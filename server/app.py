@@ -1,16 +1,36 @@
-import os, json
+import os, json, base64
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pywebpush import webpush, WebPushException
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
 
 app = Flask(__name__)
 CORS(app, origins=["https://arochab.github.io", "http://localhost:*"])
 
-VAPID_PRIVATE_KEY = os.environ["VAPID_PRIVATE_KEY"]
-VAPID_PUBLIC_KEY  = os.environ["VAPID_PUBLIC_KEY"]
-VAPID_CLAIMS      = {"sub": "mailto:adam.chabbi94@gmail.com"}
-PUSH_SECRET       = os.environ.get("PUSH_SECRET", "")
+VAPID_PUBLIC_KEY = os.environ["VAPID_PUBLIC_KEY"]
+VAPID_CLAIMS     = {"sub": "mailto:adam.chabbi94@gmail.com"}
+PUSH_SECRET      = os.environ.get("PUSH_SECRET", "")
+
+
+def _vapid_private_key():
+    """
+    pywebpush (py_vapid.from_raw) attend la clé privée EC en base64url du
+    scalaire BRUT (32 bytes), pas le PEM ni le DER PKCS8.
+    On accepte un PEM (multi-lignes ou avec \\n échappés via env var) et on
+    en extrait le scalaire brut une fois au démarrage.
+    """
+    raw = os.environ["VAPID_PRIVATE_KEY"].strip()
+    if "\\n" in raw and "\n" not in raw:        # Render: \n littéraux
+        raw = raw.replace("\\n", "\n")
+    if "BEGIN" in raw:                           # PEM → scalaire brut base64url
+        key = load_pem_private_key(raw.encode(), password=None)
+        scalar = key.private_numbers().private_value.to_bytes(32, "big")
+        return base64.urlsafe_b64encode(scalar).decode().rstrip("=")
+    return raw                                   # déjà en base64url brut
+
+
+VAPID_PRIVATE_KEY = _vapid_private_key()
 
 # Persistance durable via GitHub Gist (gratuit). Si non configuré, fallback /tmp.
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
