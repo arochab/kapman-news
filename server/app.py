@@ -185,11 +185,14 @@ def notify():
                 body = (ex.response.text or "")[:200] if ex.response else ""
             except Exception:
                 pass
-            # status=0 → pas de réponse HTTP : la cause est dans le message (chiffrement/clé).
+            # pywebpush range parfois le code dans le message au lieu de ex.response
+            # (status=0) → on détecte 404/410 dans le texte pour bien purger l'abonné mort.
             msg = str(ex)[:300]
-            app.logger.warning(f"webpush failed: status={status} msg={msg!r} body={body!r} endpoint={sub.get('endpoint','')[:60]}")
+            gone = status in (404, 410) or "410 Gone" in msg or "404 Not Found" in msg \
+                or "unsubscribed or expired" in msg
+            app.logger.warning(f"webpush failed: status={status} gone={gone} msg={msg!r} endpoint={sub.get('endpoint','')[:60]}")
             errors.append({"status": status, "detail": body or msg})
-            if status in (404, 410):
+            if gone:
                 dead.append(sub["endpoint"])
             else:
                 failed += 1
