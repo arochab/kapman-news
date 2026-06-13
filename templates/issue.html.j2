@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL N°09 — Ce qu&#39;on entend quand personne regarde</title>
+<title>KAPMAN SIGNAL N°{{ "%02d"|format(issue_num) }} — {{ tagline_plain }}</title>
 <meta name="theme-color" content="#0D0D0D">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -227,7 +227,7 @@ body {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; KAPMAN SIGNAL N°09 &nbsp;·&nbsp; Juin 2026</div>
+  <div class="hero-meta">{{ date_iso }} &nbsp;·&nbsp; KAPMAN SIGNAL N°{{ "%02d"|format(issue_num) }} &nbsp;·&nbsp; {{ month_label }}</div>
 
   <div class="logo-block">
     <svg class="logo-circles" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-bottom:14px">
@@ -240,183 +240,60 @@ body {
     <div class="logo-collective">Escape Music Collective</div>
   </div>
 
-  <div class="tagline">Ce qu'on entend quand<br>personne regarde</div>
-  <div class="reading-time">4 min &nbsp;·&nbsp; Juin 2026</div>
+  <div class="tagline">{{ tagline_html | safe }}</div>
+  <div class="reading-time">{{ reading_time }} &nbsp;·&nbsp; {{ month_label }}</div>
 </div>
 
 <!-- SUMMARY -->
 <div class="summary">
   <div class="lbl lbl-blue">Cette édition</div>
   <ul class="sum-list">
-    <li>10 tracks de tes playlists mai/juin — zéro répétition avec N°08</li>
-    <li>2 sorties récentes 2026 qui méritent l&#39;attention</li>
-    <li>Un label à creuser : Wagon Repair</li>
-    <li>Note de studio — ce que le TR-6S apprend quand on arrête de le forcer</li>
-    
+    {% for bullet in summary_bullets %}<li>{{ bullet }}</li>
+    {% endfor %}
   </ul>
 </div>
 
-
-
-  
+{#
+  Le corps alterne sections et stats dans l'ordre fourni par `blocks`.
+  Chaque bloc a un "type" : "section" (avec tracks ou body) ou "stat".
+  Les sections "tracks" et "body" partagent la même enveloppe ; on choisit
+  le rendu selon la présence de `tracks` ou `paragraphs`.
+#}
+{% for block in blocks %}
+  {% if block.type == "section" %}
 <div class="body-wrap">
 <div class="section">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
-  <h2>Ce qui tourne — les incontournables</h2>
-    
-    
+  <div class="s-accent"><div class="s-bar s-bar-{{ block.accent }}"></div><div class="s-num">{{ block.index }} / {{ section_count }}</div></div>
+  <h2>{{ block.heading }}</h2>
+    {% if block.tracks %}
+    {% for t in block.tracks %}
   <div class="track">
-    <div class="track-name">Metrosoul — Metrosoul 2 Day</div>
-    <div class="track-meta">Metromusic · 2004</div>
-    <div class="track-body">Deep house acide, 10 minutes. Metromusic était un label allemand discret, cette track en est le sommet. Le groove acide arrive au bout de 3 minutes et il reste. 639 vues — c'est le genre d'obscurité qui justifie de creuser.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=BjhiCl9C85s" target="_blank">▶ Écouter</a>
+    <div class="track-name">{{ t.name }}</div>
+    {% if t.meta %}<div class="track-meta">{{ t.meta }}</div>{% endif %}
+    <div class="track-body">{{ t.body | safe }}</div>
+    {% for link in t.links %}<a class="track-link track-link-{{ block.accent }}" href="{{ link.url }}" target="_blank">{{ link.label }}</a>{% endfor %}
   </div>
-    
-  <div class="track">
-    <div class="track-name">Jesse Rose — A-Sided</div>
-    <div class="track-meta">Dubsided · 2005</div>
-    <div class="track-body">Jesse Rose avant qu'il soit connu de tout le monde. Ce label Dubsided de Dave Taylor était une des choses les plus cohérentes de l'époque UK. Sec, fonctionnel, groove parfait dès la première mesure.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=guphkg-9rUw" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Morgan Geist — Super EP</div>
-    <div class="track-meta">2002</div>
-    <div class="track-body">Morgan Geist seul, sans Darshan. Là où Metro Area était disco, ses tracks solo sont plus froides, plus machines. Une référence pour comprendre comment construire un groove avec presque rien.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=QzZR65TFMvo" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Lowtec — Looser</div>
-    <div class="track-meta">L.I.E.S. Records</div>
-    <div class="track-body">Warehouse dub techno américain au meilleur de sa forme. Pas beau, pas propre — c'est exactement ça le point. Ce son a une texture que les productions modernes cherchent à retrouver sans y arriver.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=elYx3OhNTXY" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">The Missing Link — Cracker Smoke</div>
-    <div class="track-meta">Wagon Repair WAG001 · 2004</div>
-    <div class="track-body">Première sortie du label Wagon Repair. Minimal canadien, toujours intelligent. Cette track ouvre le catalogue parfaitement.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=mF5oGbtVSQI" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Presence — Gettin&#39; Lifted</div>
-    <div class="track-meta">Remote REM004 · UK 1996</div>
-    <div class="track-body">Deep house UK 1996 à l'état pur. Ce label Remote Records ne dure pas longtemps mais chaque sortie est un chef d'oeuvre. 42k vues — les gens qui savent, savent.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=HEpUV9o7sOU" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Housey Doingz — Gobstopper</div>
-    <div class="track-meta">Wiggle WIG001 · UK 1996</div>
-    <div class="track-body">La toute première sortie du label Wiggle. Cette track sonne 1996 dans le meilleur sens du terme. 116k vues. Un classique.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=AFm2NVoL8EE" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Shonky — The Way It Goes</div>
-    <div class="track-meta">WB029</div>
-    <div class="track-body">Un des DJs parisiens les plus consistants depuis 20 ans — pas le plus célèbre, mais toujours le plus solide. Deep, patient, précis.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=wE_F9MdtVHA" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Dyed Soundorom — Remote Cocktail</div>
-    <div class="track-meta">Solo</div>
-    <div class="track-body">Version solo avant les sorties Freak n'Chic. Plus brut, plus expérimental. Si tu l'as raté à l'époque c'est le moment.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=P3n7PoyVPI8" target="_blank">▶ Écouter</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Switch — Get Ya Dub On</div>
-    <div class="track-meta">Original mix</div>
-    <div class="track-body">Dave Taylor aka Switch — ce mec a construit la moitié du son UK mid-2000s. Ce dub original est la version la plus honnête de ce qu'il savait faire. 79k vues.</div>
-    <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=yJ1h0Jnn1lI" target="_blank">▶ Écouter</a>
-  </div>
-    
-    
-    
-</div>
-</div>
-  
-
-  
-<div class="stat stat-green">
-  <div class="stat-num">1996</div>
-  <div class="stat-ctx">Année des deux classiques de cette issue — Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
-</div>
-  
-
-  
-<div class="body-wrap">
-<div class="section">
-  <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
-  <h2>Sorties 2026 — ce qui mérite l&#39;attention</h2>
-    
-    
-  <div class="track">
-    <div class="track-name">Epsie — Chase The Worm</div>
-    <div class="track-meta">9FINITY / Secretsundaze · 2026</div>
-    <div class="track-body">Cinq tracks sur l'imprint de Secretsundaze. Breaks, techno, éléments electro. Construit live-first — ça s'entend dans la façon dont les éléments se déplacent. Précis sans être froid.</div>
-    <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=5MycIrUAyGM" target="_blank">▶ Écouter</a><a class="track-link track-link-green" href="https://found.ee/PDlqVV" target="_blank">↗ Bandcamp</a>
-  </div>
-    
-  <div class="track">
-    <div class="track-name">Kerouac — Marky</div>
-    <div class="track-meta">Dank Records UK DANK001 · 2026</div>
-    <div class="track-body">Première sortie du label Dank Records UK. Tech house avec une identité immédiatement reconnaissable. 300 copies. Ce genre de première sortie c'est exactement ce qu'il faut surveiller.</div>
-    <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=4bX8RVXvnyY" target="_blank">▶ Écouter</a><a class="track-link track-link-green" href="https://dankrecordsuk.bandcamp.com" target="_blank">↗ Bandcamp</a>
-  </div>
-    
-    
-    
-</div>
-</div>
-  
-
-  
-<div class="stat stat-blue">
-  <div class="stat-num">300</div>
-  <div class="stat-ctx">Copies pressées pour le Kerouac EP sur Dank Records UK. Première sortie du label. À surveiller de près.</div>
-</div>
-  
-
-  
-<div class="body-wrap">
-<div class="section">
-  <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
-  <h2>Label du mois — Wagon Repair</h2>
-    
-    
+    {% endfor %}
+    {% endif %}
+    {% if block.paragraphs %}
   <div class="s-body">
-    <p>Fondé en 2004 à Montréal/Toronto. Minimal, tech house, toujours entre deux chaises de façon intentionnelle. Le catalogue est compact et cohérent — chaque sortie apporte quelque chose que la précédente n'avait pas.</p><p>Ce qui distingue Wagon Repair : ils ne cherchent pas un son de label, ils cherchent un niveau d'exigence. Ça produit une discographie dans laquelle chaque track est différente mais tout s'assemble.</p><p>Par où commencer : WAG001 (The Missing Link), puis remonter le catalogue sur <a href="https://www.discogs.com/label/12397-Wagon-Repair" target="_blank">Discogs →</a></p>
+    {% for p in block.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
   </div>
-    
+    {% endif %}
 </div>
 </div>
-  
-
-  
-<div class="body-wrap">
-<div class="section">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">4 / 4</div></div>
-  <h2>Note de studio</h2>
-    
-    
-  <div class="s-body">
-    <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire — et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine — les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend — et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test. Claude Code pour automatiser l'organisation des sessions — les tâches répétitives qui cassent le flow créatif.</p>
-  </div>
-    
+  {% elif block.type == "stat" %}
+<div class="stat stat-{{ block.accent }}">
+  <div class="stat-num">{{ block.number }}</div>
+  <div class="stat-ctx">{{ block.context }}</div>
 </div>
-</div>
-  
-
+  {% endif %}
+{% endfor %}
 
 <!-- FORWARD -->
 <div class="forward">
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
-  <p>Le catalogue Wagon Repair complet sur Discogs, la sortie Secretsundaze/9FINITY d'Epsie sur Bandcamp, les premières sorties de Dank Records UK. Trois fils à tirer — c'est exactement ce qu'on cherche.</p>
+  <p>{{ forward_text | safe }}</p>
 </div>
 
 <!-- SUBSCRIBE + QR -->
