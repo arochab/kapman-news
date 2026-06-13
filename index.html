@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAPMAN SIGNAL — Underground Electronic · Paris</title>
+<meta name="theme-color" content="#0D0D0D">
+<link rel="manifest" href="/pwa/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --ink:#0D0D0D; --cream:#F5F0E8; --red:#E8372A; --green:#00A650; --blue:#2F57D4; --dim:#555; --border:#1A1A1A; }
+html, body { background: var(--ink); color: var(--cream); font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 680px; margin: 0 auto; }
+.triple-rule { display: flex; height: 3px; }
+.triple-rule .r { flex:1; background: var(--red); }
+.triple-rule .g { flex:1; background: var(--green); }
+.triple-rule .b { flex:1; background: var(--blue); }
+.hero { padding: 56px 48px; border-bottom: 1px solid var(--border); }
+.logo-circles { display: block; margin-bottom: 14px; }
+.wordmark { font-size: 44px; font-weight: 900; letter-spacing: .08em; color: var(--cream); line-height: 1; margin-bottom: 6px; }
+.mini-rule { display: flex; height: 2px; width: 140px; margin-bottom: 8px; }
+.mini-rule .r { flex:1; background: var(--red); }
+.mini-rule .g { flex:1; background: var(--green); }
+.mini-rule .b { flex:1; background: var(--blue); }
+.collective { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: #333; margin-bottom: 32px; }
+.hero p { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 440px; }
+.issues { padding: 40px 48px; }
+.lbl { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+.issue-row { display: flex; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: opacity .15s; }
+.issue-row:hover { opacity: .6; }
+.issue-num { font-size: 10px; letter-spacing: .14em; color: #333; flex-shrink: 0; width: 32px; }
+.issue-title { font-size: 15px; font-weight: 600; color: var(--cream); flex: 1; }
+.issue-date { font-size: 11px; color: #333; flex-shrink: 0; }
+.subscribe { padding: 40px 48px; border-top: 1px solid var(--border); }
+.subscribe h2 { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
+.subscribe p { font-size: 13px; color: var(--dim); line-height: 1.7; margin-bottom: 20px; }
+#sub-btn { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid #2A2A2A; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: all .2s; }
+#sub-btn:hover { border-color: var(--green); color: var(--green); }
+.footer { padding: 40px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
+.footer-wordmark { font-size: 16px; font-weight: 900; letter-spacing: .12em; color: #1E1E1E; margin-bottom: 4px; }
+.footer-rule { display: flex; height: 1px; width: 60px; margin: 0 auto 6px; }
+.footer-rule .r { flex:1; background: var(--red); }
+.footer-rule .g { flex:1; background: var(--green); }
+.footer-rule .b { flex:1; background: var(--blue); }
+.footer-col { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #1A1A1A; }
+@media(max-width:600px) { .hero,.issues,.subscribe,.footer { padding-left:24px; padding-right:24px; } .wordmark { font-size:34px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="hero">
+    <svg class="logo-circles" width="80" height="48" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="28" r="26" fill="#E8372A" opacity=".9"/>
+      <circle cx="48" cy="28" r="26" fill="#00A650" opacity=".85"/>
+      <circle cx="64" cy="28" r="26" fill="#2F57D4" opacity=".9"/>
+    </svg>
+    <div class="wordmark">KAPMAN</div>
+    <div class="mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+    <div class="collective">Escape Music Collective</div>
+    <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic — Paris.</p>
+  </div>
+  <div class="issues">
+    <div class="lbl">Issues</div>
+    <a class="issue-row" href="/issues/09/">
+      <span class="issue-num">N°09</span>
+      <span class="issue-title">Ce qu'on entend quand personne regarde</span>
+      <span class="issue-date">Juin 2026</span>
+    </a>
+  </div>
+  <div class="subscribe">
+    <h2>Notifications push</h2>
+    <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
+    <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
+    <p id="sub-status" style="font-size:11px;color:#333;margin-top:10px"></p>
+  </div>
+  <div class="footer">
+    <div class="footer-wordmark">KAPMAN</div>
+    <div class="footer-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+    <div class="footer-col">Escape Music Collective</div>
+  </div>
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+</div>
+<script>
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/pwa/service-worker.js').catch(()=>{});
+  async function subscribePush() {
+    const btn = document.getElementById('sub-btn'), status = document.getElementById('sub-status');
+    if (!('Notification' in window)) { status.textContent = 'Non supporté.'; return; }
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') { status.textContent = 'Permission refusée.'; return; }
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      if (await reg.pushManager.getSubscription()) { btn.textContent = '✓ Déjà abonné'; return; }
+      const { publicKey } = await fetch('https://kapman-news.onrender.com/vapid-public-key').then(r=>r.json());
+      const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(publicKey) });
+      await fetch('https://kapman-news.onrender.com/subscribe', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(sub) });
+      btn.textContent = '✓ Abonné'; status.textContent = 'Notification à chaque nouvelle issue.';
+    } catch(e) { status.textContent = 'Erreur : ' + e.message; }
+  }
+  function urlBase64ToUint8Array(b64) {
+    const pad = '='.repeat((4-b64.length%4)%4), b = atob((b64+pad).replace(/-/g,'+').replace(/_/g,'/'));
+    return Uint8Array.from([...b].map(c=>c.charCodeAt(0)));
+  }
+</script>
+</body>
+</html>

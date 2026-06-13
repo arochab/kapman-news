@@ -1,0 +1,51 @@
+name: Push Notification — New Issue
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'issues/**/index.html'   # déclenche uniquement si une issue est ajoutée/modifiée
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect new issue
+        id: detect
+        run: |
+          # Récupère les fichiers issues/ modifiés dans ce commit
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^issues/' | head -1)
+          if [ -z "$CHANGED" ]; then
+            echo "no_issue=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          # Extrait le numéro d'issue ex: issues/09/index.html → 09
+          ISSUE=$(echo "$CHANGED" | cut -d'/' -f2)
+          echo "issue=$ISSUE" >> $GITHUB_OUTPUT
+          echo "Detected issue: $ISSUE"
+
+      - name: Set up Python
+        if: steps.detect.outputs.no_issue != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        if: steps.detect.outputs.no_issue != 'true'
+        run: pip install requests python-dotenv
+
+      - name: Send push notification
+        if: steps.detect.outputs.no_issue != 'true'
+        env:
+          RENDER_URL:  ${{ secrets.RENDER_URL }}
+          PUSH_SECRET: ${{ secrets.PUSH_SECRET }}
+        run: |
+          ISSUE="${{ steps.detect.outputs.issue }}"
+          python tools/send_push.py \
+            --issue "$ISSUE" \
+            --title "KAPMAN SIGNAL N°$ISSUE" \
+            --body "Nouvelle issue disponible — écoute ce qu'on a sélectionné ce mois-ci."
