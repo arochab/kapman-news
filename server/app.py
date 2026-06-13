@@ -167,6 +167,7 @@ def notify():
 
     subs = load_subs()
     sent, failed, dead = 0, 0, []
+    errors = []  # détail des échecs (status + extrait) pour le diagnostic
 
     for sub in subs:
         try:
@@ -179,6 +180,13 @@ def notify():
             sent += 1
         except WebPushException as ex:
             status = ex.response.status_code if ex.response else 0
+            body = ""
+            try:
+                body = (ex.response.text or "")[:200] if ex.response else ""
+            except Exception:
+                pass
+            app.logger.warning(f"webpush failed: status={status} body={body!r} endpoint={sub.get('endpoint','')[:60]}")
+            errors.append({"status": status, "detail": body})
             if status in (404, 410):
                 dead.append(sub["endpoint"])
             else:
@@ -188,7 +196,7 @@ def notify():
         subs = [s for s in subs if s["endpoint"] not in dead]
         save_subs(subs)
 
-    return jsonify({"sent": sent, "failed": failed, "cleaned": len(dead)})
+    return jsonify({"sent": sent, "failed": failed, "cleaned": len(dead), "errors": errors})
 
 
 if __name__ == "__main__":

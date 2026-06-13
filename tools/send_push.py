@@ -25,6 +25,8 @@ def send(issue: str, title: str, body: str):
     r.raise_for_status()
     data = r.json()
     print(f"✓ Push envoyé — {data['sent']} abonnés, {data['failed']} échecs, {data['cleaned']} nettoyés")
+    for e in data.get("errors", []):
+        print(f"  ↳ échec status={e.get('status')} detail={e.get('detail','')!r}")
     return data
 
 if __name__ == "__main__":
