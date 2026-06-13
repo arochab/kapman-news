@@ -4,80 +4,137 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KAPMAN SIGNAL — Underground Electronic · Paris</title>
-<meta name="theme-color" content="#0D0D0D">
+<meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root { --ink:#0D0D0D; --cream:#F5F0E8; --red:#E8372A; --green:#00A650; --blue:#2F57D4; --dim:#555; --border:#1A1A1A; }
-html, body { background: var(--ink); color: var(--cream); font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+:root {
+  --ink:#0E0F14; --cream:#F0EEE6; --red:#E83A2E; --green:#1FC85E; --blue:#3A6CF0;
+  --mid:#B8B3AB; --dim:#5A5C66; --border:#1B1C22;
+  --disp:'Black Ops One',system-ui,sans-serif;
+  --text:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+html, body { background: var(--ink); color: var(--cream); font-family: var(--text); -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 680px; margin: 0 auto; }
+
 .triple-rule { display: flex; height: 3px; }
 .triple-rule .r { flex:1; background: var(--red); }
 .triple-rule .g { flex:1; background: var(--green); }
 .triple-rule .b { flex:1; background: var(--blue); }
-.hero { padding: 56px 48px; border-bottom: 1px solid var(--border); }
-.logo-circles { display: block; margin-bottom: 14px; }
-.wordmark { font-size: 44px; font-weight: 900; letter-spacing: .08em; color: var(--cream); line-height: 1; margin-bottom: 6px; }
-.mini-rule { display: flex; height: 2px; width: 140px; margin-bottom: 8px; }
+
+.hero { padding: 64px 48px 52px; border-bottom: 1px solid var(--border); }
+
+/* Marque RGB-light additive */
+.logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
+.lc { position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%; mix-blend-mode: screen; will-change: transform; animation: lc-breathe 6s ease-in-out infinite; }
+.lc-r { left: 0;   background: var(--red); }
+.lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
+.lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
+@keyframes lc-breathe { 0%,100% { transform: translateX(0);} 50% { transform: translateX(var(--shift,0)); } }
+
+/* Wordmark Black Ops One + RGB-split */
+.wordmark { font-family: var(--disp); font-size: 52px; font-weight: 400; letter-spacing: .02em; color: var(--cream); line-height: 1; margin-bottom: 12px; text-transform: uppercase; position: relative; display: inline-block; }
+.wordmark[data-txt]::before, .wordmark[data-txt]::after { content: attr(data-txt); position: absolute; inset: 0; mix-blend-mode: screen; pointer-events: none; }
+.wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 4.2s steps(1) infinite; }
+.wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 4.2s steps(1) infinite; }
+@keyframes rgb-r { 0%,82%,100%{transform:translate(-1.5px,0);opacity:.55;} 84%{transform:translate(-5px,2px);opacity:1;} 88%{transform:translate(3px,-2px);opacity:.85;} 91%{transform:translate(-2px,1px);opacity:.7;} 94%{transform:translate(-1.5px,0);opacity:.55;} }
+@keyframes rgb-b { 0%,82%,100%{transform:translate(1.5px,0);opacity:.55;} 84%{transform:translate(5px,-2px);opacity:1;} 88%{transform:translate(-3px,2px);opacity:.85;} 91%{transform:translate(2px,-1px);opacity:.7;} 94%{transform:translate(1.5px,0);opacity:.55;} }
+
+.mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
 .mini-rule .r { flex:1; background: var(--red); }
 .mini-rule .g { flex:1; background: var(--green); }
 .mini-rule .b { flex:1; background: var(--blue); }
-.collective { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: #333; margin-bottom: 32px; }
-.hero p { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 440px; }
-.issues { padding: 40px 48px; }
-.lbl { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
-.issue-row { display: flex; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: opacity .15s; }
-.issue-row:hover { opacity: .6; }
-.issue-num { font-size: 10px; letter-spacing: .14em; color: #333; flex-shrink: 0; width: 32px; }
-.issue-title { font-size: 15px; font-weight: 600; color: var(--cream); flex: 1; }
-.issue-date { font-size: 11px; color: #333; flex-shrink: 0; }
-.subscribe { padding: 40px 48px; border-top: 1px solid var(--border); }
-.subscribe h2 { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
-.subscribe p { font-size: 13px; color: var(--dim); line-height: 1.7; margin-bottom: 20px; }
-#sub-btn { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid #2A2A2A; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: all .2s; }
+.collective { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: #44464F; margin-bottom: 30px; }
+.hero p { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 460px; }
+
+.issues { padding: 44px 48px; }
+.lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--blue); margin-bottom: 22px; }
+
+/* Liste : structure des .issue-row conservée à l'identique (ancre du build script). */
+.issue-row { display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border); text-decoration: none; position: relative; transition: padding-left .2s ease; }
+.issue-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent, transparent); transform: scaleY(0); transform-origin: top; transition: transform .25s ease; }
+.issue-row:hover { padding-left: 16px; }
+.issue-row:hover::before { transform: scaleY(1); }
+.issue-row:nth-child(3n+1) { --accent: var(--red); }
+.issue-row:nth-child(3n+2) { --accent: var(--green); }
+.issue-row:nth-child(3n)   { --accent: var(--blue); }
+.issue-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: #44464F; flex-shrink: 0; width: 38px; font-variant-numeric: tabular-nums; transition: color .2s; }
+.issue-row:hover .issue-num { color: var(--accent, var(--cream)); }
+.issue-title { font-size: 16px; font-weight: 600; color: var(--cream); flex: 1; line-height: 1.35; }
+.issue-date { font-family: var(--mono); font-size: 11px; color: #44464F; flex-shrink: 0; text-transform: uppercase; letter-spacing: .06em; }
+
+.subscribe { padding: 48px 48px; border-top: 1px solid var(--border); text-align: center; }
+.subscribe .inner { max-width: 420px; margin: 0 auto; }
+.subscribe h2 { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); margin-bottom: 12px; }
+.subscribe p { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 22px; }
+#sub-btn { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid #2C2E36; padding: 11px 22px; cursor: pointer; transition: all .2s; }
 #sub-btn:hover, #sub-btn.on { border-color: var(--green); color: var(--green); }
-#sub-status { font-size:12px; color:#777; margin-top:12px; min-height:16px; line-height:1.5; }
+#sub-status { font-family: var(--mono); font-size:12px; color:#777; margin-top:12px; min-height:16px; line-height:1.5; }
 #sub-status[data-kind="ok"]  { color: var(--green); }
 #sub-status[data-kind="err"] { color: var(--red); }
-.footer { padding: 40px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
-.footer-wordmark { font-size: 16px; font-weight: 900; letter-spacing: .12em; color: #1E1E1E; margin-bottom: 4px; }
-.footer-rule { display: flex; height: 1px; width: 60px; margin: 0 auto 6px; }
+
+.footer { padding: 44px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
+.footer-wordmark { font-family: var(--disp); font-size: 18px; font-weight: 400; letter-spacing: .06em; color: #2A2C34; margin-bottom: 6px; text-transform: uppercase; }
+.footer-rule { display: flex; height: 1px; width: 70px; margin: 0 auto 6px; }
 .footer-rule .r { flex:1; background: var(--red); }
 .footer-rule .g { flex:1; background: var(--green); }
 .footer-rule .b { flex:1; background: var(--blue); }
-.footer-col { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #1A1A1A; }
-@media(max-width:600px) { .hero,.issues,.subscribe,.footer { padding-left:24px; padding-right:24px; } .wordmark { font-size:34px; } }
+.footer-col { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #2A2C34; }
+
+/* ── MOTION ── */
+.triple-rule .r, .triple-rule .g, .triple-rule .b { transform: scaleX(0); transform-origin: center; animation: rule-grow .7s cubic-bezier(.2,.8,.2,1) forwards; }
+.triple-rule .g { animation-delay: .08s; }
+.triple-rule .b { animation-delay: .16s; }
+@keyframes rule-grow { to { transform: scaleX(1); } }
+.js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .6s cubic-bezier(.16,1,.3,1); }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .triple-rule .r, .triple-rule .g, .triple-rule .b, .lc { animation: none !important; transform: none !important; }
+  .wordmark[data-txt]::before, .wordmark[data-txt]::after { animation: none !important; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+@media(max-width:600px) {
+  .hero,.issues,.subscribe,.footer { padding-left:24px; padding-right:24px; }
+  .wordmark { font-size:42px; }
+  .issue-row { gap: 14px; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
   <div class="hero">
-    <svg class="logo-circles" width="80" height="48" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="28" r="26" fill="#E8372A" opacity=".9"/>
-      <circle cx="48" cy="28" r="26" fill="#00A650" opacity=".85"/>
-      <circle cx="64" cy="28" r="26" fill="#2F57D4" opacity=".9"/>
-    </svg>
-    <div class="wordmark">KAPMAN</div>
+    <div class="logo-circles" aria-hidden="true">
+      <span class="lc lc-r" style="--shift:-3px"></span>
+      <span class="lc lc-g" style="--shift:0px"></span>
+      <span class="lc lc-b" style="--shift:3px"></span>
+    </div>
+    <div class="wordmark" data-txt="KAPMAN">KAPMAN</div>
     <div class="mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="collective">Escape Music Collective</div>
     <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic — Paris.</p>
   </div>
   <div class="issues">
     <div class="lbl">Issues</div>
-    <a class="issue-row" href="/issues/09/">
+    <a class="issue-row" href="issues/09/">
       <span class="issue-num">N°09</span>
       <span class="issue-title">Ce qu'on entend quand personne regarde</span>
       <span class="issue-date">Juin 2026</span>
     </a>
   </div>
-  <div class="subscribe">
-    <h2>Notifications push</h2>
-    <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
-    <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
-    <p id="sub-status"></p>
+  <div class="subscribe reveal">
+    <div class="inner">
+      <h2>Notifications push</h2>
+      <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
+      <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
+      <p id="sub-status"></p>
+    </div>
   </div>
   <div class="footer">
     <div class="footer-wordmark">KAPMAN</div>
@@ -86,6 +143,27 @@ html, body { background: var(--ink); color: var(--cream); font-family: 'Space Gr
   </div>
   <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 </div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { els.forEach(function (el) { el.classList.add('in'); }); }
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (reduce || !('IntersectionObserver' in window)) { root.classList.add('js'); showAll(); return; }
+  try {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    root.classList.add('js');
+    els.forEach(function (el) { io.observe(el); });
+    requestAnimationFrame(function () {
+      els.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in'); });
+    });
+    setTimeout(showAll, 1200);
+  } catch (e) { root.classList.remove('js'); showAll(); }
+})();
+</script>
 <script src="pwa/push-client.js"></script>
 </body>
 </html>
