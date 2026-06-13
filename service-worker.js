@@ -4,7 +4,7 @@
 // (ex. https://arochab.github.io/kapman-news/) — jamais d'absolu "/" qui
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
-const CACHE = 'kapman-v2';
+const CACHE = 'kapman-v3';
 
 // URL absolue résolue depuis le scope du SW
 const fromScope = (path) => new URL(path, self.registration.scope).toString();
@@ -46,12 +46,20 @@ self.addEventListener('fetch', (e) => {
   );
 });
 
-// Push reçue
+// Push reçue — défensif : affiche TOUJOURS une notif, même si le payload
+// est illisible (déchiffrement raté). On ne perd jamais une notif silencieusement.
 self.addEventListener('push', (e) => {
-  const data = e.data ? e.data.json() : {};
+  let data = {};
+  try {
+    if (e.data) data = e.data.json();
+  } catch (err) {
+    // payload non-JSON ou non déchiffrable : on garde les valeurs par défaut
+    data = {};
+  }
+
   const title = data.title || 'KAPMAN SIGNAL';
   const targetUrl = data.url
-    ? fromScope(data.url.replace(/^\//, ''))   // tolère "/issues/09/" ou "issues/09/"
+    ? fromScope(String(data.url).replace(/^\//, ''))
     : fromScope('./');
 
   const options = {
@@ -59,13 +67,10 @@ self.addEventListener('push', (e) => {
     icon: fromScope('pwa/icon-192.png'),
     badge: fromScope('pwa/badge-72.png'),
     data: { url: targetUrl },
-    actions: [
-      { action: 'open', title: 'Lire' },
-      { action: 'dismiss', title: 'Plus tard' },
-    ],
     vibrate: [100, 50, 100],
     tag: 'kapman-issue',
     renotify: true,
+    requireInteraction: false,
   };
   e.waitUntil(self.registration.showNotification(title, options));
 });
