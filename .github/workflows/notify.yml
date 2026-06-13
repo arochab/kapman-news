@@ -2,9 +2,15 @@ name: Push Notification — New Issue
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - 'issues/**/index.html'   # déclenche uniquement si une issue est ajoutée/modifiée
+  workflow_dispatch:             # déclenchement manuel — renvoyer une notif à la demande
+    inputs:
+      issue:
+        description: "Numéro d'issue (ex: 09) — laisser vide pour auto-détecter le dernier commit"
+        required: false
+        default: ''
 
 jobs:
   notify:
@@ -17,7 +23,14 @@ jobs:
       - name: Detect new issue
         id: detect
         run: |
-          # Récupère les fichiers issues/ modifiés dans ce commit
+          # Déclenchement manuel avec un numéro explicite : priorité.
+          MANUAL="${{ github.event.inputs.issue }}"
+          if [ -n "$MANUAL" ]; then
+            echo "issue=$MANUAL" >> $GITHUB_OUTPUT
+            echo "Manual issue: $MANUAL"
+            exit 0
+          fi
+          # Sinon : récupère les fichiers issues/ modifiés dans ce commit.
           CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^issues/' | head -1)
           if [ -z "$CHANGED" ]; then
             echo "no_issue=true" >> $GITHUB_OUTPUT
