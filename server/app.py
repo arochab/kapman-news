@@ -185,12 +185,19 @@ def notify():
                 body = (ex.response.text or "")[:200] if ex.response else ""
             except Exception:
                 pass
-            app.logger.warning(f"webpush failed: status={status} body={body!r} endpoint={sub.get('endpoint','')[:60]}")
-            errors.append({"status": status, "detail": body})
+            # status=0 → pas de réponse HTTP : la cause est dans le message (chiffrement/clé).
+            msg = str(ex)[:300]
+            app.logger.warning(f"webpush failed: status={status} msg={msg!r} body={body!r} endpoint={sub.get('endpoint','')[:60]}")
+            errors.append({"status": status, "detail": body or msg})
             if status in (404, 410):
                 dead.append(sub["endpoint"])
             else:
                 failed += 1
+        except Exception as ex:  # erreur hors HTTP (ValueError clé, chiffrement…)
+            msg = f"{type(ex).__name__}: {ex}"[:300]
+            app.logger.warning(f"webpush crashed: {msg} endpoint={sub.get('endpoint','')[:60]}")
+            errors.append({"status": -1, "detail": msg})
+            failed += 1
 
     if dead:
         subs = [s for s in subs if s["endpoint"] not in dead]
