@@ -4,7 +4,7 @@
 // (ex. https://arochab.github.io/kapman-news/) — jamais d'absolu "/" qui
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
-const CACHE = 'kapman-v3';
+const CACHE = 'kapman-v4';
 
 // URL absolue résolue depuis le scope du SW
 const fromScope = (path) => new URL(path, self.registration.scope).toString();
@@ -67,6 +67,7 @@ self.addEventListener('push', (e) => {
     icon: fromScope('pwa/icon-192.png'),
     badge: fromScope('pwa/badge-72.png'),
     data: { url: targetUrl },
+    actions: [{ action: 'open', title: 'Lire' }],
     vibrate: [100, 50, 100],
     tag: 'kapman-issue',
     renotify: true,
