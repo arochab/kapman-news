@@ -77,9 +77,6 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
 #sub-status { font-family: var(--mono); font-size:12px; color:#777; margin-top:12px; min-height:16px; line-height:1.5; }
 #sub-status[data-kind="ok"]  { color: var(--green); }
 #sub-status[data-kind="err"] { color: var(--red); }
-.qr-wrap { margin: 36px auto 0; padding-top: 32px; border-top: 1px solid var(--border); max-width: 200px; }
-.qr-wrap img { width: 120px; height: 120px; display: block; margin: 0 auto 10px; image-rendering: pixelated; }
-.qr-label { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #44464F; line-height: 1.5; }
 
 .footer { padding: 44px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
 .footer-wordmark { font-family: var(--disp); font-size: 18px; font-weight: 400; letter-spacing: .06em; color: #6A6C76; margin-bottom: 6px; text-transform: uppercase; }
@@ -137,10 +134,6 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
       <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
       <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
       <p id="sub-status"></p>
-    </div>
-    <div class="qr-wrap">
-      <img src="pwa/qr.png" alt="QR abonnement" onerror="this.parentNode.style.display='none'">
-      <div class="qr-label">Scanner pour s'abonner</div>
     </div>
   </div>
   <div class="footer">

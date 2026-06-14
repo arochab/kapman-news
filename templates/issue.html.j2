@@ -260,9 +260,12 @@ body {
 #sub-status { font-family: var(--mono); font-size: 12px; color: #777; margin-top: 12px; min-height: 16px; line-height: 1.5; }
 #sub-status[data-kind="ok"]  { color: var(--green); }
 #sub-status[data-kind="err"] { color: var(--red); }
-.qr-wrap { margin: 36px auto 0; padding-top: 32px; border-top: 1px solid var(--border); max-width: 200px; }
-.qr-wrap img { width: 120px; height: 120px; display: block; margin: 0 auto 10px; image-rendering: pixelated; }
-.qr-label { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #44464F; line-height: 1.5; }
+.qr-wrap { margin: 40px auto 0; padding-top: 36px; border-top: 1px solid var(--border); max-width: 260px; }
+.qr-share-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #56586A; margin-bottom: 16px; }
+.qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 18px; image-rendering: pixelated; background: var(--cream); padding: 8px; border-radius: 4px; }
+.qr-steps { display: inline-flex; flex-direction: column; gap: 7px; text-align: left; }
+.qr-steps span { font-family: var(--mono); font-size: 11px; color: #6A6C76; line-height: 1.4; }
+.qr-steps b { color: var(--green); font-weight: 500; margin-right: 6px; }
 
 /* ── FOOTER ── */
 .footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
@@ -392,17 +395,22 @@ body {
   <p>{{ forward_text | safe }}</p>
 </div>
 
-<!-- SUBSCRIBE + QR (QR centré en bas) -->
+<!-- SUBSCRIBE + QR (QR = partage à un ami, parcours honnête) -->
 <div class="subscribe-section reveal">
   <div class="sub-text">
     <h3>Recevoir les prochaines issues</h3>
-    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap. Ou scanne le QR.</p>
+    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
     <p id="sub-status"></p>
   </div>
   <div class="qr-wrap">
-    <img src="../../pwa/qr.png" alt="QR abonnement" onerror="this.parentNode.style.display='none'">
-    <div class="qr-label">Scanner pour s'abonner</div>
+    <div class="qr-share-lbl">Partager à un ami</div>
+    <img src="../../pwa/qr.png" alt="QR vers KAPMAN SIGNAL" onerror="this.parentNode.style.display='none'">
+    <div class="qr-steps">
+      <span><b>1.</b> Scanne avec l'appareil photo</span>
+      <span><b>2.</b> Ouvre le lien dans Chrome</span>
+      <span><b>3.</b> Appuie sur « S'abonner »</span>
+    </div>
   </div>
 </div>
 
