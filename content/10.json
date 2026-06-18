@@ -1,47 +1,104 @@
 {
   "issue_num": 10,
-  "date_iso": "YYYY-MM-DD",
-  "month_label": "Mois AAAA",
+  "date_iso": "2026-06-18",
+  "month_label": "Juin 2026",
   "reading_time": "4 min",
-  "tagline_plain": "",
-  "tagline_html": "",
+  "tagline_plain": "De Chicago à Cologne — la ligne directe",
+  "tagline_html": "De Chicago à Cologne —<br>la ligne directe",
   "summary_bullets": [
-    "",
-    "",
-    "",
-    ""
+    "6 tracks sur la ligne Chicago → Detroit → Cologne — zéro répétition avec N°09",
+    "2 sorties 2026 à suivre : Reagan Grey sur Wolf Music, Manuel Darquart",
+    "Label du mois : Sound Signature (Detroit, Theo Parrish)",
+    "Note de studio — jouer dans une tradition sans s'y perdre"
   ],
   "blocks": [
     {
       "type": "section",
       "accent": "red",
-      "heading": "",
-      "tracks": []
+      "heading": "La ligne directe",
+      "tracks": [
+        {
+          "name": "Mr Fingers — Can You Feel It",
+          "meta": "Trax Records TX127 · Chicago 1986",
+          "body": "Larry Heard a enregistré ça dans sa chambre sur un 4-piste. Pas de studio, pas de budget, juste une boîte à rythmes et un synthé bas de gamme. Quarante ans plus tard c'est encore dans les premières mesures que quelque chose se passe qu'on ne sait pas expliquer. Le point zéro.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=k4vllvhbEzw" }]
+        },
+        {
+          "name": "Theo Parrish — Falling Up",
+          "meta": "Sound Signature · Detroit",
+          "body": "La version originale, pas le Carl Craig remix. Detroit soul-house à l'état brut — les éléments arrivent quand ils veulent, pas quand la structure le demande. Ce relâchement intentionnel c'est exactement ce qui manque dans 90% des productions actuelles.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=bJ58lHX2Zrs" }]
+        },
+        {
+          "name": "Omar S — Thank U 4 Letting Me Be Myself",
+          "meta": "FXHE AOS-7000 · Detroit 2013",
+          "body": "Huit minutes. Les synthés en ouverture ressemblent à rien d'autre — pas du Chicago, pas du Berlin, juste Detroit à un moment précis. Omar S a un rapport à la musique que personne n'a su copier. La disco infusée dans la techno sans que les deux s'annulent.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=3wPJPintfrM" }]
+        },
+        {
+          "name": "Akufen — Deck The House",
+          "meta": "Force Inc Music Works · Montréal 2002",
+          "body": "Marc Leclair échantillonnait la radio FM sur un séquenceur — des fragments de voix, de pub, de chansons — et les recombinait. Le résultat est une micro-house qui ressemble à aucune autre micro-house. Quand Herbert a remixé ce disque c'est parce qu'il avait compris que Leclair faisait quelque chose de fondamentalement différent.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=yXHNXjxkiVU" }]
+        },
+        {
+          "name": "Isolée — Beau Mot Plage",
+          "meta": "Perlon PERL 31 · Stuttgart 2002",
+          "body": "Rajko Müller. Cette track a été jouée dans tous les clubs minimaux de 2002 à 2008 et elle sonne toujours juste aujourd'hui. La mélodie est simple au point d'être gênante — c'est pour ça qu'elle reste. Perlon à son meilleur : rien de trop, rien qui manque.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=mQy2V_3LRMQ" }]
+        },
+        {
+          "name": "Ricardo Villalobos — Serpentin",
+          "meta": "Perlon PERL 42 · 2004",
+          "body": "Extrait de Thé au Harem d'Archimède, son deuxième album. Villalobos venait de rentrer du Chili avec une façon de traiter le groove qui n'existait pas en Europe. Cette track met 4 minutes à s'installer et ensuite elle ne lâche plus rien. Perlon ne ressemblait alors à aucun autre label.",
+          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=KpZpch8Qpo8" }]
+        }
+      ]
     },
     {
       "type": "stat",
       "accent": "green",
-      "number": "",
-      "context": ""
+      "number": "1986",
+      "context": "Année où Larry Heard enregistre Can You Feel It dans sa chambre à Chicago. La maison de la house music n'était pas un studio — c'était une pièce, un synthé, une idée."
     },
     {
       "type": "section",
       "accent": "green",
-      "heading": "",
-      "tracks": []
+      "heading": "Sorties 2026 — ce qui mérite l'attention",
+      "tracks": [
+        {
+          "name": "Reagan Grey — Kinetic EP",
+          "meta": "Wolf Music Recordings WOLFEP084 · Mars 2026",
+          "body": "Basée à Toronto, des sorties sur Local Talk et Selections. Wolf Music pour la deuxième sortie du label en 2026. Deep house dub-inflected, précise — la track 'Not Giving Up' avec Christie Nelson est le point d'entrée. Ce label UK sait toujours exactement ce qu'il cherche.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=eVxub7ztEG8" },
+            { "label": "↗ Bandcamp", "url": "https://reagangrey.bandcamp.com/album/kinetic-ep" }
+          ]
+        },
+        {
+          "name": "Manuel Darquart — Dream House Factory Vol. 1",
+          "meta": "Wolf Music Recordings · 2026",
+          "body": "Influences Italo house assumées, acid, disco — mais sans nostalgie facile. Darquart prend les outils des années 80 et les met au service d'un groove 2026. Deux sorties Wolf Music consécutives dans cette issue — c'est pas un hasard, le label traverse actuellement sa meilleure période depuis longtemps.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=5vvySiVnHrU" }
+          ]
+        }
+      ]
     },
     {
       "type": "stat",
       "accent": "blue",
-      "number": "",
-      "context": ""
+      "number": "1999",
+      "context": "Année de fondation de Sound Signature à Detroit. Theo Parrish voulait un label sans style assigné — juste un niveau d'exigence. 27 ans plus tard la discographie est toujours aussi inclassable."
     },
     {
       "type": "section",
       "accent": "blue",
-      "heading": "",
+      "heading": "Label du mois — Sound Signature",
       "paragraphs": [
-        ""
+        "Detroit, 1999. Theo Parrish commence Sound Signature parce qu'il ne veut pas définir son son, il veut définir ses standards. La différence est fondamentale.",
+        "Le catalogue fait coexister de la deep house éclatée, des edits soul à 78 BPM, de la techno dure, des disques live, des instrumentaux de 12 minutes. Ce qui relie tout ça c'est une façon d'écouter la musique — attentive, physique, sans compromis sur le groove.",
+        "Son 2025 : Organic Hardware Pt 2 — double LP qui confirme que Parrish n'a aucune intention de simplifier quoi que ce soit. Par où commencer : <a href=\"https://soundsignature.bandcamp.com/\" target=\"_blank\">soundsignature.bandcamp.com →</a>"
       ]
     },
     {
@@ -49,9 +106,12 @@
       "accent": "red",
       "heading": "Note de studio",
       "paragraphs": [
-        ""
+        "J'ai réécouté Can You Feel It pour la première fois depuis longtemps — vraiment réécouté, pas en fond sonore.",
+        "Ce qui m'a frappé : la drum machine est fausse. Pas musicalement — techniquement. Les temps ne sont pas parfaitement alignés. Et c'est exactement pour ça que ça respire. Larry Heard n'avait pas les outils pour corriger ça, ou peut-être qu'il s'en fichait. Le résultat c'est qu'on entend quelqu'un en train de jouer, pas un programme en train d'exécuter.",
+        "Depuis, j'essaie de désaligner intentionnellement certains éléments dans mes sessions Live 12. Pas du slop aléatoire — du micro-décalage voulu. Le TR-6S en séquenceur externe avec un léger retard sur les hats. Le résultat n'est pas parfait et c'est exactement le point.",
+        "La tradition ne sert à rien si elle devient une prison de référence. Elle sert à comprendre pourquoi les imperfections de 1986 sonnent mieux que les grids parfaits de 2020."
       ]
     }
   ],
-  "forward_text": ""
+  "forward_text": "Le catalogue Sound Signature complet sur leur Bandcamp, le Kinetic EP de Reagan Grey, et les premières sorties Wolf Music 2026 de Manuel Darquart — trois fils. Et si tu n'as jamais vraiment écouté Akufen, le album My Way sur Force Inc est le point d'entrée."
 }
