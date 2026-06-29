@@ -1,0 +1,62 @@
+name: Scaffold next issue
+
+on:
+  schedule:
+    - cron: '17 7 * * 1'   # chaque lundi 07h17 UTC (≈ 9h17 Paris)
+  workflow_dispatch: {}     # déclenchement manuel pour tester
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine next issue number
+        id: next
+        run: |
+          MAX=$(ls issues/ | grep -E '^[0-9]+$' | sort -n | tail -1 | sed 's/^0*//')
+          NEXT=$((MAX + 1))
+          PADDED=$(printf '%02d' $NEXT)
+          echo "num=$PADDED" >> $GITHUB_OUTPUT
+          echo "Next issue: $PADDED"
+
+      - name: Check if scaffold already exists
+        id: check
+        run: |
+          if [ -f "content/${{ steps.next.outputs.num }}.json" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "content/${{ steps.next.outputs.num }}.json already exists — nothing to do."
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Python
+        if: steps.check.outputs.exists == 'false'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Create scaffold
+        if: steps.check.outputs.exists == 'false'
+        run: python tools/new_issue.py --num ${{ steps.next.outputs.num }}
+
+      - name: Commit and push
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/${{ steps.next.outputs.num }}.json
+          git commit -m "chore: scaffold KAPMAN SIGNAL N°${{ steps.next.outputs.num }} (à remplir en session)
+
+Rappel éditorial avant d'écrire le contenu :
+- AUCUNE répétition : jamais une track/artiste/label déjà utilisé.
+- LIENS RÉELS uniquement : YouTube/Bandcamp des playlists réelles d'Adam.
+- Accents cyclent rouge → vert → bleu ; stats alternent vert/bleu.
+- Ton : euphorique, physique, précis. KAPMAN ≠ Escape Music Collective.
+
+Pour publier : remplir content/${{ steps.next.outputs.num }}.json puis
+\`python tools/new_issue.py --num ${{ steps.next.outputs.num }} --build\` + push."
+          git push origin master
