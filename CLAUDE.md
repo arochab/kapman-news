@@ -21,15 +21,18 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   Subscriptions persist in a **private GitHub Gist** via the API (env: `GITHUB_TOKEN`
   scope `gist`, `GIST_ID`). Plus `VAPID_PRIVATE_KEY` (PEM — the server converts it to
   the raw 32-byte scalar that pywebpush needs), `VAPID_PUBLIC_KEY`, `PUSH_SECRET`, `PORT`.
-- **Publishing** = push an `issues/NN/index.html`. La notification ne part PLUS
-  au push : `.github/workflows/scheduled-notify.yml` envoie la dernière issue
-  non notifiée chaque **mardi et vendredi à 10h (Paris)** — marqueur dans
-  `state/last-notified-issue.txt`, commité après envoi réussi. Envoi manuel
-  immédiat possible via `notify.yml` (workflow_dispatch, input `issue`).
-  Pour re-render des issues existantes (refonte template) :
-  `python tools/build_issue.py --rebuild-all` + commit `[skip notify]`.
+- **Publishing = committer un `content/NN.json` REMPLI suffit.** Au créneau
+  suivant (mardi/vendredi 10h Paris), `scheduled-notify.yml` prend le plus
+  petit numéro rempli non notifié, le REND si besoin (build committé par le
+  bot), envoie la notification et avance `state/last-notified-issue.txt`.
+  File FIFO, un numéro par créneau, squelette vide = jamais envoyé. Envoi
+  manuel immédiat : `notify.yml` (workflow_dispatch, input `issue`). Refonte
+  template : `python tools/build_issue.py --rebuild-all` + commit
+  `[skip notify]`. Processus complet : `docs/PIPELINE-EDITORIAL.md`.
+- **Anti-répétition** : `python tools/track_history.py` (`--check "Nom"`)
+  avant toute sélection.
 - **Cadence** : scaffold auto du numéro suivant (scaffold.yml) mardi & vendredi
-  ~10h45 Paris ; l'écriture éditoriale reste manuelle (Adam en session).
+  ~10h45 Paris ; l'écriture éditoriale se fait en session sur cette base.
 
 ## Authoring a new issue
 
