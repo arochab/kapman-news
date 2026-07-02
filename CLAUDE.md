@@ -52,6 +52,19 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 - La tagline doit être **tenue par le séquencement** (si le titre annonce Cologne, la
   tracklist y arrive). Max ~1 référence pointue par description de track ; le résumé
   « Cette édition » vend l'écoute, pas la cuisine interne.
+- **Fact-check Discogs bloquant** avant publication : chaque méta (label, catno, année,
+  ville) vérifiée sur la release exacte. Une méta fausse devant des diggers est
+  disqualifiante (cf `docs/AUDIT-EDITORIAL.md` §2 — erreurs relevées dans 09/10).
+- **Zéro cuisine interne dans le texte publié** : jamais « tes playlists », « zéro
+  répétition avec N°0X », noms d'outils (IA, scripts) dans la note de studio, ou
+  auto-commentaire de fabrication (« deux sorties du même label — c'est pas un hasard »).
+- **Règle du canon : max 1 track canon par numéro**, uniquement au service d'une track
+  obscure. Le N°09 (Metromusic, Remote, WIG001) est le modèle ; pas le N°10.
+- **Tics bannis** : « exactement » (quota 0), « niveau d'exigence » recyclé, compteurs
+  de vues YouTube comme preuve de goût (1 max/numéro). Varier les thèses de la note de
+  studio. Stats = vraie donnée (copies, prix, durée) — jamais une date Wikipédia.
+- Les créneaux mar/ven sont des **fenêtres de livraison, pas des quotas** : ne publier
+  que ce qui est au niveau. Stratégie produit/monétisation : `docs/AUDIT-EDITORIAL.md`.
 - Section accents cycle red → green → blue. Stats alternate green/blue. L'accent
   dominant d'une issue (numéral géant, CTA écoute) est dérivé de `issue_num % 3`
   par le template — rien à décider par issue.
