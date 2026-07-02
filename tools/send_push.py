@@ -1,6 +1,6 @@
 """
 Envoie la notification push pour une nouvelle issue.
-Usage : python tools/send_push.py --issue 09 --title "KAPMAN SIGNAL N°09" --body "Ce qu'on entend quand personne regarde"
+Usage : python tools/send_push.py --issue 09 --title "CIRCUIT FERMÉ N°09" --body "Ce qu'on entend quand personne regarde"
 Appelé par GitHub Actions à chaque push sur main.
 """
 import argparse, os, sys, time

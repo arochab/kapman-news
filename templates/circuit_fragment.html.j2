@@ -1,0 +1,36 @@
+{#
+  Fragment membre autonome : rend UN bloc (section ou stat) avec les classes
+  CSS existantes de la page (section, s-accent, s-bar, tracks tracks-{accent},
+  stat...). Utilisé côté client : pwa/circuit.js déchiffre le blob, rend ce
+  gabarit côté outillage (tools/circuit.py) et insère le HTML résultant après
+  l'élément [data-flow="position"] correspondant.
+
+  Différence avec un bloc public : pas de compteur "n / N" (pas de s-num),
+  juste la barre d'accent + un badge discret ".s-circuit".
+#}
+{%- import '_track.j2' as trackm -%}
+{%- if block.type == "section" -%}
+<div class="body-wrap">
+<div class="section{% if block.invert %} section--invert{% endif %}">
+  <div class="s-accent"><div class="s-bar s-bar-{{ block.accent }}"></div><span class="s-circuit">Circuit</span></div>
+  <h2>{{ block.heading }}</h2>
+  {% if block.tracks %}
+  <div class="tracks tracks-{{ block.accent }}">
+    {% for t in block.tracks %}
+{{ trackm.track(t, block.accent) }}
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if block.paragraphs %}
+  <div class="s-body">
+    {% for p in block.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+</div>
+{%- elif block.type == "stat" -%}
+<div class="stat stat-{{ block.accent }}">
+  <div class="stat-num">{{ block.number }}</div>
+  <div class="stat-ctx">{{ block.context }}</div>
+</div>
+{%- endif -%}

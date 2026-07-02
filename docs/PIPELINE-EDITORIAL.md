@@ -35,6 +35,25 @@ l'ordre, et un créneau sans numéro prêt reste silencieux.
    Pour envoyer sans attendre : Actions → « Push Notification · envoi
    manuel » → Run workflow avec le numéro.
 
+## Numéro à circuit fermé (à partir du N°17)
+
+1. **Écrire les deux parties** : la partie publique dans `content/NN.json`
+   comme d'habitude, la partie membre dans `content/circuit/NN.json`
+   (gitignoré, jamais commité en clair). Même schéma de blocs que
+   `content/SCHEMA.md`, plus un champ `position` par bloc pour indiquer où il
+   s'insère dans le numéro reconstitué côté membre.
+2. **Sceller** : `python tools/circuit.py --seal NN --code "<code du mois>"`
+   puis vérifier avec `python tools/circuit.py --check NN`. Le scellé chiffré
+   est embarqué dans la page publique ; le code du mois ne quitte jamais git.
+3. **Committer** : uniquement `content/NN.json` et le scellé produit par
+   `--seal` (embarqué dans le HTML rendu). Ne jamais committer
+   `content/circuit/NN.json` en clair ni le code du mois.
+4. **Retoucher après coup** : `python tools/circuit.py --open NN --code
+   "<code du mois>"` pour redéchiffrer localement, éditer, puis resceller.
+5. **Rendu et envoi restent automatiques** : la CI n'a jamais besoin du code
+   du mois, elle ne touche qu'au HTML déjà scellé. `scheduled-notify.yml`
+   fonctionne à l'identique pour un numéro fermé ou ouvert.
+
 ## Garde-fous
 
 - Rebuild de masse (refonte template) : `python tools/build_issue.py

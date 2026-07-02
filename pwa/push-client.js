@@ -1,4 +1,4 @@
-// KAPMAN SIGNAL — Client Web Push partagé
+// CIRCUIT FERMÉ · Client Web Push partagé
 // Inclus par index.html (racine) ET issues/NN/index.html (sous-dossier).
 // Calcule la racine du site dynamiquement pour enregistrer le SW au bon scope.
 
@@ -277,8 +277,8 @@
     btn.hidden = false;
     btn.addEventListener('click', () => {
       navigator.share({
-        title: 'KAPMAN SIGNAL',
-        text: 'La newsletter underground electronic du Escape Music Collective',
+        title: 'CIRCUIT FERMÉ',
+        text: 'La newsletter underground electronic, sélection sous chiffrement client',
         url: ROOT,
       }).catch((err) => {
         // AbortError si la lectrice annule le partage : rien à signaler.

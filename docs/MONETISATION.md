@@ -1,57 +1,51 @@
 # Monétisation · Membre du circuit
 
-Principe : la lettre CIRCUIT FERMÉ reste 100 % gratuite et publique (canal
-d'acquisition). On vend l'appartenance, pas le texte : un paywall convertirait
-3 à 10 %, soit 1 à 3 payants sur le lectorat actuel (cf docs/AUDIT-EDITORIAL.md).
-Framing public type NTS : « le contenu reste ouvert, tu finances la suite ».
+Principe : freemium. La version publique de chaque numéro reste digne de la
+marque (c'est le canal d'acquisition) ; la version complète vit dans « le
+circuit » (les membres). Prix : 5 €/mois ou 50 €/an (2 mois offerts + l'objet
+de fin d'année, un zine risographié : jamais promettre de K7). Deux Payment
+Links Stripe, un par palier.
 
-## L'offre
+## Le découpage éditorial
 
-Deux paliers, deux Payment Links Stripe :
+À respecter à chaque numéro fermé (à partir du N°17) :
 
-- **5 €/mois** (mensuel)
-- **50 €/an** (2 mois offerts + le totem de fin d'année)
+**Gratuit** (page publique) :
+- la tagline
+- les puces « Cette édition » (celles qui renvoient à des sections fermées
+  deviennent des teasers non cliquables)
+- 3 tracks sur 7, avec textes et liens complets
+- la note de studio
+- 1 stat
 
-Ce que le membre débloque :
+**Circuit** (déverrouillé par le code du mois) :
+- les 4 autres tracks
+- « Par où commencer »
+- le récap tracklist complet
+- le crate du mois, dans le dernier numéro du mois : la playlist prête à
+  jouer + 3 tracks bonus avec notes de digging (mêmes règles éditoriales que
+  la lettre : blocklist des playlists d'Adam, no repeat 10 éditions, liens
+  vérifiés)
+- l'archive des numéros fermés
 
-1. **La Séance** (le cœur) : écoute collective mensuelle au lieu ami, la
-   sélection du mois jouée en entier, lumière basse, débrief. Séance #1 le
-   samedi 25 juillet 2026, gratuite pour tous (produit d'appel et moment de
-   conversion) ; ensuite réservée aux membres sur RSVP. Jamais d'argent sur
-   place.
-2. **Le crate du mois** (l'utilité) : la playlist prête à jouer des numéros
-   du mois + 3 tracks bonus hors flux public avec notes de digging. Rédigé
-   dans la même session que le dernier numéro du mois (coût marginal quasi
-   nul). Mêmes règles éditoriales que la lettre (blocklist des playlists
-   d'Adam, no repeat 10 éditions, liens vérifiés). Livré le dernier vendredi
-   du mois en message privé WhatsApp aux membres (liste tirée du dashboard
-   Stripe ; trivial sous 20 membres).
-3. **La cabine** : le group chat WhatsApp reste GRATUIT et ouvert à tous les
-   abonnés (canal d'acquisition, pas un perk). Le perk membre, c'est le crate
-   en privé et la Séance.
-4. **Le totem annuel** (l'objet) : zine risographié réservé au palier annuel,
-   tirage 50 à 100 exemplaires, expédié en décembre. (Ne jamais promettre de
-   K7 publiquement ; ça reste un bonus interne éventuel.)
+Les numéros 09 à 16 restent complets et gratuits : c'est l'archive d'appel.
+Le circuit se ferme au N°17 (vendredi 24 juillet 2026), en même temps que
+l'activation Stripe.
 
-## Économie
+## Le code du circuit
 
-20 membres = 100 €/mois (net Stripe ~93 €) : la Séance et le zine
-s'autofinancent. À cette échelle c'est un club qui se finance, pas un
-salaire ; le revenu viendra de la taille. Note non bloquante : des revenus
-récurrents se déclarent (micro-BNC) · décision d'Adam.
+Un code par mois, format trois mots plus deux chiffres, généré par
+`python tools/circuit.py --gen-code`. Le code n'est jamais commité ni publié
+sur le site : il est distribué via le message de confirmation post-achat
+Stripe (configurable dans le Payment Link) et rappelé en privé.
 
-## Seuil de décision (écrit d'avance)
+Un membre qui résilie perd les codes suivants et garde les anciens (les
+numéros déjà déverrouillés restent lisibles chez lui, rien à révoquer côté
+serveur puisque tout est statique).
 
-Moins de 5 membres au 31 août 2026 : le club redevient gratuit, on retente à
-50+ abonnés push. 5 ou plus : rituel confirmé, Séance mensuelle et crate
-pérennisés.
-
-## Annonce N°17 (prête à coller, verbatim)
-
-> Le circuit s'ouvre. La lettre reste gratuite, rien ne change ici. Les
-> membres (5 € par mois ou 50 € l'année) financent la suite : la Séance
-> d'écoute mensuelle, le crate du mois avec ses tracks bonus, et l'objet de
-> fin d'année pour les annuels. Première Séance demain soir.
+Limite assumée : un code peut se partager. La rotation mensuelle et le petit
+cercle suffisent : on ne vend pas des secrets d'État, on vend l'appartenance
+et le geste.
 
 ## Mise en place Stripe (lun 20 juillet, ~20 min)
 
@@ -69,8 +63,11 @@ pérennisés.
    - Activer le **portail client** (« customer portal ») pour que les
      membres puissent résilier en autonomie, sans avoir à écrire à qui que
      ce soit.
-   - Rendre le champ e-mail obligatoire (utile pour le suivi du crate et
-     pour dire merci ponctuellement).
+   - Rendre le champ e-mail obligatoire (utile pour le suivi et pour dire
+     merci ponctuellement).
+   - Configurer le **message de confirmation post-achat** pour qu'il
+     contienne le code du circuit du mois en cours et le lien WhatsApp de la
+     cabine.
 
 4. **Configurer le site** · coller les deux URLs dans `content/site.json` :
 
@@ -104,27 +101,45 @@ pérennisés.
    apparaît sur toutes les issues déjà publiées et sur la home.
 
 6. **Suivi des membres** · tout se passe dans le dashboard Stripe (nombre
-   d'abonnés, paiements, désabonnements/churn, e-mails collectés pour le
-   crate du mois et les mercis ponctuels).
+   d'abonnés, paiements, désabonnements/churn, e-mails collectés).
 
-## Distribution du crate
+## Économie
 
-Liste des membres tirée du dashboard Stripe → message privé WhatsApp le
-dernier vendredi du mois. Pas de nouvel outil tant qu'on est sous 20
-membres.
+20 membres = 100 €/mois (net Stripe ~93 €) : le zine et le projet
+s'autofinancent. À cette échelle c'est un club qui se finance, pas un
+salaire. Note non bloquante : des revenus récurrents se déclarent
+(micro-BNC), décision d'Adam.
 
-## Limites & suite
+## Seuil de décision (écrit d'avance)
 
-- Le dépôt GitHub est **public** : le contenu de chaque issue reste lisible
-  par n'importe qui, membre ou non. Ce n'est **pas un paywall**, c'est de
-  l'appartenance volontaire. Choix assumé, cohérent avec l'esprit
-  « portfolio + petit cercle d'amis » du projet.
-- Pour un vrai paywall (v3 hypothétique, si le besoin se présente un jour)
-  il faudrait changer d'architecture : dépôt privé + hébergement avec
-  authentification (par ex. Render avec check de session, ou Cloudflare
-  Access devant les pages), ou bien migrer vers une plateforme dédiée à
-  l'abonnement payant. À décider plus tard, pas urgent.
-- Alternatives à Stripe si jamais : **Ko-fi** ou **Liberapay**, moins
-  « pro » dans le rendu mais zéro friction à mettre en place (pas de KYC
-  aussi lourd, pages hébergées prêtes à l'emploi). Stripe reste préférable
-  ici pour le rendu et le portail client en self-service.
+Moins de 5 membres au 31 août 2026 : le circuit rouvre (tout redevient
+gratuit), on retente à 50+ abonnés push. 5 membres ou plus : modèle
+confirmé.
+
+## Annonce N°17 (prête à coller, verbatim)
+
+> Le circuit se ferme. À partir de ce numéro, la lettre publique garde trois
+> tracks et la note de studio. Le reste (quatre tracks, par où commencer, le
+> crate du mois) vit dans le circuit : 5 € par mois ou 50 € l'année, le code
+> arrive à l'inscription. Rien d'autre ne change.
+
+## Accès offerts (testeurs et relais)
+
+Le lien magique rend tout accès offert trivial : une URL de numéro avec le
+code en fragment (`…/issues/17/#c=<code du mois>`) déverrouille au premier
+clic, sans saisie ; le fragment ne quitte jamais le navigateur et l'URL se
+nettoie toute seule.
+- **Cercle testeurs** (5 à 10 très proches) : le code du mois offert, envoyé
+  chaque mois en privé. Leur paiement, c'est le retour d'usage.
+- **Relais** (DJs, comptes de la scène, presse) : un lien magique vers UN
+  numéro précis, jamais l'archive. Le code tournant limite la casse si le
+  lien fuit.
+- Quand ça prendra de la hauteur : passer aux codes multiples par numéro
+  (clé de contenu enveloppée sous plusieurs codes : membre, invité,
+  campagne, révocables séparément). Noté comme évolution v2 de
+  tools/circuit.py, pas urgent.
+
+## Idées pour plus tard
+
+- La Séance d'écoute collective : reportée, trop tôt.
+- La cabine WhatsApp reste gratuite et ouverte.

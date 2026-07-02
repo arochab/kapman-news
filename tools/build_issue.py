@@ -1,5 +1,5 @@
 """
-Rend une issue KAPMAN SIGNAL en page web statique à partir d'un JSON de contenu.
+Rend une issue CIRCUIT FERMÉ en page web statique à partir d'un JSON de contenu.
 
   python tools/build_issue.py --content content/10.json
 
@@ -109,6 +109,13 @@ def render_issue(content: dict) -> str:
     listen_all_url, listen_count = extract_listen_all(content)
     site = load_site()
 
+    # circuit (contenu membre chiffre, optionnel) : passe explicitement comme
+    # site, et retire du dict spread ci-dessous pour eviter un doublon de
+    # kwarg. Absent (anciennes issues) -> None -> falsy en Jinja, rendu
+    # strictement identique a aujourd'hui.
+    circuit = content.get("circuit")
+    content_rest = {k: v for k, v in content.items() if k != "circuit"}
+
     return tmpl.render(
         section_count=section_count,
         prev_num=prev_num,
@@ -116,7 +123,8 @@ def render_issue(content: dict) -> str:
         listen_all_url=listen_all_url,
         listen_count=listen_count,
         site=site,
-        **content,
+        circuit=circuit,
+        **content_rest,
     )
 
 

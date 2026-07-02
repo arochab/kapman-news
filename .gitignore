@@ -8,3 +8,6 @@ __pycache__/
 
 # Render ephemeral / local temp
 *.log
+
+# Clair membre "circuit ferme" (ne jamais commiter le contenu en clair)
+content/circuit/

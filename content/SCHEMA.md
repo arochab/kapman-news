@@ -110,6 +110,108 @@ Liens réels uniquement — jamais inventés ni devinés (cf. règle éditoriale
 ci-dessous). Le label du lien porte son propre symbole (`▶`, `↗`, `◈`) ; le
 template ne les ajoute pas automatiquement.
 
+## Numéro à circuit fermé
+
+Mécanisme freemium : une issue peut embarquer du contenu membre chiffré côté
+client (AES-256-GCM, clé dérivée d'un code par PBKDF2, compatible WebCrypto),
+déchiffré dans le navigateur par un code jamais commité. Piloté par
+`python tools/circuit.py` (`--seal` / `--check` / `--open` / `--gen-code`).
+
+### Le clair membre : `content/circuit/NN.json`
+
+Fichier gitignoré (`content/circuit/`), n'existe qu'en session d'écriture,
+jamais commité. Structure :
+
+```json
+{
+  "blocks": [
+    {
+      "type": "section",
+      "accent": "red",
+      "heading": "Titre du bloc membre",
+      "position": 2,
+      "tracks": [ /* même structure qu'un track public, cf plus haut */ ]
+    },
+    {
+      "type": "stat",
+      "accent": "blue",
+      "number": "1996",
+      "context": "Contexte du chiffre...",
+      "position": 4
+    }
+  ]
+}
+```
+
+Chaque bloc a la **même structure qu'un bloc public** (section avec `tracks`
+ou `paragraphs`, ou `stat` ; cf sections « Blocs » plus haut), plus un champ
+entier obligatoire `position` : le fragment rendu est inséré après l'élément
+public portant `data-flow="position"` (`position` = 0 : juste après le hero,
+avant le premier bloc public).
+
+### Le blob chiffré : champ `circuit` de `content/NN.json`
+
+```json
+{
+  "v": 1,
+  "kid": "2026-07",
+  "salt": "<base64>",
+  "iv": "<base64>",
+  "ct": "<base64>",
+  "teaser": "3 tracks de plus réservées aux membres du circuit.",
+  "count": 3
+}
+```
+
+| Champ | Description |
+|-------|-------------|
+| `v` | Version du format (toujours `1` actuellement). |
+| `kid` | Identifiant de clé, format `YYYY-MM`. Défaut : déduit de `date_iso` de l'issue. |
+| `salt` | Sel PBKDF2, 16 octets aléatoires, base64 standard. |
+| `iv` | Vecteur d'initialisation AES-GCM, 12 octets aléatoires, base64 standard. |
+| `ct` | Ciphertext AES-256-GCM, tag concaténé en fin (comportement par défaut de `cryptography` et de WebCrypto), base64 standard. |
+| `teaser` | Texte public affiché à la place du contenu membre (chaîne libre publique, jamais chiffrée). Écrit par `--seal --teaser "..."`, sinon construit automatiquement depuis `count`. |
+| `count` | Nombre total de tracks des blocs membres. Calculé par `--seal`, jamais saisi à la main. |
+
+Absent (issue sans circuit fermé) : `circuit` est falsy en Jinja, rendu
+identique à aujourd'hui, aucune adaptation nécessaire pour les anciennes
+issues.
+
+### Crypto (compatibilité WebCrypto obligatoire)
+
+- Clé : `PBKDF2-HMAC-SHA256(code normalisé, salt, 310000 itérations, 32 octets)`.
+- Normalisation du code : `strip()` puis minuscule, rien d'autre.
+- Chiffrement : AES-256-GCM, IV 12 octets aléatoires, tag concaténé en fin de
+  ciphertext.
+- Encodage : base64 standard avec padding pour `salt`/`iv`/`ct`.
+- Le plaintext (avant chiffrement) est un JSON UTF-8 :
+  `{"fragments": [{"position": <int>, "html": "<fragment HTML rendu>"}], "source": {...}}`
+  où `fragments[].html` vient du rendu individuel de chaque bloc via
+  `templates/circuit_fragment.html.j2`, et `source` est le contenu intégral
+  de `content/circuit/NN.json` (permet à `--open` de reconstruire le clair
+  sans perte).
+
+### Procédure
+
+1. Écrire le clair dans `content/circuit/NN.json` (même règles éditoriales
+   que le contenu public : anti-répétition, liens réels, méta structurée).
+2. `python tools/circuit.py --seal NN --code "mot-mot-mot-NN"` : rend les
+   fragments, chiffre, écrit le champ `circuit` dans `content/NN.json`.
+   Code de test rapide : `python tools/circuit.py --gen-code`.
+3. `python tools/circuit.py --check NN --code "..."` : vérifie l'intégrité
+   avant publication (fragments non vides, positions entières, code correct).
+4. Commit **sans** `content/circuit/NN.json` (gitignoré, le clair ne quitte
+   jamais la session). Le code membre n'est jamais commité non plus ; il se
+   transmet aux membres par un canal séparé.
+5. Pour retoucher un circuit déjà scellé : `python tools/circuit.py --open NN
+   --code "..."` recrée `content/circuit/NN.json` à partir du blob chiffré
+   (refuse si le fichier existe déjà, pour ne rien écraser). Éditer, puis
+   `--seal` de nouveau.
+
+**Rappel** : le code n'est jamais commité, aucun clair membre ne doit
+apparaître dans git (le `.gitignore` couvre `content/circuit/`, mais rester
+vigilant sur les diffs avant `git add`).
+
 ## Règles éditoriales (voir mémoire)
 - **Jamais** répéter un track/artiste/label déjà publié → cf
   `NEWSLETTER DEMO/memory/newsletter_track_history.md`.

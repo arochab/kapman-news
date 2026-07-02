@@ -13,6 +13,8 @@ Audience: portfolio/showcase piece + ~10–30 close friends (Paris). Mobile-firs
 - Seule exception : le crédit discret du footer : « Sélection · KAPMAN » avec trois
   liens : Shotgun `https://shotgun.live/artists/kapman_music`, SoundCloud
   `https://soundcloud.com/kapman_music`, Instagram `https://www.instagram.com/kapman___/`.
+- **Réseaux** : uniquement le compte Instagram CIRCUIT FERMÉ (anonyme, à
+  partir d'août) ; jamais les comptes persos d'Adam en public.
 
 ## Architecture (don't re-derive — it's settled)
 
@@ -40,6 +42,8 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   avant toute sélection.
 - **Cadence** : scaffold auto du numéro suivant (scaffold.yml) mardi & vendredi
   ~10h45 Paris ; l'écriture éditoriale se fait en session sur cette base.
+- **Accès offerts** : lien magique `#c=<code>` (voir docs/MONETISATION.md ·
+  Accès offerts).
 
 ## Authoring a new issue
 
@@ -92,6 +96,15 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 - **Tics bannis** : « exactement » (quota 0), « niveau d'exigence » recyclé, compteurs
   de vues YouTube comme preuve de goût (1 max/numéro). Varier les thèses de la note de
   studio. Stats = vraie donnée (copies, prix, durée) — jamais une date Wikipédia.
+- **Freemium (à partir du N°17)** : découpage obligatoire sur chaque numéro fermé,
+  gratuit = 3 tracks sur 7 (textes et liens complets) + la note de studio + 1 stat ;
+  le reste (4 tracks, « Par où commencer », récap tracklist, crate du mois) est
+  scellé via `tools/circuit.py`. Seal obligatoire avant tout commit d'un numéro
+  fermé ; le code mensuel n'est jamais commité ; jamais de clair membre
+  (`content/circuit/NN.json`) dans git. Détail complet : `docs/MONETISATION.md`
+  et `docs/PIPELINE-EDITORIAL.md`.
+- La Séance d'écoute collective est hors offre (idée reportée, pas au programme) ;
+  la cabine WhatsApp reste gratuite et ouverte à tous les abonnés.
 - Les créneaux mar/ven sont des **fenêtres de livraison, pas des quotas** : ne publier
   que ce qui est au niveau. Stratégie produit/monétisation : `docs/AUDIT-EDITORIAL.md`.
 - Section accents cycle red → green → blue. Stats alternate green/blue. L'accent
@@ -122,3 +135,5 @@ glitch RGB. La triple-rule R/V/B reste la signature graphique. Gris uniquement
 via les tokens du `:root` (`--dim`/`--meta`/`--faint`, tous ≥4.5:1 sur l'ink) : zéro hex
 littéral hors `:root`. All design lives in
 `templates/issue.html.j2` — change it there, never per-issue.
+- La note de studio est désormais un panneau signature hors du flux numéroté
+  (en-tête mono, glyphe signal en signature).

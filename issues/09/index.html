@@ -185,6 +185,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .section--invert .s-num { color: var(--ink-meta); }
 .section--invert .s-body a { color: var(--blue); }
 
+/* ── NOTE DE STUDIO (panneau signature, hors flux numéroté) ──
+   Sort du comptage "n / N" : triple rule fine en tête, en-tête mono dédié,
+   corps en Hanken plus grand que les sections, glyphe signal en signature
+   finale (aligné à droite, sans nom). Toujours cream (section--invert). */
+.studio-note .triple-rule { height: 3px; margin-bottom: 24px; }
+.studio-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-meta); margin-bottom: 24px; }
+.studio-body p { font-family: var(--text); font-size: 19px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 18px; }
+.studio-body p:last-child { margin-bottom: 0; }
+.studio-body a { color: var(--blue); }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
+
 /* ── TRACK ── */
 .track {
   margin-bottom: 28px; padding: 0 0 28px 40px; position: relative;
@@ -358,6 +369,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
+  .studio-body p { font-size: 17px; }
 }
 </style>
 </head>
@@ -367,7 +379,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" data-flow="0">
   <div class="issue-numeral" aria-hidden="true">09</div>
   <div class="hero-content">
     <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; CIRCUIT FERMÉ N°09 &nbsp;·&nbsp; Juin 2026</div>
@@ -409,7 +421,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="1">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
   <h2>Ce qui tourne : les incontournables</h2>
@@ -554,14 +566,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-green reveal">
+<div class="stat stat-green reveal" data-flow="2">
   <div class="stat-num">1996</div>
   <div class="stat-ctx">Année des deux classiques de cette issue : Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="3">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
   <h2>Sorties 2026 : ce qui mérite l&#39;attention</h2>
@@ -602,14 +614,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-blue reveal">
+<div class="stat stat-blue reveal" data-flow="4">
   <div class="stat-num">300</div>
   <div class="stat-ctx">Copies pressées pour le Kerouac EP sur Dank Records UK. Première sortie du label. À surveiller de près.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="5">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
   <h2>Le label · Wagon Repair</h2>
@@ -624,16 +636,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="body-wrap">
-<div class="section reveal section--invert" id="s4">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">4 / 4</div></div>
-  <h2>Note de studio</h2>
-    
-    
-  <div class="s-body">
+<div class="body-wrap" data-flow="6">
+<div class="section studio-note reveal section--invert" id="s4">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="studio-kicker">Note de studio · Juin 2026</div>
+  <div class="s-body studio-body">
     <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test.</p>
   </div>
-    
+  <div class="studio-sig">
+    <div class="signal-glyph" aria-hidden="true">
+      <span class="sg-bar sg-r"></span>
+      <span class="sg-bar sg-g"></span>
+      <span class="sg-bar sg-b"></span>
+    </div>
+  </div>
 </div>
 </div>
   
