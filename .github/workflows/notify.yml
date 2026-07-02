@@ -1,11 +1,11 @@
-name: Push Notification — New Issue
+name: Push Notification — envoi manuel
+
+# L'envoi automatique à la publication est désactivé : les notifications
+# partent aux créneaux programmés (scheduled-notify.yml, mardi & vendredi
+# 10h Paris). Ce workflow reste l'outil d'envoi MANUEL à la demande.
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'issues/**/index.html'   # déclenche uniquement si une issue est ajoutée/modifiée
-  workflow_dispatch:             # déclenchement manuel — renvoyer une notif à la demande
+  workflow_dispatch:             # déclenchement manuel — envoyer/renvoyer une notif
     inputs:
       issue:
         description: "Numéro d'issue (ex: 09) — laisser vide pour auto-détecter le dernier commit"

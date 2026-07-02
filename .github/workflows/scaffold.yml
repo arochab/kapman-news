@@ -2,7 +2,10 @@ name: Scaffold next issue
 
 on:
   schedule:
-    - cron: '17 7 * * 1'   # chaque lundi 07h17 UTC (≈ 9h17 Paris)
+    # Rythme de parution bi-hebdo : le squelette du numéro suivant est prêt
+    # ~45 min après chaque créneau d'envoi (mardi & vendredi 10h Paris).
+    # Idempotent (vérifie l'existence du JSON), donc pas de garde DST.
+    - cron: '45 8 * * 2,5'
   workflow_dispatch: {}     # déclenchement manuel pour tester
 
 jobs:
@@ -49,14 +52,20 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add content/${{ steps.next.outputs.num }}.json
-          git commit -m "chore: scaffold KAPMAN SIGNAL N°${{ steps.next.outputs.num }} (à remplir en session)
+          # Message multiligne via -F - + heredoc quoté (un -m multiligne
+          # cassait l'indentation YAML ; le heredoc quoté neutralise les
+          # backticks, et ${{ }} est substitué par le runner avant le shell).
+          git commit -F - <<'MSG'
+          chore: scaffold KAPMAN SIGNAL N°${{ steps.next.outputs.num }} (à remplir en session)
 
-Rappel éditorial avant d'écrire le contenu :
-- AUCUNE répétition : jamais une track/artiste/label déjà utilisé.
-- LIENS RÉELS uniquement : YouTube/Bandcamp des playlists réelles d'Adam.
-- Accents cyclent rouge → vert → bleu ; stats alternent vert/bleu.
-- Ton : euphorique, physique, précis. KAPMAN ≠ Escape Music Collective.
+          Rappel éditorial avant d'écrire le contenu :
+          - AUCUNE répétition : jamais une track/artiste/label déjà utilisé.
+          - LIENS RÉELS uniquement : YouTube/Bandcamp des playlists réelles d'Adam.
+          - Accents cyclent rouge → vert → bleu ; stats alternent vert/bleu.
+          - Ton : euphorique, physique, précis. KAPMAN ≠ Escape Music Collective.
 
-Pour publier : remplir content/${{ steps.next.outputs.num }}.json puis
-\`python tools/new_issue.py --num ${{ steps.next.outputs.num }} --build\` + push."
+          Pour publier : remplir content/${{ steps.next.outputs.num }}.json puis
+          `python tools/new_issue.py --num ${{ steps.next.outputs.num }} --build` + push.
+          La notification partira au prochain créneau (mardi/vendredi 10h Paris).
+          MSG
           git push origin master

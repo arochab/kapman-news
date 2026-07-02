@@ -1,0 +1,97 @@
+name: Notification programmée — mardi & vendredi 10h (Paris)
+
+# La publication d'une issue (push de issues/NN/index.html) ne notifie plus
+# immédiatement : ce workflow envoie la notification de la DERNIÈRE issue non
+# encore notifiée, chaque mardi et vendredi à 10h heure de Paris.
+# Le marqueur vit dans state/last-notified-issue.txt (commité après envoi).
+#
+# GitHub cron = UTC uniquement → deux crons (été UTC+2 / hiver UTC+1) + une
+# garde qui vérifie qu'il est exactement 10h à Paris ; le doublon DST sort
+# silencieusement.
+
+on:
+  schedule:
+    - cron: '0 8 * * 2,5'   # 10h Paris quand l'Europe est en heure d'été (UTC+2)
+    - cron: '0 9 * * 2,5'   # 10h Paris quand l'Europe est en heure d'hiver (UTC+1)
+  workflow_dispatch: {}      # test manuel — ignore la garde horaire
+
+concurrency:
+  group: scheduled-notify
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10   # warm-up Render (cold start) + retries de /notify
+
+    steps:
+      - name: Garde horaire (10h à Paris exactement)
+        id: gate
+        run: |
+          H=$(TZ=Europe/Paris date +%H)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$H" = "10" ]; then
+            echo "go=true" >> $GITHUB_OUTPUT
+          else
+            echo "go=false" >> $GITHUB_OUTPUT
+            echo "Il est ${H}h à Paris — ce déclenchement est le doublon été/hiver, on sort."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.go == 'true'
+
+      - name: Détecter une issue en attente de notification
+        id: pending
+        if: steps.gate.outputs.go == 'true'
+        run: |
+          LATEST=$(ls issues/ | grep -E '^[0-9]{2}$' | sort | tail -1)
+          LAST=$(cat state/last-notified-issue.txt 2>/dev/null || echo "00")
+          echo "Dernière issue publiée : ${LATEST:-aucune} — dernière notifiée : $LAST"
+          if [ -n "$LATEST" ] \
+             && [ "$((10#$LATEST))" -gt "$((10#$LAST))" ] \
+             && [ -s "issues/$LATEST/index.html" ]; then
+            echo "issue=$LATEST" >> $GITHUB_OUTPUT
+            echo "→ N°$LATEST sera notifiée."
+          else
+            echo "issue=" >> $GITHUB_OUTPUT
+            echo "→ Rien à notifier sur ce créneau."
+          fi
+
+      - name: Set up Python
+        if: steps.pending.outputs.issue != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        if: steps.pending.outputs.issue != ''
+        run: pip install requests python-dotenv
+
+      - name: Envoyer la notification
+        if: steps.pending.outputs.issue != ''
+        env:
+          RENDER_URL:  ${{ secrets.RENDER_URL }}
+          PUSH_SECRET: ${{ secrets.PUSH_SECRET }}
+        run: |
+          ISSUE="${{ steps.pending.outputs.issue }}"
+          python tools/send_push.py \
+            --issue "$ISSUE" \
+            --title "KAPMAN SIGNAL N°$ISSUE" \
+            --body "Nouvelle issue disponible — écoute ce qu'on a sélectionné."
+
+      # Marqué APRÈS envoi réussi : si l'envoi échoue, le job échoue et
+      # l'issue sera retentée au prochain créneau (mardi ou vendredi suivant).
+      - name: Marquer l'issue comme notifiée
+        if: steps.pending.outputs.issue != ''
+        run: |
+          ISSUE="${{ steps.pending.outputs.issue }}"
+          mkdir -p state
+          echo "$ISSUE" > state/last-notified-issue.txt
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/last-notified-issue.txt
+          git commit -m "chore(notify): N°$ISSUE notifiée (créneau programmé) [skip notify]"
+          git pull --rebase origin master
+          git push origin master

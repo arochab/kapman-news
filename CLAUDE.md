@@ -21,11 +21,15 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   Subscriptions persist in a **private GitHub Gist** via the API (env: `GITHUB_TOKEN`
   scope `gist`, `GIST_ID`). Plus `VAPID_PRIVATE_KEY` (PEM — the server converts it to
   the raw 32-byte scalar that pywebpush needs), `VAPID_PUBLIC_KEY`, `PUSH_SECRET`, `PORT`.
-- **Publishing** = push an `issues/NN/index.html`; `.github/workflows/notify.yml` calls
-  `/notify` → Web Push to all subscribers. Only **added** issue files notify
-  (`--diff-filter=A`), et un commit contenant `[skip notify]` ne notifie jamais —
-  pour re-render des issues existantes (refonte template) :
+- **Publishing** = push an `issues/NN/index.html`. La notification ne part PLUS
+  au push : `.github/workflows/scheduled-notify.yml` envoie la dernière issue
+  non notifiée chaque **mardi et vendredi à 10h (Paris)** — marqueur dans
+  `state/last-notified-issue.txt`, commité après envoi réussi. Envoi manuel
+  immédiat possible via `notify.yml` (workflow_dispatch, input `issue`).
+  Pour re-render des issues existantes (refonte template) :
   `python tools/build_issue.py --rebuild-all` + commit `[skip notify]`.
+- **Cadence** : scaffold auto du numéro suivant (scaffold.yml) mardi & vendredi
+  ~10h45 Paris ; l'écriture éditoriale reste manuelle (Adam en session).
 
 ## Authoring a new issue
 
