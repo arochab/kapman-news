@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL N°09 · Ce qu&#39;on entend quand personne regarde</title>
+<title>CIRCUIT FERMÉ N°09 · Ce qu&#39;on entend quand personne regarde</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,7 +88,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 /* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
    Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
-   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+   Wordmark = CIRCUIT (Hanken 800) au-dessus de FERMÉ (Plex Mono, tracking large). */
 .lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 
 .signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
@@ -319,7 +319,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .footer-mini-rule .g { flex:1; background: var(--green); }
 .footer-mini-rule .b { flex:1; background: var(--blue); }
 .footer-collective { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 28px; }
-.footer-byline { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-bottom: 8px; }
+.footer-credit { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-bottom: 4px; }
+.footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.footer-link { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .15s; }
+.footer-link:hover, .footer-link:focus-visible { color: var(--cream); }
 .footer-colophon { font-family: var(--mono); font-size: 10px; color: var(--meta); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
 
 /* ── MOTION ── */
@@ -367,7 +370,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="hero">
   <div class="issue-numeral" aria-hidden="true">09</div>
   <div class="hero-content">
-    <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; KAPMAN SIGNAL N°09 &nbsp;·&nbsp; Juin 2026</div>
+    <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; CIRCUIT FERMÉ N°09 &nbsp;·&nbsp; Juin 2026</div>
 
     <div class="logo-block">
       <div class="lockup">
@@ -377,12 +380,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
           <span class="sg-bar sg-b"></span>
         </div>
         <div class="lockup-text">
-          <div class="wordmark">KAPMAN</div>
-          <div class="signal-label">Signal</div>
+          <div class="wordmark">CIRCUIT</div>
+          <div class="signal-label">Fermé</div>
         </div>
       </div>
       <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-      <div class="logo-collective">Escape Music Collective</div>
+      <div class="logo-collective">Underground Electronic · Paris</div>
     </div>
 
     <h1 class="tagline">Ce qu'on entend quand<br>personne regarde</h1>
@@ -666,7 +669,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   <button id="share-btn" hidden>↗ Partager à un ami</button>
   <div class="qr-wrap">
     <div class="qr-share-lbl">Partager à un ami</div>
-    <img src="../../pwa/qr.png" alt="QR vers KAPMAN SIGNAL" onerror="this.parentNode.style.display='none'">
+    <img src="../../pwa/qr.png" alt="QR vers CIRCUIT FERMÉ" onerror="this.parentNode.style.display='none'">
     <div class="qr-steps">
       <span><b>1.</b> Scanne avec l'appareil photo</span>
       <span><b>2.</b> Ouvre le lien dans Chrome</span>
@@ -692,17 +695,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
         <span class="sg-bar sg-b"></span>
       </div>
       <div class="lockup-text">
-        <div class="wordmark">KAPMAN</div>
-        <div class="signal-label">Signal</div>
+        <div class="wordmark">CIRCUIT</div>
+        <div class="signal-label">Fermé</div>
       </div>
     </div>
     <div class="footer-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-    <div class="footer-collective">Escape Music Collective</div>
+    <div class="footer-collective">Underground Electronic · Paris</div>
   </div>
 
-  <div class="footer-byline">Sélection &amp; textes · KAPMAN · Escape Music Collective, Paris</div>
+  <div class="footer-credit">Sélection · KAPMAN</div>
+  <div class="footer-links">
+    <a class="footer-link" href="https://shotgun.live/artists/kapman_music" target="_blank" rel="noopener">Shotgun</a>
+    <a class="footer-link" href="https://soundcloud.com/kapman_music" target="_blank" rel="noopener">SoundCloud</a>
+    <a class="footer-link" href="https://www.instagram.com/kapman___/" target="_blank" rel="noopener">Instagram</a>
+  </div>
   
-  <div class="footer-colophon">N°09 · JUIN 2026 · 12 TRACKS · PARIS · KAPMAN SIGNAL</div>
+  <div class="footer-colophon">N°09 · JUIN 2026 · 12 TRACKS · PARIS · CIRCUIT FERMÉ</div>
 </div>
 
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
