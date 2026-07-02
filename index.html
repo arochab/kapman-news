@@ -9,18 +9,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --ink:#0E0F14; --cream:#F0EEE6; --red:#E83A2E; --green:#1FC85E; --blue:#3A6CF0;
-  --mid:#B8B3AB; --dim:#5A5C66; --border:#1B1C22;
+  --mid:#B8B3AB;
+  --dim:#9A9DA8;          /* était #5A5C66 (2.9:1) → 7.1:1 */
+  --meta:#8A8D99;         /* remplace #44464F, #34363E, #777 → 5.8:1 */
+  --faint:#8B8E99;        /* remplace #56586A → 5.9:1 */
+  --border:#1B1C22; --border-strong:#2A2C36; --surface:#121319;
+  --deep:#0B0C10;         /* remplace #0A0A0A et #080808 */
+  --blue-text:#5B85F5;    /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
   --disp:'Black Ops One',system-ui,sans-serif;
   --text:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 html, body { background: var(--ink); color: var(--cream); font-family: var(--text); -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 680px; margin: 0 auto; }
+::selection { background:var(--issue-accent,var(--blue)); color:var(--ink); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blue)); outline-offset:3px; }
 
 .triple-rule { display: flex; height: 3px; }
 .triple-rule .r { flex:1; background: var(--red); }
@@ -31,7 +39,7 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
 
 /* Marque RGB-light additive */
 .logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
-.lc { position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%; mix-blend-mode: screen; will-change: transform; animation: lc-breathe 6s ease-in-out infinite; }
+.lc { position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%; mix-blend-mode: screen; animation: lc-breathe 6s ease-in-out infinite; }
 .lc-r { left: 0;   background: var(--red); }
 .lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
 .lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
@@ -49,42 +57,49 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
 .mini-rule .r { flex:1; background: var(--red); }
 .mini-rule .g { flex:1; background: var(--green); }
 .mini-rule .b { flex:1; background: var(--blue); }
-.collective { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: #44464F; margin-bottom: 30px; }
+.collective { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--meta); margin-bottom: 30px; }
 .hero p { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 460px; }
 
 .issues { padding: 44px 48px; }
 .lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--blue); margin-bottom: 22px; }
 
-/* Liste : structure des .issue-row conservée à l'identique (ancre du build script). */
+/* Liste : structure des .issue-row générée/maintenue par tools/build_issue.py (update_home). */
 .issue-row { display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border); text-decoration: none; position: relative; transition: padding-left .2s ease; }
 .issue-row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent, transparent); transform: scaleY(0); transform-origin: top; transition: transform .25s ease; }
 .issue-row:hover { padding-left: 16px; }
 .issue-row:hover::before { transform: scaleY(1); }
-.issue-row:nth-child(3n+1) { --accent: var(--red); }
-.issue-row:nth-child(3n+2) { --accent: var(--green); }
-.issue-row:nth-child(3n)   { --accent: var(--blue); }
-.issue-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: #44464F; flex-shrink: 0; width: 38px; font-variant-numeric: tabular-nums; transition: color .2s; }
+.acc-0 { --accent: var(--red); }
+.acc-1 { --accent: var(--green); }
+.acc-2 { --accent: var(--blue); }
+.issue-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--meta); flex-shrink: 0; width: 38px; font-variant-numeric: tabular-nums; transition: color .2s; }
 .issue-row:hover .issue-num { color: var(--accent, var(--cream)); }
-.issue-title { font-size: 16px; font-weight: 600; color: var(--cream); flex: 1; line-height: 1.35; }
-.issue-date { font-family: var(--mono); font-size: 11px; color: #44464F; flex-shrink: 0; text-transform: uppercase; letter-spacing: .06em; }
+.issue-main { display:flex; flex-direction:column; gap:4px; flex:1; }
+.issue-title { font-size: 16px; font-weight: 600; color: var(--cream); line-height: 1.35; }
+.issue-artists { font-family: var(--mono); font-size: 10px; color: var(--meta); line-height: 1.5; }
+.issue-date { font-family: var(--mono); font-size: 11px; color: var(--meta); flex-shrink: 0; text-transform: uppercase; letter-spacing: .06em; }
 
 .subscribe { padding: 48px 48px; border-top: 1px solid var(--border); text-align: center; }
 .subscribe .inner { max-width: 420px; margin: 0 auto; }
 .subscribe h2 { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); margin-bottom: 12px; }
 .subscribe p { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 22px; }
-#sub-btn { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid #2C2E36; padding: 11px 22px; cursor: pointer; transition: all .2s; }
+#sub-btn { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid var(--border-strong); padding: 14px 24px; min-height: 44px; cursor: pointer; transition: all .2s; }
 #sub-btn:hover, #sub-btn.on { border-color: var(--green); color: var(--green); }
-#sub-status { font-family: var(--mono); font-size:12px; color:#777; margin-top:12px; min-height:16px; line-height:1.5; }
+.sub-note { font-family: var(--mono); font-size: 10px; letter-spacing: .04em; color: var(--faint); margin-top: 14px; margin-bottom: 0; line-height: 1.6; }
+#sub-status { font-family: var(--mono); font-size:12px; color:var(--meta); margin-top:12px; min-height:16px; line-height:1.5; }
 #sub-status[data-kind="ok"]  { color: var(--green); }
 #sub-status[data-kind="err"] { color: var(--red); }
+#share-btn { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); background: transparent; border: 1px solid var(--border-strong); padding: 14px 24px; min-height: 44px; cursor: pointer; transition: all .2s; margin-top: 18px; }
+#share-btn:hover { border-color: var(--blue); color: var(--blue); }
 
 .footer { padding: 44px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
-.footer-wordmark { font-family: var(--disp); font-size: 18px; font-weight: 400; letter-spacing: .06em; color: #6A6C76; margin-bottom: 6px; text-transform: uppercase; }
+.footer-wordmark { font-family: var(--disp); font-size: 18px; font-weight: 400; letter-spacing: .06em; color: var(--dim); margin-bottom: 6px; text-transform: uppercase; }
 .footer-rule { display: flex; height: 1px; width: 70px; margin: 0 auto 6px; }
 .footer-rule .r { flex:1; background: var(--red); }
 .footer-rule .g { flex:1; background: var(--green); }
 .footer-rule .b { flex:1; background: var(--blue); }
-.footer-col { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #56586A; }
+.footer-col { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
+.footer-gh { display:inline-block; margin-top:14px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--faint); text-decoration: none; }
+.footer-gh:hover { color: var(--cream); }
 
 /* ── MOTION ── */
 .triple-rule .r, .triple-rule .g, .triple-rule .b { transform: scaleX(0); transform-origin: center; animation: rule-grow .7s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -115,22 +130,28 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
       <span class="lc lc-g" style="--shift:0px"></span>
       <span class="lc lc-b" style="--shift:3px"></span>
     </div>
-    <div class="wordmark" data-txt="KAPMAN">KAPMAN</div>
+    <h1 class="wordmark" data-txt="KAPMAN">KAPMAN</h1>
     <div class="mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="collective">Escape Music Collective</div>
     <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic — Paris.</p>
   </div>
   <div class="issues">
-    <div class="lbl">Issues</div>
-    <a class="issue-row" href="issues/10/">
+    <div class="lbl" id="archive-lbl">Archive — 2 numéros</div>
+    <a class="issue-row acc-1" href="issues/10/">
       <span class="issue-num">N°10</span>
-      <span class="issue-title">De Chicago à Cologne — la ligne directe</span>
-      <span class="issue-date">Juin 2026</span>
+      <span class="issue-main">
+        <span class="issue-title">De Chicago à Cologne — la ligne directe</span>
+        <span class="issue-artists">Mr Fingers · Theo Parrish · Omar S · Akufen · Isolée · Ricardo Villalobos · Reagan Grey · Manuel Darquart</span>
+      </span>
+      <span class="issue-date">18.06.26</span>
     </a>
-    <a class="issue-row" href="issues/09/">
+    <a class="issue-row acc-0" href="issues/09/">
       <span class="issue-num">N°09</span>
-      <span class="issue-title">Ce qu'on entend quand personne regarde</span>
-      <span class="issue-date">Juin 2026</span>
+      <span class="issue-main">
+        <span class="issue-title">Ce qu&#x27;on entend quand personne regarde</span>
+        <span class="issue-artists">Metrosoul · Jesse Rose · Morgan Geist · Lowtec · The Missing Link · Presence · Housey Doingz · Shonky · Dyed Soundorom · Switch · Epsie · Kerouac</span>
+      </span>
+      <span class="issue-date">13.06.26</span>
     </a>
   </div>
   <div class="subscribe reveal">
@@ -138,13 +159,16 @@ html, body { background: var(--ink); color: var(--cream); font-family: var(--tex
       <h2>Notifications push</h2>
       <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
       <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
-      <p id="sub-status"></p>
+      <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+      <p id="sub-status" aria-live="polite"></p>
+      <button id="share-btn" hidden>↗ Partager à un ami</button>
     </div>
   </div>
   <div class="footer">
     <div class="footer-wordmark">KAPMAN</div>
     <div class="footer-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="footer-col">Escape Music Collective</div>
+    <a class="footer-gh" href="https://github.com/arochab/kapman-news" target="_blank" rel="noopener">GitHub →</a>
   </div>
   <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 </div>

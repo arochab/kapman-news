@@ -4,7 +4,11 @@
 // (ex. https://arochab.github.io/kapman-news/) — jamais d'absolu "/" qui
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
-const CACHE = 'kapman-v4';
+// Bump à chaque changement de DA/template — force le remplacement du cache.
+const CACHE = 'kapman-v5';
+
+// URL du serveur Render — même valeur que pwa/push-client.js (RENDER).
+const RENDER = 'https://kapman-news.onrender.com';
 
 // URL absolue résolue depuis le scope du SW
 const fromScope = (path) => new URL(path, self.registration.scope).toString();
@@ -15,7 +19,6 @@ self.addEventListener('install', (e) => {
     caches.open(CACHE)
       .then((cache) => cache.addAll([
         fromScope('./'),
-        fromScope('issues/09/'),
       ]))
       .catch((err) => console.warn('[SW] cache warm-up partiel:', err)) // ne bloque pas l'install
   );
@@ -32,7 +35,9 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// Fetch — network first, fallback cache (sans page offline dédiée)
+// Fetch — network first, fallback cache, puis réponse offline explicite
+// (jamais `undefined` : un respondWith(undefined) casse la requête au lieu
+// d'afficher un message lisible).
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   e.respondWith(
@@ -42,7 +47,16 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE).then((cache) => cache.put(e.request, clone));
         return res;
       })
-      .catch(() => caches.match(e.request))
+      .catch(() =>
+        caches.match(e.request).then(
+          (cached) =>
+            cached ||
+            new Response('Hors-ligne — reviens quand tu as du réseau.', {
+              status: 503,
+              headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+            })
+        )
+      )
   );
 });
 
@@ -89,5 +103,50 @@ self.addEventListener('notificationclick', (e) => {
       if (existing) return existing.focus();
       return clients.openWindow(url);
     })
+  );
+});
+
+// Le navigateur peut invalider un abonnement push (rotation interne côté
+// pusher) et déclenche cet event pour qu'on s'y resouscrive nous-mêmes.
+// Sans ce handler, l'abonné arrête silencieusement de recevoir des push.
+function urlBase64ToUint8Array(b64) {
+  const pad = '='.repeat((4 - (b64.length % 4)) % 4);
+  const base = (b64 + pad).replace(/-/g, '+').replace(/_/g, '/');
+  const raw = atob(base);
+  return Uint8Array.from([...raw].map((c) => c.charCodeAt(0)));
+}
+
+self.addEventListener('pushsubscriptionchange', (e) => {
+  const oldKey =
+    e.oldSubscription && e.oldSubscription.options
+      ? e.oldSubscription.options.applicationServerKey
+      : null;
+
+  // Fallback : l'ancienne clé n'est pas toujours exposée par le navigateur.
+  // On va la rechercher auprès du serveur (même source que push-client.js) —
+  // pas de clé publique en dur ici : elle est gérée côté Render et peut
+  // tourner, donc mieux vaut la relire que risquer une valeur obsolète.
+  const keyPromise = oldKey
+    ? Promise.resolve(oldKey)
+    : fetch(RENDER + '/vapid-public-key')
+        .then((r) => r.json())
+        .then((j) => urlBase64ToUint8Array(j.publicKey));
+
+  e.waitUntil(
+    keyPromise
+      .then((applicationServerKey) =>
+        self.registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey,
+        })
+      )
+      .then((sub) =>
+        fetch(RENDER + '/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(sub),
+        })
+      )
+      .catch((err) => console.warn('[SW] pushsubscriptionchange re-subscribe échoué:', err))
   );
 });

@@ -33,6 +33,8 @@ SKELETON = {
     "date_iso": "YYYY-MM-DD",
     "month_label": "Mois AAAA",
     "reading_time": "4 min",
+    "playlist_url": "",
+    "listening_time": "",
     "tagline_plain": "",
     "tagline_html": "",
     "summary_bullets": ["", "", "", ""],

@@ -1,15 +1,17 @@
+{%- set acc = ['red', 'green', 'blue'][issue_num % 3] -%}
+{%- set listen_url = playlist_url or listen_all_url -%}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KAPMAN SIGNAL N°{{ "%02d"|format(issue_num) }} — {{ tagline_plain }}</title>
-<meta name="theme-color" content="#0D0D0D">
+<meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -21,12 +23,20 @@
   --green:  #1FC85E;
   --blue:   #3A6CF0;
   --mid:    #B8B3AB;
-  --dim:    #5A5C66;
+  --dim:    #9A9DA8;          /* corrigé pour 7.1:1 de contraste sur --ink */
+  --meta:   #8A8D99;          /* corrigé pour 5.8:1 de contraste sur --ink */
+  --faint:  #8B8E99;          /* corrigé pour 5.9:1 de contraste sur --ink */
   --border: #1B1C22;
+  --border-strong: #2A2C36;
   --surface:#121319;
+  --deep:   #0B0C10;          /* fond le plus sombre (stat, forward) */
+  --blue-text: #5B85F5;       /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
+  --ink-soft: #3A3B42;        /* registre cream (section--invert) */
+  --ink-meta: #6B6D78;        /* registre cream (section--invert) */
   --disp:   'Black Ops One', system-ui, sans-serif;
   --text:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   --mono:   'IBM Plex Mono', ui-monospace, monospace;
+  --issue-accent: var(--{{ acc }});
 }
 
 html { background: var(--ink); }
@@ -39,7 +49,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.wrap { max-width: 680px; margin: 0 auto; }
+::selection { background: var(--issue-accent, var(--blue)); color: var(--ink); }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--blue)); outline-offset: 3px; }
+
+.wrap { max-width: 680px; margin: 0 auto; counter-reset: trk; }
 
 /* ── TRIPLE RULE ── */
 .triple-rule { display: flex; height: 3px; width: 100%; }
@@ -49,16 +63,34 @@ body {
 
 /* ── HERO ── */
 .hero {
+  position: relative;
+  overflow: hidden;
   padding: 56px 48px 48px;
   border-bottom: 1px solid var(--border);
   background: var(--ink);
 }
+.hero-content { position: relative; z-index: 1; }
+
+/* Numéral d'issue géant — un seul geste géant par hero */
+.issue-numeral {
+  position: absolute; right: -8px; top: 28px; z-index: 0; pointer-events: none;
+  font-family: var(--disp); font-size: clamp(96px, 24vw, 180px); line-height: .85;
+  color: transparent; -webkit-text-stroke: 1px var(--issue-accent); opacity: .35;
+}
+.issue-numeral::before, .issue-numeral::after {
+  content: attr(data-txt);
+  position: absolute; inset: 0;
+  color: transparent;
+}
+.issue-numeral::before { -webkit-text-stroke: 1px var(--red);  transform: translate(-2px, 0); opacity: .35; }
+.issue-numeral::after  { -webkit-text-stroke: 1px var(--blue); transform: translate(2px, 0);  opacity: .35; }
+
 .hero-meta {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: #44464F;
+  color: var(--meta);
   margin-bottom: 40px;
 }
 
@@ -67,7 +99,7 @@ body {
 .logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
 .lc {
   position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%;
-  mix-blend-mode: screen; will-change: transform;
+  mix-blend-mode: screen;
   animation: lc-breathe 6s ease-in-out infinite;
 }
 .lc-r { left: 0;   background: var(--red);   }
@@ -77,11 +109,12 @@ body {
   0%, 100% { transform: translateX(0); }
   50%      { transform: translateX(var(--shift, 0)); }
 }
+.logo-circles.paused .lc { animation-play-state: paused; }
 
-/* Wordmark RGB-split (SONIC MARK du brand book) ────────────────── */
+/* Wordmark RGB-split (SONIC MARK du brand book) — masthead ────────────── */
 .logo-wordmark {
   font-family: var(--disp);
-  font-size: 52px;
+  font-size: 34px;
   font-weight: 400;
   letter-spacing: .02em;
   color: var(--cream);
@@ -99,22 +132,23 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
 }
-/* chromatic edge présent en permanence (comme le SONIC MARK statique), qui glitche par à-coups */
-.logo-wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 4.2s steps(1) infinite; }
-.logo-wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 4.2s steps(1) infinite; }
+/* chromatic edge présent en permanence (comme le SONIC MARK statique), qui glitche par à-coups — événement rare (14s) */
+.logo-wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 14s steps(1) infinite; }
+.logo-wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 14s steps(1) infinite; }
+.logo-wordmark.paused::before, .logo-wordmark.paused::after { animation-play-state: paused; }
 @keyframes rgb-r {
-  0%,82%,100% { transform: translate(-1.5px,0); opacity:.55; }
-  84%   { transform: translate(-5px,2px);  opacity:1; }
-  88%   { transform: translate(3px,-2px);  opacity:.85; }
-  91%   { transform: translate(-2px,1px);  opacity:.7; }
-  94%   { transform: translate(-1.5px,0);  opacity:.55; }
+  0%,88%,100% { transform: translate(-1.5px,0); opacity:.55; }
+  89.5% { transform: translate(-5px,2px);  opacity:1; }
+  91%   { transform: translate(3px,-2px);  opacity:.85; }
+  93%   { transform: translate(-2px,1px);  opacity:.7; }
+  95%   { transform: translate(-1.5px,0);  opacity:.55; }
 }
 @keyframes rgb-b {
-  0%,82%,100% { transform: translate(1.5px,0); opacity:.55; }
-  84%   { transform: translate(5px,-2px);  opacity:1; }
-  88%   { transform: translate(-3px,2px);  opacity:.85; }
-  91%   { transform: translate(2px,-1px);  opacity:.7; }
-  94%   { transform: translate(1.5px,0);   opacity:.55; }
+  0%,88%,100% { transform: translate(1.5px,0); opacity:.55; }
+  89.5% { transform: translate(5px,-2px);  opacity:1; }
+  91%   { transform: translate(-3px,2px);  opacity:.85; }
+  93%   { transform: translate(2px,-1px);  opacity:.7; }
+  95%   { transform: translate(1.5px,0);   opacity:.55; }
 }
 
 .logo-mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
@@ -122,36 +156,50 @@ body {
 .logo-mini-rule .g { flex: 1; background: var(--green); }
 .logo-mini-rule .b { flex: 1; background: var(--blue); }
 
-.logo-collective { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: #44464F; }
+.logo-collective { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--meta); }
 
 .tagline {
   font-family: var(--text);
-  font-size: 30px;
+  font-size: clamp(34px, 7vw, 46px);
   font-weight: 800;
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
   color: var(--cream);
-  line-height: 1.15;
+  line-height: 1.05;
   margin-bottom: 14px;
 }
-.reading-time { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #34363E; }
+.reading-time { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--meta); }
 
 /* ── SUMMARY ── */
 .summary { background: var(--surface); padding: 28px 48px; border-bottom: 1px solid var(--border); }
-.lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; margin-bottom: 16px; }
-.lbl-blue  { color: var(--blue); }
-.lbl-red   { color: var(--red); }
-.lbl-green { color: var(--green); }
+.lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
+.lbl-blue   { color: var(--blue); }
+.lbl-red    { color: var(--red); }
+.lbl-green  { color: var(--green); }
+.lbl-accent { color: var(--issue-accent); }
 
 .sum-list { list-style: none; }
 .sum-list li {
-  padding: 8px 0 8px 20px;
+  padding: 10px 0 10px 20px;
   position: relative;
   font-size: 14px;
   color: var(--mid);
-  border-bottom: 1px solid #161616;
+  border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
 .sum-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-link { color: inherit; text-decoration: none; display: block; }
+.sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
+
+.listen-all {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--issue-accent); border: 1px solid var(--issue-accent);
+  padding: 13px 20px; min-height: 44px; margin-top: 18px;
+  text-decoration: none; transition: background .18s, color .18s;
+}
+.listen-all:hover { background: var(--issue-accent); color: var(--ink); }
+.listen-all-end-wrap { padding: 0 48px 44px; }
+.listen-all--end { margin-top: 0; }
 
 /* ── BODY ── */
 .body-wrap { padding: 0 48px; }
@@ -163,52 +211,62 @@ body {
 .s-bar-red   { background: var(--red); }
 .s-bar-green { background: var(--green); }
 .s-bar-blue  { background: var(--blue); }
-.s-num { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #34363E; }
+.s-num { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--meta); }
 
 .section h2 {
-  font-family: var(--mono);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  font-family: var(--text);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  text-transform: none;
   color: var(--cream);
   line-height: 1.3;
   margin-bottom: 28px;
 }
 
+/* ── SECTION INVERSÉE (cream) — "Note de studio" & co ── */
+.section--invert { background: var(--cream); color: var(--ink); margin: 0 -48px; padding: 44px 48px; }
+.section--invert h2 { color: var(--ink); }
+.section--invert .s-body p { color: var(--ink-soft); }
+.section--invert .s-num { color: var(--ink-meta); }
+.section--invert .s-body a { color: var(--blue); }
+
 /* ── TRACK ── */
-.tracks { counter-reset: trk; }
 .track {
   margin-bottom: 28px; padding: 0 0 28px 40px; position: relative;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--border);
 }
 .track:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.track:target { border-left: 2px solid var(--accent, var(--blue)); padding-left: 38px; }
 .track::before {
   counter-increment: trk; content: counter(trk, decimal-leading-zero);
   position: absolute; left: 0; top: 1px;
   font-family: var(--mono);
-  font-size: 10px; letter-spacing: .04em; color: #44464F;
+  font-size: 10px; letter-spacing: .04em; color: var(--meta);
   font-variant-numeric: tabular-nums; transition: color .2s;
 }
 .track:hover::before { color: var(--accent, #555); }
 .track-name { font-size: 15px; font-weight: 600; color: var(--cream); margin-bottom: 2px; line-height: 1.3; }
-.track-meta { font-family: var(--mono); font-size: 10px; color: #44464F; letter-spacing: .04em; margin-bottom: 8px; text-transform: uppercase; }
-.track-body { font-size: 14px; color: var(--dim); line-height: 1.65; margin-bottom: 12px; }
+.track-meta { font-family: var(--mono); font-size: 10px; color: var(--meta); letter-spacing: .04em; margin-bottom: 8px; text-transform: uppercase; }
+.track-body { font-size: 15px; color: var(--mid); line-height: 1.65; margin-bottom: 12px; }
+.track-dig { font-family: var(--mono); font-size: 10px; color: var(--meta); line-height: 1.5; margin-bottom: 12px; }
+.dig-arrow { color: var(--accent, var(--blue)); margin-right: 4px; }
 .tracks-red   { --accent: var(--red); }
 .tracks-green { --accent: var(--green); }
 .tracks-blue  { --accent: var(--blue); }
+.track-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .track-link {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   text-decoration: none;
-  margin-right: 10px;
-  padding: 6px 12px;
-  border: 1px solid #1E1E1E;
+  min-height: 44px;
+  padding: 11px 16px;
+  border: 1px solid var(--border-strong);
   border-radius: 2px;
   transition: border-color .18s, color .18s, background .18s;
 }
@@ -218,7 +276,7 @@ body {
 .track-link-blue  { color: var(--blue); }
 
 /* ── STAT ── */
-.stat { padding: 32px 48px; border-bottom: 1px solid var(--border); background: #0A0A0A; }
+.stat { padding: 32px 48px; border-bottom: 1px solid var(--border); background: var(--deep); }
 .stat-red   { border-left: 3px solid var(--red); }
 .stat-green { border-left: 3px solid var(--green); }
 .stat-blue  { border-left: 3px solid var(--blue); }
@@ -226,61 +284,83 @@ body {
 .stat-red   .stat-num { color: var(--red); }
 .stat-green .stat-num { color: var(--green); }
 .stat-blue  .stat-num { color: var(--blue); }
-.stat-ctx { font-size: 14px; color: #6A6C76; line-height: 1.65; }
+.stat-ctx { font-size: 14px; color: var(--dim); line-height: 1.65; }
 
 /* ── SECTION BODY ── */
 .s-body p { font-size: 15px; color: var(--mid); line-height: 1.75; margin-bottom: 16px; }
 .s-body p:last-child { margin-bottom: 0; }
-.s-body a { color: var(--blue); text-decoration: none; }
+.s-body a { color: var(--blue-text); text-decoration: none; }
 .s-body a:hover { text-decoration: underline; }
 .s-body strong { color: var(--cream); font-weight: 600; }
 
+/* ── TRACKLIST RÉCAP (optionnel) ── */
+.tracklist-recap-list { list-style: none; font-family: var(--mono); font-size: 12px; }
+.tracklist-recap-list li { border-bottom: 1px solid var(--border); }
+.tracklist-recap-list li:last-child { border-bottom: none; }
+.tracklist-recap-list a { display: block; padding: 10px 0; min-height: 44px; display: flex; align-items: center; color: var(--mid); text-decoration: none; }
+.tracklist-recap-list a:hover, .tracklist-recap-list a:focus-visible { color: var(--cream); }
+
 /* ── FORWARD ── */
-.forward { background: #080808; padding: 32px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.forward p { font-size: 14px; color: #444; line-height: 1.8; }
+.forward { background: var(--deep); padding: 32px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.forward p { font-size: 15px; color: var(--mid); line-height: 1.8; }
 
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
 .subscribe-section { padding: 56px 48px; border-bottom: 1px solid var(--border); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
 .sub-text h3 { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); margin-bottom: 12px; }
 .sub-text p { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 22px; }
-#sub-btn {
+#sub-btn, #share-btn {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--cream);
   background: transparent;
-  border: 1px solid #2C2E36;
-  padding: 11px 22px;
+  border: 1px solid var(--border-strong);
+  padding: 14px 24px;
+  min-height: 44px;
   cursor: pointer;
   transition: all .2s;
 }
-#sub-btn:hover, #sub-btn.on { border-color: var(--green); color: var(--green); }
-#sub-status { font-family: var(--mono); font-size: 12px; color: #777; margin-top: 12px; min-height: 16px; line-height: 1.5; }
+#sub-btn:hover, #sub-btn.on, #share-btn:hover { border-color: var(--green); color: var(--green); }
+#share-btn { margin-top: 24px; }
+.sub-note { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-top: 14px; }
+#sub-status { font-family: var(--mono); font-size: 12px; color: var(--meta); margin-top: 12px; min-height: 16px; line-height: 1.5; }
 #sub-status[data-kind="ok"]  { color: var(--green); }
 #sub-status[data-kind="err"] { color: var(--red); }
 .qr-wrap { margin: 40px auto 0; padding-top: 36px; border-top: 1px solid var(--border); max-width: 260px; }
-.qr-share-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #56586A; margin-bottom: 16px; }
+.qr-share-lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
 .qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 18px; image-rendering: pixelated; background: var(--cream); padding: 8px; border-radius: 4px; }
 .qr-steps { display: inline-flex; flex-direction: column; gap: 7px; text-align: left; }
-.qr-steps span { font-family: var(--mono); font-size: 11px; color: #6A6C76; line-height: 1.4; }
+.qr-steps span { font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.4; }
 .qr-steps b { color: var(--green); font-weight: 500; margin-right: 6px; }
+
+/* ── NAVIGATION D'ISSUE ── */
+.issue-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 48px; border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+}
+.issue-nav a { color: var(--faint); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color .15s; }
+.issue-nav a:hover { color: var(--cream); }
+.issue-nav-prev, .issue-nav-next { flex: 1; }
+.issue-nav-next { text-align: right; justify-content: flex-end; }
+.issue-nav-next a { justify-content: flex-end; }
+.issue-nav-all { flex: 1; text-align: center; }
+.issue-nav-all a { justify-content: center; }
 
 /* ── FOOTER ── */
 .footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
 .footer-logo { margin-bottom: 24px; }
 .footer-logo-circles { margin: 0 auto 10px; display: block; }
-.footer-wordmark { font-family: var(--disp); font-size: 22px; font-weight: 400; letter-spacing: .04em; color: #6A6C76; text-transform: uppercase; margin-bottom: 6px; }
+.footer-wordmark { font-family: var(--disp); font-size: 22px; font-weight: 400; letter-spacing: .04em; color: var(--dim); text-transform: uppercase; margin-bottom: 6px; }
 .footer-mini-rule { display: flex; height: 1px; width: 80px; margin: 0 auto 6px; }
 .footer-mini-rule .r { flex:1; background: var(--red); }
 .footer-mini-rule .g { flex:1; background: var(--green); }
 .footer-mini-rule .b { flex:1; background: var(--blue); }
-.footer-collective { font-family: var(--mono); font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: #56586A; margin-bottom: 28px; }
-.footer-nav { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
-.footer-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #8A8C96; text-decoration: none; transition: color .15s; }
-.footer-nav a:hover { color: var(--cream); }
-.footer-unsub { font-family: var(--mono); font-size: 11px; color: #56586A; line-height: 1.6; }
+.footer-collective { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 28px; }
+.footer-byline { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-bottom: 8px; }
+.footer-colophon { font-family: var(--mono); font-size: 10px; color: var(--meta); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
 
 /* ── MOTION ── */
 /* La triple-rule se déploie depuis le centre au chargement */
@@ -310,10 +390,11 @@ body {
 
 @media (max-width: 600px) {
   .hero, .summary, .body-wrap, .forward,
-  .subscribe-section, .footer, .stat { padding-left: 24px; padding-right: 24px; }
-  .tagline { font-size: 24px; }
-  .logo-wordmark { font-size: 40px; }
+  .subscribe-section, .footer, .stat,
+  .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
+  .logo-wordmark { font-size: 30px; }
   .stat-num { font-size: 52px; }
+  .section--invert { margin: 0 -24px; padding: 44px 24px; }
 }
 </style>
 </head>
@@ -324,30 +405,34 @@ body {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-meta">{{ date_iso }} &nbsp;·&nbsp; KAPMAN SIGNAL N°{{ "%02d"|format(issue_num) }} &nbsp;·&nbsp; {{ month_label }}</div>
+  <div class="issue-numeral" aria-hidden="true" data-txt="{{ '%02d'|format(issue_num) }}">{{ '%02d'|format(issue_num) }}</div>
+  <div class="hero-content">
+    <div class="hero-meta">{{ date_iso }} &nbsp;·&nbsp; KAPMAN SIGNAL N°{{ "%02d"|format(issue_num) }} &nbsp;·&nbsp; {{ month_label }}</div>
 
-  <div class="logo-block">
-    <div class="logo-circles" aria-hidden="true">
-      <span class="lc lc-r" style="--shift:-3px"></span>
-      <span class="lc lc-g" style="--shift:0px"></span>
-      <span class="lc lc-b" style="--shift:3px"></span>
+    <div class="logo-block">
+      <div class="logo-circles" aria-hidden="true">
+        <span class="lc lc-r" style="--shift:-3px"></span>
+        <span class="lc lc-g" style="--shift:0px"></span>
+        <span class="lc lc-b" style="--shift:3px"></span>
+      </div>
+      <div class="logo-wordmark" data-txt="KAPMAN">KAPMAN</div>
+      <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+      <div class="logo-collective">Escape Music Collective</div>
     </div>
-    <div class="logo-wordmark" data-txt="KAPMAN">KAPMAN</div>
-    <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-    <div class="logo-collective">Escape Music Collective</div>
-  </div>
 
-  <div class="tagline">{{ tagline_html | safe }}</div>
-  <div class="reading-time">{{ reading_time }} &nbsp;·&nbsp; {{ month_label }}</div>
+    <h1 class="tagline">{{ tagline_html | safe }}</h1>
+    <div class="reading-time">{% if listening_time %}{{ reading_time }} lecture &nbsp;·&nbsp; {{ listening_time }} écoute{% else %}{{ reading_time }} &nbsp;·&nbsp; {{ month_label }}{% endif %}</div>
+  </div>
 </div>
 
 <!-- SUMMARY -->
 <div class="summary">
-  <div class="lbl lbl-blue">Cette édition</div>
+  <div class="lbl lbl-accent">Cette édition</div>
   <ul class="sum-list">
-    {% for bullet in summary_bullets %}<li>{{ bullet }}</li>
+    {% for bullet in summary_bullets %}<li>{% if loop.index <= section_count %}<a class="sum-link" href="#s{{ loop.index }}">{{ bullet }}</a>{% else %}{{ bullet }}{% endif %}</li>
     {% endfor %}
   </ul>
+  {% if listen_url %}<a class="listen-all" href="{{ listen_url }}" target="_blank" rel="noopener">▶ Écouter la sélection{% if listen_count %} — {{ listen_count }} tracks{% endif %}</a>{% endif %}
 </div>
 
 {#
@@ -359,17 +444,23 @@ body {
 {% for block in blocks %}
   {% if block.type == "section" %}
 <div class="body-wrap">
-<div class="section reveal">
+<div class="section reveal{% if block.invert or block.heading == 'Note de studio' %} section--invert{% endif %}" id="s{{ block.index }}">
   <div class="s-accent"><div class="s-bar s-bar-{{ block.accent }}"></div><div class="s-num">{{ block.index }} / {{ section_count }}</div></div>
   <h2>{{ block.heading }}</h2>
     {% if block.tracks %}
   <div class="tracks tracks-{{ block.accent }}">
     {% for t in block.tracks %}
-  <div class="track">
+  <div class="track"{% if t.slug %} id="{{ t.slug }}"{% endif %}>
     <div class="track-name">{{ t.name }}</div>
-    {% if t.meta %}<div class="track-meta">{{ t.meta }}</div>{% endif %}
+    {% if t.label or t.catno or t.year %}<div class="track-meta">{{ t.label }}{% if t.catno %} {{ t.catno }}{% endif %}{% if t.format %} · {{ t.format }}{% endif %}{% if t.place %} · {{ t.place }}{% endif %}{% if t.year %} · {{ t.year }}{% endif %}</div>
+    {% elif t.meta %}<div class="track-meta">{{ t.meta }}</div>{% endif %}
     <div class="track-body">{{ t.body | safe }}</div>
-    {% for link in t.links %}<a class="track-link track-link-{{ block.accent }}" href="{{ link.url }}" target="_blank">{{ link.label }}</a>{% endfor %}
+    {% if t.dig %}<div class="track-dig"><span class="dig-arrow">↳</span> {{ t.dig }}</div>{% endif %}
+    {% if t.links %}
+    <div class="track-links">
+      {% for link in t.links %}<a class="track-link track-link-{{ block.accent }}" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+    </div>
+    {% endif %}
   </div>
     {% endfor %}
   </div>
@@ -389,6 +480,33 @@ body {
   {% endif %}
 {% endfor %}
 
+<!-- TRACKLIST RÉCAP (optionnel, flag racine show_tracklist) -->
+{% if show_tracklist %}
+<div class="body-wrap">
+<div class="section reveal">
+  <div class="lbl lbl-blue">Tracklist</div>
+  <ol class="tracklist-recap-list">
+    {% set ns = namespace(i=0) %}
+    {% for block in blocks %}
+      {% if block.tracks %}
+        {% for t in block.tracks %}
+          {% set ns.i = ns.i + 1 %}
+  <li><a href="#{{ t.slug }}">{{ '%02d'|format(ns.i) }} {{ t.name }}</a></li>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </ol>
+</div>
+</div>
+{% endif %}
+
+<!-- ÉCOUTER LA SÉLECTION (répété avant le forward) -->
+{% if listen_url %}
+<div class="listen-all-end-wrap">
+  <a class="listen-all listen-all--end" href="{{ listen_url }}" target="_blank" rel="noopener">▶ Écouter la sélection{% if listen_count %} — {{ listen_count }} tracks{% endif %}</a>
+</div>
+{% endif %}
+
 <!-- FORWARD -->
 <div class="forward reveal">
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
@@ -401,8 +519,10 @@ body {
     <h3>Recevoir les prochaines issues</h3>
     <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
-    <p id="sub-status"></p>
+    <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+    <p id="sub-status" aria-live="polite"></p>
   </div>
+  <button id="share-btn" hidden>↗ Partager à un ami</button>
   <div class="qr-wrap">
     <div class="qr-share-lbl">Partager à un ami</div>
     <img src="../../pwa/qr.png" alt="QR vers KAPMAN SIGNAL" onerror="this.parentNode.style.display='none'">
@@ -412,6 +532,13 @@ body {
       <span><b>3.</b> Appuie sur « S'abonner »</span>
     </div>
   </div>
+</div>
+
+<!-- NAVIGATION D'ISSUE -->
+<div class="issue-nav">
+  <span class="issue-nav-prev">{% if prev_num %}<a href="../{{ prev_num }}/">← N°{{ prev_num }}</a>{% endif %}</span>
+  <span class="issue-nav-all"><a href="../../">Tous les numéros</a></span>
+  <span class="issue-nav-next">{% if next_num %}<a href="../{{ next_num }}/">N°{{ next_num }} →</a>{% endif %}</span>
 </div>
 
 <!-- FOOTER -->
@@ -427,11 +554,9 @@ body {
     <div class="footer-collective">Escape Music Collective</div>
   </div>
 
-  <nav class="footer-nav">
-    <a href="../../">Toutes les issues</a>
-    <a href="https://github.com/arochab/kapman-news" target="_blank">GitHub</a>
-  </nav>
-  <div class="footer-unsub">KAPMAN SIGNAL — La newsletter du collectif.</div>
+  <div class="footer-byline">Sélection &amp; textes — KAPMAN · Escape Music Collective, Paris</div>
+  {% set track_count = blocks | selectattr('tracks', 'defined') | map(attribute='tracks') | map('length') | sum %}
+  <div class="footer-colophon">N°{{ '%02d'|format(issue_num) }} · {{ month_label|upper }} · {{ track_count }} TRACKS · PARIS · KAPMAN SIGNAL</div>
 </div>
 
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
@@ -474,6 +599,23 @@ body {
   } catch (e) {
     root.classList.remove('js'); showAll();
   }
+
+  // Glitch rare = événement, pas du bruit permanent : on le pause hors viewport.
+  try {
+    var hero = document.querySelector('.hero');
+    var lc = document.querySelector('.logo-circles');
+    var wm = document.querySelector('.logo-wordmark');
+    if (hero && (lc || wm) && 'IntersectionObserver' in window) {
+      var heroIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var visible = e.isIntersecting;
+          if (lc) lc.classList.toggle('paused', !visible);
+          if (wm) wm.classList.toggle('paused', !visible);
+        });
+      }, { threshold: 0 });
+      heroIO.observe(hero);
+    }
+  } catch (e) {}
 })();
 </script>
 <script src="../../pwa/push-client.js"></script>
