@@ -86,7 +86,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add "issues/$NN" index.html
-          git commit -m "publish: KAPMAN SIGNAL N°$NN (créneau programmé) [skip notify]"
+          git commit -m "publish: CIRCUIT FERMÉ N°$NN (créneau programmé) [skip notify]"
           git pull --rebase origin master
           git push origin master
 
@@ -99,7 +99,7 @@ jobs:
           NN="${{ steps.queue.outputs.issue }}"
           python tools/send_push.py \
             --issue "$NN" \
-            --title "KAPMAN SIGNAL N°$NN" \
+            --title "CIRCUIT FERMÉ N°$NN" \
             --body "Nouvelle issue disponible : écoute ce qu'on a sélectionné."
 
       # Marqué APRÈS envoi réussi : un envoi raté sera retenté au créneau suivant.

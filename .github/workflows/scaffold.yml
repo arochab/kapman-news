@@ -56,13 +56,13 @@ jobs:
           # cassait l'indentation YAML ; le heredoc quoté neutralise les
           # backticks, et ${{ }} est substitué par le runner avant le shell).
           git commit -F - <<'MSG'
-          chore: scaffold KAPMAN SIGNAL N°${{ steps.next.outputs.num }} (à remplir en session)
+          chore: scaffold CIRCUIT FERMÉ N°${{ steps.next.outputs.num }} (à remplir en session)
 
           Rappel éditorial avant d'écrire le contenu :
           - AUCUNE répétition : jamais une track/artiste/label déjà utilisé.
           - LIENS RÉELS uniquement : YouTube/Bandcamp des playlists réelles d'Adam.
           - Accents cyclent rouge → vert → bleu ; stats alternent vert/bleu.
-          - Ton : euphorique, physique, précis. KAPMAN ≠ Escape Music Collective.
+          - Ton : euphorique, physique, précis. La marque publique est CIRCUIT FERMÉ, jamais KAPMAN ni Escape dans les textes.
 
           Pour publier : remplir content/${{ steps.next.outputs.num }}.json puis
           `python tools/new_issue.py --num ${{ steps.next.outputs.num }} --build` + push.

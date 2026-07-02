@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL · Underground Electronic · Paris</title>
+<title>CIRCUIT FERMÉ · Underground Electronic · Paris</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 
 /* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
    Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
-   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+   Wordmark = CIRCUIT (Hanken 800) au-dessus de FERMÉ (Plex Mono, tracking large). */
 .lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 
 .signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
@@ -122,8 +122,10 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 .footer-rule .g { flex:1; background: var(--green); }
 .footer-rule .b { flex:1; background: var(--blue); }
 .footer-col { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
-.footer-gh { display:inline-block; margin-top:14px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--faint); text-decoration: none; }
-.footer-gh:hover { color: var(--cream); }
+.footer-credit { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-top: 14px; margin-bottom: 4px; }
+.footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
+.footer-link { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .15s; }
+.footer-link:hover, .footer-link:focus-visible { color: var(--cream); }
 
 /* ── MOTION ── */
 .triple-rule .r, .triple-rule .g, .triple-rule .b { transform: scaleX(0); transform-origin: center; animation: rule-grow .7s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -156,12 +158,12 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
         <span class="sg-bar sg-b"></span>
       </div>
       <div class="lockup-text">
-        <div class="wordmark">KAPMAN</div>
-        <div class="signal-label">Signal</div>
+        <div class="wordmark">CIRCUIT</div>
+        <div class="signal-label">Fermé</div>
       </div>
     </div>
     <div class="mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-    <div class="collective">Escape Music Collective</div>
+    <div class="collective">Underground Electronic · Paris</div>
     <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic · Paris.</p>
   </div>
   <div class="issues">
@@ -206,7 +208,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
   <div class="membership reveal" id="membership" hidden>
     <div class="membership-kicker">Soutenir</div>
     <h3 class="membership-title">Abonnement de soutien</h3>
-    <p>Si SIGNAL nourrit tes écoutes, finance la suite · sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+    <p>Si CIRCUIT FERMÉ nourrit tes écoutes, finance la suite · sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
     <a class="membership-cta" id="membership-cta" href="#" target="_blank" rel="noopener">Devenir membre · 5 € / mois</a>
     <p class="membership-note">Sans engagement · résiliable en un clic via Stripe.</p>
   </div>
@@ -218,13 +220,18 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
         <span class="sg-bar sg-b"></span>
       </div>
       <div class="lockup-text">
-        <div class="wordmark">KAPMAN</div>
-        <div class="signal-label">Signal</div>
+        <div class="wordmark">CIRCUIT</div>
+        <div class="signal-label">Fermé</div>
       </div>
     </div>
     <div class="footer-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-    <div class="footer-col">Escape Music Collective</div>
-    <a class="footer-gh" href="https://github.com/arochab/kapman-news" target="_blank" rel="noopener">GitHub →</a>
+    <div class="footer-col">Underground Electronic · Paris</div>
+    <div class="footer-credit">Sélection · KAPMAN</div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://shotgun.live/artists/kapman_music" target="_blank" rel="noopener">Shotgun</a>
+      <a class="footer-link" href="https://soundcloud.com/kapman_music" target="_blank" rel="noopener">SoundCloud</a>
+      <a class="footer-link" href="https://www.instagram.com/kapman___/" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </div>
   <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 </div>

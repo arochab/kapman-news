@@ -72,5 +72,5 @@ jobs:
           ISSUE="${{ steps.detect.outputs.issue }}"
           python tools/send_push.py \
             --issue "$ISSUE" \
-            --title "KAPMAN SIGNAL N°$ISSUE" \
-            --body "Nouvelle issue disponible — écoute ce qu'on a sélectionné ce mois-ci."
+            --title "CIRCUIT FERMÉ N°$ISSUE" \
+            --body "Nouvelle issue disponible : écoute ce qu'on a sélectionné ce mois-ci."
