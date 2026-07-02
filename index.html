@@ -78,6 +78,23 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 .issue-artists { font-family: var(--mono); font-size: 10px; color: var(--meta); line-height: 1.5; }
 .issue-date { font-family: var(--mono); font-size: 11px; color: var(--meta); flex-shrink: 0; text-transform: uppercase; letter-spacing: .06em; }
 
+/* ── MEMBERSHIP (abonnement de soutien, optionnel) ──
+   Masqué par défaut (attribut hidden) ; le script en bas de page le révèle
+   uniquement si content/site.json fournit une membership_url non vide. */
+.membership { padding: 44px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.membership-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+.membership-title { font-family: var(--text); font-size: 21px; font-weight: 700; color: var(--cream); margin-bottom: 12px; line-height: 1.3; }
+.membership p { font-size: 15px; color: var(--mid); line-height: 1.7; max-width: 420px; margin: 0 auto 22px; }
+.membership-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--cream); border: 1px solid var(--cream);
+  padding: 14px 24px; min-height: 44px;
+  text-decoration: none; transition: border-color .18s, color .18s;
+}
+.membership-cta:hover, .membership-cta:focus-visible { border-color: var(--blue); color: var(--blue); }
+.membership-note { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 14px; }
+
 .subscribe { padding: 48px 48px; border-top: 1px solid var(--border); text-align: center; }
 .subscribe .inner { max-width: 420px; margin: 0 auto; }
 .subscribe h2 { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); margin-bottom: 12px; }
@@ -116,6 +133,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 
 @media(max-width:600px) {
   .hero,.issues,.subscribe,.footer { padding-left:24px; padding-right:24px; }
+  .membership { padding: 24px; }
   .wordmark { font-size:42px; }
   .issue-row { gap: 14px; }
 }
@@ -164,6 +182,15 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
       <button id="share-btn" hidden>↗ Partager à un ami</button>
     </div>
   </div>
+  <!-- MEMBERSHIP (abonnement de soutien) — masqué tant que content/site.json ne fournit pas d'URL Stripe.
+       Voir script en fin de page : fetch défensif, aucune dépendance, silencieux en cas d'échec. -->
+  <div class="membership reveal" id="membership" hidden>
+    <div class="membership-kicker">Soutenir</div>
+    <h3 class="membership-title">Abonnement de soutien</h3>
+    <p>Si SIGNAL nourrit tes écoutes, finance la suite — sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+    <a class="membership-cta" id="membership-cta" href="#" target="_blank" rel="noopener">Devenir membre — 5 € / mois</a>
+    <p class="membership-note">Sans engagement — résiliable en un clic via Stripe.</p>
+  </div>
   <div class="footer">
     <div class="footer-wordmark">KAPMAN</div>
     <div class="footer-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
@@ -191,6 +218,27 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
     });
     setTimeout(showAll, 1200);
   } catch (e) { root.classList.remove('js'); showAll(); }
+})();
+</script>
+<script>
+// Membership : révèle le bloc de soutien uniquement si content/site.json fournit
+// une membership_url non vide. Aucune dépendance, échec silencieux (offline, etc.).
+(function () {
+  try {
+    fetch('content/site.json').then(function (r) {
+      return r && r.ok ? r.json() : null;
+    }).then(function (data) {
+      if (!data || !data.membership_url) return;
+      var block = document.getElementById('membership');
+      var cta = document.getElementById('membership-cta');
+      if (!block || !cta) return;
+      cta.href = data.membership_url;
+      // Libellé en un seul nœud texte : le CTA est en inline-flex, qui
+      // ignore les nœuds texte réduits à une espace entre deux éléments.
+      if (data.membership_price) cta.textContent = 'Devenir membre — ' + data.membership_price;
+      block.hidden = false;
+    }).catch(function () {});
+  } catch (e) {}
 })();
 </script>
 <script src="pwa/push-client.js"></script>

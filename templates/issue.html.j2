@@ -304,6 +304,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .forward { background: var(--deep); padding: 32px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .forward p { font-size: 15px; color: var(--mid); line-height: 1.8; }
 
+{% if site and site.membership_url %}
+/* ── MEMBERSHIP (abonnement de soutien, optionnel) ──
+   Tout ce bloc (CSS + markup) est conditionné par site.membership_url : tant
+   que content/site.json ne fournit pas d'URL Stripe, rien n'en sort dans le
+   HTML rendu — pas même le CSS. */
+.membership { background: var(--surface); padding: 44px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.membership-title { font-family: var(--text); font-size: 21px; font-weight: 700; color: var(--cream); margin-bottom: 12px; line-height: 1.3; }
+.membership p { font-size: 15px; color: var(--mid); line-height: 1.7; max-width: 420px; margin: 0 auto 22px; }
+.membership-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--cream); border: 1px solid var(--cream);
+  padding: 14px 24px; min-height: 44px;
+  text-decoration: none; transition: border-color .18s, color .18s;
+}
+.membership-cta:hover, .membership-cta:focus-visible { border-color: var(--issue-accent); color: var(--issue-accent); }
+.membership-note { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 14px; }
+{% endif %}
+
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
 .subscribe-section { padding: 56px 48px; border-bottom: 1px solid var(--border); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
@@ -392,6 +411,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .hero, .summary, .body-wrap, .forward,
   .subscribe-section, .footer, .stat,
   .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
+  {% if site and site.membership_url %}.membership { padding: 24px; }{% endif %}
   .logo-wordmark { font-size: 30px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
@@ -512,6 +532,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
   <p>{{ forward_text | safe }}</p>
 </div>
+
+{% if site and site.membership_url %}
+<!-- MEMBERSHIP (abonnement de soutien — masqué tant que content/site.json n'a pas d'URL Stripe) -->
+<div class="membership reveal">
+  <div class="lbl lbl-accent">Soutenir</div>
+  <h3 class="membership-title">Abonnement de soutien</h3>
+  <p>Si SIGNAL nourrit tes écoutes, finance la suite — sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+  <a class="membership-cta" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre — {{ site.membership_price or '5 € / mois' }}</a>
+  <p class="membership-note">Sans engagement — résiliable en un clic via Stripe.</p>
+</div>
+{% endif %}
 
 <!-- SUBSCRIBE + QR (QR = partage à un ami, parcours honnête) -->
 <div class="subscribe-section reveal">

@@ -56,6 +56,16 @@ def compute_prev_next(issue_num: int):
     return prev_num, next_num
 
 
+def load_site() -> dict:
+    """Charge content/site.json (config globale non liée à une issue précise :
+    membership_url, membership_price, …). Absent -> dict vide (falsy en Jinja,
+    donc le bloc membership ne s'affiche simplement pas)."""
+    site_path = CONTENT / "site.json"
+    if not site_path.exists():
+        return {}
+    return json.loads(site_path.read_text(encoding="utf-8"))
+
+
 def extract_listen_all(content: dict):
     """Extrait les IDs YouTube (ordre, dédupliqués) de tous les tracks[].links[].url."""
     ids = []
@@ -97,6 +107,7 @@ def render_issue(content: dict) -> str:
 
     prev_num, next_num = compute_prev_next(content["issue_num"])
     listen_all_url, listen_count = extract_listen_all(content)
+    site = load_site()
 
     return tmpl.render(
         section_count=section_count,
@@ -104,6 +115,7 @@ def render_issue(content: dict) -> str:
         next_num=next_num,
         listen_all_url=listen_all_url,
         listen_count=listen_count,
+        site=site,
         **content,
     )
 
