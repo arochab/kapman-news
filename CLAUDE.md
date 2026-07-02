@@ -22,7 +22,10 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   scope `gist`, `GIST_ID`). Plus `VAPID_PRIVATE_KEY` (PEM — the server converts it to
   the raw 32-byte scalar that pywebpush needs), `VAPID_PUBLIC_KEY`, `PUSH_SECRET`, `PORT`.
 - **Publishing** = push an `issues/NN/index.html`; `.github/workflows/notify.yml` calls
-  `/notify` → Web Push to all subscribers.
+  `/notify` → Web Push to all subscribers. Only **added** issue files notify
+  (`--diff-filter=A`), et un commit contenant `[skip notify]` ne notifie jamais —
+  pour re-render des issues existantes (refonte template) :
+  `python tools/build_issue.py --rebuild-all` + commit `[skip notify]`.
 
 ## Authoring a new issue
 
@@ -38,7 +41,16 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   the track history before writing (kept in the user's memory).
 - **Real links only** — YouTube/Bandcamp links come from Adam's actual playlists, never
   invented or guessed.
-- Section accents cycle red → green → blue. Stats alternate green/blue.
+- **Doctrine de liens** : chaque track vise `▶ Écouter` (YouTube) + `↗ Bandcamp`
+  (sorties actuelles) ou `◈ Discogs` (catalogue — la release exacte), sourcés à l'écriture.
+- **Méta structurée** : utiliser les champs optionnels `label`/`catno`/`year`/`place`/
+  `format` du schéma track (cf `content/SCHEMA.md`) ; jamais une méta sans label ni année.
+- La tagline doit être **tenue par le séquencement** (si le titre annonce Cologne, la
+  tracklist y arrive). Max ~1 référence pointue par description de track ; le résumé
+  « Cette édition » vend l'écoute, pas la cuisine interne.
+- Section accents cycle red → green → blue. Stats alternate green/blue. L'accent
+  dominant d'une issue (numéral géant, CTA écoute) est dérivé de `issue_num % 3`
+  par le template — rien à décider par issue.
 - Tone: euphoric · physical · precise. KAPMAN = the person; Escape Music Collective =
   the place. Never confuse the two.
 
@@ -48,9 +60,16 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 - VAPID private key = raw 32-byte scalar base64url, not PEM/DER (server converts).
 - `sent:1` but nothing received = Chrome's Android-level notification permission was off
   (two permission layers: the site *and* Chrome itself).
+- **Render free tier cold start > 30s** = la notif N°10 a raté sur ReadTimeout (juin 2026).
+  `tools/send_push.py` fait maintenant warm-up (~180s max) + timeout 120s + 3 retries, et
+  `server/gunicorn.conf.py` monte le timeout worker à 120s (le défaut 30s tuait le worker
+  en plein envoi). La start command Render doit rester `gunicorn app:app` (conf auto-chargée).
 
 ## Design system
 
-Ink `#0D0D0D` · Cream `#F5F0E8` · Red `#E8372A` · Green `#00A650` · Blue `#2F57D4`.
-Logo = three additive-light circles. Font: Space Grotesk. All design lives in
+Ink `#0E0F14` · Cream `#F0EEE6` · Red `#E83A2E` · Green `#1FC85E` · Blue `#3A6CF0`
+(couleurs exactes du brand book `brand_assets/`). Fonts : **Black Ops One** (logo/display
+uniquement) · **Hanken Grotesk** (texte) · **IBM Plex Mono** (technique). Gris uniquement
+via les tokens du `:root` (`--dim`/`--meta`/`--faint`, tous ≥4.5:1 sur l'ink) — zéro hex
+littéral hors `:root`. Logo = three additive-light circles. All design lives in
 `templates/issue.html.j2` — change it there, never per-issue.

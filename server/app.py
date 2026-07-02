@@ -124,6 +124,12 @@ def health():
     })
 
 
+@app.route("/health")
+def health_light():
+    """Cible de warm-up ultra-légère : ne touche ni au Gist ni à rien de coûteux."""
+    return jsonify({"ok": True})
+
+
 @app.route("/vapid-public-key")
 def vapid_key():
     return jsonify({"publicKey": VAPID_PUBLIC_KEY})

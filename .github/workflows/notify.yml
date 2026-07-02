@@ -15,6 +15,7 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10   # laisse le temps au warm-up Render (cold start) + retries de /notify
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,8 +31,19 @@ jobs:
             echo "Manual issue: $MANUAL"
             exit 0
           fi
-          # Sinon : récupère les fichiers issues/ modifiés dans ce commit.
-          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^issues/' | head -1)
+          # Garde [skip notify] : si le commit de tête porte ce tag, on sort
+          # sans notifier. Sert à re-render des issues existantes (ex: refonte
+          # du template) sans envoyer de fausse notif aux abonnés.
+          MSG=$(git log -1 --pretty=%B HEAD)
+          if echo "$MSG" | grep -qF '[skip notify]'; then
+            echo "no_issue=true" >> $GITHUB_OUTPUT
+            echo "Commit marqué [skip notify] — pas de notification envoyée."
+            exit 0
+          fi
+          # Sinon : ne considère que les fichiers d'issue AJOUTÉS (--diff-filter=A).
+          # Un re-render de masse des issues existantes (changement de template)
+          # ne modifie que des fichiers déjà présents → aucune notification.
+          CHANGED=$(git diff --name-only --diff-filter=A HEAD~1 HEAD | grep '^issues/.*/index\.html$' | head -1)
           if [ -z "$CHANGED" ]; then
             echo "no_issue=true" >> $GITHUB_OUTPUT
             exit 0
