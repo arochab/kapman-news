@@ -1,47 +1,199 @@
 {
   "issue_num": 11,
-  "date_iso": "YYYY-MM-DD",
-  "month_label": "Mois AAAA",
+  "date_iso": "2026-07-03",
+  "month_label": "Juillet 2026",
   "reading_time": "4 min",
-  "tagline_plain": "",
-  "tagline_html": "",
+  "listening_time": "",
+  "playlist_url": "",
+  "show_tracklist": true,
+  "tagline_plain": "Paris parle bas depuis trente ans",
+  "tagline_html": "Paris parle bas<br>depuis trente ans",
   "summary_bullets": [
-    "",
-    "",
-    "",
-    ""
+    "Six tracks de la maison parisienne qui parle bas — d'I:Cube à Cabanne, 1999-2016",
+    "Deux sorties à suivre : D'Julz remixé par la relève, et les dix ans de Pont Neuf en double vinyle",
+    "Le label — Versatile : trente ans de Paris indépendant, par où commencer",
+    "Note de studio — ce que le micro-décalage fait au reste du mix"
   ],
   "blocks": [
     {
       "type": "section",
       "accent": "red",
-      "heading": "",
-      "tracks": []
+      "heading": "Ce qui tourne — Paris en sourdine, 1999-2016",
+      "tracks": [
+        {
+          "name": "I:Cube — Adore",
+          "label": "Versatile",
+          "catno": "VER CD 003",
+          "format": "CD",
+          "place": "Paris",
+          "year": "1999",
+          "body": "Le deuxième album de Nicolas Chaix, celui où Versatile troque le disco contre la texture. Le morceau-titre avance à peine — une nappe, un pouls, des accords qui tombent comme de la neige — et le corps suit quand même. De la house d'appartement qui tient sur un dancefloor, ce qui est bien plus rare que l'inverse.",
+          "dig": "I:Cube → moitié de Château Flight avec Gilb'r. Tout part de VER 001, Disco Cubizm, 1996.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=hDqTKFKwkZA"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/5822-ICube-Adore"
+            }
+          ]
+        },
+        {
+          "name": "Pépé Bradock — Peer Pressure",
+          "label": "Atavisme",
+          "catno": "ATA 001",
+          "format": "12\"",
+          "year": "2000",
+          "body": "Face « Maman Side » d'ATA 001 — Bradock nommait ses faces comme personne. Julien Auger étire un sample jusqu'à ce qu'il devienne une matière : house, techno et poussière de trip hop dans le même sillon. Le morceau ne monte jamais où on l'attend, et c'est ce qui le rend physique.",
+          "dig": "Atavisme est le label de Bradock lui-même — ce disque en est la toute première référence.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=J0J-0ynMizg"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/17541-P%C3%A9p%C3%A9-Bradock-6-Millions-Pintades-EP"
+            }
+          ]
+        },
+        {
+          "name": "Llorca — Indigo Blues",
+          "label": "F Communications",
+          "catno": "F 137 CD",
+          "format": "CD",
+          "year": "2001",
+          "body": "La French touch sans les filtres. Ludovic Llorca plie un souffle de Dizzy Gillespie sous la voix de Nicole Graham et fait tenir le club entier sur une ligne de basse jazz. F Communications avait aussi ce visage-là — feutré, nocturne, imparable.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=TftH7q6XyTk"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/3465-Llorca-New-Comer"
+            }
+          ]
+        },
+        {
+          "name": "Ark — E-Cône",
+          "label": "Circus Company",
+          "catno": "CCcd 001",
+          "format": "CD",
+          "place": "Paris",
+          "year": "2003",
+          "body": "L'ouverture de la série solo de Circus Company, et le portrait craché de son auteur : une house lo-fi qui boite volontairement, drôle et sale, avec un groove de traviole qui finit par mettre tout le monde d'accord. Guillaume Berroyer reste l'excentrique le plus précis de la scène parisienne des années 2000.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=D3ziJ4_QPFI"
+            },
+            {
+              "label": "↗ Bandcamp",
+              "url": "https://circuscompany.bandcamp.com/album/alleluyark"
+            }
+          ]
+        },
+        {
+          "name": "Phil Weeks & Chris Carrier — Tight Squeeze",
+          "label": "Robsoul",
+          "catno": "Robsoul Ltd. 07",
+          "format": "12\"",
+          "year": "2006",
+          "body": "Face B d'un 12\" limité partagé avec Lorenzo. Un loop, un shuffle, une pointe de saleté — les deux Français font tenir le morceau sur presque rien, et il tient. De la house de DJs faite par des DJs, calibrée pour cinq heures du matin, chez le label parisien le plus discrètement constant de la décennie.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=vy0bbKJi8U0"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/821816-Lorenzo-Phil-Weeks-Chris-Carrier-Get-Deep-Tight-Squeeze"
+            }
+          ]
+        },
+        {
+          "name": "Cabanne — Fr4",
+          "label": "Minibar",
+          "catno": "mb042",
+          "format": "3×12\"",
+          "year": "2016",
+          "body": "Vingt ans après ses débuts, Cabanne enregistre Discopathy : trois vinyles de presque rien, et Fr4 en est la pièce la plus nue. Un kick, des accents jazz, des silences placés au cordeau — la ligne minimale parisienne n'a jamais parlé aussi bas ni groové aussi fort.",
+          "dig": "Cabanne → Logistic puis Telegraph à la fin des années 90, puis Minibar, son propre label.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=Mz4N0u7e-OM"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/9408805-Cabanne-Discopathy"
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "stat",
       "accent": "green",
-      "number": "",
-      "context": ""
+      "number": "1997",
+      "context": "L'année où D'Julz ouvre sa résidence Bass Culture au Rex Club. Elle ne s'est jamais arrêtée — la plus longue de l'histoire du club — et le label qui suit en porte le nom."
     },
     {
       "type": "section",
       "accent": "green",
-      "heading": "",
-      "tracks": []
+      "heading": "Sorties récentes — la relève parle bas aussi",
+      "tracks": [
+        {
+          "name": "D'Julz — The School Of Night Remixes",
+          "label": "Bass Culture",
+          "catno": "BCR075",
+          "place": "Paris",
+          "year": "2025",
+          "body": "Cinq relectures des EPs School Of Night par Sweely, DJ Deep, Hostom et Darren Roach. Le remix de Nu Bass par DJ Deep condense le Rex en six minutes : deep, tendu, sans graisse. La maison-mère parisienne qui invite la relève sans lâcher la barre.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=n4wuOWt5Uko"
+            },
+            {
+              "label": "↗ Bandcamp",
+              "url": "https://shop.bassculturerecords.com/album/the-school-of-night-remixes-ep"
+            }
+          ]
+        },
+        {
+          "name": "Various — In House We Trust (Pont Neuf 10 Years)",
+          "label": "Pont Neuf Records",
+          "format": "2×12\"",
+          "place": "Paris",
+          "year": "2026",
+          "body": "Douze tracks pour dix ans de label : Tour-Maubourg, Mad Rey, Marina Trench, Black Loops et la suite. La génération qui a repris la maison française là où les anciens l'avaient laissée, réunie sur un double vinyle anniversaire. Préco ouverte, un single par semaine tout l'été, sortie le 4 septembre.",
+          "links": [
+            {
+              "label": "↗ Bandcamp",
+              "url": "https://pontneuf.bandcamp.com/album/pont-neuf-10-years-in-house-we-trust"
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "stat",
       "accent": "blue",
-      "number": "",
-      "context": ""
+      "number": "664",
+      "context": "Références Versatile listées sur Discogs au moment où j'écris. Trente ans de catalogue sans pause, toujours la même adresse : Paris. On en parle juste en dessous."
     },
     {
       "type": "section",
       "accent": "blue",
-      "heading": "",
+      "heading": "Le label — Versatile",
       "paragraphs": [
-        ""
+        "Paris, 1996. Gilb'r lance Versatile avec un maxi d'I:Cube, Disco Cubizm — VER 001. Trente ans plus tard, le label est toujours debout, toujours indépendant, toujours à la même hauteur de voix.",
+        "Ce que Versatile a de rare : il n'a jamais choisi. House, disco, jazz, techno, expérimental — Château Flight, Etienne Jaumet, I:Cube — et pourtant tout s'écoute comme une seule discothèque. C'est une maison au sens propre : des gens qui reviennent, un son qui vieillit bien parce qu'il n'a jamais couru après l'époque.",
+        "Par où commencer : Disco Cubizm (1996), puis Adore (1999), puis fouiller le reste comme un bac de disquaire sur <a href=\"https://shop.versatilerecords.com/\" target=\"_blank\">le Bandcamp du label →</a>"
       ]
     },
     {
@@ -49,9 +201,12 @@
       "accent": "red",
       "heading": "Note de studio",
       "paragraphs": [
-        ""
+        "Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé — quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.",
+        "Un groove qui respire prend de la place. Dès que le décalage fait son travail, les couches deviennent des obstacles : la nappe du MicroKorg 2 est passée de trois voix à une, et le morceau tient mieux debout. Je n'avais pas prévu que désaligner une piste m'obligerait à en couper trois autres.",
+        "L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View — la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.",
+        "Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part — maintenant c'est au mix d'apprendre à se taire."
       ]
     }
   ],
-  "forward_text": ""
+  "forward_text": "Trente ans d'un côté, dix de l'autre : le Bandcamp de Versatile se fouille comme un bac, et Pont Neuf égrène un single par semaine jusqu'au 4 septembre — la préco du double vinyle est ouverte. Entre les deux, la série Alleluyark d'Ark s'écoute d'une traite sur le Bandcamp de Circus Company."
 }
