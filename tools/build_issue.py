@@ -200,8 +200,9 @@ def update_home(content: dict):
         pos = html_src.find(anchor)
         if pos == -1:
             raise RuntimeError("Ancre 'archive-lbl' introuvable dans index.html")
-        # Insère juste après la balise fermante du label (la fin de la ligne du div).
-        insert_at = html_src.find(">", pos) + 1
+        # Insère après le </div> du label (pas après le > de la balise ouvrante,
+        # qui couperait le div en deux).
+        insert_at = html_src.find("</div>", pos) + len("</div>")
         html_src = html_src[:insert_at] + "\n" + row + html_src[insert_at:]
 
     # Recompte les rows et remet à jour le libellé "Archive — N numéros".
