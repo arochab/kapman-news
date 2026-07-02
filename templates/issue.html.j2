@@ -261,7 +261,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .forward p { font-size: 15px; color: var(--mid); line-height: 1.8; }
 
 {% if site and site.membership_url %}
-/* ── MEMBERSHIP (abonnement de soutien, optionnel) ──
+/* ── MEMBERSHIP (Membre du circuit, optionnel) ──
    Tout ce bloc (CSS + markup) est conditionné par site.membership_url : tant
    que content/site.json ne fournit pas d'URL Stripe, rien n'en sort dans le
    HTML rendu · pas même le CSS. */
@@ -276,6 +276,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   text-decoration: none; transition: border-color .18s, color .18s;
 }
 .membership-cta:hover, .membership-cta:focus-visible { border-color: var(--issue-accent); color: var(--issue-accent); }
+.membership-alt { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--meta); text-decoration: underline; text-decoration-color: transparent; transition: color .18s, text-decoration-color .18s; margin-top: 14px; }
+.membership-alt:hover, .membership-alt:focus-visible { color: var(--issue-accent); text-decoration-color: var(--issue-accent); }
 .membership-note { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 14px; }
 {% endif %}
 
@@ -501,13 +503,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 </div>
 
 {% if site and site.membership_url %}
-<!-- MEMBERSHIP (abonnement de soutien · masqué tant que content/site.json n'a pas d'URL Stripe) -->
+<!-- MEMBERSHIP (Membre du circuit · masqué tant que content/site.json n'a pas d'URL Stripe) -->
 <div class="membership reveal">
   <div class="lbl lbl-accent">Soutenir</div>
-  <h3 class="membership-title">Abonnement de soutien</h3>
-  <p>Si CIRCUIT FERMÉ nourrit tes écoutes, finance la suite · sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+  <h3 class="membership-title">Membre du circuit</h3>
+  <p>La lettre reste gratuite. Les membres financent la suite et débloquent la Séance d'écoute mensuelle, le crate du mois avec ses tracks bonus, et l'objet de fin d'année pour les annuels.</p>
   <a class="membership-cta" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € / mois' }}</a>
-  <p class="membership-note">Sans engagement · résiliable en un clic via Stripe.</p>
+  {% if site.membership_annual_url %}
+  <div><a class="membership-alt" href="{{ site.membership_annual_url }}" target="_blank" rel="noopener">ou l'année · {{ site.membership_annual_price or '50 € / an' }}</a></div>
+  {% endif %}
+  <p class="membership-note">Sans engagement · résiliable en un clic.</p>
 </div>
 {% endif %}
 
