@@ -2,135 +2,116 @@
   "issue_num": 11,
   "date_iso": "2026-07-03",
   "month_label": "Juillet 2026",
-  "reading_time": "4 min",
+  "reading_time": "5 min",
   "listening_time": "",
   "playlist_url": "",
   "show_tracklist": true,
-  "tagline_plain": "Paris parle bas depuis trente ans",
-  "tagline_html": "Paris parle bas<br>depuis trente ans",
+  "tagline_plain": "Dix ans de tech house anglaise, dans l'ordre",
+  "tagline_html": "Dix ans de tech house anglaise,<br>dans l'ordre",
   "summary_bullets": [
-    "Six tracks de la maison parisienne qui parle bas — d'I:Cube à Cabanne, 1999-2016",
-    "Deux sorties à suivre : D'Julz remixé par la relève, et les dix ans de Pont Neuf en double vinyle",
-    "Le label — Versatile : trente ans de Paris indépendant, par où commencer",
-    "Note de studio — ce que le micro-décalage fait au reste du mix"
+    "7 tracks de la tech house anglaise, 1999 à 2007 : de Terry Francis à Whiff, sans détour",
+    "Deux sorties à suivre : Buraye sur Planka Records, Mishouju sur Howl Records",
+    "Le label : 20:20 Vision, une ferme du Yorkshire depuis trente ans",
+    "Note de studio : ce que le micro-décalage fait au reste du mix"
   ],
   "blocks": [
     {
       "type": "section",
       "accent": "red",
-      "heading": "Ce qui tourne — Paris en sourdine, 1999-2016",
+      "heading": "Ce qui tourne : la tech house anglaise, 1999 à 2007",
       "tracks": [
         {
-          "name": "I:Cube — Adore",
-          "label": "Versatile",
-          "catno": "VER CD 003",
-          "format": "CD",
-          "place": "Paris",
+          "name": "Terry Francis · Took From Me",
+          "label": "Surreal",
+          "catno": "SUR005",
+          "format": "12\", White Label",
+          "place": "UK",
           "year": "1999",
-          "body": "Le deuxième album de Nicolas Chaix, celui où Versatile troque le disco contre la texture. Le morceau-titre avance à peine — une nappe, un pouls, des accords qui tombent comme de la neige — et le corps suit quand même. De la house d'appartement qui tient sur un dancefloor, ce qui est bien plus rare que l'inverse.",
-          "dig": "I:Cube → moitié de Château Flight avec Gilb'r. Tout part de VER 001, Disco Cubizm, 1996.",
+          "body": "Terry Francis pose le morceau qui ouvrait toute la scène tech house londonienne de la fin des années 90. Le kick est sec, le sample vocal grince, la ligne de basse tremble sous le plancher : rien n'est là pour décorer. C'est la seule référence canon du numéro, elle sert de porte d'entrée aux six tracks qui suivent, toutes plus obscures. On y entend déjà tout ce que l'Angleterre va creuser pendant huit ans.",
+          "dig": "Terry Francis tient la résidence Fabric depuis l'ouverture du club en octobre 1999, sans interruption : vingt sept ans au même endroit, le même soir.",
           "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=hDqTKFKwkZA"
-            },
-            {
-              "label": "◈ Discogs",
-              "url": "https://www.discogs.com/release/5822-ICube-Adore"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=SOVTFfQcXCw" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/6055099-Terry-Francis-Took-From-Me" }
           ]
         },
         {
-          "name": "Pépé Bradock — Peer Pressure",
-          "label": "Atavisme",
-          "catno": "ATA 001",
+          "name": "Stabilizer · Factor",
+          "label": "Boom Box Records",
+          "catno": "BBR10",
           "format": "12\"",
+          "place": "UK",
           "year": "2000",
-          "body": "Face « Maman Side » d'ATA 001 — Bradock nommait ses faces comme personne. Julien Auger étire un sample jusqu'à ce qu'il devienne une matière : house, techno et poussière de trip hop dans le même sillon. Le morceau ne monte jamais où on l'attend, et c'est ce qui le rend physique.",
-          "dig": "Atavisme est le label de Bradock lui-même — ce disque en est la toute première référence.",
+          "body": "Deuxième étape, l'an deux mille : Stabilizer pousse la tech house vers le breakbeat sans jamais perdre le groove house. Factor avance par àcoups, une caisse claire qui claque de travers, un riff qui revient toujours un poil trop tard. Une signature rythmique qui ne ressemble à rien d'autre dans cette sélection.",
           "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=J0J-0ynMizg"
-            },
-            {
-              "label": "◈ Discogs",
-              "url": "https://www.discogs.com/release/17541-P%C3%A9p%C3%A9-Bradock-6-Millions-Pintades-EP"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=V5KrxK52syI" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/53866-Stabilizer-Pure-Digital" }
           ]
         },
         {
-          "name": "Llorca — Indigo Blues",
-          "label": "F Communications",
-          "catno": "F 137 CD",
-          "format": "CD",
-          "year": "2001",
-          "body": "La French touch sans les filtres. Ludovic Llorca plie un souffle de Dizzy Gillespie sous la voix de Nicole Graham et fait tenir le club entier sur une ligne de basse jazz. F Communications avait aussi ce visage-là — feutré, nocturne, imparable.",
-          "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=TftH7q6XyTk"
-            },
-            {
-              "label": "◈ Discogs",
-              "url": "https://www.discogs.com/release/3465-Llorca-New-Comer"
-            }
-          ]
-        },
-        {
-          "name": "Ark — E-Cône",
-          "label": "Circus Company",
-          "catno": "CCcd 001",
-          "format": "CD",
-          "place": "Paris",
-          "year": "2003",
-          "body": "L'ouverture de la série solo de Circus Company, et le portrait craché de son auteur : une house lo-fi qui boite volontairement, drôle et sale, avec un groove de traviole qui finit par mettre tout le monde d'accord. Guillaume Berroyer reste l'excentrique le plus précis de la scène parisienne des années 2000.",
-          "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=D3ziJ4_QPFI"
-            },
-            {
-              "label": "↗ Bandcamp",
-              "url": "https://circuscompany.bandcamp.com/album/alleluyark"
-            }
-          ]
-        },
-        {
-          "name": "Phil Weeks & Chris Carrier — Tight Squeeze",
-          "label": "Robsoul",
-          "catno": "Robsoul Ltd. 07",
+          "name": "Jay Kaufman · The Fear (Youth In Asia's Fearless Dub)",
+          "label": "Sonambulist Recordings",
+          "catno": "SONB 003",
           "format": "12\"",
-          "year": "2006",
-          "body": "Face B d'un 12\" limité partagé avec Lorenzo. Un loop, un shuffle, une pointe de saleté — les deux Français font tenir le morceau sur presque rien, et il tient. De la house de DJs faite par des DJs, calibrée pour cinq heures du matin, chez le label parisien le plus discrètement constant de la décennie.",
+          "place": "UK",
+          "year": "2001",
+          "body": "Un an plus tard, Sonambulist Recordings sort son tout premier disque et le confie à Jay Kaufman. Le dub signé Youth In Asia retire presque tout du morceau original et ne garde qu'une respiration et un groove suspendu. C'est tendu, patient, construit pour une salle qui commence à peine à se remplir.",
           "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=vy0bbKJi8U0"
-            },
-            {
-              "label": "◈ Discogs",
-              "url": "https://www.discogs.com/release/821816-Lorenzo-Phil-Weeks-Chris-Carrier-Get-Deep-Tight-Squeeze"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=xRJbGcHtQOE" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/113815-Jay-Kaufman-The-Fear" }
           ]
         },
         {
-          "name": "Cabanne — Fr4",
-          "label": "Minibar",
-          "catno": "mb042",
-          "format": "3×12\"",
-          "year": "2016",
-          "body": "Vingt ans après ses débuts, Cabanne enregistre Discopathy : trois vinyles de presque rien, et Fr4 en est la pièce la plus nue. Un kick, des accents jazz, des silences placés au cordeau — la ligne minimale parisienne n'a jamais parlé aussi bas ni groové aussi fort.",
-          "dig": "Cabanne → Logistic puis Telegraph à la fin des années 90, puis Minibar, son propre label.",
+          "name": "Harold Heath · Can You Feel",
+          "label": "Uhuru Beats",
+          "catno": "uhuru 005",
+          "format": "12\"",
+          "place": "UK",
+          "year": "2002",
+          "body": "Harold Heath enregistre pour Uhuru Beats, label anglais discret dont chaque sortie tenait la même ligne exigeante. Can You Feel avance en neuf minutes sans jamais se presser : une boucle, une touche d'acide, un groove qui se resserre par paliers. Le genre de disque que seuls les diggers se refilaient à l'époque.",
           "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=Mz4N0u7e-OM"
-            },
-            {
-              "label": "◈ Discogs",
-              "url": "https://www.discogs.com/release/9408805-Cabanne-Discopathy"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=MPvJJEzBUoY" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/313867-Harold-Heath-Can-You-Feel" }
+          ]
+        },
+        {
+          "name": "Two Right Wrongans · Wrong Station Right Platform",
+          "label": "Wrong",
+          "catno": "Wrong 007",
+          "format": "12\"",
+          "place": "UK",
+          "year": "2002",
+          "body": "Sur le label Wrong, la même année, Two Right Wrongans jouent la carte du nom qui prévient : la structure part dans une direction puis se ravise en plein milieu. Le groove tech house reste solide sous les fausses pistes, presque un jeu entre le producteur et l'auditeur. Une des sorties les plus singulières de cette décennie anglaise.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=zDJjZx7bk-8" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/81482-Various-Wrong-Station-Right-Platform" }
+          ]
+        },
+        {
+          "name": "Tom Parris · Mitsubishi Dealer",
+          "label": "Cubic Records",
+          "catno": "CUBIC 008",
+          "format": "12\"",
+          "place": "UK",
+          "year": "2006",
+          "body": "Cubic Records sort ce disque de Tom Parris en 2006, quand la tech house anglaise a déjà digéré une décennie d'expérimentations et cherche autre chose. Mitsubishi Dealer tient sur un riff electro sec et un kick qui ne lâche rien pendant sept minutes. La ligne reste tech house dans l'os, même quand la texture vire electro.",
+          "dig": "Ce disque est répertorié comme Cubic Hits Release 8 dans le catalogue du label, en pleine vague electro house anglaise du milieu des années 2000.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=OWkIAg0qRis" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/648185-Tom-Parris-Gavin-Burrows-Tom-Parris-Vs-Gavin-Burrows" }
+          ]
+        },
+        {
+          "name": "Whiff · My Brain",
+          "label": "Whiff",
+          "catno": "WHIFF 002",
+          "format": "12\" EP",
+          "place": "UK",
+          "year": "2007",
+          "body": "Dernière étape de la ligne : en 2007, l'artiste Whiff publie sa propre sortie sur son propre label, house, electro et acid dans le même sillon. My Brain referme la décennie sur un groove tordu, acide par endroits, jamais complètement propre. Huit ans après Terry Francis, l'Angleterre parle encore la même langue, avec un accent différent.",
+          "dig": "Le label s'appelle comme l'artiste : Whiff sort ce disque sur son propre imprint, une pratique courante dans la scène tech house anglaise du milieu des années 2000.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=qSJMkhCT1lc" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/1887464-WHIFF-Uncensored-EP" }
           ]
         }
       ]
@@ -138,44 +119,36 @@
     {
       "type": "stat",
       "accent": "green",
-      "number": "1997",
-      "context": "L'année où D'Julz ouvre sa résidence Bass Culture au Rex Club. Elle ne s'est jamais arrêtée — la plus longue de l'histoire du club — et le label qui suit en porte le nom."
+      "number": "8",
+      "context": "Huit ans séparent Took From Me de My Brain : toute la ligne tech house anglaise traversée dans cette sélection, sans un seul faux pas."
     },
     {
       "type": "section",
       "accent": "green",
-      "heading": "Sorties récentes — la relève parle bas aussi",
+      "heading": "Sorties récentes : la ligne continue ailleurs",
       "tracks": [
         {
-          "name": "D'Julz — The School Of Night Remixes",
-          "label": "Bass Culture",
-          "catno": "BCR075",
-          "place": "Paris",
-          "year": "2025",
-          "body": "Cinq relectures des EPs School Of Night par Sweely, DJ Deep, Hostom et Darren Roach. Le remix de Nu Bass par DJ Deep condense le Rex en six minutes : deep, tendu, sans graisse. La maison-mère parisienne qui invite la relève sans lâcher la barre.",
+          "name": "Buraye · Spires of Mirage",
+          "label": "Planka Records",
+          "catno": "PLNK007",
+          "format": "12\"",
+          "year": "2026",
+          "body": "Sur la compilation Quiet Understanding EP de Planka Records, Buraye pose une piste tendue, construite pour les petites heures. Spires of Mirage tient sur une nappe froide et une percussion qui n'accélère jamais vraiment. La suite naturelle de la ligne anglaise ouverte plus haut, version 2026.",
           "links": [
-            {
-              "label": "▶ Écouter",
-              "url": "https://www.youtube.com/watch?v=n4wuOWt5Uko"
-            },
-            {
-              "label": "↗ Bandcamp",
-              "url": "https://shop.bassculturerecords.com/album/the-school-of-night-remixes-ep"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=2-2NUys_0Yc" },
+            { "label": "↗ Boutique", "url": "https://www.deejay.de/Various_Quiet_Understanding_EP_PLNK007_Vinyl__1231561" }
           ]
         },
         {
-          "name": "Various — In House We Trust (Pont Neuf 10 Years)",
-          "label": "Pont Neuf Records",
-          "format": "2×12\"",
-          "place": "Paris",
+          "name": "Mishouju · I Am Ai",
+          "label": "Howl Records",
+          "format": "Digital",
+          "place": "Gênes",
           "year": "2026",
-          "body": "Douze tracks pour dix ans de label : Tour-Maubourg, Mad Rey, Marina Trench, Black Loops et la suite. La génération qui a repris la maison française là où les anciens l'avaient laissée, réunie sur un double vinyle anniversaire. Préco ouverte, un single par semaine tout l'été, sortie le 4 septembre.",
+          "body": "Sur Howl Records, label italien basé à Gênes, Mishouju sort I Am Ai en single numérique deux titres. La machine semble hésiter entre techno et house sans jamais trancher, un titre qui résume bien le geste. Loin de Londres mais sur la même intensité tech house, la lignée continue ailleurs.",
           "links": [
-            {
-              "label": "↗ Bandcamp",
-              "url": "https://pontneuf.bandcamp.com/album/pont-neuf-10-years-in-house-we-trust"
-            }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=rrnninhlgAE" },
+            { "label": "↗ Bandcamp", "url": "https://howlrecord.bandcamp.com/album/mishouju-i-am-ai" }
           ]
         }
       ]
@@ -183,17 +156,17 @@
     {
       "type": "stat",
       "accent": "blue",
-      "number": "664",
-      "context": "Références Versatile listées sur Discogs au moment où j'écris. Trente ans de catalogue sans pause, toujours la même adresse : Paris. On en parle juste en dessous."
+      "number": "500",
+      "context": "Près de 500 références 20:20 Vision publiées en trente ans, annoncées par le label lui même pour son anniversaire en 2025. Une des maisons les plus stables de l'histoire de la tech house anglaise."
     },
     {
       "type": "section",
       "accent": "blue",
-      "heading": "Le label — Versatile",
+      "heading": "Le label · 20:20 Vision",
       "paragraphs": [
-        "Paris, 1996. Gilb'r lance Versatile avec un maxi d'I:Cube, Disco Cubizm — VER 001. Trente ans plus tard, le label est toujours debout, toujours indépendant, toujours à la même hauteur de voix.",
-        "Ce que Versatile a de rare : il n'a jamais choisi. House, disco, jazz, techno, expérimental — Château Flight, Etienne Jaumet, I:Cube — et pourtant tout s'écoute comme une seule discothèque. C'est une maison au sens propre : des gens qui reviennent, un son qui vieillit bien parce qu'il n'a jamais couru après l'époque.",
-        "Par où commencer : Disco Cubizm (1996), puis Adore (1999), puis fouiller le reste comme un bac de disquaire sur <a href=\"https://shop.versatilerecords.com/\" target=\"_blank\">le Bandcamp du label →</a>"
+        "Yorkshire, 1995. Ralph Lawson et Carl Finlow montent 20:20 Vision dans une ferme, loin des studios londoniens. La toute première sortie s'appelle Wulf n Bear, Space Groover.",
+        "Le label ne s'est jamais figé sur un son unique : house, techno, electro cohabitent sur le même catalogue depuis trente ans, avec des noms comme Maya Jane Coles ou DJ T qui sont passés par la maison. Ce qui tient tout ensemble, c'est un souci du groove plutôt qu'un genre précis.",
+        "Par où commencer : Random Factor · Know You're There (Silver City Remix), 2003, catalogue VIS084, puis remonter le catalogue sur <a href=\"https://www.discogs.com/release/139511-Random-Factor-Know-Youre-There\" target=\"_blank\">◈ Discogs →</a>"
       ]
     },
     {
@@ -201,12 +174,12 @@
       "accent": "red",
       "heading": "Note de studio",
       "paragraphs": [
-        "Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé — quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.",
+        "Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé : quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.",
         "Un groove qui respire prend de la place. Dès que le décalage fait son travail, les couches deviennent des obstacles : la nappe du MicroKorg 2 est passée de trois voix à une, et le morceau tient mieux debout. Je n'avais pas prévu que désaligner une piste m'obligerait à en couper trois autres.",
-        "L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View — la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.",
-        "Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part — maintenant c'est au mix d'apprendre à se taire."
+        "L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View : la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.",
+        "Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part, maintenant c'est au mix d'apprendre à se taire."
       ]
     }
   ],
-  "forward_text": "Trente ans d'un côté, dix de l'autre : le Bandcamp de Versatile se fouille comme un bac, et Pont Neuf égrène un single par semaine jusqu'au 4 septembre — la préco du double vinyle est ouverte. Entre les deux, la série Alleluyark d'Ark s'écoute d'une traite sur le Bandcamp de Circus Company."
+  "forward_text": "Le catalogue 20:20 Vision se remonte entier sur Discogs, la Quiet Understanding EP de Planka Records tourne en 12 pouces chez Deejay.de, et I Am Ai de Mishouju s'écoute au complet sur le Bandcamp de Howl Records. Trois portes pour prolonger l'écoute au-delà de cette page."
 }
