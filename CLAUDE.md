@@ -44,7 +44,19 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 - **Never repeat** a track, artist, or label used in a previous issue. Cross-reference
   the track history before writing (kept in the user's memory).
 - **Real links only** — YouTube/Bandcamp links come from Adam's actual playlists, never
-  invented or guessed.
+  invented or guessed. Les playlists vivent dans `content/playlists/*.txt` (exports
+  YouTube avec URLs, Discogs, labels) : c'est LA source des sélections.
+- **Profil de goût d'Adam (source : ses playlists — s'y tenir)** : tech house UK
+  1996-2007 (Wiggle-adjacent, Terry Francis, Swag, 20:20 Vision, Sonambulist, Cubic,
+  Whiff), minimal/tech house allemande 2001-2007 (KarateMusik, Ringelbeatz,
+  38db-Tonsportgruppe, Satt, i220, Disko B, Tiny Sticks, Freude Am Tanzen),
+  electro/tech house hybride, progressive house UK 1998-2005, acid revival mi-2000s,
+  edits (Clone, DFA), rominimal et scène actuelle (Jamuse, Planka, Dank, Vanni Danni).
+  PAS de French house filtrée, PAS de canon Chicago/Detroit sauf au service d'une
+  obscurité.
+- **AUCUN tiret dans tout texte publié ni dans les réponses à Adam** : ni « — » ni
+  « – », nulle part (prose, titres, noms de tracks, UI). Séparateur artiste/titre :
+  « · ». Les traits d'union de mots composés français restent normaux.
 - **Doctrine de liens** : chaque track vise `▶ Écouter` (YouTube) + `↗ Bandcamp`
   (sorties actuelles) ou `◈ Discogs` (catalogue — la release exacte), sourcés à l'écriture.
 - **Méta structurée** : utiliser les champs optionnels `label`/`catno`/`year`/`place`/
@@ -84,9 +96,12 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 
 ## Design system
 
-Ink `#0E0F14` · Cream `#F0EEE6` · Red `#E83A2E` · Green `#1FC85E` · Blue `#3A6CF0`
-(couleurs exactes du brand book `brand_assets/`). Fonts : **Black Ops One** (logo/display
-uniquement) · **Hanken Grotesk** (texte) · **IBM Plex Mono** (technique). Gris uniquement
-via les tokens du `:root` (`--dim`/`--meta`/`--faint`, tous ≥4.5:1 sur l'ink) — zéro hex
-littéral hors `:root`. Logo = three additive-light circles. All design lives in
+Ink `#0E0F14` · Cream `#F0EEE6` · Red `#E83A2E` · Green `#1FC85E` · Blue `#3A6CF0`.
+Fonts : **Hanken Grotesk** (texte + wordmark 800) · **IBM Plex Mono** (technique).
+Black Ops One est SUPPRIMÉE (juillet 2026, demande d'Adam). Logo v3 = glyphe
+« signal » (3 barres verticales arrondies R/V/B, hauteurs 12/22/17) + wordmark
+KAPMAN (Hanken 800) + SIGNAL (mono espacé) ; plus de cercles additifs, plus de
+glitch RGB. La triple-rule R/V/B reste la signature graphique. Gris uniquement
+via les tokens du `:root` (`--dim`/`--meta`/`--faint`, tous ≥4.5:1 sur l'ink) : zéro hex
+littéral hors `:root`. All design lives in
 `templates/issue.html.j2` — change it there, never per-issue.
