@@ -3,114 +3,147 @@
   "date_iso": "2026-06-18",
   "month_label": "Juin 2026",
   "reading_time": "4 min",
-  "tagline_plain": "De Chicago à Francfort — la ligne directe",
-  "tagline_html": "De Chicago à Francfort —<br>la ligne directe",
+  "tagline_plain": "Cinq ans avant que l'Allemagne dise minimal",
+  "tagline_html": "Cinq ans avant que<br>l'Allemagne dise minimal",
   "summary_bullets": [
-    "6 tracks sur la ligne Chicago → Detroit → Francfort — l'arc 1986 → 2004 en une seule écoute",
-    "2 sorties 2026 à suivre : Reagan Grey sur Wolf Music, Manuel Darquart",
-    "Le label : Sound Signature (Detroit, Theo Parrish)",
-    "Note de studio — jouer dans une tradition sans s'y perdre"
+    "Sept tracks sur l'Allemagne d'avant le minimal, de Ebird en 2001 à Rocket Launcher en 2006",
+    "Deux sorties récentes à suivre : Dav sur le label suisse Jamuse, et Vanni Danni du côté rominimal",
+    "Le label : 38db Tonsportgruppe, trente références allemandes entre 2004 et 2009",
+    "Note de studio : ce que l'économie de moyens allemande apprend au studio"
   ],
   "blocks": [
     {
       "type": "section",
       "accent": "red",
-      "heading": "La ligne directe",
+      "heading": "Ce qui tourne : l'Allemagne avant le minimal, 2001 à 2006",
       "tracks": [
         {
-          "name": "Mr Fingers — Can You Feel It",
-          "label": "Trax Records",
-          "catno": "TX127",
+          "name": "Modomonomusik & Bee · Ebird",
+          "label": "Ringelbeatz",
+          "catno": "RINGELBEATZ02",
           "format": "12\"",
-          "place": "Chicago",
-          "year": "1986",
-          "body": "Larry Heard a enregistré ça dans sa chambre sur un 4-piste. Pas de studio, pas de budget, juste une boîte à rythmes et un synthé bas de gamme. Quarante ans plus tard c'est encore dans les premières mesures que quelque chose se passe qu'on ne sait pas expliquer. Le point zéro.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=k4vllvhbEzw" }]
+          "place": "Allemagne",
+          "year": "2001",
+          "body": "Sept minutes de deep house acide gravées sur le label que le duo dirige lui-même. Le groove avance en boucle serrée, presque monotone, jusqu'à ce que l'acide vienne mordre dedans. C'est le point de départ logique de cette sélection : une Allemagne qui bricole encore son vocabulaire, sans souci du genre à venir. Le kick ne cherche pas à impressionner, il porte.",
+          "dig": "Bee, c'est Bee A Pilot, moitié du duo derrière le label Ringelbeatz lui-même.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=gMOf_rlXtn0" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/74130-Modomonomusik-Bee-Silicon-Valley" }
+          ]
         },
         {
-          "name": "Theo Parrish — Falling Up",
-          "label": "Third Ear Recordings",
-          "catno": "3ELP 001",
-          "format": "3×LP",
-          "place": "Detroit",
-          "year": "2002",
-          "body": "La version originale, pas le Carl Craig remix — parue sur la compilation Detroit Beatdown Volume One. Detroit soul-house à l'état brut — les éléments arrivent quand ils veulent, pas quand la structure le demande. Ce relâchement intentionnel, c'est ce qui manque à 90% des productions actuelles.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=bJ58lHX2Zrs" }]
+          "name": "Märtini Brös. · After Hours In Texas",
+          "label": "Not On Label",
+          "format": "2×LP",
+          "place": "Allemagne",
+          "year": "2001",
+          "body": "Face D2 d'une compilation vinyle en deux volumes, Music Rodeo, sortie sans nom de label affiché la même année. Le titre sonne comme une private party filmée en Super 8 : boucle sale, groove chaloupé, presque amateur dans le meilleur sens du terme. Le duo n'a laissé que peu de traces sur Discogs, ce qui rend la trouvaille plus précieuse encore. Une pièce de white label typique de cette Allemagne d'avant le minimal, où le disque comptait plus que le nom dessus.",
+          "dig": "Face D2 de la compilation Music Rodeo. La face A1 revient au même duo avec 1000 Miles Of Dust.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=1UqRGNkHOxs" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/de/release/17494084-Various-Music-Rodeo" }
+          ]
         },
         {
-          "name": "Omar S — Thank U 4 Letting Me Be Myself",
-          "label": "FXHE Records",
-          "catno": "AOS-7000",
-          "format": "CD",
-          "place": "Detroit",
-          "year": "2013",
-          "body": "Huit minutes. Les synthés en ouverture ressemblent à rien d'autre — pas du Chicago, pas du Berlin, juste Detroit à un moment précis. Omar S a un rapport à la musique que personne n'a su copier. La disco infusée dans la techno sans que les deux s'annulent.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=3wPJPintfrM" }]
-        },
-        {
-          "name": "Akufen — Deck The House",
-          "label": "Force Inc. Music Works",
-          "catno": "FIM 223",
+          "name": "Roland Fiege · Privatrocker V2.0",
+          "label": "Satt",
+          "catno": "SATT 001",
           "format": "12\"",
-          "place": "Montréal",
-          "year": "2002",
-          "body": "Marc Leclair échantillonnait la radio FM sur un séquenceur — des fragments de voix, de pub, de chansons — et les recombinait. Le résultat est une micro-house qui ressemble à aucune autre micro-house. Quand Herbert a remixé ce disque c'est parce qu'il avait compris que Leclair faisait quelque chose de fondamentalement différent.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=yXHNXjxkiVU" }]
-        },
-        {
-          "name": "Isolée — Beau Mot Plage",
-          "label": "Playhouse",
-          "catno": "PLAY 22",
-          "format": "12\"",
-          "place": "Francfort",
-          "year": "1998",
-          "body": "Rajko Müller. Cette track a été jouée dans tous les clubs minimaux de 2002 à 2008 et elle sonne toujours juste aujourd'hui. La mélodie est simple au point d'être gênante — c'est pour ça qu'elle reste. Perlon à son meilleur : rien de trop, rien qui manque.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=mQy2V_3LRMQ" }]
-        },
-        {
-          "name": "Ricardo Villalobos — Serpentin",
-          "label": "Perlon",
-          "catno": "PERL 43",
-          "format": "3×12\"",
+          "place": "Allemagne",
           "year": "2004",
-          "body": "Extrait de Thé au Harem d'Archimède, son deuxième album. Des percussions latines déviées de leur rôle, un kick qui s'efface, une patience dans le déroulé que personne d'autre ne s'autorisait en 2004. Cette track met 4 minutes à s'installer et ensuite elle ne lâche plus rien. Perlon ne ressemblait alors à aucun autre label.",
-          "links": [{ "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=KpZpch8Qpo8" }]
-        }
-      ]
-    },
-    {
-      "type": "stat",
-      "accent": "green",
-      "number": "1986",
-      "context": "Année où Larry Heard enregistre Can You Feel It dans sa chambre à Chicago. La maison de la house music n'était pas un studio — c'était une pièce, un synthé, une idée."
-    },
-    {
-      "type": "section",
-      "accent": "green",
-      "heading": "Sorties 2026 — ce qui mérite l'attention",
-      "tracks": [
-        {
-          "name": "Reagan Grey — Kinetic EP",
-          "label": "Wolf Music Recordings",
-          "catno": "WOLFEP084",
-          "format": "12\"",
-          "place": "Toronto",
-          "year": "2026",
-          "body": "Basée à Toronto, des sorties sur Local Talk et Selections. Wolf Music pour la deuxième sortie du label en 2026. Deep house dub-inflected, précise — la track 'Not Giving Up' avec Christie Nelson est le point d'entrée. Ce label UK sait ce qu'il cherche, et ça s'entend.",
+          "body": "Six minutes de tech house sèche, construites autour d'un kick qui ne varie jamais et d'un riff qui, lui, n'arrête pas d'évoluer autour de ce point fixe. Le morceau ne cherche jamais à surprendre, il cherche à tenir : c'est toute la promesse du label Satt à ses débuts. La V2.0 du titre n'est pas un hasard, Fiege retravaille sa propre formule jusqu'à ce qu'elle tienne debout toute seule. Sorti en 2004, quand cette économie de moyens était encore une évidence plutôt qu'un choix esthétique.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=eVxub7ztEG8" },
-            { "label": "↗ Bandcamp", "url": "https://reagangrey.bandcamp.com/album/kinetic-ep" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=FfTJoR6s0JU" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/256754-Roland-Fiege-Privatrocker" }
           ]
         },
         {
-          "name": "Manuel Darquart — Dream House Factory Vol. 1",
-          "label": "Wolf Music Recordings",
-          "catno": "WOLFEP085",
+          "name": "Dakar & Grinser · Reptile",
+          "label": "Disko B",
+          "catno": "DB133",
           "format": "12\"",
-          "year": "2026",
-          "body": "Influences Italo house assumées, acid, disco — mais sans nostalgie facile. Darquart prend les outils des années 80 et les met au service d'un groove 2026. Wolf Music, deuxième fois dans cette sélection : le label est dans sa meilleure période depuis des années.",
+          "place": "Munich",
+          "year": "2005",
+          "body": "Une basse qui rampe plus qu'elle ne pousse, une syncope qui revient sans jamais se répéter deux fois pareil : Reptile porte bien son nom. Le groove change de direction en douceur, jamais brutalement, jusqu'à ce corps à corps qui tient six minutes sans faiblir. Disko B publie ici un duo qu'il suit depuis longtemps, et ça s'entend dans l'aisance du morceau. Une pièce fonctionnelle et habitée à la fois, pas juste l'une des deux.",
+          "dig": "Dakar & Grinser, duo formé par Christian Kreuz et Michael Kuhn, résidents du club Ultraschall à Munich avant de rejoindre Disko B, label lui aussi munichois.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=5vvySiVnHrU" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=sZEAxcLIovQ" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/462258-Dakar-Grinser-25-Reptile" }
+          ]
+        },
+        {
+          "name": "Wekan · Hallo! (Tigerskin Remix)",
+          "label": "Tiny Sticks",
+          "catno": "stick 003",
+          "format": "12\"",
+          "place": "UK",
+          "year": "2005",
+          "body": "Le Hallo! original appartient à Wekan, mais c'est la version signée Tigerskin qui a couru les sets allemands de l'époque. Le remix retire la moitié des éléments de l'original et laisse un beat sec, presque austère, porter toute la tension. On y entend déjà la grammaire qui deviendra minimal quelques années plus tard, sans le vocabulaire pour la nommer encore. Une pièce charnière dans cette sélection, celle où l'économie commence à devenir un style.",
+          "dig": "Le remix est signé Tigerskin, l'un des nombreux alias de l'Allemand Alexander Krüger, aussi actif sous le nom Dub Taylor.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=xwYKDNRZILE" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/569316-Wekan-Reworked" }
+          ]
+        },
+        {
+          "name": "Nicolas Stefan · Leibgericht",
+          "label": "KarateMusik",
+          "catno": "KarateMusik019",
+          "format": "12\"",
+          "place": "Allemagne",
+          "year": "2006",
+          "body": "Presque huit minutes sur le label KarateMusik, un nom qui annonce la couleur : quelque chose de nourrissant, sans fioritures. Leibgericht avance par couches minimales, un groove qui prend son temps pour s'installer et qui, une fois posé, ne bouge plus. Le disque préfère la répétition contrôlée à la surprise permanente, et gagne en intensité pour cette raison précise. Deux mille six, année où ce genre de morceau reste encore une évidence fonctionnelle plutôt qu'un genre revendiqué.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=zJ5EK2cD5jQ" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/835148-Nicolas-Stefan-Brothership-EP" }
+          ]
+        },
+        {
+          "name": "Andy Lee · Rocket Launcher",
+          "label": "i220",
+          "catno": "i220-053",
+          "format": "12\"",
+          "place": "Allemagne",
+          "year": "2006",
+          "body": "Sept minutes qui portent bien leur titre : une poussée progressive, un moteur qui monte en régime sans jamais redescendre. Le label i220 signe ici une pièce taillée pour la fin de nuit, quand la salle a besoin d'un raidissement plutôt que d'une nouvelle mélodie. Peu d'éléments, tous utilisés à fond : la même leçon que le reste de cette sélection, prise au sérieux jusqu'au bout. Rocket Launcher clôt l'arc en 2006, à la lisière de ce que l'Allemagne appellera bientôt autrement.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=NMERLJ6l9W8" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/870920-Andy-Lee-Rocket-Launcher-EP" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "accent": "green",
+      "number": "5",
+      "context": "Cinq ans séparent Ebird, sorti en 2001, et Rocket Launcher, sorti en 2006 : les deux bornes de cette sélection. Entre les deux, l'Allemagne fabrique un vocabulaire fonctionnel avant même d'avoir besoin de lui donner un nom."
+    },
+    {
+      "type": "section",
+      "accent": "green",
+      "heading": "Sorties récentes : deux pistes qui vont plus loin",
+      "tracks": [
+        {
+          "name": "Dav · Bad Dreams",
+          "label": "Jamuse",
+          "catno": "JAMU003",
+          "format": "12\"",
+          "place": "Suisse",
+          "year": "2025",
+          "body": "Sortie sur Jamuse, label suisse qui creuse une deep house nocturne sans esbroufe. Bad Dreams avance sur un groove tendu, presque anxieux, qui colle bien à son titre sans jamais verser dans l'ambiance pesante. La production reste sobre : peu de couches, un kick qui porte tout le poids du morceau. Une sortie 2025 qui mérite de rester dans les bacs plus qu'un instant.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=gFdRpLqFPYg" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/35689603-Dav-Tailored-Dreams-" }
+          ]
+        },
+        {
+          "name": "Vanni Danni · What Can I Get",
+          "year": "2026",
+          "body": "Sortie en mai 2026, autoproduite, dans l'orbite de la scène rominimal que Vanni Danni creuse depuis plusieurs années. What Can I Get avance en boucle hypnotique, un groove patient qui construit sa tension sans brusquer personne. C'est une house minimale contemporaine qui doit beaucoup, sans le dire frontalement, à l'économie de moyens qui traverse ce numéro. Une sortie récente qui prolonge une ligne plutôt qu'elle ne la referme.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=hykVQGZjBSQ" },
+            { "label": "↗ Bandcamp", "url": "https://vannidanni.bandcamp.com/track/vanni-danni-what-can-i-get" }
           ]
         }
       ]
@@ -118,17 +151,17 @@
     {
       "type": "stat",
       "accent": "blue",
-      "number": "367",
-      "context": "Références Sound Signature recensées sur Discogs à ce jour, pressages et rééditions compris. Vingt-sept ans de sorties, et le catalogue s'écoute encore comme un seul long DJ set — dans n'importe quel ordre."
+      "number": "30",
+      "context": "Trente références 38db Tonsportgruppe recensées sur Discogs, de 2004 à 2009. Le label dont il est question juste en dessous."
     },
     {
       "type": "section",
       "accent": "blue",
-      "heading": "Le label — Sound Signature",
+      "heading": "Le label : 38db Tonsportgruppe",
       "paragraphs": [
-        "Detroit, 1999. Theo Parrish monte Sound Signature sans définir de son maison : le seul critère d'entrée, c'est le groove — ce qu'un disque fait à un corps qui écoute debout.",
-        "Le catalogue fait coexister de la deep house éclatée, des edits soul à 78 BPM, de la techno dure, des disques live, des instrumentaux de 12 minutes. Ce qui relie tout ça, c'est une écoute physique — attentive, patiente, qui juge un disque aux jambes plutôt qu'au genre.",
-        "Son 2025 : Organic Hardware Pt 2 — double LP qui confirme que Parrish n'a aucune intention de simplifier quoi que ce soit. Par où commencer : <a href=\"https://soundsignature.bandcamp.com/\" target=\"_blank\">soundsignature.bandcamp.com →</a>"
+        "Allemagne, 2004. 38db Tonsportgruppe naît comme division d'Auralis Music Management, portée par Boni & Tooth T. Le nom sonne comme un laboratoire de sport, et le catalogue s'en approche : une tech house fonctionnelle, taillée pour l'effort plutôt que pour l'écoute de salon.",
+        "Trente références recensées sur Discogs entre 2004 et 2009, de TSG001 jusqu'aux dernières sorties de la décennie. Un catalogue compact, sans extension excessive, qui tient sur une idée simple : un groove qui marche.",
+        "Par où commencer : The Goalie's Anxiety · 31st Tango Zeppelin (TSG004, 2005), remixée par Terry Lee Brown Jr. et par les fondateurs du label eux-mêmes, Boni & Tooth T. <a href=\"https://www.discogs.com/fr/release/612087-The-Goalies-Anxiety-31st-Tango-Zeppelin-Remixed\" target=\"_blank\">◈ Discogs →</a>"
       ]
     },
     {
@@ -136,12 +169,12 @@
       "accent": "red",
       "heading": "Note de studio",
       "paragraphs": [
-        "J'ai réécouté Can You Feel It pour la première fois depuis longtemps — vraiment réécouté, pas en fond sonore.",
-        "Ce qui m'a frappé : la drum machine est fausse. Pas musicalement — techniquement. Les temps ne sont pas parfaitement alignés. Et c'est pour ça que ça respire. Larry Heard n'avait pas les outils pour corriger ça, ou peut-être qu'il s'en fichait. Le résultat c'est qu'on entend quelqu'un en train de jouer, pas un programme en train d'exécuter.",
-        "Depuis, j'essaie de désaligner intentionnellement certains éléments dans mes sessions Live 12. Pas du slop aléatoire — du micro-décalage voulu. Le TR-6S en séquenceur externe avec un léger retard sur les hats. Le résultat n'est pas parfait — c'est le point.",
-        "La tradition ne sert à rien si elle devient une prison de référence. Elle sert à comprendre pourquoi les imperfections de 1986 sonnent mieux que les grids parfaits de 2020."
+        "Cette semaine j'ai réécouté d'affilée une dizaine de maxis allemands du début des années 2000, ceux qui tournaient avant que le mot minimal existe pour les décrire. Ce qui frappe n'est pas la sécheresse du son. C'est le nombre d'éléments qui composent chaque morceau, rarement plus de quatre ou cinq à la fois.",
+        "Sur Privatrocker V2.0 il y a un kick, une ligne de basse, une percussion secondaire, un accord tenu. C'est tout. Le morceau tient une salle pendant six minutes sans jamais avoir besoin d'ajouter une couche pour relancer l'attention.",
+        "J'ai pris l'habitude inverse dans mes propres sessions : empiler jusqu'à ce que ça sonne plein, puis retirer ce qui gêne. Cette fois j'ai tenté le chemin d'en face. Partir du kick du TR-6S et du MicroKorg 2 en son unique, et refuser d'ajouter un troisième élément tant que les deux premiers ne tenaient pas seuls debout. Le micro-décalage que j'explore depuis un moment prend une autre valeur dans ce cadre : sur si peu d'éléments, chaque milliseconde de retard se voit et se sent.",
+        "Ce que cette tech house allemande fonctionnelle apprend, ce n'est pas une esthétique à copier. C'est une discipline : ne rien garder qui ne travaille pas. Dans Live 12, en Session View, j'ai laissé deux pistes vides plus longtemps que d'habitude avant de me demander si elles manquaient vraiment."
       ]
     }
   ],
-  "forward_text": "Le catalogue Sound Signature complet sur leur Bandcamp, le Kinetic EP de Reagan Grey, et les premières sorties Wolf Music 2026 de Manuel Darquart — trois fils. Et si tu n'as jamais vraiment écouté Akufen, l'album My Way sur Force Inc est le point d'entrée."
+  "forward_text": "Le catalogue 38db Tonsportgruppe se fouille entièrement sur Discogs, en partant de TSG004. Deux fils supplémentaires à tirer : la page Jamuse pour suivre Dav, et la scène rominimal du côté de Vanni Danni, dont le morceau de ce numéro n'est qu'un point d'entrée."
 }
