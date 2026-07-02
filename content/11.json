@@ -6,112 +6,113 @@
   "listening_time": "",
   "playlist_url": "",
   "show_tracklist": true,
-  "tagline_plain": "Dix ans de tech house anglaise, dans l'ordre",
-  "tagline_html": "Dix ans de tech house anglaise,<br>dans l'ordre",
+  "tagline_plain": "Sept ans de tech house anglaise, dans l'ordre",
+  "tagline_html": "Sept ans de tech house anglaise,<br>dans l'ordre",
   "summary_bullets": [
-    "7 tracks de la tech house anglaise, 1999 à 2007 : de Terry Francis à Whiff, sans détour",
-    "Deux sorties à suivre : Buraye sur Planka Records, Mishouju sur Howl Records",
-    "Le label : 20:20 Vision, une ferme du Yorkshire depuis trente ans",
+    "7 tracks de la tech house anglaise, 1997 à 2004 : de House Of 909 à Switch vs. McGuyver, sans détour",
+    "Deux sorties à suivre : TSVI sur Nervous Horizon, Cee ElAssaad sur Local Talk",
+    "Le label : Low Pressings, un catalogue UK tenu sur plus de vingt ans",
     "Note de studio : ce que le micro-décalage fait au reste du mix"
   ],
   "blocks": [
     {
       "type": "section",
       "accent": "red",
-      "heading": "Ce qui tourne : la tech house anglaise, 1999 à 2007",
+      "heading": "Ce qui tourne : la tech house anglaise, 1997 à 2004",
       "tracks": [
         {
-          "name": "Terry Francis · Took From Me",
-          "label": "Surreal",
-          "catno": "SUR005",
-          "format": "12\", White Label",
+          "name": "House Of 909 · The Main Event",
+          "label": "Pagan",
+          "catno": "PAGAN 004",
+          "format": "12\", EP",
           "place": "UK",
-          "year": "1999",
-          "body": "Terry Francis pose le morceau qui ouvrait toute la scène tech house londonienne de la fin des années 90. Le kick est sec, le sample vocal grince, la ligne de basse tremble sous le plancher : rien n'est là pour décorer. C'est la seule référence canon du numéro, elle sert de porte d'entrée aux six tracks qui suivent, toutes plus obscures. On y entend déjà tout ce que l'Angleterre va creuser pendant huit ans.",
-          "dig": "Terry Francis tient la résidence Fabric depuis l'ouverture du club en octobre 1999, sans interruption : vingt sept ans au même endroit, le même soir.",
+          "year": "1997",
+          "body": "House Of 909 ouvre cette relecture avec le trio londonien au sommet, un an avant leur premier album. The Main Event tient sur un riff de piano tordu et une boucle vocale qui claque sec, la même formule tech house qui irriguera toute la décennie suivante. C'est la seule référence un peu connue du numéro, elle sert de porte d'entrée aux six tracks qui suivent, toutes plus obscures.",
+          "dig": "Le disque existe en deux pressages distincts la même année, Pagan 004 à Londres et Pagan America Y-41003 aux États-Unis : la maison plaçait déjà son catalogue des deux côtés de l'Atlantique.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=SOVTFfQcXCw" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/6055099-Terry-Francis-Took-From-Me" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=gxpIqQKHOJY" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/1507-House-Of-909-Deep-Distraction-EP" }
           ]
         },
         {
-          "name": "Stabilizer · Factor",
-          "label": "Boom Box Records",
-          "catno": "BBR10",
+          "name": "Toka · Tomkat (Pure Science V3 Mix)",
+          "label": "Bosh",
+          "catno": "BOSH 1202",
           "format": "12\"",
           "place": "UK",
-          "year": "2000",
-          "body": "Deuxième étape, l'an deux mille : Stabilizer pousse la tech house vers le breakbeat sans jamais perdre le groove house. Factor avance par àcoups, une caisse claire qui claque de travers, un riff qui revient toujours un poil trop tard. Une signature rythmique qui ne ressemble à rien d'autre dans cette sélection.",
+          "year": "1998",
+          "body": "Un an plus tard, le label Bosh sort Tomkat, écrit par Toka et Blakkat dans un studio de Blackpool. Le Pure Science V3 Mix pousse le groove vers l'orgue et la basse ronde, loin de Londres mais dans la même veine tech house précise. Le disque ouvre une décennie de productions pour ce petit label du nord de l'Angleterre.",
+          "dig": "Tomkat existe en deux pressages Bosh la même année : le Tokally Safe Mix sur Bosh 1201, ces remixes Pure Science sur Bosh 1202.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=V5KrxK52syI" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/53866-Stabilizer-Pure-Digital" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=xYI1VWN8zOQ" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/314260-Toka-Tomkat-Pure-Science-Remixes" }
           ]
         },
         {
-          "name": "Jay Kaufman · The Fear (Youth In Asia's Fearless Dub)",
-          "label": "Sonambulist Recordings",
-          "catno": "SONB 003",
+          "name": "Mole Clinic · Buggin' (In)",
+          "label": "Low Pressings",
+          "catno": "LP018",
+          "format": "12\"",
+          "place": "UK",
+          "year": "1999",
+          "body": "Low Pressings publie Buggin' en 1999, un disque signé Mole Clinic qui tient sur une boucle de guitare funk et un groove qui ne se presse jamais. Deux versions se répondent sur les deux faces, In et Out, la même idée retournée dans les deux sens. La tech house anglaise a déjà appris à étirer le temps.",
+          "dig": "Le In Mix tourne sur neuf minutes pleines, un format long typique du label à cette époque.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=WLbcdCM2uPM" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/42521-Mole-Clinic-Buggin" }
+          ]
+        },
+        {
+          "name": "Third Movement · Free (Original Mix)",
+          "label": "Forensic Records",
+          "catno": "FOR-014",
+          "format": "12\", White Label",
+          "place": "UK",
+          "year": "2000",
+          "body": "Third Movement sort Free en 2000 sur Forensic Records, en pressage promo blanc réservé aux DJ's avant la sortie commerciale. Le morceau avance sur une ligne de basse profonde et des percussions sèches, la tech house anglaise qui commence à regarder vers la house progressive sans jamais s'y noyer complètement.",
+          "links": [
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=ORsgONeFdsk" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/2348606-Third-Movement-Free" }
+          ]
+        },
+        {
+          "name": "Mainframe · Mainframe",
+          "label": "Fuju",
+          "catno": "Fuju 004",
           "format": "12\"",
           "place": "UK",
           "year": "2001",
-          "body": "Un an plus tard, Sonambulist Recordings sort son tout premier disque et le confie à Jay Kaufman. Le dub signé Youth In Asia retire presque tout du morceau original et ne garde qu'une respiration et un groove suspendu. C'est tendu, patient, construit pour une salle qui commence à peine à se remplir.",
+          "body": "Sur Fuju, sous label de Junior London, le projet Mainframe sort un disque éponyme en 2001. La face B, un dub épuré aux percussions étouffées, tient debout sur la seule tension du groove. La ligne anglaise creuse son sillon loin des maisons déjà connues.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=xRJbGcHtQOE" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/113815-Jay-Kaufman-The-Fear" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=id11f9jUq0I" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/4944-Mainframe-Mainframe" }
           ]
         },
         {
-          "name": "Harold Heath · Can You Feel",
-          "label": "Uhuru Beats",
-          "catno": "uhuru 005",
+          "name": "Foremost Poets · Open Season (Mental Mix)",
+          "label": "Junior London",
+          "catno": "BRG049",
           "format": "12\"",
           "place": "UK",
           "year": "2002",
-          "body": "Harold Heath enregistre pour Uhuru Beats, label anglais discret dont chaque sortie tenait la même ligne exigeante. Can You Feel avance en neuf minutes sans jamais se presser : une boucle, une touche d'acide, un groove qui se resserre par paliers. Le genre de disque que seuls les diggers se refilaient à l'époque.",
+          "body": "Foremost Poets publie Open Season sur Junior London en 2002, deux mixes construits autour du même sample retourné à l'envers. Le Mental Mix pousse le grain plus loin que le Main Mix, plus sec, plus tendu. La tech house anglaise a fini par digérer le funk américain sans jamais le trahir.",
+          "dig": "Les deux versions samplent Open Sesame de Kool & The Gang, un clin d'œil que seuls les habitués du label repéraient à l'époque.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=MPvJJEzBUoY" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/313867-Harold-Heath-Can-You-Feel" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=yHUSzI3UId0" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/68672-Foremost-Poets-Open-Season" }
           ]
         },
         {
-          "name": "Two Right Wrongans · Wrong Station Right Platform",
-          "label": "Wrong",
-          "catno": "Wrong 007",
+          "name": "Switch vs. McGuyver · Big Banana",
+          "label": "Beat Code",
+          "catno": "BC004",
           "format": "12\"",
           "place": "UK",
-          "year": "2002",
-          "body": "Sur le label Wrong, la même année, Two Right Wrongans jouent la carte du nom qui prévient : la structure part dans une direction puis se ravise en plein milieu. Le groove tech house reste solide sous les fausses pistes, presque un jeu entre le producteur et l'auditeur. Une des sorties les plus singulières de cette décennie anglaise.",
+          "year": "2004",
+          "body": "Beat Code referme la ligne en 2004 avec Big Banana, signé par le duo Switch vs. McGuyver. Le morceau tient sur un riff acide et un kick qui ne desserre jamais l'étau. Sept ans après The Main Event, l'Angleterre parle encore la même langue tech house, avec un accent plus dur.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=zDJjZx7bk-8" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/81482-Various-Wrong-Station-Right-Platform" }
-          ]
-        },
-        {
-          "name": "Tom Parris · Mitsubishi Dealer",
-          "label": "Cubic Records",
-          "catno": "CUBIC 008",
-          "format": "12\"",
-          "place": "UK",
-          "year": "2006",
-          "body": "Cubic Records sort ce disque de Tom Parris en 2006, quand la tech house anglaise a déjà digéré une décennie d'expérimentations et cherche autre chose. Mitsubishi Dealer tient sur un riff electro sec et un kick qui ne lâche rien pendant sept minutes. La ligne reste tech house dans l'os, même quand la texture vire electro.",
-          "dig": "Ce disque est répertorié comme Cubic Hits Release 8 dans le catalogue du label, en pleine vague electro house anglaise du milieu des années 2000.",
-          "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=OWkIAg0qRis" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/648185-Tom-Parris-Gavin-Burrows-Tom-Parris-Vs-Gavin-Burrows" }
-          ]
-        },
-        {
-          "name": "Whiff · My Brain",
-          "label": "Whiff",
-          "catno": "WHIFF 002",
-          "format": "12\" EP",
-          "place": "UK",
-          "year": "2007",
-          "body": "Dernière étape de la ligne : en 2007, l'artiste Whiff publie sa propre sortie sur son propre label, house, electro et acid dans le même sillon. My Brain referme la décennie sur un groove tordu, acide par endroits, jamais complètement propre. Huit ans après Terry Francis, l'Angleterre parle encore la même langue, avec un accent différent.",
-          "dig": "Le label s'appelle comme l'artiste : Whiff sort ce disque sur son propre imprint, une pratique courante dans la scène tech house anglaise du milieu des années 2000.",
-          "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=qSJMkhCT1lc" },
-            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/1887464-WHIFF-Uncensored-EP" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=p_pcQ2g5fWc" },
+            { "label": "◈ Discogs", "url": "https://www.discogs.com/release/251857-Switch-vs-McGuyver-Big-Banana" }
           ]
         }
       ]
@@ -119,8 +120,8 @@
     {
       "type": "stat",
       "accent": "green",
-      "number": "8",
-      "context": "Huit ans séparent Took From Me de My Brain : toute la ligne tech house anglaise traversée dans cette sélection, sans un seul faux pas."
+      "number": "7",
+      "context": "Sept ans séparent The Main Event de Big Banana : toute la ligne tech house anglaise traversée dans cette sélection, sans un seul faux pas."
     },
     {
       "type": "section",
@@ -128,27 +129,27 @@
       "heading": "Sorties récentes : la ligne continue ailleurs",
       "tracks": [
         {
-          "name": "Buraye · Spires of Mirage",
-          "label": "Planka Records",
-          "catno": "PLNK007",
-          "format": "12\"",
+          "name": "TSVI · Dance Tripping",
+          "label": "Nervous Horizon",
+          "format": "Digital",
+          "place": "Londres",
           "year": "2026",
-          "body": "Sur la compilation Quiet Understanding EP de Planka Records, Buraye pose une piste tendue, construite pour les petites heures. Spires of Mirage tient sur une nappe froide et une percussion qui n'accélère jamais vraiment. La suite naturelle de la ligne anglaise ouverte plus haut, version 2026.",
+          "body": "Sur Nervous Horizon, le label londonien qu'il a monté avec Wallwork et Federico Ciampolini, TSVI sort l'EP Dance Tripping en avril 2026. Le morceau titre tient sur des basses tordues et une pulsation qui ne cède jamais, la même mécanique tech house qu'en 1997, recalibrée pour aujourd'hui. La ligne ouverte plus haut n'a jamais vraiment quitté Londres.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=2-2NUys_0Yc" },
-            { "label": "↗ Boutique", "url": "https://www.deejay.de/Various_Quiet_Understanding_EP_PLNK007_Vinyl__1231561" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=SeX6VXZ626A" },
+            { "label": "↗ Bandcamp", "url": "https://tsvi.bandcamp.com/album/dance-tripping-ep" }
           ]
         },
         {
-          "name": "Mishouju · I Am Ai",
-          "label": "Howl Records",
+          "name": "Cee ElAssaad · Set Me Free (Original Mix)",
+          "label": "Local Talk",
           "format": "Digital",
-          "place": "Gênes",
+          "place": "Casablanca",
           "year": "2026",
-          "body": "Sur Howl Records, label italien basé à Gênes, Mishouju sort I Am Ai en single numérique deux titres. La machine semble hésiter entre techno et house sans jamais trancher, un titre qui résume bien le geste. Loin de Londres mais sur la même intensité tech house, la lignée continue ailleurs.",
+          "body": "Sur Local Talk, label suédois de house chaude, Cee ElAssaad sort Set Me Free depuis Casablanca en mai 2026. L'orgue Hammond tourne en boucle sur un kick appuyé, loin de l'Angleterre mais sur la même intensité tech house que le reste de cette sélection. La ligne continue, ailleurs et autrement.",
           "links": [
-            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=rrnninhlgAE" },
-            { "label": "↗ Bandcamp", "url": "https://howlrecord.bandcamp.com/album/mishouju-i-am-ai" }
+            { "label": "▶ Écouter", "url": "https://www.youtube.com/watch?v=2wa0IekSP_o" },
+            { "label": "↗ Bandcamp", "url": "https://ceeelassaad.bandcamp.com/track/set-me-free-original-mix" }
           ]
         }
       ]
@@ -156,17 +157,17 @@
     {
       "type": "stat",
       "accent": "blue",
-      "number": "500",
-      "context": "Près de 500 références 20:20 Vision publiées en trente ans, annoncées par le label lui même pour son anniversaire en 2025. Une des maisons les plus stables de l'histoire de la tech house anglaise."
+      "number": "183",
+      "context": "183 références Low Pressings recensées sur Discogs entre 1997 et 2020 : vingt-trois ans du même sceau sur chaque disque, sans jamais changer d'adresse."
     },
     {
       "type": "section",
       "accent": "blue",
-      "heading": "Le label · 20:20 Vision",
+      "heading": "Le label · Low Pressings",
       "paragraphs": [
-        "Yorkshire, 1995. Ralph Lawson et Carl Finlow montent 20:20 Vision dans une ferme, loin des studios londoniens. La toute première sortie s'appelle Wulf n Bear, Space Groover.",
-        "Le label ne s'est jamais figé sur un son unique : house, techno, electro cohabitent sur le même catalogue depuis trente ans, avec des noms comme Maya Jane Coles ou DJ T qui sont passés par la maison. Ce qui tient tout ensemble, c'est un souci du groove plutôt qu'un genre précis.",
-        "Par où commencer : Random Factor · Know You're There (Silver City Remix), 2003, catalogue VIS084, puis remonter le catalogue sur <a href=\"https://www.discogs.com/release/139511-Random-Factor-Know-Youre-There\" target=\"_blank\">◈ Discogs →</a>"
+        "Londres, 1997. Le producteur Clive Henry monte Low Pressings avec son complice de studio Rocky pour sortir ses propres productions sans attendre le feu vert d'un label extérieur. Les premières références sortent la même année, portées par un noyau qui ne quittera plus la maison pendant plus de vingt ans.",
+        "Le catalogue ne s'est jamais figé sur un son unique : house, tech house et touches deep se croisent sur les mêmes références, avec des passages remarqués de Mole Clinic, Yann Fontaine ou Autonomous Soul. Ce qui tient tout ensemble, c'est un groove sec, jamais trop poli.",
+        "Par où commencer : Yann Fontaine · Open Your Eyes, 2000, catalogue LP032, puis remonter le catalogue sur <a href=\"https://www.discogs.com/release/33969-Yann-Fontaine-Open-Your-Eyes\" target=\"_blank\">◈ Discogs →</a>"
       ]
     },
     {
@@ -181,5 +182,5 @@
       ]
     }
   ],
-  "forward_text": "Le catalogue 20:20 Vision se remonte entier sur Discogs, la Quiet Understanding EP de Planka Records tourne en 12 pouces chez Deejay.de, et I Am Ai de Mishouju s'écoute au complet sur le Bandcamp de Howl Records. Trois portes pour prolonger l'écoute au-delà de cette page."
+  "forward_text": "Le catalogue Low Pressings se remonte entier sur Discogs, Dance Tripping de TSVI s'écoute au complet sur le Bandcamp de Nervous Horizon, et Set Me Free de Cee ElAssaad tourne sur le Bandcamp de Local Talk. Trois portes pour prolonger l'écoute au-delà de cette page."
 }
