@@ -49,17 +49,26 @@ def main():
 
     if args.check:
         needle = args.check.lower()
+        latest = max((int(n) for n in used), default=0)
         hits = []
         for num, u in used.items():
             for kind in ("artists", "labels", "tracks"):
                 for v in u[kind]:
                     if needle in v.lower():
-                        hits.append(f"N°{num} · {kind[:-1]} · {v}")
+                        gap = latest + 1 - int(num)
+                        verdict = "LIBRE (≥10 éditions)" if gap >= 10 else f"BLOQUÉ (écart {gap}, mini 10)"
+                        hits.append(f"N°{num} · {kind[:-1]} · {v} → {verdict}")
         if hits:
-            print("DÉJÀ UTILISÉ :")
             print("\n".join(hits))
         else:
-            print("OK : jamais utilisé.")
+            print("OK : jamais utilisé en édition.")
+        # Blocklist playlists : Adam connaît déjà ces sons.
+        pl = (CONTENT / "playlists")
+        if pl.exists():
+            for f in pl.glob("*.txt"):
+                if re.search(re.escape(args.check), f.read_text(encoding="utf-8"), re.I):
+                    print(f"BLOCKLIST : présent dans {f.name} (playlists d'Adam, interdit de suggestion)")
+                    break
         return
 
     for num, u in used.items():

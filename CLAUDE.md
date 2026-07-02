@@ -1,11 +1,18 @@
-# KAPMAN SIGNAL — Agent Instructions
+# CIRCUIT FERMÉ (ex KAPMAN SIGNAL) — Agent Instructions
 
-KAPMAN SIGNAL is an underground-electronic music newsletter distributed as a
+CIRCUIT FERMÉ is an underground-electronic music newsletter distributed as a
 **Progressive Web App with Web Push** — not email. Static issues on GitHub Pages,
 push notifications via a Flask server on Render. 100% free to run.
 
-Audience: portfolio/showcase piece + ~10–30 close friends of the Escape Music
-Collective (Paris). Mobile-first reading.
+Audience: portfolio/showcase piece + ~10–30 close friends (Paris). Mobile-first.
+
+## Brand (règle stricte depuis juillet 2026)
+- La marque publique est **CIRCUIT FERMÉ**. Ni « KAPMAN » ni « Escape Music
+  Collective » n'apparaissent dans la marque, les titres, les notifications ou le
+  corps des textes (Adam ne veut pas se griller).
+- Seule exception : le crédit discret du footer : « Sélection · KAPMAN » avec trois
+  liens : Shotgun `https://shotgun.live/artists/kapman_music`, SoundCloud
+  `https://soundcloud.com/kapman_music`, Instagram `https://www.instagram.com/kapman___/`.
 
 ## Architecture (don't re-derive — it's settled)
 
@@ -44,11 +51,16 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
 
 ## Editorial rules (hard constraints)
 
-- **Never repeat** a track, artist, or label used in a previous issue. Cross-reference
-  the track history before writing (kept in the user's memory).
-- **Real links only** — YouTube/Bandcamp links come from Adam's actual playlists, never
-  invented or guessed. Les playlists vivent dans `content/playlists/*.txt` (exports
-  YouTube avec URLs, Discogs, labels) : c'est LA source des sélections.
+- **Never repeat** : aucun track, artiste ou label d'une édition précédente ne peut
+  revenir avant **10 éditions d'intervalle** (ex : utilisé au N°09, libre au N°19).
+  Vérifier avec `python tools/track_history.py --check "Nom"` avant toute sélection.
+- **Real links only** : chaque lien YouTube/Bandcamp/Discogs vérifié pendant l'écriture
+  (oembed + api.discogs.com), jamais inventé ni deviné.
+- **Les playlists d'Adam (`content/playlists/*.txt`) sont un PROFIL DE GOÛT et une
+  BLOCKLIST, jamais une source** : Adam connaît déjà ces sons. Tout track ou artiste
+  qui y figure est INTERDIT de sélection (vérif : `grep -i "<artiste>"
+  content/playlists/*.txt` doit être vide). La mission : des découvertes nouvelles
+  dans ce goût (autres références des mêmes labels, labels adjacents, même époque).
 - **Profil de goût d'Adam (source : ses playlists — s'y tenir)** : tech house UK
   1996-2007 (Wiggle-adjacent, Terry Francis, Swag, 20:20 Vision, Sonambulist, Cubic,
   Whiff), minimal/tech house allemande 2001-2007 (KarateMusik, Ringelbeatz,
