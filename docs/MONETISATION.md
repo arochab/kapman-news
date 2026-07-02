@@ -1,3 +1,15 @@
+# L'OFFRE ARRÊTÉE · « Le Cercle » (juillet 2026)
+
+La newsletter reste gratuite. 5 €/mois (ou 50 €/an, 2 mois offerts + zine) :
+1. La Séance mensuelle réservée membres (+1 invité).
+2. Le crate du mois : 5 tracks bonus + notes, dans la cabine membres.
+3. La cabine membres (WhatsApp privé).
+4. Le totem annuel (zine risographié) pour les abonnés annuels.
+Stripe : un produit « CIRCUIT FERMÉ · Le Cercle », deux prix récurrents
+(5 €/mois, 50 €/an), un Payment Link avec email + portail client.
+Jamais de numéro verrouillé. Re-vente aux moments de preuve (après chaque
+Séance). Réévaluation du modèle à 50 abonnés push.
+
 # Monétisation — abonnement de soutien (5 €/mois)
 
 KAPMAN SIGNAL est un projet gratuit et open source. Ce document décrit la
