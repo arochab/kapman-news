@@ -130,7 +130,7 @@ def write_issue(content: dict) -> Path:
 
 
 def _row_artists(content: dict) -> str:
-    """Artistes réels : partie avant le premier '—' de chaque t.name (sections), dédupliqués, join ' · '."""
+    """Artistes réels : partie avant le premier séparateur de chaque t.name, dédupliqués, join ' / '."""
     artists = []
     seen = set()
     for b in content.get("blocks", []):
@@ -138,7 +138,7 @@ def _row_artists(content: dict) -> str:
             continue
         for t in b.get("tracks", []) or []:
             name = t.get("name", "")
-            artist = name.split("—", 1)[0].strip()
+            artist = re.split(r" [·—–] ", name, 1)[0].strip()
             if artist and artist not in seen:
                 seen.add(artist)
                 artists.append(artist)
@@ -205,10 +205,10 @@ def update_home(content: dict):
         insert_at = html_src.find("</div>", pos) + len("</div>")
         html_src = html_src[:insert_at] + "\n" + row + html_src[insert_at:]
 
-    # Recompte les rows et remet à jour le libellé "Archive — N numéros".
+    # Recompte les rows et remet à jour le libellé "Archive · N numéros".
     row_count = len(re.findall(r'class="issue-row', html_src))
     html_src = re.sub(
-        r'(<div class="lbl" id="archive-lbl">Archive — )\d+( numéros?</div>)',
+        r'(<div class="lbl" id="archive-lbl">Archive [·—] )\d+( numéros?</div>)',
         lambda m: f"{m.group(1)}{row_count}{m.group(2)}",
         html_src,
     )

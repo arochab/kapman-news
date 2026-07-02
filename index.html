@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL — Underground Electronic · Paris</title>
+<title>KAPMAN SIGNAL · Underground Electronic · Paris</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Brand book : SIGNAL = glyphe 3 barres R/V/B · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -21,7 +21,6 @@
   --border:#1B1C22; --border-strong:#2A2C36; --surface:#121319;
   --deep:#0B0C10;         /* remplace #0A0A0A et #080808 */
   --blue-text:#5B85F5;    /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
-  --disp:'Black Ops One',system-ui,sans-serif;
   --text:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
@@ -37,21 +36,24 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 
 .hero { padding: 64px 48px 52px; border-bottom: 1px solid var(--border); }
 
-/* Marque RGB-light additive */
-.logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
-.lc { position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%; mix-blend-mode: screen; animation: lc-breathe 6s ease-in-out infinite; }
-.lc-r { left: 0;   background: var(--red); }
-.lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
-.lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
-@keyframes lc-breathe { 0%,100% { transform: translateX(0);} 50% { transform: translateX(var(--shift,0)); } }
+/* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
+   Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
+   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+.lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 
-/* Wordmark Black Ops One + RGB-split */
-.wordmark { font-family: var(--disp); font-size: 52px; font-weight: 400; letter-spacing: .02em; color: var(--cream); line-height: 1; margin-bottom: 12px; text-transform: uppercase; position: relative; display: inline-block; }
-.wordmark[data-txt]::before, .wordmark[data-txt]::after { content: attr(data-txt); position: absolute; inset: 0; mix-blend-mode: screen; pointer-events: none; }
-.wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 4.2s steps(1) infinite; }
-.wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 4.2s steps(1) infinite; }
-@keyframes rgb-r { 0%,82%,100%{transform:translate(-1.5px,0);opacity:.55;} 84%{transform:translate(-5px,2px);opacity:1;} 88%{transform:translate(3px,-2px);opacity:.85;} 91%{transform:translate(-2px,1px);opacity:.7;} 94%{transform:translate(-1.5px,0);opacity:.55;} }
-@keyframes rgb-b { 0%,82%,100%{transform:translate(1.5px,0);opacity:.55;} 84%{transform:translate(5px,-2px);opacity:1;} 88%{transform:translate(-3px,2px);opacity:.85;} 91%{transform:translate(2px,-1px);opacity:.7;} 94%{transform:translate(1.5px,0);opacity:.55;} }
+.signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
+.signal-glyph .sg-bar { width: 6px; border-radius: 3px; transform-origin: bottom; }
+.signal-glyph .sg-r { background: var(--red);   height: 12px; animation: sg-breathe 2.8s ease-in-out infinite alternate; }
+.signal-glyph .sg-g { background: var(--green); height: 22px; animation: sg-breathe 3.6s ease-in-out infinite alternate; }
+.signal-glyph .sg-b { background: var(--blue);  height: 17px; animation: sg-breathe 3.2s ease-in-out infinite alternate; }
+@keyframes sg-breathe { from { transform: scaleY(1); } to { transform: scaleY(.75); } }
+.signal-glyph.paused .sg-bar { animation-play-state: paused; }
+
+.lockup-text { display: flex; flex-direction: column; gap: 4px; }
+.wordmark { font-family: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
+.signal-label { font-family: var(--mono); font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: var(--meta); line-height: 1; }
+.hero .wordmark { font-size: 40px; }
+.hero .signal-label { font-size: 11px; }
 
 .mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
 .mini-rule .r { flex:1; background: var(--red); }
@@ -109,7 +111,12 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 #share-btn:hover { border-color: var(--blue); color: var(--blue); }
 
 .footer { padding: 44px 48px 56px; text-align: center; border-top: 1px solid var(--border); }
-.footer-wordmark { font-family: var(--disp); font-size: 18px; font-weight: 400; letter-spacing: .06em; color: var(--dim); margin-bottom: 6px; text-transform: uppercase; }
+.footer-lockup { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+.footer-lockup .signal-glyph { gap: 3px; }
+.footer-lockup .sg-bar { width: 4px; }
+.footer-lockup .lockup-text { gap: 2px; }
+.footer-lockup .wordmark { font-size: 18px; color: var(--dim); }
+.footer-lockup .signal-label { font-size: 9px; }
 .footer-rule { display: flex; height: 1px; width: 70px; margin: 0 auto 6px; }
 .footer-rule .r { flex:1; background: var(--red); }
 .footer-rule .g { flex:1; background: var(--green); }
@@ -126,15 +133,14 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 .js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .6s cubic-bezier(.16,1,.3,1); }
 .js .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .triple-rule .r, .triple-rule .g, .triple-rule .b, .lc { animation: none !important; transform: none !important; }
-  .wordmark[data-txt]::before, .wordmark[data-txt]::after { animation: none !important; }
+  .triple-rule .r, .triple-rule .g, .triple-rule .b, .signal-glyph .sg-bar { animation: none !important; transform: none !important; }
   .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 @media(max-width:600px) {
   .hero,.issues,.subscribe,.footer { padding-left:24px; padding-right:24px; }
   .membership { padding: 24px; }
-  .wordmark { font-size:42px; }
+  .hero .wordmark { font-size:32px; }
   .issue-row { gap: 14px; }
 }
 </style>
@@ -143,31 +149,36 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
 <div class="wrap">
   <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
   <div class="hero">
-    <div class="logo-circles" aria-hidden="true">
-      <span class="lc lc-r" style="--shift:-3px"></span>
-      <span class="lc lc-g" style="--shift:0px"></span>
-      <span class="lc lc-b" style="--shift:3px"></span>
+    <div class="lockup">
+      <div class="signal-glyph" aria-hidden="true">
+        <span class="sg-bar sg-r"></span>
+        <span class="sg-bar sg-g"></span>
+        <span class="sg-bar sg-b"></span>
+      </div>
+      <div class="lockup-text">
+        <div class="wordmark">KAPMAN</div>
+        <div class="signal-label">Signal</div>
+      </div>
     </div>
-    <h1 class="wordmark" data-txt="KAPMAN">KAPMAN</h1>
     <div class="mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="collective">Escape Music Collective</div>
-    <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic — Paris.</p>
+    <p>Sélection mensuelle de tracks, labels et notes de studio. Underground electronic · Paris.</p>
   </div>
   <div class="issues">
-    <div class="lbl" id="archive-lbl">Archive — 3 numéros</div>
+    <div class="lbl" id="archive-lbl">Archive · 3 numéros</div>
     <a class="issue-row acc-2" href="issues/11/">
       <span class="issue-num">N°11</span>
       <span class="issue-main">
-        <span class="issue-title">Paris parle bas depuis trente ans</span>
-        <span class="issue-artists">I:Cube · Pépé Bradock · Llorca · Ark · Phil Weeks &amp; Chris Carrier · Cabanne · D&#x27;Julz · Various</span>
+        <span class="issue-title">Dix ans de tech house anglaise, dans l&#x27;ordre</span>
+        <span class="issue-artists">Terry Francis · Stabilizer · Jay Kaufman · Harold Heath · Two Right Wrongans · Tom Parris · Whiff · Buraye · Mishouju</span>
       </span>
       <span class="issue-date">03.07.26</span>
     </a>
     <a class="issue-row acc-1" href="issues/10/">
       <span class="issue-num">N°10</span>
       <span class="issue-main">
-        <span class="issue-title">De Chicago à Francfort — la ligne directe</span>
-        <span class="issue-artists">Mr Fingers · Theo Parrish · Omar S · Akufen · Isolée · Ricardo Villalobos · Reagan Grey · Manuel Darquart</span>
+        <span class="issue-title">Cinq ans avant que l&#x27;Allemagne dise minimal</span>
+        <span class="issue-artists">Modomonomusik &amp; Bee · Märtini Brös. · Roland Fiege · Dakar &amp; Grinser · Wekan · Nicolas Stefan · Andy Lee · Dav · Vanni Danni</span>
       </span>
       <span class="issue-date">18.06.26</span>
     </a>
@@ -185,22 +196,32 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
       <h2>Notifications push</h2>
       <p>Reçois chaque nouvelle issue sur ton Android. Pas d'appli, pas de compte.</p>
       <button id="sub-btn" onclick="subscribePush()">↓ S'abonner</button>
-      <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+      <p class="sub-note">Tu peux couper quand tu veux · une fois abonné·e, le même bouton sert à te désabonner.</p>
       <p id="sub-status" aria-live="polite"></p>
       <button id="share-btn" hidden>↗ Partager à un ami</button>
     </div>
   </div>
-  <!-- MEMBERSHIP (abonnement de soutien) — masqué tant que content/site.json ne fournit pas d'URL Stripe.
+  <!-- MEMBERSHIP (abonnement de soutien) · masqué tant que content/site.json ne fournit pas d'URL Stripe.
        Voir script en fin de page : fetch défensif, aucune dépendance, silencieux en cas d'échec. -->
   <div class="membership reveal" id="membership" hidden>
     <div class="membership-kicker">Soutenir</div>
     <h3 class="membership-title">Abonnement de soutien</h3>
-    <p>Si SIGNAL nourrit tes écoutes, finance la suite — sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
-    <a class="membership-cta" id="membership-cta" href="#" target="_blank" rel="noopener">Devenir membre — 5 € / mois</a>
-    <p class="membership-note">Sans engagement — résiliable en un clic via Stripe.</p>
+    <p>Si SIGNAL nourrit tes écoutes, finance la suite · sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+    <a class="membership-cta" id="membership-cta" href="#" target="_blank" rel="noopener">Devenir membre · 5 € / mois</a>
+    <p class="membership-note">Sans engagement · résiliable en un clic via Stripe.</p>
   </div>
   <div class="footer">
-    <div class="footer-wordmark">KAPMAN</div>
+    <div class="footer-lockup">
+      <div class="signal-glyph" aria-hidden="true">
+        <span class="sg-bar sg-r"></span>
+        <span class="sg-bar sg-g"></span>
+        <span class="sg-bar sg-b"></span>
+      </div>
+      <div class="lockup-text">
+        <div class="wordmark">KAPMAN</div>
+        <div class="signal-label">Signal</div>
+      </div>
+    </div>
     <div class="footer-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="footer-col">Escape Music Collective</div>
     <a class="footer-gh" href="https://github.com/arochab/kapman-news" target="_blank" rel="noopener">GitHub →</a>
@@ -243,7 +264,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--accent,var(--blu
       cta.href = data.membership_url;
       // Libellé en un seul nœud texte : le CTA est en inline-flex, qui
       // ignore les nœuds texte réduits à une espace entre deux éléments.
-      if (data.membership_price) cta.textContent = 'Devenir membre — ' + data.membership_price;
+      if (data.membership_price) cta.textContent = 'Devenir membre · ' + data.membership_price;
       block.hidden = false;
     }).catch(function () {});
   } catch (e) {}

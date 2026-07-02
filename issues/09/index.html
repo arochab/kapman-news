@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL N°09 — Ce qu&#39;on entend quand personne regarde</title>
+<title>KAPMAN SIGNAL N°09 · Ce qu&#39;on entend quand personne regarde</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Brand book : SIGNAL = glyphe 3 barres R/V/B · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -31,7 +31,6 @@
   --blue-text: #5B85F5;       /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
   --ink-soft: #3A3B42;        /* registre cream (section--invert) */
   --ink-meta: #6B6D78;        /* registre cream (section--invert) */
-  --disp:   'Black Ops One', system-ui, sans-serif;
   --text:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   --mono:   'IBM Plex Mono', ui-monospace, monospace;
   --issue-accent: var(--red);
@@ -69,19 +68,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 .hero-content { position: relative; z-index: 1; }
 
-/* Numéral d'issue géant — un seul geste géant par hero */
+/* Numéral d'issue géant · un seul geste géant par hero, contour simple (pas de split RGB) */
 .issue-numeral {
   position: absolute; right: -8px; top: 28px; z-index: 0; pointer-events: none;
-  font-family: var(--disp); font-size: clamp(96px, 24vw, 180px); line-height: .85;
+  font-family: var(--text); font-weight: 800; font-size: clamp(96px, 24vw, 180px); line-height: .85;
   color: transparent; -webkit-text-stroke: 1px var(--issue-accent); opacity: .35;
 }
-.issue-numeral::before, .issue-numeral::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  color: transparent;
-}
-.issue-numeral::before { -webkit-text-stroke: 1px var(--red);  transform: translate(-2px, 0); opacity: .35; }
-.issue-numeral::after  { -webkit-text-stroke: 1px var(--blue); transform: translate(2px, 0);  opacity: .35; }
 
 .hero-meta {
   font-family: var(--mono);
@@ -93,61 +85,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 
 .logo-block { margin-bottom: 40px; }
-/* Marque RGB-light : 3 disques HTML en screen → vrai mélange additif (jaune/cyan/blanc) */
-.logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
-.lc {
-  position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%;
-  mix-blend-mode: screen;
-  animation: lc-breathe 6s ease-in-out infinite;
-}
-.lc-r { left: 0;   background: var(--red);   }
-.lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
-.lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
-@keyframes lc-breathe {
-  0%, 100% { transform: translateX(0); }
-  50%      { transform: translateX(var(--shift, 0)); }
-}
-.logo-circles.paused .lc { animation-play-state: paused; }
 
-/* Wordmark RGB-split (SONIC MARK du brand book) — masthead ────────────── */
-.logo-wordmark {
-  font-family: var(--disp);
-  font-size: 34px;
-  font-weight: 400;
-  letter-spacing: .02em;
-  color: var(--cream);
-  line-height: 1;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-}
-/* couches chromatiques décalées, en screen, qui glitchent */
-.logo-wordmark[data-txt]::before,
-.logo-wordmark[data-txt]::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-/* chromatic edge présent en permanence (comme le SONIC MARK statique), qui glitche par à-coups — événement rare (14s) */
-.logo-wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 14s steps(1) infinite; }
-.logo-wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 14s steps(1) infinite; }
-.logo-wordmark.paused::before, .logo-wordmark.paused::after { animation-play-state: paused; }
-@keyframes rgb-r {
-  0%,88%,100% { transform: translate(-1.5px,0); opacity:.55; }
-  89.5% { transform: translate(-5px,2px);  opacity:1; }
-  91%   { transform: translate(3px,-2px);  opacity:.85; }
-  93%   { transform: translate(-2px,1px);  opacity:.7; }
-  95%   { transform: translate(-1.5px,0);  opacity:.55; }
-}
-@keyframes rgb-b {
-  0%,88%,100% { transform: translate(1.5px,0); opacity:.55; }
-  89.5% { transform: translate(5px,-2px);  opacity:1; }
-  91%   { transform: translate(-3px,2px);  opacity:.85; }
-  93%   { transform: translate(2px,-1px);  opacity:.7; }
-  95%   { transform: translate(1.5px,0);   opacity:.55; }
-}
+/* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
+   Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
+   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+.lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+.signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
+.signal-glyph .sg-bar { width: 6px; border-radius: 3px; transform-origin: bottom; }
+.signal-glyph .sg-r { background: var(--red);   height: 12px; animation: sg-breathe 2.8s ease-in-out infinite alternate; }
+.signal-glyph .sg-g { background: var(--green); height: 22px; animation: sg-breathe 3.6s ease-in-out infinite alternate; }
+.signal-glyph .sg-b { background: var(--blue);  height: 17px; animation: sg-breathe 3.2s ease-in-out infinite alternate; }
+@keyframes sg-breathe { from { transform: scaleY(1); } to { transform: scaleY(.75); } }
+.signal-glyph.paused .sg-bar { animation-play-state: paused; }
+
+.lockup-text { display: flex; flex-direction: column; gap: 4px; }
+.wordmark { font-family: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
+.signal-label { font-family: var(--mono); font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: var(--meta); line-height: 1; }
+.logo-block .wordmark { font-size: 26px; }
+.logo-block .signal-label { font-size: 9px; }
 
 .logo-mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
 .logo-mini-rule .r { flex: 1; background: var(--red); }
@@ -184,7 +140,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -222,7 +178,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   margin-bottom: 28px;
 }
 
-/* ── SECTION INVERSÉE (cream) — "Note de studio" & co ── */
+/* ── SECTION INVERSÉE (cream) · "Note de studio" & co ── */
 .section--invert { background: var(--cream); color: var(--ink); margin: 0 -48px; padding: 44px 48px; }
 .section--invert h2 { color: var(--ink); }
 .section--invert .s-body p { color: var(--ink-soft); }
@@ -352,8 +308,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 /* ── FOOTER ── */
 .footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
 .footer-logo { margin-bottom: 24px; }
-.footer-logo-circles { margin: 0 auto 10px; display: block; }
-.footer-wordmark { font-family: var(--disp); font-size: 22px; font-weight: 400; letter-spacing: .04em; color: var(--dim); text-transform: uppercase; margin-bottom: 6px; }
+.footer-lockup { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+.footer-lockup .signal-glyph { gap: 3px; }
+.footer-lockup .sg-bar { width: 4px; }
+.footer-lockup .lockup-text { gap: 2px; }
+.footer-lockup .wordmark { font-size: 18px; color: var(--dim); }
+.footer-lockup .signal-label { font-size: 9px; }
 .footer-mini-rule { display: flex; height: 1px; width: 80px; margin: 0 auto 6px; }
 .footer-mini-rule .r { flex:1; background: var(--red); }
 .footer-mini-rule .g { flex:1; background: var(--green); }
@@ -372,7 +332,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .triple-rule .b { animation-delay: .16s; }
 @keyframes rule-grow { to { transform: scaleX(1); } }
 
-/* Apparition au scroll — entrée franche (rise).
+/* Apparition au scroll · entrée franche (rise).
    Le contenu n'est masqué QUE si JS tourne (classe .js sur <html>) : sans JS,
    ou si l'observer échoue, tout reste visible. Jamais de contenu perdu. */
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .5s ease, transform .65s cubic-bezier(.16,1,.3,1); }
@@ -383,8 +343,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 @media (prefers-reduced-motion: reduce) {
   .triple-rule .r, .triple-rule .g, .triple-rule .b,
-  .lc { animation: none !important; transform: none !important; }
-  .logo-wordmark[data-txt]::before, .logo-wordmark[data-txt]::after { animation: none !important; }
+  .signal-glyph .sg-bar { animation: none !important; transform: none !important; }
   .js .reveal, .js .stat.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
@@ -393,7 +352,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .subscribe-section, .footer, .stat,
   .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
   
-  .logo-wordmark { font-size: 30px; }
+  .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
 }
@@ -406,17 +365,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 <!-- HERO -->
 <div class="hero">
-  <div class="issue-numeral" aria-hidden="true" data-txt="09">09</div>
+  <div class="issue-numeral" aria-hidden="true">09</div>
   <div class="hero-content">
     <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; KAPMAN SIGNAL N°09 &nbsp;·&nbsp; Juin 2026</div>
 
     <div class="logo-block">
-      <div class="logo-circles" aria-hidden="true">
-        <span class="lc lc-r" style="--shift:-3px"></span>
-        <span class="lc lc-g" style="--shift:0px"></span>
-        <span class="lc lc-b" style="--shift:3px"></span>
+      <div class="lockup">
+        <div class="signal-glyph" aria-hidden="true">
+          <span class="sg-bar sg-r"></span>
+          <span class="sg-bar sg-g"></span>
+          <span class="sg-bar sg-b"></span>
+        </div>
+        <div class="lockup-text">
+          <div class="wordmark">KAPMAN</div>
+          <div class="signal-label">Signal</div>
+        </div>
       </div>
-      <div class="logo-wordmark" data-txt="KAPMAN">KAPMAN</div>
       <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
       <div class="logo-collective">Escape Music Collective</div>
     </div>
@@ -430,13 +394,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="summary">
   <div class="lbl lbl-accent">Cette édition</div>
   <ul class="sum-list">
-    <li><a class="sum-link" href="#s1">10 tracks hors canon — de la deep house UK 1996 au minimal de Vancouver, du digging, pas des évidences</a></li>
+    <li><a class="sum-link" href="#s1">10 tracks hors canon : de la deep house UK 1996 au minimal de Vancouver, du digging, pas des évidences</a></li>
     <li><a class="sum-link" href="#s2">2 sorties récentes 2026 qui méritent l&#39;attention</a></li>
     <li><a class="sum-link" href="#s3">Un label à creuser : Wagon Repair</a></li>
-    <li><a class="sum-link" href="#s4">Note de studio — ce que le TR-6S apprend quand on arrête de le forcer</a></li>
+    <li><a class="sum-link" href="#s4">Note de studio : ce que le TR-6S apprend quand on arrête de le forcer</a></li>
     
   </ul>
-  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=BjhiCl9C85s,guphkg-9rUw,QzZR65TFMvo,elYx3OhNTXY,mF5oGbtVSQI,HEpUV9o7sOU,AFm2NVoL8EE,wE_F9MdtVHA,P3n7PoyVPI8,yJ1h0Jnn1lI,5MycIrUAyGM,4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter la sélection — 12 tracks</a>
+  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=BjhiCl9C85s,guphkg-9rUw,QzZR65TFMvo,elYx3OhNTXY,mF5oGbtVSQI,HEpUV9o7sOU,AFm2NVoL8EE,wE_F9MdtVHA,P3n7PoyVPI8,yJ1h0Jnn1lI,5MycIrUAyGM,4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter la sélection · 12 tracks</a>
 </div>
 
 
@@ -445,15 +409,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
-  <h2>Ce qui tourne — les incontournables</h2>
+  <h2>Ce qui tourne : les incontournables</h2>
     
   <div class="tracks tracks-red">
     
   <div class="track" id="metrosoul-metrosoul-2-day">
-    <div class="track-name">Metrosoul — Metrosoul 2 Day</div>
+    <div class="track-name">Metrosoul · Metrosoul 2 Day</div>
     <div class="track-meta">Metromusic memu001 · 12&#34; · Allemagne · 2004</div>
     
-    <div class="track-body">Deep house acide, 9 minutes. Metromusic était un label allemand discret, cette track en est le sommet. Le groove acide arrive au bout de 3 minutes et il reste. 639 vues — c'est le genre d'obscurité qui justifie de creuser.</div>
+    <div class="track-body">Deep house acide, 9 minutes. Metromusic était un label allemand discret, cette track en est le sommet. Le groove acide arrive au bout de 3 minutes et il reste. 639 vues, c'est le genre d'obscurité qui justifie de creuser.</div>
     
     
     <div class="track-links">
@@ -463,7 +427,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="jesse-rose-a-sided">
-    <div class="track-name">Jesse Rose — A-Sided</div>
+    <div class="track-name">Jesse Rose · A-Sided</div>
     <div class="track-meta">Dubsided DSD004 · 12&#34; · Londres · 2005</div>
     
     <div class="track-body">Jesse Rose avant qu'il soit connu de tout le monde. Ce label Dubsided de Dave Taylor était une des choses les plus cohérentes de l'époque UK. Sec, fonctionnel, groove parfait dès la première mesure.</div>
@@ -476,7 +440,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="morgan-geist-super-ep">
-    <div class="track-name">Morgan Geist — Super EP</div>
+    <div class="track-name">Morgan Geist · Super EP</div>
     <div class="track-meta">Environ ENV 012 · 12&#34; · New York · 2001</div>
     
     <div class="track-body">Morgan Geist seul, sans Darshan. Là où Metro Area était disco, ses tracks solo sont plus froides, plus machines. Une référence pour comprendre comment construire un groove avec presque rien.</div>
@@ -489,10 +453,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="lowtec-looser">
-    <div class="track-name">Lowtec — Looser</div>
+    <div class="track-name">Lowtec · Looser</div>
     <div class="track-meta">Nonplus Records NONPLUS011 · 12&#34; · Londres · 2011</div>
     
-    <div class="track-body">Dub techno warehouse signé Lowtec — Jens Kuhn, moitié de Workshop, Allemagne — sorti chez Nonplus à Londres. Pas beau, pas propre : c'est voulu. Ce son a une texture que les productions modernes cherchent à retrouver sans y arriver.</div>
+    <div class="track-body">Dub techno warehouse signé Lowtec (Jens Kuhn, moitié de Workshop, Allemagne), sorti chez Nonplus à Londres. Pas beau, pas propre : c'est voulu. Ce son a une texture que les productions modernes cherchent à retrouver sans y arriver.</div>
     
     
     <div class="track-links">
@@ -502,7 +466,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="the-missing-link-cracker-smoke">
-    <div class="track-name">The Missing Link — Cracker Smoke</div>
+    <div class="track-name">The Missing Link · Cracker Smoke</div>
     <div class="track-meta">Wagon Repair WAG001 · 12&#34; EP · Vancouver · 2004</div>
     
     <div class="track-body">Première sortie du label de Mathew Jonson, signée Matt Cavender. Minimal dub de Vancouver : presque rien en surface, tout le poids dans le bas du spectre.</div>
@@ -515,10 +479,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="presence-gettin-lifted">
-    <div class="track-name">Presence — Gettin&#39; Lifted</div>
+    <div class="track-name">Presence · Gettin&#39; Lifted</div>
     <div class="track-meta">Remote REM004 · 12&#34; · UK · 1996</div>
     
-    <div class="track-body">Deep house UK 1996 à l'état pur. Presence, c'est Charles Webster — son label Remote ne dure pas longtemps mais chaque sortie est un chef d'oeuvre. Accords suspendus, basse ronde qui porte tout.</div>
+    <div class="track-body">Deep house UK 1996 à l'état pur. Presence, c'est Charles Webster : son label Remote ne dure pas longtemps mais chaque sortie est un chef d'oeuvre. Accords suspendus, basse ronde qui porte tout.</div>
     
     
     <div class="track-links">
@@ -528,10 +492,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="housey-doingz-gobstopper">
-    <div class="track-name">Housey Doingz — Gobstopper</div>
+    <div class="track-name">Housey Doingz · Gobstopper</div>
     <div class="track-meta">Wiggle WIG001 · 12&#34; EP · Londres · 1996</div>
     
-    <div class="track-body">La toute première sortie du label Wiggle — Terry Francis et Nathan Coles. Cette track sonne 1996 dans le meilleur sens du terme : tech house anglaise au swing sec, un groove qui n'a pas pris une ride.</div>
+    <div class="track-body">La toute première sortie du label Wiggle, posée par ses fondateurs. Cette track sonne 1996 dans le meilleur sens du terme : tech house anglaise au swing sec, un groove qui n'a pas pris une ride.</div>
     
     
     <div class="track-links">
@@ -541,10 +505,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="shonky-the-way-it-goes">
-    <div class="track-name">Shonky — The Way It Goes</div>
+    <div class="track-name">Shonky · The Way It Goes</div>
     <div class="track-meta">Wicked Bass WB029 · 12&#34; EP · Kyiv · 2024</div>
     
-    <div class="track-body">Un des DJs parisiens les plus consistants depuis 20 ans — pas le plus célèbre, mais toujours le plus solide. Deep, patient, précis.</div>
+    <div class="track-body">Un des DJs parisiens les plus consistants depuis 20 ans, pas le plus célèbre, mais toujours le plus solide. Deep, patient, précis.</div>
     
     
     <div class="track-links">
@@ -554,10 +518,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="dyed-soundorom-remote-cocktail">
-    <div class="track-name">Dyed Soundorom — Remote Cocktail</div>
+    <div class="track-name">Dyed Soundorom · Remote Cocktail</div>
     <div class="track-meta">Freak n&#39; Chic FNC30 · 12&#34; · Paris · 2008</div>
     
-    <div class="track-body">Face B du sampler Eyelights de Dan Ghenacia — Shonky occupe la face A. Plus brut, plus expérimental que ce qu'il fera ensuite. Si tu l'as raté à l'époque c'est le moment.</div>
+    <div class="track-body">Face B du sampler Eyelights de Dan Ghenacia (Shonky occupe la face A). Plus brut, plus expérimental que ce qu'il fera ensuite. Si tu l'as raté à l'époque c'est le moment.</div>
     
     
     <div class="track-links">
@@ -567,10 +531,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="switch-get-ya-dub-on">
-    <div class="track-name">Switch — Get Ya Dub On</div>
+    <div class="track-name">Switch · Get Ya Dub On</div>
     <div class="track-meta">Freerange FR029 · 12&#34; · Londres · 2003</div>
     
-    <div class="track-body">Dave Taylor aka Switch — ce mec a construit la moitié du son UK mid-2000s. Ce dub sorti chez Freerange avant même Dubsided est la version la plus honnête de ce qu'il savait faire.</div>
+    <div class="track-body">Dave Taylor aka Switch, ce mec a construit la moitié du son UK mid-2000s. Ce dub sorti chez Freerange avant même Dubsided est la version la plus honnête de ce qu'il savait faire.</div>
     
     
     <div class="track-links">
@@ -589,7 +553,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 <div class="stat stat-green reveal">
   <div class="stat-num">1996</div>
-  <div class="stat-ctx">Année des deux classiques de cette issue — Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
+  <div class="stat-ctx">Année des deux classiques de cette issue : Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
 </div>
   
 
@@ -597,15 +561,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
-  <h2>Sorties 2026 — ce qui mérite l&#39;attention</h2>
+  <h2>Sorties 2026 : ce qui mérite l&#39;attention</h2>
     
   <div class="tracks tracks-green">
     
   <div class="track" id="epsie-chase-the-worm">
-    <div class="track-name">Epsie — Chase The Worm</div>
+    <div class="track-name">Epsie · Chase The Worm</div>
     <div class="track-meta">9FINITY 9FINITY007 · 12&#34; EP · Londres · 2026</div>
     
-    <div class="track-body">Cinq tracks sur l'imprint de Secretsundaze. Breaks, techno, éléments electro. Construit live-first — ça s'entend dans la façon dont les éléments se déplacent. Précis sans être froid.</div>
+    <div class="track-body">Cinq tracks sur l'imprint de Secretsundaze. Breaks, techno, éléments electro. Construit live-first, ça s'entend dans la façon dont les éléments se déplacent. Précis sans être froid.</div>
     
     
     <div class="track-links">
@@ -615,7 +579,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   </div>
     
   <div class="track" id="kerouac-marky">
-    <div class="track-name">Kerouac — Marky</div>
+    <div class="track-name">Kerouac · Marky</div>
     <div class="track-meta">Dank Records UK DANK001 · 12&#34; · Londres · 2026</div>
     
     <div class="track-body">Première sortie du label Dank Records UK, sud-est de Londres. Tech house avec une identité immédiatement reconnaissable. 300 copies. Ce genre de première sortie, ça se surveille.</div>
@@ -645,11 +609,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
-  <h2>Le label — Wagon Repair</h2>
+  <h2>Le label · Wagon Repair</h2>
     
     
   <div class="s-body">
-    <p>Fondé en 2004 à Vancouver autour de Mathew Jonson et Konrad Black. Minimal, tech house, toujours entre deux chaises de façon intentionnelle. Le catalogue est compact et cohérent — chaque sortie apporte quelque chose que la précédente n'avait pas.</p><p>Ce qui distingue Wagon Repair : ils ne cherchent pas un son de label, ils cherchent un niveau d'exigence. Ça produit une discographie dans laquelle chaque track est différente mais tout s'assemble.</p><p>Par où commencer : WAG001 (The Missing Link), puis remonter le catalogue sur <a href="https://www.discogs.com/label/32530-Wagon-Repair" target="_blank">Discogs →</a></p>
+    <p>Fondé en 2004 à Vancouver autour de Mathew Jonson et Konrad Black. Minimal, tech house, toujours entre deux chaises de façon intentionnelle. Le catalogue est compact et cohérent : chaque sortie apporte quelque chose que la précédente n'avait pas.</p><p>Ce qui distingue Wagon Repair : ils ne cherchent pas un son de label, ils cherchent un niveau d'exigence. Ça produit une discographie dans laquelle chaque track est différente mais tout s'assemble.</p><p>Par où commencer : WAG001 (The Missing Link), puis remonter le catalogue sur <a href="https://www.discogs.com/label/32530-Wagon-Repair" target="_blank">Discogs →</a></p>
   </div>
     
 </div>
@@ -664,7 +628,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
   <div class="s-body">
-    <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire — et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine — les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend — et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test.</p>
+    <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test.</p>
   </div>
     
 </div>
@@ -678,14 +642,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- ÉCOUTER LA SÉLECTION (répété avant le forward) -->
 
 <div class="listen-all-end-wrap">
-  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=BjhiCl9C85s,guphkg-9rUw,QzZR65TFMvo,elYx3OhNTXY,mF5oGbtVSQI,HEpUV9o7sOU,AFm2NVoL8EE,wE_F9MdtVHA,P3n7PoyVPI8,yJ1h0Jnn1lI,5MycIrUAyGM,4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter la sélection — 12 tracks</a>
+  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=BjhiCl9C85s,guphkg-9rUw,QzZR65TFMvo,elYx3OhNTXY,mF5oGbtVSQI,HEpUV9o7sOU,AFm2NVoL8EE,wE_F9MdtVHA,P3n7PoyVPI8,yJ1h0Jnn1lI,5MycIrUAyGM,4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter la sélection · 12 tracks</a>
 </div>
 
 
 <!-- FORWARD -->
 <div class="forward reveal">
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
-  <p>Le catalogue Wagon Repair complet sur Discogs, la sortie Secretsundaze/9FINITY d'Epsie sur Bandcamp, les premières sorties de Dank Records UK. Trois fils à tirer — chacun mène plus loin que cette page.</p>
+  <p>Le catalogue Wagon Repair complet sur Discogs, la sortie Secretsundaze/9FINITY d'Epsie sur Bandcamp, les premières sorties de Dank Records UK. Trois fils à tirer, chacun mène plus loin que cette page.</p>
 </div>
 
 
@@ -694,9 +658,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="subscribe-section reveal">
   <div class="sub-text">
     <h3>Recevoir les prochaines issues</h3>
-    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap.</p>
+    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte · Chrome + un tap.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
-    <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+    <p class="sub-note">Tu peux couper quand tu veux · une fois abonné·e, le même bouton sert à te désabonner.</p>
     <p id="sub-status" aria-live="polite"></p>
   </div>
   <button id="share-btn" hidden>↗ Partager à un ami</button>
@@ -721,17 +685,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-logo">
-    <svg class="footer-logo-circles" width="48" height="28" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="28" r="26" fill="#E83A2E" opacity=".6"/>
-      <circle cx="48" cy="28" r="26" fill="#1FC85E" opacity=".6"/>
-      <circle cx="64" cy="28" r="26" fill="#3A6CF0" opacity=".6"/>
-    </svg>
-    <div class="footer-wordmark">KAPMAN</div>
+    <div class="footer-lockup">
+      <div class="signal-glyph" aria-hidden="true">
+        <span class="sg-bar sg-r"></span>
+        <span class="sg-bar sg-g"></span>
+        <span class="sg-bar sg-b"></span>
+      </div>
+      <div class="lockup-text">
+        <div class="wordmark">KAPMAN</div>
+        <div class="signal-label">Signal</div>
+      </div>
+    </div>
     <div class="footer-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="footer-collective">Escape Music Collective</div>
   </div>
 
-  <div class="footer-byline">Sélection &amp; textes — KAPMAN · Escape Music Collective, Paris</div>
+  <div class="footer-byline">Sélection &amp; textes · KAPMAN · Escape Music Collective, Paris</div>
   
   <div class="footer-colophon">N°09 · JUIN 2026 · 12 TRACKS · PARIS · KAPMAN SIGNAL</div>
 </div>
@@ -777,17 +746,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     root.classList.remove('js'); showAll();
   }
 
-  // Glitch rare = événement, pas du bruit permanent : on le pause hors viewport.
+  // Le glyphe respire en continu, mais on le pause hors viewport (repos, pas de bruit gratuit).
   try {
     var hero = document.querySelector('.hero');
-    var lc = document.querySelector('.logo-circles');
-    var wm = document.querySelector('.logo-wordmark');
-    if (hero && (lc || wm) && 'IntersectionObserver' in window) {
+    var glyph = document.querySelector('.hero .signal-glyph');
+    if (hero && glyph && 'IntersectionObserver' in window) {
       var heroIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          var visible = e.isIntersecting;
-          if (lc) lc.classList.toggle('paused', !visible);
-          if (wm) wm.classList.toggle('paused', !visible);
+          glyph.classList.toggle('paused', !e.isIntersecting);
         });
       }, { threshold: 0 });
       heroIO.observe(hero);

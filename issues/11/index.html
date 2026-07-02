@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL N°11 — Paris parle bas depuis trente ans</title>
+<title>KAPMAN SIGNAL N°11 · Dix ans de tech house anglaise, dans l&#39;ordre</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Brand book : SIGNAL = glyphe 3 barres R/V/B · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -31,7 +31,6 @@
   --blue-text: #5B85F5;       /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
   --ink-soft: #3A3B42;        /* registre cream (section--invert) */
   --ink-meta: #6B6D78;        /* registre cream (section--invert) */
-  --disp:   'Black Ops One', system-ui, sans-serif;
   --text:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   --mono:   'IBM Plex Mono', ui-monospace, monospace;
   --issue-accent: var(--blue);
@@ -69,19 +68,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 .hero-content { position: relative; z-index: 1; }
 
-/* Numéral d'issue géant — un seul geste géant par hero */
+/* Numéral d'issue géant · un seul geste géant par hero, contour simple (pas de split RGB) */
 .issue-numeral {
   position: absolute; right: -8px; top: 28px; z-index: 0; pointer-events: none;
-  font-family: var(--disp); font-size: clamp(96px, 24vw, 180px); line-height: .85;
+  font-family: var(--text); font-weight: 800; font-size: clamp(96px, 24vw, 180px); line-height: .85;
   color: transparent; -webkit-text-stroke: 1px var(--issue-accent); opacity: .35;
 }
-.issue-numeral::before, .issue-numeral::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  color: transparent;
-}
-.issue-numeral::before { -webkit-text-stroke: 1px var(--red);  transform: translate(-2px, 0); opacity: .35; }
-.issue-numeral::after  { -webkit-text-stroke: 1px var(--blue); transform: translate(2px, 0);  opacity: .35; }
 
 .hero-meta {
   font-family: var(--mono);
@@ -93,61 +85,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 
 .logo-block { margin-bottom: 40px; }
-/* Marque RGB-light : 3 disques HTML en screen → vrai mélange additif (jaune/cyan/blanc) */
-.logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
-.lc {
-  position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%;
-  mix-blend-mode: screen;
-  animation: lc-breathe 6s ease-in-out infinite;
-}
-.lc-r { left: 0;   background: var(--red);   }
-.lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
-.lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
-@keyframes lc-breathe {
-  0%, 100% { transform: translateX(0); }
-  50%      { transform: translateX(var(--shift, 0)); }
-}
-.logo-circles.paused .lc { animation-play-state: paused; }
 
-/* Wordmark RGB-split (SONIC MARK du brand book) — masthead ────────────── */
-.logo-wordmark {
-  font-family: var(--disp);
-  font-size: 34px;
-  font-weight: 400;
-  letter-spacing: .02em;
-  color: var(--cream);
-  line-height: 1;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-}
-/* couches chromatiques décalées, en screen, qui glitchent */
-.logo-wordmark[data-txt]::before,
-.logo-wordmark[data-txt]::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-/* chromatic edge présent en permanence (comme le SONIC MARK statique), qui glitche par à-coups — événement rare (14s) */
-.logo-wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 14s steps(1) infinite; }
-.logo-wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 14s steps(1) infinite; }
-.logo-wordmark.paused::before, .logo-wordmark.paused::after { animation-play-state: paused; }
-@keyframes rgb-r {
-  0%,88%,100% { transform: translate(-1.5px,0); opacity:.55; }
-  89.5% { transform: translate(-5px,2px);  opacity:1; }
-  91%   { transform: translate(3px,-2px);  opacity:.85; }
-  93%   { transform: translate(-2px,1px);  opacity:.7; }
-  95%   { transform: translate(-1.5px,0);  opacity:.55; }
-}
-@keyframes rgb-b {
-  0%,88%,100% { transform: translate(1.5px,0); opacity:.55; }
-  89.5% { transform: translate(5px,-2px);  opacity:1; }
-  91%   { transform: translate(-3px,2px);  opacity:.85; }
-  93%   { transform: translate(2px,-1px);  opacity:.7; }
-  95%   { transform: translate(1.5px,0);   opacity:.55; }
-}
+/* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
+   Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
+   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+.lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+.signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
+.signal-glyph .sg-bar { width: 6px; border-radius: 3px; transform-origin: bottom; }
+.signal-glyph .sg-r { background: var(--red);   height: 12px; animation: sg-breathe 2.8s ease-in-out infinite alternate; }
+.signal-glyph .sg-g { background: var(--green); height: 22px; animation: sg-breathe 3.6s ease-in-out infinite alternate; }
+.signal-glyph .sg-b { background: var(--blue);  height: 17px; animation: sg-breathe 3.2s ease-in-out infinite alternate; }
+@keyframes sg-breathe { from { transform: scaleY(1); } to { transform: scaleY(.75); } }
+.signal-glyph.paused .sg-bar { animation-play-state: paused; }
+
+.lockup-text { display: flex; flex-direction: column; gap: 4px; }
+.wordmark { font-family: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
+.signal-label { font-family: var(--mono); font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: var(--meta); line-height: 1; }
+.logo-block .wordmark { font-size: 26px; }
+.logo-block .signal-label { font-size: 9px; }
 
 .logo-mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
 .logo-mini-rule .r { flex: 1; background: var(--red); }
@@ -184,7 +140,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -222,7 +178,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   margin-bottom: 28px;
 }
 
-/* ── SECTION INVERSÉE (cream) — "Note de studio" & co ── */
+/* ── SECTION INVERSÉE (cream) · "Note de studio" & co ── */
 .section--invert { background: var(--cream); color: var(--ink); margin: 0 -48px; padding: 44px 48px; }
 .section--invert h2 { color: var(--ink); }
 .section--invert .s-body p { color: var(--ink-soft); }
@@ -352,8 +308,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 /* ── FOOTER ── */
 .footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
 .footer-logo { margin-bottom: 24px; }
-.footer-logo-circles { margin: 0 auto 10px; display: block; }
-.footer-wordmark { font-family: var(--disp); font-size: 22px; font-weight: 400; letter-spacing: .04em; color: var(--dim); text-transform: uppercase; margin-bottom: 6px; }
+.footer-lockup { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+.footer-lockup .signal-glyph { gap: 3px; }
+.footer-lockup .sg-bar { width: 4px; }
+.footer-lockup .lockup-text { gap: 2px; }
+.footer-lockup .wordmark { font-size: 18px; color: var(--dim); }
+.footer-lockup .signal-label { font-size: 9px; }
 .footer-mini-rule { display: flex; height: 1px; width: 80px; margin: 0 auto 6px; }
 .footer-mini-rule .r { flex:1; background: var(--red); }
 .footer-mini-rule .g { flex:1; background: var(--green); }
@@ -372,7 +332,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .triple-rule .b { animation-delay: .16s; }
 @keyframes rule-grow { to { transform: scaleX(1); } }
 
-/* Apparition au scroll — entrée franche (rise).
+/* Apparition au scroll · entrée franche (rise).
    Le contenu n'est masqué QUE si JS tourne (classe .js sur <html>) : sans JS,
    ou si l'observer échoue, tout reste visible. Jamais de contenu perdu. */
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .5s ease, transform .65s cubic-bezier(.16,1,.3,1); }
@@ -383,8 +343,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 @media (prefers-reduced-motion: reduce) {
   .triple-rule .r, .triple-rule .g, .triple-rule .b,
-  .lc { animation: none !important; transform: none !important; }
-  .logo-wordmark[data-txt]::before, .logo-wordmark[data-txt]::after { animation: none !important; }
+  .signal-glyph .sg-bar { animation: none !important; transform: none !important; }
   .js .reveal, .js .stat.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
@@ -393,7 +352,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .subscribe-section, .footer, .stat,
   .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
   
-  .logo-wordmark { font-size: 30px; }
+  .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
 }
@@ -406,23 +365,28 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 <!-- HERO -->
 <div class="hero">
-  <div class="issue-numeral" aria-hidden="true" data-txt="11">11</div>
+  <div class="issue-numeral" aria-hidden="true">11</div>
   <div class="hero-content">
     <div class="hero-meta">2026-07-03 &nbsp;·&nbsp; KAPMAN SIGNAL N°11 &nbsp;·&nbsp; Juillet 2026</div>
 
     <div class="logo-block">
-      <div class="logo-circles" aria-hidden="true">
-        <span class="lc lc-r" style="--shift:-3px"></span>
-        <span class="lc lc-g" style="--shift:0px"></span>
-        <span class="lc lc-b" style="--shift:3px"></span>
+      <div class="lockup">
+        <div class="signal-glyph" aria-hidden="true">
+          <span class="sg-bar sg-r"></span>
+          <span class="sg-bar sg-g"></span>
+          <span class="sg-bar sg-b"></span>
+        </div>
+        <div class="lockup-text">
+          <div class="wordmark">KAPMAN</div>
+          <div class="signal-label">Signal</div>
+        </div>
       </div>
-      <div class="logo-wordmark" data-txt="KAPMAN">KAPMAN</div>
       <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
       <div class="logo-collective">Escape Music Collective</div>
     </div>
 
-    <h1 class="tagline">Paris parle bas<br>depuis trente ans</h1>
-    <div class="reading-time">4 min &nbsp;·&nbsp; Juillet 2026</div>
+    <h1 class="tagline">Dix ans de tech house anglaise,<br>dans l'ordre</h1>
+    <div class="reading-time">5 min &nbsp;·&nbsp; Juillet 2026</div>
   </div>
 </div>
 
@@ -430,13 +394,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="summary">
   <div class="lbl lbl-accent">Cette édition</div>
   <ul class="sum-list">
-    <li><a class="sum-link" href="#s1">Six tracks de la maison parisienne qui parle bas — d&#39;I:Cube à Cabanne, 1999-2016</a></li>
-    <li><a class="sum-link" href="#s2">Deux sorties à suivre : D&#39;Julz remixé par la relève, et les dix ans de Pont Neuf en double vinyle</a></li>
-    <li><a class="sum-link" href="#s3">Le label — Versatile : trente ans de Paris indépendant, par où commencer</a></li>
-    <li><a class="sum-link" href="#s4">Note de studio — ce que le micro-décalage fait au reste du mix</a></li>
+    <li><a class="sum-link" href="#s1">7 tracks de la tech house anglaise, 1999 à 2007 : de Terry Francis à Whiff, sans détour</a></li>
+    <li><a class="sum-link" href="#s2">Deux sorties à suivre : Buraye sur Planka Records, Mishouju sur Howl Records</a></li>
+    <li><a class="sum-link" href="#s3">Le label : 20:20 Vision, une ferme du Yorkshire depuis trente ans</a></li>
+    <li><a class="sum-link" href="#s4">Note de studio : ce que le micro-décalage fait au reste du mix</a></li>
     
   </ul>
-  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=hDqTKFKwkZA,J0J-0ynMizg,TftH7q6XyTk,D3ziJ4_QPFI,vy0bbKJi8U0,Mz4N0u7e-OM,n4wuOWt5Uko" target="_blank" rel="noopener">▶ Écouter la sélection — 7 tracks</a>
+  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=SOVTFfQcXCw,V5KrxK52syI,xRJbGcHtQOE,MPvJJEzBUoY,zDJjZx7bk-8,OWkIAg0qRis,qSJMkhCT1lc,2-2NUys_0Yc,rrnninhlgAE" target="_blank" rel="noopener">▶ Écouter la sélection · 9 tracks</a>
 </div>
 
 
@@ -445,84 +409,97 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
-  <h2>Ce qui tourne — Paris en sourdine, 1999-2016</h2>
+  <h2>Ce qui tourne : la tech house anglaise, 1999 à 2007</h2>
     
   <div class="tracks tracks-red">
     
-  <div class="track" id="i-cube-adore">
-    <div class="track-name">I:Cube — Adore</div>
-    <div class="track-meta">Versatile VER CD 003 · CD · Paris · 1999</div>
+  <div class="track" id="terry-francis-took-from-me">
+    <div class="track-name">Terry Francis · Took From Me</div>
+    <div class="track-meta">Surreal SUR005 · 12&#34;, White Label · UK · 1999</div>
     
-    <div class="track-body">Le deuxième album de Nicolas Chaix, celui où Versatile troque le disco contre la texture. Le morceau-titre avance à peine — une nappe, un pouls, des accords qui tombent comme de la neige — et le corps suit quand même. De la house d'appartement qui tient sur un dancefloor, ce qui est bien plus rare que l'inverse.</div>
-    <div class="track-dig"><span class="dig-arrow">↳</span> I:Cube → moitié de Château Flight avec Gilb&#39;r. Tout part de VER 001, Disco Cubizm, 1996.</div>
+    <div class="track-body">Terry Francis pose le morceau qui ouvrait toute la scène tech house londonienne de la fin des années 90. Le kick est sec, le sample vocal grince, la ligne de basse tremble sous le plancher : rien n'est là pour décorer. C'est la seule référence canon du numéro, elle sert de porte d'entrée aux six tracks qui suivent, toutes plus obscures. On y entend déjà tout ce que l'Angleterre va creuser pendant huit ans.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Terry Francis tient la résidence Fabric depuis l&#39;ouverture du club en octobre 1999, sans interruption : vingt sept ans au même endroit, le même soir.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=hDqTKFKwkZA" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/5822-ICube-Adore" target="_blank" rel="noopener">◈ Discogs</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=SOVTFfQcXCw" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/6055099-Terry-Francis-Took-From-Me" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="pepe-bradock-peer-pressure">
-    <div class="track-name">Pépé Bradock — Peer Pressure</div>
-    <div class="track-meta">Atavisme ATA 001 · 12&#34; · 2000</div>
+  <div class="track" id="stabilizer-factor">
+    <div class="track-name">Stabilizer · Factor</div>
+    <div class="track-meta">Boom Box Records BBR10 · 12&#34; · UK · 2000</div>
     
-    <div class="track-body">Face « Maman Side » d'ATA 001 — Bradock nommait ses faces comme personne. Julien Auger étire un sample jusqu'à ce qu'il devienne une matière : house, techno et poussière de trip hop dans le même sillon. Le morceau ne monte jamais où on l'attend, et c'est ce qui le rend physique.</div>
-    <div class="track-dig"><span class="dig-arrow">↳</span> Atavisme est le label de Bradock lui-même — ce disque en est la toute première référence.</div>
+    <div class="track-body">Deuxième étape, l'an deux mille : Stabilizer pousse la tech house vers le breakbeat sans jamais perdre le groove house. Factor avance par àcoups, une caisse claire qui claque de travers, un riff qui revient toujours un poil trop tard. Une signature rythmique qui ne ressemble à rien d'autre dans cette sélection.</div>
+    
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=J0J-0ynMizg" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/17541-P%C3%A9p%C3%A9-Bradock-6-Millions-Pintades-EP" target="_blank" rel="noopener">◈ Discogs</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=V5KrxK52syI" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/53866-Stabilizer-Pure-Digital" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="llorca-indigo-blues">
-    <div class="track-name">Llorca — Indigo Blues</div>
-    <div class="track-meta">F Communications F 137 CD · CD · 2001</div>
+  <div class="track" id="jay-kaufman-the-fear-youth-in-asia-s-fearless-dub">
+    <div class="track-name">Jay Kaufman · The Fear (Youth In Asia&#39;s Fearless Dub)</div>
+    <div class="track-meta">Sonambulist Recordings SONB 003 · 12&#34; · UK · 2001</div>
     
-    <div class="track-body">La French touch sans les filtres. Ludovic Llorca plie un souffle de Dizzy Gillespie sous la voix de Nicole Graham et fait tenir le club entier sur une ligne de basse jazz. F Communications avait aussi ce visage-là — feutré, nocturne, imparable.</div>
+    <div class="track-body">Un an plus tard, Sonambulist Recordings sort son tout premier disque et le confie à Jay Kaufman. Le dub signé Youth In Asia retire presque tout du morceau original et ne garde qu'une respiration et un groove suspendu. C'est tendu, patient, construit pour une salle qui commence à peine à se remplir.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=TftH7q6XyTk" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/3465-Llorca-New-Comer" target="_blank" rel="noopener">◈ Discogs</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=xRJbGcHtQOE" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/113815-Jay-Kaufman-The-Fear" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="ark-e-cone">
-    <div class="track-name">Ark — E-Cône</div>
-    <div class="track-meta">Circus Company CCcd 001 · CD · Paris · 2003</div>
+  <div class="track" id="harold-heath-can-you-feel">
+    <div class="track-name">Harold Heath · Can You Feel</div>
+    <div class="track-meta">Uhuru Beats uhuru 005 · 12&#34; · UK · 2002</div>
     
-    <div class="track-body">L'ouverture de la série solo de Circus Company, et le portrait craché de son auteur : une house lo-fi qui boite volontairement, drôle et sale, avec un groove de traviole qui finit par mettre tout le monde d'accord. Guillaume Berroyer reste l'excentrique le plus précis de la scène parisienne des années 2000.</div>
+    <div class="track-body">Harold Heath enregistre pour Uhuru Beats, label anglais discret dont chaque sortie tenait la même ligne exigeante. Can You Feel avance en neuf minutes sans jamais se presser : une boucle, une touche d'acide, un groove qui se resserre par paliers. Le genre de disque que seuls les diggers se refilaient à l'époque.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=D3ziJ4_QPFI" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://circuscompany.bandcamp.com/album/alleluyark" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=MPvJJEzBUoY" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/313867-Harold-Heath-Can-You-Feel" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="phil-weeks-chris-carrier-tight-squeeze">
-    <div class="track-name">Phil Weeks &amp; Chris Carrier — Tight Squeeze</div>
-    <div class="track-meta">Robsoul Robsoul Ltd. 07 · 12&#34; · 2006</div>
+  <div class="track" id="two-right-wrongans-wrong-station-right-platform">
+    <div class="track-name">Two Right Wrongans · Wrong Station Right Platform</div>
+    <div class="track-meta">Wrong Wrong 007 · 12&#34; · UK · 2002</div>
     
-    <div class="track-body">Face B d'un 12" limité partagé avec Lorenzo. Un loop, un shuffle, une pointe de saleté — les deux Français font tenir le morceau sur presque rien, et il tient. De la house de DJs faite par des DJs, calibrée pour cinq heures du matin, chez le label parisien le plus discrètement constant de la décennie.</div>
+    <div class="track-body">Sur le label Wrong, la même année, Two Right Wrongans jouent la carte du nom qui prévient : la structure part dans une direction puis se ravise en plein milieu. Le groove tech house reste solide sous les fausses pistes, presque un jeu entre le producteur et l'auditeur. Une des sorties les plus singulières de cette décennie anglaise.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=vy0bbKJi8U0" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/821816-Lorenzo-Phil-Weeks-Chris-Carrier-Get-Deep-Tight-Squeeze" target="_blank" rel="noopener">◈ Discogs</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=zDJjZx7bk-8" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/81482-Various-Wrong-Station-Right-Platform" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="cabanne-fr4">
-    <div class="track-name">Cabanne — Fr4</div>
-    <div class="track-meta">Minibar mb042 · 3×12&#34; · 2016</div>
+  <div class="track" id="tom-parris-mitsubishi-dealer">
+    <div class="track-name">Tom Parris · Mitsubishi Dealer</div>
+    <div class="track-meta">Cubic Records CUBIC 008 · 12&#34; · UK · 2006</div>
     
-    <div class="track-body">Vingt ans après ses débuts, Cabanne enregistre Discopathy : trois vinyles de presque rien, et Fr4 en est la pièce la plus nue. Un kick, des accents jazz, des silences placés au cordeau — la ligne minimale parisienne n'a jamais parlé aussi bas ni groové aussi fort.</div>
-    <div class="track-dig"><span class="dig-arrow">↳</span> Cabanne → Logistic puis Telegraph à la fin des années 90, puis Minibar, son propre label.</div>
+    <div class="track-body">Cubic Records sort ce disque de Tom Parris en 2006, quand la tech house anglaise a déjà digéré une décennie d'expérimentations et cherche autre chose. Mitsubishi Dealer tient sur un riff electro sec et un kick qui ne lâche rien pendant sept minutes. La ligne reste tech house dans l'os, même quand la texture vire electro.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Ce disque est répertorié comme Cubic Hits Release 8 dans le catalogue du label, en pleine vague electro house anglaise du milieu des années 2000.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=Mz4N0u7e-OM" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/9408805-Cabanne-Discopathy" target="_blank" rel="noopener">◈ Discogs</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=OWkIAg0qRis" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/648185-Tom-Parris-Gavin-Burrows-Tom-Parris-Vs-Gavin-Burrows" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+    
+  <div class="track" id="whiff-my-brain">
+    <div class="track-name">Whiff · My Brain</div>
+    <div class="track-meta">Whiff WHIFF 002 · 12&#34; EP · UK · 2007</div>
+    
+    <div class="track-body">Dernière étape de la ligne : en 2007, l'artiste Whiff publie sa propre sortie sur son propre label, house, electro et acid dans le même sillon. My Brain referme la décennie sur un groove tordu, acide par endroits, jamais complètement propre. Huit ans après Terry Francis, l'Angleterre parle encore la même langue, avec un accent différent.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Le label s&#39;appelle comme l&#39;artiste : Whiff sort ce disque sur son propre imprint, une pratique courante dans la scène tech house anglaise du milieu des années 2000.</div>
+    
+    <div class="track-links">
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=qSJMkhCT1lc" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/1887464-WHIFF-Uncensored-EP" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
@@ -536,8 +513,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
   
 <div class="stat stat-green reveal">
-  <div class="stat-num">1997</div>
-  <div class="stat-ctx">L&#39;année où D&#39;Julz ouvre sa résidence Bass Culture au Rex Club. Elle ne s&#39;est jamais arrêtée — la plus longue de l&#39;histoire du club — et le label qui suit en porte le nom.</div>
+  <div class="stat-num">8</div>
+  <div class="stat-ctx">Huit ans séparent Took From Me de My Brain : toute la ligne tech house anglaise traversée dans cette sélection, sans un seul faux pas.</div>
 </div>
   
 
@@ -545,32 +522,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
-  <h2>Sorties récentes — la relève parle bas aussi</h2>
+  <h2>Sorties récentes : la ligne continue ailleurs</h2>
     
   <div class="tracks tracks-green">
     
-  <div class="track" id="d-julz-the-school-of-night-remixes">
-    <div class="track-name">D&#39;Julz — The School Of Night Remixes</div>
-    <div class="track-meta">Bass Culture BCR075 · Paris · 2025</div>
+  <div class="track" id="buraye-spires-of-mirage">
+    <div class="track-name">Buraye · Spires of Mirage</div>
+    <div class="track-meta">Planka Records PLNK007 · 12&#34; · 2026</div>
     
-    <div class="track-body">Cinq relectures des EPs School Of Night par Sweely, DJ Deep, Hostom et Darren Roach. Le remix de Nu Bass par DJ Deep condense le Rex en six minutes : deep, tendu, sans graisse. La maison-mère parisienne qui invite la relève sans lâcher la barre.</div>
+    <div class="track-body">Sur la compilation Quiet Understanding EP de Planka Records, Buraye pose une piste tendue, construite pour les petites heures. Spires of Mirage tient sur une nappe froide et une percussion qui n'accélère jamais vraiment. La suite naturelle de la ligne anglaise ouverte plus haut, version 2026.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=n4wuOWt5Uko" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://shop.bassculturerecords.com/album/the-school-of-night-remixes-ep" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=2-2NUys_0Yc" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://www.deejay.de/Various_Quiet_Understanding_EP_PLNK007_Vinyl__1231561" target="_blank" rel="noopener">↗ Boutique</a>
     </div>
     
   </div>
     
-  <div class="track" id="various-in-house-we-trust-pont-neuf-10-years">
-    <div class="track-name">Various — In House We Trust (Pont Neuf 10 Years)</div>
-    <div class="track-meta">Pont Neuf Records · 2×12&#34; · Paris · 2026</div>
+  <div class="track" id="mishouju-i-am-ai">
+    <div class="track-name">Mishouju · I Am Ai</div>
+    <div class="track-meta">Howl Records · Digital · Gênes · 2026</div>
     
-    <div class="track-body">Douze tracks pour dix ans de label : Tour-Maubourg, Mad Rey, Marina Trench, Black Loops et la suite. La génération qui a repris la maison française là où les anciens l'avaient laissée, réunie sur un double vinyle anniversaire. Préco ouverte, un single par semaine tout l'été, sortie le 4 septembre.</div>
+    <div class="track-body">Sur Howl Records, label italien basé à Gênes, Mishouju sort I Am Ai en single numérique deux titres. La machine semble hésiter entre techno et house sans jamais trancher, un titre qui résume bien le geste. Loin de Londres mais sur la même intensité tech house, la lignée continue ailleurs.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://pontneuf.bandcamp.com/album/pont-neuf-10-years-in-house-we-trust" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=rrnninhlgAE" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://howlrecord.bandcamp.com/album/mishouju-i-am-ai" target="_blank" rel="noopener">↗ Bandcamp</a>
     </div>
     
   </div>
@@ -584,8 +561,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
   
 <div class="stat stat-blue reveal">
-  <div class="stat-num">664</div>
-  <div class="stat-ctx">Références Versatile listées sur Discogs au moment où j&#39;écris. Trente ans de catalogue sans pause, toujours la même adresse : Paris. On en parle juste en dessous.</div>
+  <div class="stat-num">500</div>
+  <div class="stat-ctx">Près de 500 références 20:20 Vision publiées en trente ans, annoncées par le label lui même pour son anniversaire en 2025. Une des maisons les plus stables de l&#39;histoire de la tech house anglaise.</div>
 </div>
   
 
@@ -593,11 +570,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
-  <h2>Le label — Versatile</h2>
+  <h2>Le label · 20:20 Vision</h2>
     
     
   <div class="s-body">
-    <p>Paris, 1996. Gilb'r lance Versatile avec un maxi d'I:Cube, Disco Cubizm — VER 001. Trente ans plus tard, le label est toujours debout, toujours indépendant, toujours à la même hauteur de voix.</p><p>Ce que Versatile a de rare : il n'a jamais choisi. House, disco, jazz, techno, expérimental — Château Flight, Etienne Jaumet, I:Cube — et pourtant tout s'écoute comme une seule discothèque. C'est une maison au sens propre : des gens qui reviennent, un son qui vieillit bien parce qu'il n'a jamais couru après l'époque.</p><p>Par où commencer : Disco Cubizm (1996), puis Adore (1999), puis fouiller le reste comme un bac de disquaire sur <a href="https://shop.versatilerecords.com/" target="_blank">le Bandcamp du label →</a></p>
+    <p>Yorkshire, 1995. Ralph Lawson et Carl Finlow montent 20:20 Vision dans une ferme, loin des studios londoniens. La toute première sortie s'appelle Wulf n Bear, Space Groover.</p><p>Le label ne s'est jamais figé sur un son unique : house, techno, electro cohabitent sur le même catalogue depuis trente ans, avec des noms comme Maya Jane Coles ou DJ T qui sont passés par la maison. Ce qui tient tout ensemble, c'est un souci du groove plutôt qu'un genre précis.</p><p>Par où commencer : Random Factor · Know You're There (Silver City Remix), 2003, catalogue VIS084, puis remonter le catalogue sur <a href="https://www.discogs.com/release/139511-Random-Factor-Know-Youre-There" target="_blank">◈ Discogs →</a></p>
   </div>
     
 </div>
@@ -612,7 +589,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
   <div class="s-body">
-    <p>Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé — quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.</p><p>Un groove qui respire prend de la place. Dès que le décalage fait son travail, les couches deviennent des obstacles : la nappe du MicroKorg 2 est passée de trois voix à une, et le morceau tient mieux debout. Je n'avais pas prévu que désaligner une piste m'obligerait à en couper trois autres.</p><p>L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View — la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.</p><p>Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part — maintenant c'est au mix d'apprendre à se taire.</p>
+    <p>Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé : quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.</p><p>Un groove qui respire prend de la place. Dès que le décalage fait son travail, les couches deviennent des obstacles : la nappe du MicroKorg 2 est passée de trois voix à une, et le morceau tient mieux debout. Je n'avais pas prévu que désaligner une piste m'obligerait à en couper trois autres.</p><p>L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View : la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.</p><p>Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part, maintenant c'est au mix d'apprendre à se taire.</p>
   </div>
     
 </div>
@@ -631,22 +608,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
       
         
           
-  <li><a href="#i-cube-adore">01 I:Cube — Adore</a></li>
+  <li><a href="#terry-francis-took-from-me">01 Terry Francis · Took From Me</a></li>
         
           
-  <li><a href="#pepe-bradock-peer-pressure">02 Pépé Bradock — Peer Pressure</a></li>
+  <li><a href="#stabilizer-factor">02 Stabilizer · Factor</a></li>
         
           
-  <li><a href="#llorca-indigo-blues">03 Llorca — Indigo Blues</a></li>
+  <li><a href="#jay-kaufman-the-fear-youth-in-asia-s-fearless-dub">03 Jay Kaufman · The Fear (Youth In Asia&#39;s Fearless Dub)</a></li>
         
           
-  <li><a href="#ark-e-cone">04 Ark — E-Cône</a></li>
+  <li><a href="#harold-heath-can-you-feel">04 Harold Heath · Can You Feel</a></li>
         
           
-  <li><a href="#phil-weeks-chris-carrier-tight-squeeze">05 Phil Weeks &amp; Chris Carrier — Tight Squeeze</a></li>
+  <li><a href="#two-right-wrongans-wrong-station-right-platform">05 Two Right Wrongans · Wrong Station Right Platform</a></li>
         
           
-  <li><a href="#cabanne-fr4">06 Cabanne — Fr4</a></li>
+  <li><a href="#tom-parris-mitsubishi-dealer">06 Tom Parris · Mitsubishi Dealer</a></li>
+        
+          
+  <li><a href="#whiff-my-brain">07 Whiff · My Brain</a></li>
         
       
     
@@ -655,10 +635,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
       
         
           
-  <li><a href="#d-julz-the-school-of-night-remixes">07 D&#39;Julz — The School Of Night Remixes</a></li>
+  <li><a href="#buraye-spires-of-mirage">08 Buraye · Spires of Mirage</a></li>
         
           
-  <li><a href="#various-in-house-we-trust-pont-neuf-10-years">08 Various — In House We Trust (Pont Neuf 10 Years)</a></li>
+  <li><a href="#mishouju-i-am-ai">09 Mishouju · I Am Ai</a></li>
         
       
     
@@ -676,14 +656,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- ÉCOUTER LA SÉLECTION (répété avant le forward) -->
 
 <div class="listen-all-end-wrap">
-  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=hDqTKFKwkZA,J0J-0ynMizg,TftH7q6XyTk,D3ziJ4_QPFI,vy0bbKJi8U0,Mz4N0u7e-OM,n4wuOWt5Uko" target="_blank" rel="noopener">▶ Écouter la sélection — 7 tracks</a>
+  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=SOVTFfQcXCw,V5KrxK52syI,xRJbGcHtQOE,MPvJJEzBUoY,zDJjZx7bk-8,OWkIAg0qRis,qSJMkhCT1lc,2-2NUys_0Yc,rrnninhlgAE" target="_blank" rel="noopener">▶ Écouter la sélection · 9 tracks</a>
 </div>
 
 
 <!-- FORWARD -->
 <div class="forward reveal">
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
-  <p>Trente ans d'un côté, dix de l'autre : le Bandcamp de Versatile se fouille comme un bac, et Pont Neuf égrène un single par semaine jusqu'au 4 septembre — la préco du double vinyle est ouverte. Entre les deux, la série Alleluyark d'Ark s'écoute d'une traite sur le Bandcamp de Circus Company.</p>
+  <p>Le catalogue 20:20 Vision se remonte entier sur Discogs, la Quiet Understanding EP de Planka Records tourne en 12 pouces chez Deejay.de, et I Am Ai de Mishouju s'écoute au complet sur le Bandcamp de Howl Records. Trois portes pour prolonger l'écoute au-delà de cette page.</p>
 </div>
 
 
@@ -692,9 +672,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="subscribe-section reveal">
   <div class="sub-text">
     <h3>Recevoir les prochaines issues</h3>
-    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap.</p>
+    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte · Chrome + un tap.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
-    <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+    <p class="sub-note">Tu peux couper quand tu veux · une fois abonné·e, le même bouton sert à te désabonner.</p>
     <p id="sub-status" aria-live="polite"></p>
   </div>
   <button id="share-btn" hidden>↗ Partager à un ami</button>
@@ -719,19 +699,24 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-logo">
-    <svg class="footer-logo-circles" width="48" height="28" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="28" r="26" fill="#E83A2E" opacity=".6"/>
-      <circle cx="48" cy="28" r="26" fill="#1FC85E" opacity=".6"/>
-      <circle cx="64" cy="28" r="26" fill="#3A6CF0" opacity=".6"/>
-    </svg>
-    <div class="footer-wordmark">KAPMAN</div>
+    <div class="footer-lockup">
+      <div class="signal-glyph" aria-hidden="true">
+        <span class="sg-bar sg-r"></span>
+        <span class="sg-bar sg-g"></span>
+        <span class="sg-bar sg-b"></span>
+      </div>
+      <div class="lockup-text">
+        <div class="wordmark">KAPMAN</div>
+        <div class="signal-label">Signal</div>
+      </div>
+    </div>
     <div class="footer-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="footer-collective">Escape Music Collective</div>
   </div>
 
-  <div class="footer-byline">Sélection &amp; textes — KAPMAN · Escape Music Collective, Paris</div>
+  <div class="footer-byline">Sélection &amp; textes · KAPMAN · Escape Music Collective, Paris</div>
   
-  <div class="footer-colophon">N°11 · JUILLET 2026 · 8 TRACKS · PARIS · KAPMAN SIGNAL</div>
+  <div class="footer-colophon">N°11 · JUILLET 2026 · 9 TRACKS · PARIS · KAPMAN SIGNAL</div>
 </div>
 
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
@@ -775,17 +760,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     root.classList.remove('js'); showAll();
   }
 
-  // Glitch rare = événement, pas du bruit permanent : on le pause hors viewport.
+  // Le glyphe respire en continu, mais on le pause hors viewport (repos, pas de bruit gratuit).
   try {
     var hero = document.querySelector('.hero');
-    var lc = document.querySelector('.logo-circles');
-    var wm = document.querySelector('.logo-wordmark');
-    if (hero && (lc || wm) && 'IntersectionObserver' in window) {
+    var glyph = document.querySelector('.hero .signal-glyph');
+    if (hero && glyph && 'IntersectionObserver' in window) {
       var heroIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          var visible = e.isIntersecting;
-          if (lc) lc.classList.toggle('paused', !visible);
-          if (wm) wm.classList.toggle('paused', !visible);
+          glyph.classList.toggle('paused', !e.isIntersecting);
         });
       }, { threshold: 0 });
       heroIO.observe(hero);

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPMAN SIGNAL N°10 — De Chicago à Francfort — la ligne directe</title>
+<title>KAPMAN SIGNAL N°10 · Cinq ans avant que l&#39;Allemagne dise minimal</title>
 <meta name="theme-color" content="#0E0F14">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand book : DISPLAY = Black Ops One · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Brand book : SIGNAL = glyphe 3 barres R/V/B · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -31,7 +31,6 @@
   --blue-text: #5B85F5;       /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
   --ink-soft: #3A3B42;        /* registre cream (section--invert) */
   --ink-meta: #6B6D78;        /* registre cream (section--invert) */
-  --disp:   'Black Ops One', system-ui, sans-serif;
   --text:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   --mono:   'IBM Plex Mono', ui-monospace, monospace;
   --issue-accent: var(--green);
@@ -69,19 +68,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 .hero-content { position: relative; z-index: 1; }
 
-/* Numéral d'issue géant — un seul geste géant par hero */
+/* Numéral d'issue géant · un seul geste géant par hero, contour simple (pas de split RGB) */
 .issue-numeral {
   position: absolute; right: -8px; top: 28px; z-index: 0; pointer-events: none;
-  font-family: var(--disp); font-size: clamp(96px, 24vw, 180px); line-height: .85;
+  font-family: var(--text); font-weight: 800; font-size: clamp(96px, 24vw, 180px); line-height: .85;
   color: transparent; -webkit-text-stroke: 1px var(--issue-accent); opacity: .35;
 }
-.issue-numeral::before, .issue-numeral::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  color: transparent;
-}
-.issue-numeral::before { -webkit-text-stroke: 1px var(--red);  transform: translate(-2px, 0); opacity: .35; }
-.issue-numeral::after  { -webkit-text-stroke: 1px var(--blue); transform: translate(2px, 0);  opacity: .35; }
 
 .hero-meta {
   font-family: var(--mono);
@@ -93,61 +85,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 }
 
 .logo-block { margin-bottom: 40px; }
-/* Marque RGB-light : 3 disques HTML en screen → vrai mélange additif (jaune/cyan/blanc) */
-.logo-circles { position: relative; width: 96px; height: 56px; margin-bottom: 18px; isolation: isolate; }
-.lc {
-  position: absolute; top: 0; width: 56px; height: 56px; border-radius: 50%;
-  mix-blend-mode: screen;
-  animation: lc-breathe 6s ease-in-out infinite;
-}
-.lc-r { left: 0;   background: var(--red);   }
-.lc-g { left: 20px; background: var(--green); animation-delay: -2s; }
-.lc-b { left: 40px; background: var(--blue);  animation-delay: -4s; }
-@keyframes lc-breathe {
-  0%, 100% { transform: translateX(0); }
-  50%      { transform: translateX(var(--shift, 0)); }
-}
-.logo-circles.paused .lc { animation-play-state: paused; }
 
-/* Wordmark RGB-split (SONIC MARK du brand book) — masthead ────────────── */
-.logo-wordmark {
-  font-family: var(--disp);
-  font-size: 34px;
-  font-weight: 400;
-  letter-spacing: .02em;
-  color: var(--cream);
-  line-height: 1;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-}
-/* couches chromatiques décalées, en screen, qui glitchent */
-.logo-wordmark[data-txt]::before,
-.logo-wordmark[data-txt]::after {
-  content: attr(data-txt);
-  position: absolute; inset: 0;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-/* chromatic edge présent en permanence (comme le SONIC MARK statique), qui glitche par à-coups — événement rare (14s) */
-.logo-wordmark[data-txt]::before { color: var(--red);  transform: translate(-1.5px,0); opacity:.55; animation: rgb-r 14s steps(1) infinite; }
-.logo-wordmark[data-txt]::after  { color: var(--blue); transform: translate(1.5px,0);  opacity:.55; animation: rgb-b 14s steps(1) infinite; }
-.logo-wordmark.paused::before, .logo-wordmark.paused::after { animation-play-state: paused; }
-@keyframes rgb-r {
-  0%,88%,100% { transform: translate(-1.5px,0); opacity:.55; }
-  89.5% { transform: translate(-5px,2px);  opacity:1; }
-  91%   { transform: translate(3px,-2px);  opacity:.85; }
-  93%   { transform: translate(-2px,1px);  opacity:.7; }
-  95%   { transform: translate(-1.5px,0);  opacity:.55; }
-}
-@keyframes rgb-b {
-  0%,88%,100% { transform: translate(1.5px,0); opacity:.55; }
-  89.5% { transform: translate(5px,-2px);  opacity:1; }
-  91%   { transform: translate(-3px,2px);  opacity:.85; }
-  93%   { transform: translate(2px,-1px);  opacity:.7; }
-  95%   { transform: translate(1.5px,0);   opacity:.55; }
-}
+/* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
+   Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
+   Wordmark = KAPMAN (Hanken 800) au-dessus de SIGNAL (Plex Mono, tracking large). */
+.lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+.signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
+.signal-glyph .sg-bar { width: 6px; border-radius: 3px; transform-origin: bottom; }
+.signal-glyph .sg-r { background: var(--red);   height: 12px; animation: sg-breathe 2.8s ease-in-out infinite alternate; }
+.signal-glyph .sg-g { background: var(--green); height: 22px; animation: sg-breathe 3.6s ease-in-out infinite alternate; }
+.signal-glyph .sg-b { background: var(--blue);  height: 17px; animation: sg-breathe 3.2s ease-in-out infinite alternate; }
+@keyframes sg-breathe { from { transform: scaleY(1); } to { transform: scaleY(.75); } }
+.signal-glyph.paused .sg-bar { animation-play-state: paused; }
+
+.lockup-text { display: flex; flex-direction: column; gap: 4px; }
+.wordmark { font-family: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
+.signal-label { font-family: var(--mono); font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: var(--meta); line-height: 1; }
+.logo-block .wordmark { font-size: 26px; }
+.logo-block .signal-label { font-size: 9px; }
 
 .logo-mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
 .logo-mini-rule .r { flex: 1; background: var(--red); }
@@ -184,7 +140,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -222,7 +178,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   margin-bottom: 28px;
 }
 
-/* ── SECTION INVERSÉE (cream) — "Note de studio" & co ── */
+/* ── SECTION INVERSÉE (cream) · "Note de studio" & co ── */
 .section--invert { background: var(--cream); color: var(--ink); margin: 0 -48px; padding: 44px 48px; }
 .section--invert h2 { color: var(--ink); }
 .section--invert .s-body p { color: var(--ink-soft); }
@@ -352,8 +308,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 /* ── FOOTER ── */
 .footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
 .footer-logo { margin-bottom: 24px; }
-.footer-logo-circles { margin: 0 auto 10px; display: block; }
-.footer-wordmark { font-family: var(--disp); font-size: 22px; font-weight: 400; letter-spacing: .04em; color: var(--dim); text-transform: uppercase; margin-bottom: 6px; }
+.footer-lockup { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+.footer-lockup .signal-glyph { gap: 3px; }
+.footer-lockup .sg-bar { width: 4px; }
+.footer-lockup .lockup-text { gap: 2px; }
+.footer-lockup .wordmark { font-size: 18px; color: var(--dim); }
+.footer-lockup .signal-label { font-size: 9px; }
 .footer-mini-rule { display: flex; height: 1px; width: 80px; margin: 0 auto 6px; }
 .footer-mini-rule .r { flex:1; background: var(--red); }
 .footer-mini-rule .g { flex:1; background: var(--green); }
@@ -372,7 +332,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .triple-rule .b { animation-delay: .16s; }
 @keyframes rule-grow { to { transform: scaleX(1); } }
 
-/* Apparition au scroll — entrée franche (rise).
+/* Apparition au scroll · entrée franche (rise).
    Le contenu n'est masqué QUE si JS tourne (classe .js sur <html>) : sans JS,
    ou si l'observer échoue, tout reste visible. Jamais de contenu perdu. */
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .5s ease, transform .65s cubic-bezier(.16,1,.3,1); }
@@ -383,8 +343,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 @media (prefers-reduced-motion: reduce) {
   .triple-rule .r, .triple-rule .g, .triple-rule .b,
-  .lc { animation: none !important; transform: none !important; }
-  .logo-wordmark[data-txt]::before, .logo-wordmark[data-txt]::after { animation: none !important; }
+  .signal-glyph .sg-bar { animation: none !important; transform: none !important; }
   .js .reveal, .js .stat.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
@@ -393,7 +352,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .subscribe-section, .footer, .stat,
   .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
   
-  .logo-wordmark { font-size: 30px; }
+  .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
 }
@@ -406,22 +365,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 <!-- HERO -->
 <div class="hero">
-  <div class="issue-numeral" aria-hidden="true" data-txt="10">10</div>
+  <div class="issue-numeral" aria-hidden="true">10</div>
   <div class="hero-content">
     <div class="hero-meta">2026-06-18 &nbsp;·&nbsp; KAPMAN SIGNAL N°10 &nbsp;·&nbsp; Juin 2026</div>
 
     <div class="logo-block">
-      <div class="logo-circles" aria-hidden="true">
-        <span class="lc lc-r" style="--shift:-3px"></span>
-        <span class="lc lc-g" style="--shift:0px"></span>
-        <span class="lc lc-b" style="--shift:3px"></span>
+      <div class="lockup">
+        <div class="signal-glyph" aria-hidden="true">
+          <span class="sg-bar sg-r"></span>
+          <span class="sg-bar sg-g"></span>
+          <span class="sg-bar sg-b"></span>
+        </div>
+        <div class="lockup-text">
+          <div class="wordmark">KAPMAN</div>
+          <div class="signal-label">Signal</div>
+        </div>
       </div>
-      <div class="logo-wordmark" data-txt="KAPMAN">KAPMAN</div>
       <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
       <div class="logo-collective">Escape Music Collective</div>
     </div>
 
-    <h1 class="tagline">De Chicago à Francfort —<br>la ligne directe</h1>
+    <h1 class="tagline">Cinq ans avant que<br>l'Allemagne dise minimal</h1>
     <div class="reading-time">4 min &nbsp;·&nbsp; Juin 2026</div>
   </div>
 </div>
@@ -430,13 +394,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="summary">
   <div class="lbl lbl-accent">Cette édition</div>
   <ul class="sum-list">
-    <li><a class="sum-link" href="#s1">6 tracks sur la ligne Chicago → Detroit → Francfort — l&#39;arc 1986 → 2004 en une seule écoute</a></li>
-    <li><a class="sum-link" href="#s2">2 sorties 2026 à suivre : Reagan Grey sur Wolf Music, Manuel Darquart</a></li>
-    <li><a class="sum-link" href="#s3">Le label : Sound Signature (Detroit, Theo Parrish)</a></li>
-    <li><a class="sum-link" href="#s4">Note de studio — jouer dans une tradition sans s&#39;y perdre</a></li>
+    <li><a class="sum-link" href="#s1">Sept tracks sur l&#39;Allemagne d&#39;avant le minimal, de Ebird en 2001 à Rocket Launcher en 2006</a></li>
+    <li><a class="sum-link" href="#s2">Deux sorties récentes à suivre : Dav sur le label suisse Jamuse, et Vanni Danni du côté rominimal</a></li>
+    <li><a class="sum-link" href="#s3">Le label : 38db Tonsportgruppe, trente références allemandes entre 2004 et 2009</a></li>
+    <li><a class="sum-link" href="#s4">Note de studio : ce que l&#39;économie de moyens allemande apprend au studio</a></li>
     
   </ul>
-  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=k4vllvhbEzw,bJ58lHX2Zrs,3wPJPintfrM,yXHNXjxkiVU,mQy2V_3LRMQ,KpZpch8Qpo8,eVxub7ztEG8,5vvySiVnHrU" target="_blank" rel="noopener">▶ Écouter la sélection — 8 tracks</a>
+  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=gMOf_rlXtn0,1UqRGNkHOxs,FfTJoR6s0JU,sZEAxcLIovQ,xwYKDNRZILE,zJ5EK2cD5jQ,NMERLJ6l9W8,gFdRpLqFPYg,hykVQGZjBSQ" target="_blank" rel="noopener">▶ Écouter la sélection · 9 tracks</a>
 </div>
 
 
@@ -445,84 +409,97 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
-  <h2>La ligne directe</h2>
+  <h2>Ce qui tourne : l&#39;Allemagne avant le minimal, 2001 à 2006</h2>
     
   <div class="tracks tracks-red">
     
-  <div class="track" id="mr-fingers-can-you-feel-it">
-    <div class="track-name">Mr Fingers — Can You Feel It</div>
-    <div class="track-meta">Trax Records TX127 · 12&#34; · Chicago · 1986</div>
+  <div class="track" id="modomonomusik-bee-ebird">
+    <div class="track-name">Modomonomusik &amp; Bee · Ebird</div>
+    <div class="track-meta">Ringelbeatz RINGELBEATZ02 · 12&#34; · Allemagne · 2001</div>
     
-    <div class="track-body">Larry Heard a enregistré ça dans sa chambre sur un 4-piste. Pas de studio, pas de budget, juste une boîte à rythmes et un synthé bas de gamme. Quarante ans plus tard c'est encore dans les premières mesures que quelque chose se passe qu'on ne sait pas expliquer. Le point zéro.</div>
-    
+    <div class="track-body">Sept minutes de deep house acide gravées sur le label que le duo dirige lui-même. Le groove avance en boucle serrée, presque monotone, jusqu'à ce que l'acide vienne mordre dedans. C'est le point de départ logique de cette sélection : une Allemagne qui bricole encore son vocabulaire, sans souci du genre à venir. Le kick ne cherche pas à impressionner, il porte.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Bee, c&#39;est Bee A Pilot, moitié du duo derrière le label Ringelbeatz lui-même.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=k4vllvhbEzw" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=gMOf_rlXtn0" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/74130-Modomonomusik-Bee-Silicon-Valley" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="theo-parrish-falling-up">
-    <div class="track-name">Theo Parrish — Falling Up</div>
-    <div class="track-meta">Third Ear Recordings 3ELP 001 · 3×LP · Detroit · 2002</div>
+  <div class="track" id="martini-bros-after-hours-in-texas">
+    <div class="track-name">Märtini Brös. · After Hours In Texas</div>
+    <div class="track-meta">Not On Label · 2×LP · Allemagne · 2001</div>
     
-    <div class="track-body">La version originale, pas le Carl Craig remix — parue sur la compilation Detroit Beatdown Volume One. Detroit soul-house à l'état brut — les éléments arrivent quand ils veulent, pas quand la structure le demande. Ce relâchement intentionnel, c'est ce qui manque à 90% des productions actuelles.</div>
-    
+    <div class="track-body">Face D2 d'une compilation vinyle en deux volumes, Music Rodeo, sortie sans nom de label affiché la même année. Le titre sonne comme une private party filmée en Super 8 : boucle sale, groove chaloupé, presque amateur dans le meilleur sens du terme. Le duo n'a laissé que peu de traces sur Discogs, ce qui rend la trouvaille plus précieuse encore. Une pièce de white label typique de cette Allemagne d'avant le minimal, où le disque comptait plus que le nom dessus.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Face D2 de la compilation Music Rodeo. La face A1 revient au même duo avec 1000 Miles Of Dust.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=bJ58lHX2Zrs" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=1UqRGNkHOxs" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/de/release/17494084-Various-Music-Rodeo" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="omar-s-thank-u-4-letting-me-be-myself">
-    <div class="track-name">Omar S — Thank U 4 Letting Me Be Myself</div>
-    <div class="track-meta">FXHE Records AOS-7000 · CD · Detroit · 2013</div>
+  <div class="track" id="roland-fiege-privatrocker-v2-0">
+    <div class="track-name">Roland Fiege · Privatrocker V2.0</div>
+    <div class="track-meta">Satt SATT 001 · 12&#34; · Allemagne · 2004</div>
     
-    <div class="track-body">Huit minutes. Les synthés en ouverture ressemblent à rien d'autre — pas du Chicago, pas du Berlin, juste Detroit à un moment précis. Omar S a un rapport à la musique que personne n'a su copier. La disco infusée dans la techno sans que les deux s'annulent.</div>
+    <div class="track-body">Six minutes de tech house sèche, construites autour d'un kick qui ne varie jamais et d'un riff qui, lui, n'arrête pas d'évoluer autour de ce point fixe. Le morceau ne cherche jamais à surprendre, il cherche à tenir : c'est toute la promesse du label Satt à ses débuts. La V2.0 du titre n'est pas un hasard, Fiege retravaille sa propre formule jusqu'à ce qu'elle tienne debout toute seule. Sorti en 2004, quand cette économie de moyens était encore une évidence plutôt qu'un choix esthétique.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=3wPJPintfrM" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=FfTJoR6s0JU" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/256754-Roland-Fiege-Privatrocker" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="akufen-deck-the-house">
-    <div class="track-name">Akufen — Deck The House</div>
-    <div class="track-meta">Force Inc. Music Works FIM 223 · 12&#34; · Montréal · 2002</div>
+  <div class="track" id="dakar-grinser-reptile">
+    <div class="track-name">Dakar &amp; Grinser · Reptile</div>
+    <div class="track-meta">Disko B DB133 · 12&#34; · Munich · 2005</div>
     
-    <div class="track-body">Marc Leclair échantillonnait la radio FM sur un séquenceur — des fragments de voix, de pub, de chansons — et les recombinait. Le résultat est une micro-house qui ressemble à aucune autre micro-house. Quand Herbert a remixé ce disque c'est parce qu'il avait compris que Leclair faisait quelque chose de fondamentalement différent.</div>
-    
+    <div class="track-body">Une basse qui rampe plus qu'elle ne pousse, une syncope qui revient sans jamais se répéter deux fois pareil : Reptile porte bien son nom. Le groove change de direction en douceur, jamais brutalement, jusqu'à ce corps à corps qui tient six minutes sans faiblir. Disko B publie ici un duo qu'il suit depuis longtemps, et ça s'entend dans l'aisance du morceau. Une pièce fonctionnelle et habitée à la fois, pas juste l'une des deux.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Dakar &amp; Grinser, duo formé par Christian Kreuz et Michael Kuhn, résidents du club Ultraschall à Munich avant de rejoindre Disko B, label lui aussi munichois.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=yXHNXjxkiVU" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=sZEAxcLIovQ" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/462258-Dakar-Grinser-25-Reptile" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="isolee-beau-mot-plage">
-    <div class="track-name">Isolée — Beau Mot Plage</div>
-    <div class="track-meta">Playhouse PLAY 22 · 12&#34; · Francfort · 1998</div>
+  <div class="track" id="wekan-hallo-tigerskin-remix">
+    <div class="track-name">Wekan · Hallo! (Tigerskin Remix)</div>
+    <div class="track-meta">Tiny Sticks stick 003 · 12&#34; · UK · 2005</div>
     
-    <div class="track-body">Rajko Müller. Cette track a été jouée dans tous les clubs minimaux de 2002 à 2008 et elle sonne toujours juste aujourd'hui. La mélodie est simple au point d'être gênante — c'est pour ça qu'elle reste. Perlon à son meilleur : rien de trop, rien qui manque.</div>
-    
+    <div class="track-body">Le Hallo! original appartient à Wekan, mais c'est la version signée Tigerskin qui a couru les sets allemands de l'époque. Le remix retire la moitié des éléments de l'original et laisse un beat sec, presque austère, porter toute la tension. On y entend déjà la grammaire qui deviendra minimal quelques années plus tard, sans le vocabulaire pour la nommer encore. Une pièce charnière dans cette sélection, celle où l'économie commence à devenir un style.</div>
+    <div class="track-dig"><span class="dig-arrow">↳</span> Le remix est signé Tigerskin, l&#39;un des nombreux alias de l&#39;Allemand Alexander Krüger, aussi actif sous le nom Dub Taylor.</div>
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=mQy2V_3LRMQ" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=xwYKDNRZILE" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/569316-Wekan-Reworked" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="ricardo-villalobos-serpentin">
-    <div class="track-name">Ricardo Villalobos — Serpentin</div>
-    <div class="track-meta">Perlon PERL 43 · 3×12&#34; · 2004</div>
+  <div class="track" id="nicolas-stefan-leibgericht">
+    <div class="track-name">Nicolas Stefan · Leibgericht</div>
+    <div class="track-meta">KarateMusik KarateMusik019 · 12&#34; · Allemagne · 2006</div>
     
-    <div class="track-body">Extrait de Thé au Harem d'Archimède, son deuxième album. Des percussions latines déviées de leur rôle, un kick qui s'efface, une patience dans le déroulé que personne d'autre ne s'autorisait en 2004. Cette track met 4 minutes à s'installer et ensuite elle ne lâche plus rien. Perlon ne ressemblait alors à aucun autre label.</div>
+    <div class="track-body">Presque huit minutes sur le label KarateMusik, un nom qui annonce la couleur : quelque chose de nourrissant, sans fioritures. Leibgericht avance par couches minimales, un groove qui prend son temps pour s'installer et qui, une fois posé, ne bouge plus. Le disque préfère la répétition contrôlée à la surprise permanente, et gagne en intensité pour cette raison précise. Deux mille six, année où ce genre de morceau reste encore une évidence fonctionnelle plutôt qu'un genre revendiqué.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=KpZpch8Qpo8" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=zJ5EK2cD5jQ" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/835148-Nicolas-Stefan-Brothership-EP" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+    
+  <div class="track" id="andy-lee-rocket-launcher">
+    <div class="track-name">Andy Lee · Rocket Launcher</div>
+    <div class="track-meta">i220 i220-053 · 12&#34; · Allemagne · 2006</div>
+    
+    <div class="track-body">Sept minutes qui portent bien leur titre : une poussée progressive, un moteur qui monte en régime sans jamais redescendre. Le label i220 signe ici une pièce taillée pour la fin de nuit, quand la salle a besoin d'un raidissement plutôt que d'une nouvelle mélodie. Peu d'éléments, tous utilisés à fond : la même leçon que le reste de cette sélection, prise au sérieux jusqu'au bout. Rocket Launcher clôt l'arc en 2006, à la lisière de ce que l'Allemagne appellera bientôt autrement.</div>
+    
+    
+    <div class="track-links">
+      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=NMERLJ6l9W8" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-red" href="https://www.discogs.com/release/870920-Andy-Lee-Rocket-Launcher-EP" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
@@ -536,8 +513,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
   
 <div class="stat stat-green reveal">
-  <div class="stat-num">1986</div>
-  <div class="stat-ctx">Année où Larry Heard enregistre Can You Feel It dans sa chambre à Chicago. La maison de la house music n&#39;était pas un studio — c&#39;était une pièce, un synthé, une idée.</div>
+  <div class="stat-num">5</div>
+  <div class="stat-ctx">Cinq ans séparent Ebird, sorti en 2001, et Rocket Launcher, sorti en 2006 : les deux bornes de cette sélection. Entre les deux, l&#39;Allemagne fabrique un vocabulaire fonctionnel avant même d&#39;avoir besoin de lui donner un nom.</div>
 </div>
   
 
@@ -545,32 +522,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
-  <h2>Sorties 2026 — ce qui mérite l&#39;attention</h2>
+  <h2>Sorties récentes : deux pistes qui vont plus loin</h2>
     
   <div class="tracks tracks-green">
     
-  <div class="track" id="reagan-grey-kinetic-ep">
-    <div class="track-name">Reagan Grey — Kinetic EP</div>
-    <div class="track-meta">Wolf Music Recordings WOLFEP084 · 12&#34; · Toronto · 2026</div>
+  <div class="track" id="dav-bad-dreams">
+    <div class="track-name">Dav · Bad Dreams</div>
+    <div class="track-meta">Jamuse JAMU003 · 12&#34; · Suisse · 2025</div>
     
-    <div class="track-body">Basée à Toronto, des sorties sur Local Talk et Selections. Wolf Music pour la deuxième sortie du label en 2026. Deep house dub-inflected, précise — la track 'Not Giving Up' avec Christie Nelson est le point d'entrée. Ce label UK sait ce qu'il cherche, et ça s'entend.</div>
+    <div class="track-body">Sortie sur Jamuse, label suisse qui creuse une deep house nocturne sans esbroufe. Bad Dreams avance sur un groove tendu, presque anxieux, qui colle bien à son titre sans jamais verser dans l'ambiance pesante. La production reste sobre : peu de couches, un kick qui porte tout le poids du morceau. Une sortie 2025 qui mérite de rester dans les bacs plus qu'un instant.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=eVxub7ztEG8" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://reagangrey.bandcamp.com/album/kinetic-ep" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=gFdRpLqFPYg" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://www.discogs.com/release/35689603-Dav-Tailored-Dreams-" target="_blank" rel="noopener">◈ Discogs</a>
     </div>
     
   </div>
     
-  <div class="track" id="manuel-darquart-dream-house-factory-vol-1">
-    <div class="track-name">Manuel Darquart — Dream House Factory Vol. 1</div>
-    <div class="track-meta">Wolf Music Recordings WOLFEP085 · 12&#34; · 2026</div>
+  <div class="track" id="vanni-danni-what-can-i-get">
+    <div class="track-name">Vanni Danni · What Can I Get</div>
+    <div class="track-meta"> · 2026</div>
     
-    <div class="track-body">Influences Italo house assumées, acid, disco — mais sans nostalgie facile. Darquart prend les outils des années 80 et les met au service d'un groove 2026. Wolf Music, deuxième fois dans cette sélection : le label est dans sa meilleure période depuis des années.</div>
+    <div class="track-body">Sortie en mai 2026, autoproduite, dans l'orbite de la scène rominimal que Vanni Danni creuse depuis plusieurs années. What Can I Get avance en boucle hypnotique, un groove patient qui construit sa tension sans brusquer personne. C'est une house minimale contemporaine qui doit beaucoup, sans le dire frontalement, à l'économie de moyens qui traverse ce numéro. Une sortie récente qui prolonge une ligne plutôt qu'elle ne la referme.</div>
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=5vvySiVnHrU" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=hykVQGZjBSQ" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://vannidanni.bandcamp.com/track/vanni-danni-what-can-i-get" target="_blank" rel="noopener">↗ Bandcamp</a>
     </div>
     
   </div>
@@ -584,8 +561,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
   
 <div class="stat stat-blue reveal">
-  <div class="stat-num">367</div>
-  <div class="stat-ctx">Références Sound Signature recensées sur Discogs à ce jour, pressages et rééditions compris. Vingt-sept ans de sorties, et le catalogue s&#39;écoute encore comme un seul long DJ set — dans n&#39;importe quel ordre.</div>
+  <div class="stat-num">30</div>
+  <div class="stat-ctx">Trente références 38db Tonsportgruppe recensées sur Discogs, de 2004 à 2009. Le label dont il est question juste en dessous.</div>
 </div>
   
 
@@ -593,11 +570,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="body-wrap">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
-  <h2>Le label — Sound Signature</h2>
+  <h2>Le label : 38db Tonsportgruppe</h2>
     
     
   <div class="s-body">
-    <p>Detroit, 1999. Theo Parrish monte Sound Signature sans définir de son maison : le seul critère d'entrée, c'est le groove — ce qu'un disque fait à un corps qui écoute debout.</p><p>Le catalogue fait coexister de la deep house éclatée, des edits soul à 78 BPM, de la techno dure, des disques live, des instrumentaux de 12 minutes. Ce qui relie tout ça, c'est une écoute physique — attentive, patiente, qui juge un disque aux jambes plutôt qu'au genre.</p><p>Son 2025 : Organic Hardware Pt 2 — double LP qui confirme que Parrish n'a aucune intention de simplifier quoi que ce soit. Par où commencer : <a href="https://soundsignature.bandcamp.com/" target="_blank">soundsignature.bandcamp.com →</a></p>
+    <p>Allemagne, 2004. 38db Tonsportgruppe naît comme division d'Auralis Music Management, portée par Boni & Tooth T. Le nom sonne comme un laboratoire de sport, et le catalogue s'en approche : une tech house fonctionnelle, taillée pour l'effort plutôt que pour l'écoute de salon.</p><p>Trente références recensées sur Discogs entre 2004 et 2009, de TSG001 jusqu'aux dernières sorties de la décennie. Un catalogue compact, sans extension excessive, qui tient sur une idée simple : un groove qui marche.</p><p>Par où commencer : The Goalie's Anxiety · 31st Tango Zeppelin (TSG004, 2005), remixée par Terry Lee Brown Jr. et par les fondateurs du label eux-mêmes, Boni & Tooth T. <a href="https://www.discogs.com/fr/release/612087-The-Goalies-Anxiety-31st-Tango-Zeppelin-Remixed" target="_blank">◈ Discogs →</a></p>
   </div>
     
 </div>
@@ -612,7 +589,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
   <div class="s-body">
-    <p>J'ai réécouté Can You Feel It pour la première fois depuis longtemps — vraiment réécouté, pas en fond sonore.</p><p>Ce qui m'a frappé : la drum machine est fausse. Pas musicalement — techniquement. Les temps ne sont pas parfaitement alignés. Et c'est pour ça que ça respire. Larry Heard n'avait pas les outils pour corriger ça, ou peut-être qu'il s'en fichait. Le résultat c'est qu'on entend quelqu'un en train de jouer, pas un programme en train d'exécuter.</p><p>Depuis, j'essaie de désaligner intentionnellement certains éléments dans mes sessions Live 12. Pas du slop aléatoire — du micro-décalage voulu. Le TR-6S en séquenceur externe avec un léger retard sur les hats. Le résultat n'est pas parfait — c'est le point.</p><p>La tradition ne sert à rien si elle devient une prison de référence. Elle sert à comprendre pourquoi les imperfections de 1986 sonnent mieux que les grids parfaits de 2020.</p>
+    <p>Cette semaine j'ai réécouté d'affilée une dizaine de maxis allemands du début des années 2000, ceux qui tournaient avant que le mot minimal existe pour les décrire. Ce qui frappe n'est pas la sécheresse du son. C'est le nombre d'éléments qui composent chaque morceau, rarement plus de quatre ou cinq à la fois.</p><p>Sur Privatrocker V2.0 il y a un kick, une ligne de basse, une percussion secondaire, un accord tenu. C'est tout. Le morceau tient une salle pendant six minutes sans jamais avoir besoin d'ajouter une couche pour relancer l'attention.</p><p>J'ai pris l'habitude inverse dans mes propres sessions : empiler jusqu'à ce que ça sonne plein, puis retirer ce qui gêne. Cette fois j'ai tenté le chemin d'en face. Partir du kick du TR-6S et du MicroKorg 2 en son unique, et refuser d'ajouter un troisième élément tant que les deux premiers ne tenaient pas seuls debout. Le micro-décalage que j'explore depuis un moment prend une autre valeur dans ce cadre : sur si peu d'éléments, chaque milliseconde de retard se voit et se sent.</p><p>Ce que cette tech house allemande fonctionnelle apprend, ce n'est pas une esthétique à copier. C'est une discipline : ne rien garder qui ne travaille pas. Dans Live 12, en Session View, j'ai laissé deux pistes vides plus longtemps que d'habitude avant de me demander si elles manquaient vraiment.</p>
   </div>
     
 </div>
@@ -626,14 +603,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- ÉCOUTER LA SÉLECTION (répété avant le forward) -->
 
 <div class="listen-all-end-wrap">
-  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=k4vllvhbEzw,bJ58lHX2Zrs,3wPJPintfrM,yXHNXjxkiVU,mQy2V_3LRMQ,KpZpch8Qpo8,eVxub7ztEG8,5vvySiVnHrU" target="_blank" rel="noopener">▶ Écouter la sélection — 8 tracks</a>
+  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=gMOf_rlXtn0,1UqRGNkHOxs,FfTJoR6s0JU,sZEAxcLIovQ,xwYKDNRZILE,zJ5EK2cD5jQ,NMERLJ6l9W8,gFdRpLqFPYg,hykVQGZjBSQ" target="_blank" rel="noopener">▶ Écouter la sélection · 9 tracks</a>
 </div>
 
 
 <!-- FORWARD -->
 <div class="forward reveal">
   <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
-  <p>Le catalogue Sound Signature complet sur leur Bandcamp, le Kinetic EP de Reagan Grey, et les premières sorties Wolf Music 2026 de Manuel Darquart — trois fils. Et si tu n'as jamais vraiment écouté Akufen, l'album My Way sur Force Inc est le point d'entrée.</p>
+  <p>Le catalogue 38db Tonsportgruppe se fouille entièrement sur Discogs, en partant de TSG004. Deux fils supplémentaires à tirer : la page Jamuse pour suivre Dav, et la scène rominimal du côté de Vanni Danni, dont le morceau de ce numéro n'est qu'un point d'entrée.</p>
 </div>
 
 
@@ -642,9 +619,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="subscribe-section reveal">
   <div class="sub-text">
     <h3>Recevoir les prochaines issues</h3>
-    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte — Chrome + un tap.</p>
+    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte · Chrome + un tap.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
-    <p class="sub-note">Tu peux couper quand tu veux — une fois abonné·e, le même bouton sert à te désabonner.</p>
+    <p class="sub-note">Tu peux couper quand tu veux · une fois abonné·e, le même bouton sert à te désabonner.</p>
     <p id="sub-status" aria-live="polite"></p>
   </div>
   <button id="share-btn" hidden>↗ Partager à un ami</button>
@@ -669,19 +646,24 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-logo">
-    <svg class="footer-logo-circles" width="48" height="28" viewBox="0 0 96 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="28" r="26" fill="#E83A2E" opacity=".6"/>
-      <circle cx="48" cy="28" r="26" fill="#1FC85E" opacity=".6"/>
-      <circle cx="64" cy="28" r="26" fill="#3A6CF0" opacity=".6"/>
-    </svg>
-    <div class="footer-wordmark">KAPMAN</div>
+    <div class="footer-lockup">
+      <div class="signal-glyph" aria-hidden="true">
+        <span class="sg-bar sg-r"></span>
+        <span class="sg-bar sg-g"></span>
+        <span class="sg-bar sg-b"></span>
+      </div>
+      <div class="lockup-text">
+        <div class="wordmark">KAPMAN</div>
+        <div class="signal-label">Signal</div>
+      </div>
+    </div>
     <div class="footer-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
     <div class="footer-collective">Escape Music Collective</div>
   </div>
 
-  <div class="footer-byline">Sélection &amp; textes — KAPMAN · Escape Music Collective, Paris</div>
+  <div class="footer-byline">Sélection &amp; textes · KAPMAN · Escape Music Collective, Paris</div>
   
-  <div class="footer-colophon">N°10 · JUIN 2026 · 8 TRACKS · PARIS · KAPMAN SIGNAL</div>
+  <div class="footer-colophon">N°10 · JUIN 2026 · 9 TRACKS · PARIS · KAPMAN SIGNAL</div>
 </div>
 
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
@@ -725,17 +707,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     root.classList.remove('js'); showAll();
   }
 
-  // Glitch rare = événement, pas du bruit permanent : on le pause hors viewport.
+  // Le glyphe respire en continu, mais on le pause hors viewport (repos, pas de bruit gratuit).
   try {
     var hero = document.querySelector('.hero');
-    var lc = document.querySelector('.logo-circles');
-    var wm = document.querySelector('.logo-wordmark');
-    if (hero && (lc || wm) && 'IntersectionObserver' in window) {
+    var glyph = document.querySelector('.hero .signal-glyph');
+    if (hero && glyph && 'IntersectionObserver' in window) {
       var heroIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          var visible = e.isIntersecting;
-          if (lc) lc.classList.toggle('paused', !visible);
-          if (wm) wm.classList.toggle('paused', !visible);
+          glyph.classList.toggle('paused', !e.isIntersecting);
         });
       }, { threshold: 0 });
       heroIO.observe(hero);

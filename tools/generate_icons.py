@@ -1,63 +1,75 @@
 """
-Génère les icônes PWA KAPMAN depuis la DA (3 cercles additifs sur fond Ink).
+Génère les icônes PWA KAPMAN SIGNAL depuis la DA (glyphe signal : 3 barres
+verticales arrondies R/V/B, hauteurs 12/22/17, alignées en bas).
 Output : pwa/icon-192.png, pwa/icon-512.png, pwa/badge-72.png
 100% local, aucune dépendance réseau.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-INK   = (13, 13, 13)      # #0D0D0D
-RED   = (232, 55, 42)     # #E8372A
-GREEN = (0, 166, 80)      # #00A650
-BLUE  = (47, 87, 212)     # #2F57D4
+INK   = (14, 15, 20)      # #0E0F14
+RED   = (232, 58, 46)     # #E83A2E
+GREEN = (31, 200, 94)     # #1FC85E
+BLUE  = (58, 108, 240)    # #3A6CF0
+WHITE = (255, 255, 255)   # badge monochrome
 
 OUT = Path(__file__).parent.parent / "pwa"
 OUT.mkdir(parents=True, exist_ok=True)
 
-
-def additive_blend(base, color, alpha):
-    """Simule la lumière additive : on éclaircit vers la couleur."""
-    return tuple(
-        min(255, int(b + c * alpha))
-        for b, c in zip(base, color)
-    )
+# Proportions du glyphe (unités relatives, référence hauteurs 12/22/17 sur une
+# barre de largeur 6 -> ratio largeur/hauteur-max = 6/22).
+BAR_H_RATIO = [12 / 22, 22 / 22, 17 / 22]  # r, g, b — hauteurs relatives à la barre la plus haute
+BAR_W_TO_MAXH_RATIO = 6 / 22               # largeur d'une barre / hauteur max
+GAP_TO_MAXH_RATIO = 5 / 22                 # espace entre barres / hauteur max
 
 
-def make_icon(size, badge=False):
-    """3 cercles additifs centrés. Si badge=True, monochrome cream (Android badge)."""
-    # Supersampling x4 pour des bords lisses
-    ss = 4
+def draw_glyph(draw, cx, cy_bottom, max_h, colors, radius_ratio=0.5):
+    """Dessine les 3 barres arrondies, alignées en bas sur cy_bottom, centrées sur cx.
+    max_h = hauteur (en px) de la barre la plus haute (la verte)."""
+    bar_w = max_h * BAR_W_TO_MAXH_RATIO
+    gap = max_h * GAP_TO_MAXH_RATIO
+    total_w = bar_w * 3 + gap * 2
+    x0 = cx - total_w / 2
+    for i, (ratio, color) in enumerate(zip(BAR_H_RATIO, colors)):
+        h = max_h * ratio
+        x_left = x0 + i * (bar_w + gap)
+        x_right = x_left + bar_w
+        y_top = cy_bottom - h
+        y_bottom = cy_bottom
+        radius = bar_w * radius_ratio
+        draw.rounded_rectangle(
+            [x_left, y_top, x_right, y_bottom],
+            radius=radius,
+            fill=color,
+        )
+
+
+def make_icon(size, badge=False, maskable_safe=False):
+    """Glyphe signal centré sur fond ink. Largeur totale du glyphe ~= 45% du canvas.
+    - badge=True   -> barres blanches sur fond transparent (badge Android monochrome).
+    - maskable_safe=True -> motif contraint au cercle central de 80% du canvas
+      (marge de sécurité maskable, pour les launchers qui recadrent en cercle/squircle)."""
+    ss = 4  # supersampling pour bords lisses
     S = size * ss
-    img = Image.new("RGB", (S, S), INK)
-
-    # Rayon et positions des 3 cercles (chevauchement façon logo)
-    r = int(S * 0.26)
-    cy = S // 2
-    gap = int(r * 0.62)
-    cx_mid = S // 2
-    centers = [
-        (cx_mid - gap, cy, RED),
-        (cx_mid,       cy, GREEN),
-        (cx_mid + gap, cy, BLUE),
-    ]
 
     if badge:
-        # Badge Android = silhouette monochrome (cream) sur transparent
         img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(img)
-        for cx, cyc, _ in centers:
-            draw.ellipse([cx - r, cyc - r, cx + r, cyc + r], fill=(245, 240, 232, 255))
-        img = img.resize((size, size), Image.LANCZOS)
-        return img
+    else:
+        img = Image.new("RGB", (S, S), INK)
+    draw = ImageDraw.Draw(img)
 
-    # Mode additif : on dessine chaque cercle en accumulant la lumière
-    px = img.load()
-    for cx, cyc, color in centers:
-        for y in range(max(0, cyc - r), min(S, cyc + r)):
-            dy = y - cyc
-            half = int((r * r - dy * dy) ** 0.5) if r * r >= dy * dy else 0
-            for x in range(max(0, cx - half), min(S, cx + half)):
-                px[x, y] = additive_blend(px[x, y], color, 0.85)
+    # Largeur totale visée : 45% du canvas (ou du cercle de sécurité maskable).
+    safe_dim = S * 0.80 if maskable_safe else S
+    target_total_w = safe_dim * 0.45
+    # total_w = max_h * (3*BAR_W_TO_MAXH_RATIO + 2*GAP_TO_MAXH_RATIO)
+    unit = 3 * BAR_W_TO_MAXH_RATIO + 2 * GAP_TO_MAXH_RATIO
+    max_h = target_total_w / unit
+
+    cx = S / 2
+    cy_bottom = S / 2 + max_h / 2  # glyphe centré verticalement autour du milieu du canvas
+
+    colors = [WHITE] * 3 if badge else [RED, GREEN, BLUE]
+    draw_glyph(draw, cx, cy_bottom, max_h, colors)
 
     img = img.resize((size, size), Image.LANCZOS)
     return img
@@ -65,12 +77,15 @@ def make_icon(size, badge=False):
 
 def main():
     make_icon(192).save(OUT / "icon-192.png")
-    make_icon(512).save(OUT / "icon-512.png")
+    make_icon(512, maskable_safe=True).save(OUT / "icon-512.png")
     make_icon(72, badge=True).save(OUT / "badge-72.png")
     print(f"Icônes générées dans {OUT}")
     for f in ["icon-192.png", "icon-512.png", "badge-72.png"]:
         p = OUT / f
-        print(f"  {f} — {p.stat().st_size // 1024} KB")
+        with Image.open(p) as im:
+            dims = im.size
+            mode = im.mode
+        print(f"  {f} — {p.stat().st_size} octets — {dims[0]}x{dims[1]} — {mode}")
 
 
 if __name__ == "__main__":
