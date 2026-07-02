@@ -1,0 +1,236 @@
+{
+  "issue_num": 12,
+  "date_iso": "2026-07-07",
+  "month_label": "Juillet 2026",
+  "reading_time": "6 min",
+  "listening_time": "",
+  "playlist_url": "",
+  "show_tracklist": true,
+  "tagline_plain": "Le dub comme méthode, de 1993 à 2026",
+  "tagline_html": "Le dub comme méthode,<br>de 1993 à 2026",
+  "summary_bullets": [
+    "Sept tracks du dub comme méthode, 1993 à 2018 : de Idjut Boys à Konduku, retirer plutôt qu'ajouter",
+    "Deux sorties à suivre : cv313 et Federsen sur Alt/Dub, R.Hz sur spclnch",
+    "Le label : Wackie's, cinquante ans de dub dans le même quartier du Bronx",
+    "Note de studio : faire la version dub de son propre morceau"
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "accent": "red",
+      "heading": "Ce qui tourne : le dub comme méthode, 1993 à 2018",
+      "tracks": [
+        {
+          "name": "Idjut Boys · Jesta (Dub)",
+          "label": "U-Star Records",
+          "catno": "US 001",
+          "format": "12\", EP",
+          "place": "UK",
+          "year": "1993",
+          "body": "En 1993, le duo londonien Idjut Boys sort son tout premier disque sur son propre label, U-Star Records, monté pour l'occasion. La face B referme Jesta sur une version simplement titrée Dub : la mélodie disparaît, il ne reste qu'une carcasse rythmique et un écho qui traîne derrière chaque coup de caisse claire. Le mot dub désigne ici un geste précis, couper d'abord et garder ensuite ce qui tient debout tout seul. C'est le point de départ chronologique de tout ce numéro.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=H4WpbmgE3kE"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/182008-Idjut-Boys-Idjut-Boy-EP"
+            }
+          ]
+        },
+        {
+          "name": "Vainqueur · Elevation (Version 1)",
+          "label": "Chain Reaction",
+          "catno": "CR-07",
+          "format": "12\"",
+          "place": "Allemagne",
+          "year": "1996",
+          "body": "Trois ans plus tard à Berlin, Vainqueur pose la seule référence vraiment canon de cette sélection. Chain Reaction, label monté par Moritz von Oswald et Mark Ernestus dans la foulée de Basic Channel, y invente une manière d'étirer un accord sur plusieurs minutes sans jamais le répéter à l'identique. Elevation tient sur une nappe qui respire et un kick à peine posé, presque tout le morceau est fait de silence retravaillé. Le reste du numéro part de là pour aller chercher des versions plus obscures du même geste.",
+          "dig": "La Version 1 dépasse quinze minutes sur le disque original, sans qu'aucune section ne se répète à l'identique.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=Ug6ynHK0r78"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/7501-Vainqueur-Elevation"
+            }
+          ]
+        },
+        {
+          "name": "Lowfour · Ian EP",
+          "label": "Echocord",
+          "catno": "echocord 03",
+          "format": "12\", White Label, EP",
+          "place": "Danemark",
+          "year": "2002",
+          "body": "En 2002 à Copenhague, Kenneth Christiansen monte Echocord pour prolonger ailleurs ce que Chain Reaction avait posé à Berlin. Sa troisième sortie revient au Suédois Andreas Tilliander, déjà actif sous plusieurs alias, ici sous le nom Lowfour. Les quatre Riddim de l'EP tiennent sur une boucle sourde et un espace qui se creuse à chaque mesure, le titre annonce directement la source jamaïcaine du geste. Le dub technique quitte l'Allemagne et devient une méthode qu'on peut exporter.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=RE7Lkdz2mCA"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/2817454-Lowfour-Ian-EP"
+            }
+          ]
+        },
+        {
+          "name": "Shed · TK001",
+          "label": "Styrax Leaves",
+          "catno": "strx leaves 01",
+          "format": "12\", Limited Edition, Single Sided",
+          "place": "Allemagne",
+          "year": "2005",
+          "body": "Styrax Leaves ouvre son catalogue en 2005 avec un split entre Shed, encore débutant, et Don Williams, alias du Berlinois Thomas Wendel qui dirige déjà Mojuba et A.R.T.less. La face de Shed, TK001, tourne sur une seule boucle sourde qui se creuse mesure après mesure, sans rien ajouter en cours de route. Cette économie de moyens, presque entièrement rythmique, préfigure ce que Shed développera ensuite sous ses autres alias. Une manière de traiter le manque comme matériau principal du morceau.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=7DGR8-JmdzY"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/1162328-Shed-Don-Williams-1st-Bouquet"
+            }
+          ]
+        },
+        {
+          "name": "Echologist · Dreadscapes",
+          "label": "Mule Musiq",
+          "catno": "mule musiq 004",
+          "format": "12\"",
+          "place": "Japon",
+          "year": "2005",
+          "body": "La même année à Tokyo, le label Mule Musiq publie Dreadscapes, du Sud-Africain Brendon Moeller sous son alias Echologist. Le titre annonce le programme, une techno saturée de réverbe, presque entièrement construite sur les creux entre les coups. Moeller a quitté Johannesburg en 1993, la même année que la sortie des Idjut Boys qui ouvre ce numéro. Le geste berlinois de 1996 a maintenant traversé deux océans.",
+          "dig": "Dreadscapes inclut aussi un remix signé Dub Archanoid Trim, sorti la même année sur le même label.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=hqXNAiQogag"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/581563-Echologist-Dreadscapes"
+            }
+          ]
+        },
+        {
+          "name": "Jacek Sienkiewicz · Living In Oblivion",
+          "label": "Smallville Records",
+          "catno": "SMALLVILLE 05",
+          "format": "12\"",
+          "place": "Allemagne",
+          "year": "2007",
+          "body": "Deux ans plus tard, le disquaire hambourgeois devenu label Smallville publie sa cinquième référence, confiée au Polonais Jacek Sienkiewicz. Living In Oblivion tient sur douze minutes sans jamais poser de kick fixe, la matière dub sert ici à faire de la house sans rendre la structure évidente. Le morceau flotte plutôt qu'il n'avance, un choix qui distingue tout de suite le son Smallville du dub techno plus rigide de Berlin ou de Copenhague. C'est la version hambourgeoise du même geste, retirer la charpente et voir ce qui continue de tenir.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=kKcpiQXO0QE"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/1144343-Jacek-Sienkiewicz-Living-In-Oblivion"
+            }
+          ]
+        },
+        {
+          "name": "Konduku · Pembe Alan",
+          "label": "Nous'klaer Audio",
+          "catno": "NOUSLP002",
+          "format": "2x12\", Album",
+          "place": "Pays-Bas",
+          "year": "2018",
+          "body": "Onze ans plus tard, le Néerlandais Ruben Üvez, seul derrière le nom Konduku, referme le versant catalogue de ce numéro sur Nous'klaer Audio, label rotterdamois fondé par DJ Oberman en 2013. Pembe Alan, extrait de l'album Kıran, mélange bass anglaise, house et dub techno dans une seule piste sans jamais choisir un camp. Le morceau garde la texture cassée de la bass music, mais l'espace laissé entre les percussions reste entièrement dub. Vingt cinq ans après Jesta (Dub), la méthode n'a pas changé, couper d'abord et garder ce qui résiste.",
+          "dig": "Kıran, qui donne son titre à l'album, est une colline de Cappadoce liée à la famille paternelle turque de Ruben Üvez.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=EARftaTpUXo"
+            },
+            {
+              "label": "◈ Discogs",
+              "url": "https://www.discogs.com/release/12022065-Konduku-Kıran"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "accent": "green",
+      "number": "25",
+      "context": "Vingt cinq ans séparent Jesta (Dub) des Idjut Boys de Pembe Alan de Konduku : toute la ligne du dub comme méthode traversée dans cette sélection, du Bronx à Rotterdam en passant par Berlin, Copenhague et Tokyo."
+    },
+    {
+      "type": "section",
+      "accent": "green",
+      "heading": "Sorties récentes : la méthode aujourd'hui",
+      "tracks": [
+        {
+          "name": "cv313 & Federsen · Third Dimension",
+          "label": "Alt/Dub",
+          "catno": "AD007",
+          "format": "12\"",
+          "year": "2026",
+          "body": "Deuxième volet de la série Altering Dimensions entre l'Américain Stephen Hitchell, connu sous le nom cv313 et pour son travail avec Rod Modell dans Echospace, et Federsen, qui dirige Alt/Dub depuis les Cornouailles anglaises. Third Dimension tient sur huit minutes de textures qui mutent lentement, percussions modulées et basse épaisse en dessous. Le nom cv313 vient de l'indicatif téléphonique de Detroit, ville dont Hitchell tire l'essentiel de son vocabulaire dub depuis les années 90. Un dub techno d'aujourd'hui qui ne renie rien du geste de Chain Reaction, juste plus patient encore.",
+          "links": [
+            {
+              "label": "▶ Écouter",
+              "url": "https://www.youtube.com/watch?v=Ma7uJ6rWnBY"
+            },
+            {
+              "label": "↗ Bandcamp",
+              "url": "https://altdub.bandcamp.com/track/third-dimension"
+            }
+          ]
+        },
+        {
+          "name": "R.Hz · Reversed Dub",
+          "label": "spclnch",
+          "catno": "SPCLNCH-BLACK-03",
+          "format": "12\"",
+          "place": "Pays-Bas",
+          "year": "2026",
+          "body": "Sur spclnch, label fondé à Minsk en 2019 par Thomas Carmody avant de s'installer aux Pays-Bas, le Moscovite R.Hz publie un nouvel album après Dub Ratio, Mindscript et Echo Frequencies les années précédentes. Reversed Dub, septième piste de Hybrid Dub, retourne littéralement le principe du dub techno, au lieu de retirer des éléments dans le temps la piste semble reculer sur elle même, samples et percussions rejoués à l'envers. Une manière très 2026 de prendre la méthode au pied de la lettre plutôt que de la citer en référence.",
+          "links": [
+            {
+              "label": "↗ Bandcamp",
+              "url": "https://spclnch.bandcamp.com/track/reversed-dub"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "accent": "blue",
+      "number": "50",
+      "context": "Cinquante ans depuis l'ouverture du studio de Lloyd Bullwackie Barnes dans le Bronx en 1976. Son label, Wackie's, compte aujourd'hui 631 références répertoriées sur Discogs, sans les sous-labels Wackies Music, Wackies Studio et Wackie's House of Music."
+    },
+    {
+      "type": "section",
+      "accent": "blue",
+      "heading": "Le label · Wackie's",
+      "paragraphs": [
+        "New York, 1976. Lloyd Barnes, surnommé Bullwackie, a grandi à Trench Town avant de rejoindre la ville en 1967. Il a appris le métier auprès de Duke Reid au studio Treasure Isle, croisé Prince Buster et les débuts de Studio One, avant de monter son propre studio au 4731 White Plains Road dans le Bronx, juste à côté de son magasin de disques Wackie's House of Music.",
+        "Le label ne cherche pas à copier la Jamaïque, il la reconstruit avec les moyens du Bronx : mêmes techniques de suppression et de délai héritées de Duke Reid, appliquées avec un groupe maison, les Wackies Rhythm Force, et des voix comme Horace Andy, Sugar Minott ou Wayne Jarrett. C'est le dub reggae originel, celui dont techno et house ont hérité la méthode sans toujours le savoir : retirer une piste à la fois jusqu'à ce que le silence devienne un instrument.",
+        "Par où commencer : Horace Andy · Dance Hall Style, 1982, catalogue W-1383, puis remonter le catalogue sur <a href=\"https://www.discogs.com/release/5319468-Horace-Andy-Dance-Hall-Style\" target=\"_blank\">◈ Discogs →</a>"
+      ]
+    },
+    {
+      "type": "section",
+      "accent": "red",
+      "heading": "Note de studio",
+      "paragraphs": [
+        "Cette semaine j'ai fait un truc que je n'avais jamais fait avec un de mes morceaux : sa version dub. Pas un remix pour DJ, pas une intro allongée. J'ai dupliqué la session dans Live 12, gardé la même grille, et j'ai commencé à couper.",
+        "La nappe du MicroKorg 2 est partie en premier, elle occupait toute la place au milieu sans rien porter. Puis la moitié des hats du TR-6S, gardés seulement sur les temps forts, passés dans un delay qui répète trois fois avant de mourir. Il restait une caisse claire, une basse, et beaucoup de vide entre les deux.",
+        "Ce qui m'a surpris, c'est que le vide tenait tout seul. Le morceau original avait besoin de ses seize pistes pour paraître fini ; la version dub tient debout avec quatre, et elle groove davantage. Ce que j'ai enlevé n'était pas de la musique, c'était de la décoration posée par habitude.",
+        "Je vais reprendre le master avec ce filtre en tête : chaque piste doit justifier sa place, sinon elle part dans la version dub. Le mix avait déjà appris à se taire sur le morceau précédent ; cette fois c'est le morceau entier qui apprend à tenir debout sur moins."
+      ]
+    }
+  ],
+  "forward_text": "Le catalogue de Wackie's se remonte entier sur Discogs, Third Dimension de cv313 et Federsen tourne en douze pouces chez Alt/Dub, et Reversed Dub de R.Hz s'écoute en entier sur le Bandcamp de spclnch. Trois portes pour prolonger l'écoute plus loin que cette page."
+}
