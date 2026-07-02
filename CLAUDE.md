@@ -68,7 +68,9 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   electro/tech house hybride, progressive house UK 1998-2005, acid revival mi-2000s,
   edits (Clone, DFA), rominimal et scène actuelle (Jamuse, Planka, Dank, Vanni Danni).
   PAS de French house filtrée, PAS de canon Chicago/Detroit sauf au service d'une
-  obscurité.
+  obscurité. **Pencher les sélections vers l'ELECTRO** (hybrides electro/tech house,
+  breaks, machines qui claquent) : demande d'Adam, juillet 2026. Et jamais deux
+  taglines qui se ressemblent d'un numéro à l'autre (vérifier les précédentes).
 - **AUCUN tiret dans tout texte publié ni dans les réponses à Adam** : ni « — » ni
   « – », nulle part (prose, titres, noms de tracks, UI). Séparateur artiste/titre :
   « · ». Les traits d'union de mots composés français restent normaux.
