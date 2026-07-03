@@ -1,11 +1,11 @@
-// KAPMAN SIGNAL — Service Worker
+// CIRCUIT FERMÉ — Service Worker
 // Servi depuis la racine du repo pour que son scope couvre tout /kapman-news/.
 // Tous les chemins sont résolus relativement à self.registration.scope
 // (ex. https://arochab.github.io/kapman-news/) — jamais d'absolu "/" qui
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
 // Bump à chaque changement de DA/template — force le remplacement du cache.
-const CACHE = 'kapman-v5';
+const CACHE = 'cf-v6';
 
 // URL du serveur Render — même valeur que pwa/push-client.js (RENDER).
 const RENDER = 'https://kapman-news.onrender.com';
