@@ -45,11 +45,19 @@ l'ordre, et un créneau sans numéro prêt reste silencieux.
 2. **Sceller** : `python tools/circuit.py --seal NN --code "<code du mois>"`
    puis vérifier avec `python tools/circuit.py --check NN`. Le scellé chiffré
    est embarqué dans la page publique ; le code du mois ne quitte jamais git.
+   `--seal` produit aussi, en clair dans `content/NN.json`, le **registre
+   caviardé public** (`circuit.pieces` : index global + méta sûre de chaque
+   pièce membre, `circuit.total` : nb de pièces du numéro — jamais de
+   nom/label/catno, cf `content/SCHEMA.md`). Si on réordonne les pièces
+   (positions dans `content/circuit/NN.json`, ou tracks publiques
+   ajoutées/retirées) : **re-seal obligatoire**, sinon le registre affiché
+   ne correspond plus à l'ordre réel de la page.
 3. **Committer** : uniquement `content/NN.json` et le scellé produit par
-   `--seal` (embarqué dans le HTML rendu). Ne jamais committer
-   `content/circuit/NN.json` en clair ni le code du mois.
+   `--seal` (embarqué dans le HTML rendu, registre `pieces`/`total` inclus).
+   Ne jamais committer `content/circuit/NN.json` en clair ni le code du mois.
 4. **Retoucher après coup** : `python tools/circuit.py --open NN --code
-   "<code du mois>"` pour redéchiffrer localement, éditer, puis resceller.
+   "<code du mois>"` pour redéchiffrer localement, éditer, puis resceller
+   (le re-seal régénère `pieces`/`total` depuis le contenu courant).
 5. **Rendu et envoi restent automatiques** : la CI n'a jamais besoin du code
    du mois, elle ne touche qu'au HTML déjà scellé. `scheduled-notify.yml`
    fonctionne à l'identique pour un numéro fermé ou ouvert.

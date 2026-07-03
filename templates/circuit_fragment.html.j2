@@ -1,23 +1,34 @@
 {#
   Fragment membre autonome : rend UN bloc (section ou stat) avec les classes
-  CSS existantes de la page (section, s-accent, pastille, tracks tracks-{accent},
-  stat...). Utilisé côté client : pwa/circuit.js déchiffre le blob, rend ce
-  gabarit côté outillage (tools/circuit.py) et insère le HTML résultant après
-  l'élément [data-flow="position"] correspondant.
+  CSS v5 de la page (section, s-num, pieces, piece, stat-row...). Utilisé
+  côté client : pwa/circuit.js déchiffre le blob, rend ce gabarit côté
+  outillage (tools/circuit.py) et insère le HTML résultant après l'élément
+  [data-flow="position"] correspondant.
 
-  Différence avec un bloc public : pas de compteur "n / N" (pas de s-num),
-  juste la pastille d'accent + un badge discret ".s-circuit".
+  CONTRAT attendu de tools/circuit.py (numérotation ENTRELACÉE des pièces,
+  cf compute_pieces() dans tools/circuit.py, seule source de vérité) :
+  - chaque piste du bloc doit porter un champ entier `idx` déjà calculé :
+    l'index GLOBAL de la pièce (1..total) dans l'ordre EXACT d'affichage de
+    la page, où les blocs membres s'insèrent à leur "position" au milieu du
+    flux public (position 0 = avant le premier bloc public, position k =
+    juste après le kème bloc public), PAS simplement ajoutés après toutes
+    les pièces publiques ;
+  - le contexte de rendu du template doit fournir une variable `total`
+    (= circuit.total, le nombre total de pièces du numéro, publiques +
+    membres), passée à tmpl.render(block=block, total=<circuit_total>).
+  Sans ce contrat, le tag « PIÈCE 0X/0N » retombe sur idx=0 (fallback ci
+  dessous), visible mais non conforme à la charte v5.
 #}
 {%- import '_track.j2' as trackm -%}
 {%- if block.type == "section" -%}
 <div class="body-wrap">
-<div class="section{% if block.invert %} section--invert{% endif %}">
-  <div class="s-accent"><span class="s-circuit"><span class="pastille pastille-{{ block.accent }}" aria-hidden="true"></span>Circuit</span></div>
+<div class="section">
+  <div class="s-accent"><span class="tag tag--membres">Membres</span><span class="s-num tnum">Circuit</span></div>
   <h2>{{ block.heading }}</h2>
   {% if block.tracks %}
-  <div class="tracks tracks-{{ block.accent }}">
+  <div class="pieces">
     {% for t in block.tracks %}
-{{ trackm.track(t, block.accent) }}
+{{ trackm.track(t, t.idx or 0, total or 0, 'membres') }}
     {% endfor %}
   </div>
   {% endif %}
@@ -29,9 +40,8 @@
 </div>
 </div>
 {%- elif block.type == "stat" -%}
-<div class="stat">
-  <span class="pastille pastille-{{ block.accent }}" aria-hidden="true"></span>
-  <div class="stat-num">{{ block.number }}</div>
+<div class="stat-row">
+  <div class="stat-num tnum">{{ block.number }}</div>
   <div class="stat-ctx">{{ block.context }}</div>
 </div>
 {%- endif -%}

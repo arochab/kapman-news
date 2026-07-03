@@ -168,20 +168,22 @@ def build_og_card(content: dict) -> bool:
         return False
 
 
-def _row_artists(content: dict) -> str:
-    """Artistes réels : partie avant le premier séparateur de chaque t.name, dédupliqués, join ' / '."""
-    artists = []
-    seen = set()
+def _row_piece_count(content: dict) -> int:
+    """Nombre de pièces du registre pour la ligne d'archive home.
+
+    Priorité à `circuit.total` (posé par `tools/circuit.py --seal` sur les
+    numéros fermés freemium : compte les pièces publiques + scellées).
+    Rétrocompat : sans ce champ (numéros non fermés), on compte simplement
+    les tracks des blocs `section`."""
+    circuit = content.get("circuit") or {}
+    if circuit.get("total"):
+        return int(circuit["total"])
+    total = 0
     for b in content.get("blocks", []):
         if b.get("type") != "section":
             continue
-        for t in b.get("tracks", []) or []:
-            name = t.get("name", "")
-            artist = re.split(r" [·—–] ", name, 1)[0].strip()
-            if artist and artist not in seen:
-                seen.add(artist)
-                artists.append(artist)
-    return " · ".join(artists)
+        total += len(b.get("tracks") or [])
+    return total
 
 
 def _row_date(date_iso: str) -> str:
@@ -194,28 +196,31 @@ def _row_date(date_iso: str) -> str:
 
 
 def build_row_html(content: dict) -> str:
-    num = str(content["issue_num"]).zfill(2)
-    accent_idx = content["issue_num"] % 3
+    """Rangée du registre home v5 : index 3 chiffres, tagline, nb de pièces, date.
+    Cf CLAUDE.md § Design system + docs/CHARTE-V5 « Index de sélection »."""
+    num = str(content["issue_num"]).zfill(3)
     title = html.escape(content.get("tagline_plain", ""))
-    artists = html.escape(_row_artists(content))
     date = html.escape(_row_date(content.get("date_iso", "")))
+    count = _row_piece_count(content)
+    count_label = html.escape(f"{count} pièce" + ("" if count == 1 else "s"))
+    href_num = str(content["issue_num"]).zfill(2)
 
     return (
-        f'    <a class="issue-row acc-{accent_idx}" href="issues/{num}/">\n'
-        f'      <span class="issue-num">N°{num}</span>\n'
-        f'      <span class="issue-main">\n'
-        f'        <span class="issue-title">{title}</span>\n'
-        f'        <span class="issue-artists">{artists}</span>\n'
+        f'    <a class="registry-row" href="issues/{href_num}/">\n'
+        f'      <span class="registry-idx tnum">{num}</span>\n'
+        f'      <span class="registry-main">\n'
+        f'        <span class="tagline">{title}</span>\n'
+        f'        <span class="meta tnum">{date}</span>\n'
         f'      </span>\n'
-        f'      <span class="issue-date">{date}</span>\n'
+        f'      <span class="registry-count tnum">{count_label}</span>\n'
         f'    </a>'
     )
 
 
-# Détecte une row existante (ancien format 3-spans OU nouveau format issue-main) pour ce numéro.
+# Détecte une row existante (ancien format issue-row OU nouveau format registry-row) pour ce numéro.
 def _row_pattern(num: str) -> re.Pattern:
     return re.compile(
-        rf'    <a class="issue-row[^"]*" href="issues/{num}/">.*?</a>',
+        rf'    <a class="(?:issue-row|registry-row)[^"]*" href="issues/{num}/">.*?</a>',
         re.DOTALL,
     )
 
@@ -245,9 +250,9 @@ def update_home(content: dict):
         html_src = html_src[:insert_at] + "\n" + row + html_src[insert_at:]
 
     # Recompte les rows et remet à jour le libellé "Archive · N numéros".
-    row_count = len(re.findall(r'class="issue-row', html_src))
+    row_count = len(re.findall(r'class="registry-row"', html_src))
     html_src = re.sub(
-        r'(<div class="lbl" id="archive-lbl">Archive [·—] )\d+( numéros?</div>)',
+        r'(<div class="section-divider" id="archive-lbl">Archive [·—] )\d+( numéros?</div>)',
         lambda m: f"{m.group(1)}{row_count}{m.group(2)}",
         html_src,
     )

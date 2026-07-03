@@ -111,6 +111,56 @@
     });
   }
 
+  // Méta discographique d'une piste, même format que la macro meta() de
+  // templates/_track.j2 (label catno · format · place · année). Purement
+  // cosmétique : sert à compléter les lignes du registre au déverrouillage.
+  function trackMeta(t) {
+    if (t.label || t.catno || t.year) {
+      var s = t.label || '';
+      if (t.catno) s += (s ? ' ' : '') + t.catno;
+      if (t.format) s += ' · ' + t.format;
+      if (t.place) s += ' · ' + t.place;
+      if (t.year) s += ' · ' + t.year;
+      return s;
+    }
+    return t.meta || '';
+  }
+
+  // Complète les lignes caviardées du registre avec le nom et la méta réels
+  // (depuis le clair déchiffré), AVANT la cascade : le retrait de chaque
+  // barre révèle alors le nom à sa place (transition pilotée par --i dans le
+  // CSS du template). L'ordre DOM des .line-locked suit l'idx global
+  // croissant, identique à l'ordre des pistes membres du clair (blocs triés
+  // par position, pistes dans l'ordre : cf compute_pieces, tools/circuit.py).
+  function fillRegistreLines(data) {
+    try {
+      var rows = document.querySelectorAll('#circuit-lock .line-locked');
+      if (!rows.length || !data || !data.source || !Array.isArray(data.source.blocks)) return;
+      var blocks = data.source.blocks.slice().sort(function (a, b) {
+        return (a.position || 0) - (b.position || 0);
+      });
+      var tracks = [];
+      blocks.forEach(function (b) {
+        (b.tracks || []).forEach(function (t) { tracks.push(t); });
+      });
+      for (var i = 0; i < rows.length && i < tracks.length; i++) {
+        var t = tracks[i];
+        if (!t || !t.name) continue;
+        var bar = rows[i].querySelector('.redact-bar');
+        if (!bar || rows[i].querySelector('.line-name--reveal')) continue;
+        var nameEl = document.createElement('div');
+        nameEl.className = 'line-name line-name--reveal';
+        nameEl.textContent = t.name;
+        bar.parentNode.insertBefore(nameEl, bar);
+        var metaEl = rows[i].querySelector('.line-meta');
+        var meta = trackMeta(t);
+        if (metaEl && meta) metaEl.textContent = meta;
+      }
+    } catch (e) {
+      // Cosmétique uniquement : ne bloque jamais le déverrouillage.
+    }
+  }
+
   // Insère chaque fragment après le bon [data-flow], triés par position puis
   // par ordre d'origine (tri stable) pour un rendu déterministe même en cas
   // de collision de position.
@@ -165,6 +215,15 @@
       if (unlocked) return Promise.resolve(true);
       return decryptBlob(blob, code)
         .then(function (data) {
+          // v5 « Index de sélection » : .registre-open déclenche la cascade
+          // CSS de retrait des barres de caviardage (ligne à ligne, voir
+          // templates/issue.html.j2 .registre-open .line-locked .redact-bar)
+          // AVANT l'injection des fragments, pour que le retrait des barres
+          // et l'apparition du contenu membre restent deux temps distincts.
+          // Les noms réels sont posés dans les lignes juste avant : chaque
+          // barre qui s'essuie révèle le nom à sa place.
+          fillRegistreLines(data);
+          if (lockEl) lockEl.classList.add('registre-open');
           applyFragments(data);
           unlocked = true;
           if (lockEl) lockEl.classList.add('is-open');
