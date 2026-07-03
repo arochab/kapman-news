@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIRCUIT FERMÉ N°09 · Ce qu&#39;on entend quand personne regarde</title>
 <meta name="theme-color" content="#0E0F14">
+<!-- Open Graph / Twitter Card : og_card.py génère issues/NN/card.png au build
+     (tools/build_issue.py). og_image_available vient du contexte de rendu
+     (og_card.py réussi) : si absent, aucune balise image n'est émise (pas
+     de lien cassé), le reste (title/description/url) reste servi. -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="CIRCUIT FERMÉ">
+<meta property="og:url" content="https://arochab.github.io/kapman-news/issues/09/">
+<meta property="og:title" content="Ce qu&#39;on entend quand personne regarde">
+<meta property="og:description" content="10 tracks hors canon : de la deep house UK 1996 au minimal de Vancouver, du digging, pas des évidences">
+<meta name="twitter:title" content="Ce qu&#39;on entend quand personne regarde">
+<meta name="twitter:description" content="10 tracks hors canon : de la deep house UK 1996 au minimal de Vancouver, du digging, pas des évidences">
+<meta property="og:image" content="https://arochab.github.io/kapman-news/issues/09/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CIRCUIT FERMÉ N°09 · Ce qu&#39;on entend quand personne regarde">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arochab.github.io/kapman-news/issues/09/card.png">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,7 +158,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--issue-accent); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -184,6 +202,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .section--invert .s-body p { color: var(--ink-soft); }
 .section--invert .s-num { color: var(--ink-meta); }
 .section--invert .s-body a { color: var(--blue); }
+
+/* ── NOTE DE STUDIO (panneau signature, hors flux numéroté) ──
+   Sort du comptage "n / N" : triple rule fine en tête, en-tête mono dédié,
+   corps en Hanken plus grand que les sections, glyphe signal en signature
+   finale (aligné à droite, sans nom). Toujours cream (section--invert). */
+.studio-note .triple-rule { height: 3px; margin-bottom: 24px; }
+.studio-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-meta); margin-bottom: 24px; }
+.studio-body p { font-family: var(--text); font-size: 19px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 18px; }
+.studio-body p:last-child { margin-bottom: 0; }
+.studio-body a { color: var(--blue); }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
 
 /* ── TRACK ── */
 .track {
@@ -358,6 +387,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
+  .studio-body p { font-size: 17px; }
 }
 </style>
 </head>
@@ -367,10 +397,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" data-flow="0">
   <div class="issue-numeral" aria-hidden="true">09</div>
   <div class="hero-content">
-    <div class="hero-meta">2026-06-13 &nbsp;·&nbsp; CIRCUIT FERMÉ N°09 &nbsp;·&nbsp; Juin 2026</div>
+    <div class="hero-meta">CIRCUIT FERMÉ N°09 &nbsp;·&nbsp; 13.06.26</div>
 
     <div class="logo-block">
       <div class="lockup">
@@ -409,7 +439,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="1">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
   <h2>Ce qui tourne : les incontournables</h2>
@@ -420,7 +450,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Metrosoul · Metrosoul 2 Day</div>
     <div class="track-meta">Metromusic memu001 · 12&#34; · Allemagne · 2004</div>
     
-    <div class="track-body">Deep house acide, 9 minutes. Metromusic était un label allemand discret, cette track en est le sommet. Le groove acide arrive au bout de 3 minutes et il reste. 639 vues, c'est le genre d'obscurité qui justifie de creuser.</div>
+    <div class="track-body">Deep house acide, 9 minutes. Metromusic était un label allemand discret, cette track en est le sommet. Le groove arrive au bout de 3 minutes et ne lâche plus. 639 vues, c'est le genre d'obscurité qui justifie de creuser.</div>
     
     
     <div class="track-links">
@@ -485,7 +515,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Presence · Gettin&#39; Lifted</div>
     <div class="track-meta">Remote REM004 · 12&#34; · UK · 1996</div>
     
-    <div class="track-body">Deep house UK 1996 à l'état pur. Presence, c'est Charles Webster : son label Remote ne dure pas longtemps mais chaque sortie est un chef d'oeuvre. Accords suspendus, basse ronde qui porte tout.</div>
+    <div class="track-body">Deep house UK 1996 à l'état pur. Presence, c'est Charles Webster : son label Remote ne dure pas longtemps mais chaque sortie est un chef-d'œuvre. Accords suspendus, basse ronde qui porte tout.</div>
     
     
     <div class="track-links">
@@ -511,7 +541,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Shonky · The Way It Goes</div>
     <div class="track-meta">Wicked Bass WB029 · 12&#34; EP · Kyiv · 2024</div>
     
-    <div class="track-body">Un des DJs parisiens les plus consistants depuis 20 ans, pas le plus célèbre, mais toujours le plus solide. Deep, patient, précis.</div>
+    <div class="track-body">Un des DJs parisiens les plus constants depuis 20 ans, pas le plus célèbre, mais toujours le plus solide. Deep, patient, précis.</div>
     
     
     <div class="track-links">
@@ -554,14 +584,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-green reveal">
+<div class="stat stat-green reveal" data-flow="2">
   <div class="stat-num">1996</div>
   <div class="stat-ctx">Année des deux classiques de cette issue : Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="3">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
   <h2>Sorties 2026 : ce qui mérite l&#39;attention</h2>
@@ -602,21 +632,21 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-blue reveal">
+<div class="stat stat-blue reveal" data-flow="4">
   <div class="stat-num">300</div>
   <div class="stat-ctx">Copies pressées pour le Kerouac EP sur Dank Records UK. Première sortie du label. À surveiller de près.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="5">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
   <h2>Le label · Wagon Repair</h2>
     
     
   <div class="s-body">
-    <p>Fondé en 2004 à Vancouver autour de Mathew Jonson et Konrad Black. Minimal, tech house, toujours entre deux chaises de façon intentionnelle. Le catalogue est compact et cohérent : chaque sortie apporte quelque chose que la précédente n'avait pas.</p><p>Ce qui distingue Wagon Repair : ils ne cherchent pas un son de label, ils cherchent un niveau d'exigence. Ça produit une discographie dans laquelle chaque track est différente mais tout s'assemble.</p><p>Par où commencer : WAG001 (The Missing Link), puis remonter le catalogue sur <a href="https://www.discogs.com/label/32530-Wagon-Repair" target="_blank">Discogs →</a></p>
+    <p>Fondé en 2004 à Vancouver autour de Mathew Jonson et Konrad Black. Minimal, tech house, toujours entre deux chaises de façon intentionnelle. Le catalogue est compact et cohérent : chaque sortie apporte quelque chose que la précédente n'avait pas.</p><p>Ce qui distingue Wagon Repair : ils ne cherchent pas un son de label, ils cherchent des tracks qui tiennent seules. Résultat : une discographie où chaque pièce est différente et où tout s'assemble.</p><p>Par où commencer : WAG001 (The Missing Link), puis remonter le catalogue sur <a href="https://www.discogs.com/label/32530-Wagon-Repair" target="_blank">Discogs →</a></p>
   </div>
     
 </div>
@@ -624,16 +654,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="body-wrap">
-<div class="section reveal section--invert" id="s4">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">4 / 4</div></div>
-  <h2>Note de studio</h2>
-    
-    
-  <div class="s-body">
-    <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test.</p>
+<div class="body-wrap" data-flow="6">
+<div class="section studio-note reveal section--invert" id="s4">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="studio-kicker">Note de studio · Juin 2026</div>
+  <div class="s-body studio-body">
+    <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test : la machine propose, je ne corrige plus.</p>
   </div>
-    
+  <div class="studio-sig">
+    <div class="signal-glyph" aria-hidden="true">
+      <span class="sg-bar sg-r"></span>
+      <span class="sg-bar sg-g"></span>
+      <span class="sg-bar sg-b"></span>
+    </div>
+  </div>
 </div>
 </div>
   

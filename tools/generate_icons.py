@@ -1,5 +1,5 @@
 """
-Génère les icônes PWA KAPMAN SIGNAL depuis la DA (glyphe signal : 3 barres
+Génère les icônes PWA CIRCUIT FERMÉ depuis la DA (glyphe signal : 3 barres
 verticales arrondies R/V/B, hauteurs 12/22/17, alignées en bas).
 Output : pwa/icon-192.png, pwa/icon-512.png, pwa/badge-72.png
 100% local, aucune dépendance réseau.

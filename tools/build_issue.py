@@ -1,5 +1,5 @@
 """
-Rend une issue KAPMAN SIGNAL en page web statique à partir d'un JSON de contenu.
+Rend une issue CIRCUIT FERMÉ en page web statique à partir d'un JSON de contenu.
 
   python tools/build_issue.py --content content/10.json
 
@@ -23,6 +23,15 @@ ROOT = Path(__file__).parent.parent
 TEMPLATES = ROOT / "templates"
 ISSUES = ROOT / "issues"
 CONTENT = ROOT / "content"
+
+# Carte de partage (OG) : import optionnel, échec robuste. Un Pillow absent
+# ou une police manquante ne doit jamais faire échouer le build de l'issue,
+# seulement priver le lien social de sa card.png (le template a un fallback
+# meta propre dans ce cas — cf issue.html.j2).
+try:
+    from og_card import build_card as _build_og_card
+except Exception:  # ImportError (Pillow absent) ou toute erreur d'import des polices
+    _build_og_card = None
 
 YOUTUBE_ID_RE = re.compile(r"(?:youtube\.com/watch\?v=|youtu\.be/)([\w-]{6,})")
 
@@ -87,7 +96,7 @@ def extract_listen_all(content: dict):
     return listen_all_url, listen_count
 
 
-def render_issue(content: dict) -> str:
+def render_issue(content: dict, og_image_available: bool = False) -> str:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
         autoescape=select_autoescape(["html", "j2"]),
@@ -109,6 +118,13 @@ def render_issue(content: dict) -> str:
     listen_all_url, listen_count = extract_listen_all(content)
     site = load_site()
 
+    # circuit (contenu membre chiffre, optionnel) : passe explicitement comme
+    # site, et retire du dict spread ci-dessous pour eviter un doublon de
+    # kwarg. Absent (anciennes issues) -> None -> falsy en Jinja, rendu
+    # strictement identique a aujourd'hui.
+    circuit = content.get("circuit")
+    content_rest = {k: v for k, v in content.items() if k != "circuit"}
+
     return tmpl.render(
         section_count=section_count,
         prev_num=prev_num,
@@ -116,7 +132,9 @@ def render_issue(content: dict) -> str:
         listen_all_url=listen_all_url,
         listen_count=listen_count,
         site=site,
-        **content,
+        circuit=circuit,
+        og_image_available=og_image_available,
+        **content_rest,
     )
 
 
@@ -124,9 +142,30 @@ def write_issue(content: dict) -> Path:
     num = str(content["issue_num"]).zfill(2)
     out_dir = ISSUES / num
     out_dir.mkdir(parents=True, exist_ok=True)
+    # La carte de partage est générée AVANT le rendu HTML : le template a
+    # besoin de savoir si issues/NN/card.png existe pour émettre (ou non)
+    # les balises og:image / twitter:image sans jamais pointer un lien mort.
+    og_image_available = build_og_card(content)
     out_file = out_dir / "index.html"
-    out_file.write_text(render_issue(content), encoding="utf-8")
+    out_file.write_text(render_issue(content, og_image_available=og_image_available), encoding="utf-8")
     return out_file
+
+
+def build_og_card(content: dict) -> bool:
+    """Génère issues/NN/card.png (image de partage OG). Best effort : toute
+    erreur (Pillow absent, police manquante, JSON incomplet) n'interrompt
+    jamais le build de l'issue, juste un warning sur stderr. Retourne True
+    si la carte a bien été écrite (utilisé par le template pour les meta OG)."""
+    if _build_og_card is None:
+        print("[WARN] Pillow indisponible : carte de partage (card.png) non générée.")
+        return False
+    try:
+        out = _build_og_card(content)
+        print(f"[OK] Carte de partage -> {out}")
+        return True
+    except Exception as exc:  # noqa: BLE001 — best effort, ne doit jamais casser le build
+        print(f"[WARN] Échec génération carte de partage : {exc}")
+        return False
 
 
 def _row_artists(content: dict) -> str:

@@ -1,5 +1,5 @@
 """
-Orchestrateur d'une nouvelle issue KAPMAN SIGNAL.
+Orchestrateur d'une nouvelle issue CIRCUIT FERMÉ.
 
   python tools/new_issue.py --num 10
 
@@ -87,7 +87,7 @@ def reminders(num: int):
     print(f"1. Verifier le rendu : issues/{num:02d}/index.html")
     print(f"2. Mettre a jour la memoire : {MEMORY}")
     print("   (ajouter tracks/artistes/labels de cette issue)")
-    print("3. git add -A && git commit -m \"KAPMAN SIGNAL N°{:02d}\" && git push".format(num))
+    print("3. git add -A && git commit -m \"CIRCUIT FERMÉ N°{:02d}\" && git push".format(num))
     print("   -> GitHub Actions envoie la notif push automatiquement.")
 
 

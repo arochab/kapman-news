@@ -1,5 +1,14 @@
 {%- set acc = ['red', 'green', 'blue'][issue_num % 3] -%}
 {%- set listen_url = playlist_url or listen_all_url -%}
+{%- import '_track.j2' as trackm -%}
+{%- set site_url = "https://arochab.github.io/kapman-news/" -%}
+{%- set issue_num_padded = "%02d"|format(issue_num) -%}
+{%- set issue_url = site_url ~ "issues/" ~ issue_num_padded ~ "/" -%}
+{%- set og_image_url = site_url ~ "issues/" ~ issue_num_padded ~ "/card.png" -%}
+{%- set og_description = ((summary_bullets[0] if summary_bullets else (forward_text | striptags)) | trim) | truncate(160, True, "…") -%}
+{#- date_iso "AAAA-MM-JJ" -> "JJ.MM.AA" : même registre que la home et la carte
+    de partage. Fallback : la chaîne brute si le format est inattendu. -#}
+{%- set date_display = date_iso[8:10] ~ "." ~ date_iso[5:7] ~ "." ~ date_iso[2:4] if date_iso and date_iso|length == 10 else date_iso -%}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +16,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIRCUIT FERMÉ N°{{ "%02d"|format(issue_num) }} · {{ tagline_plain }}</title>
 <meta name="theme-color" content="#0E0F14">
+<!-- Open Graph / Twitter Card : og_card.py génère issues/NN/card.png au build
+     (tools/build_issue.py). og_image_available vient du contexte de rendu
+     (og_card.py réussi) : si absent, aucune balise image n'est émise (pas
+     de lien cassé), le reste (title/description/url) reste servi. -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="CIRCUIT FERMÉ">
+<meta property="og:url" content="{{ issue_url }}">
+<meta property="og:title" content="{{ tagline_plain }}">
+<meta property="og:description" content="{{ og_description }}">
+<meta name="twitter:title" content="{{ tagline_plain }}">
+<meta name="twitter:description" content="{{ og_description }}">
+{%- if og_image_available %}
+<meta property="og:image" content="{{ og_image_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CIRCUIT FERMÉ N°{{ issue_num_padded }} · {{ tagline_plain }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ og_image_url }}">
+{%- endif %}
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,7 +171,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--issue-accent); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -186,6 +215,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .section--invert .s-body p { color: var(--ink-soft); }
 .section--invert .s-num { color: var(--ink-meta); }
 .section--invert .s-body a { color: var(--blue); }
+
+/* ── NOTE DE STUDIO (panneau signature, hors flux numéroté) ──
+   Sort du comptage "n / N" : triple rule fine en tête, en-tête mono dédié,
+   corps en Hanken plus grand que les sections, glyphe signal en signature
+   finale (aligné à droite, sans nom). Toujours cream (section--invert). */
+.studio-note .triple-rule { height: 3px; margin-bottom: 24px; }
+.studio-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-meta); margin-bottom: 24px; }
+.studio-body p { font-family: var(--text); font-size: 19px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 18px; }
+.studio-body p:last-child { margin-bottom: 0; }
+.studio-body a { color: var(--blue); }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
 
 /* ── TRACK ── */
 .track {
@@ -261,7 +301,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .forward p { font-size: 15px; color: var(--mid); line-height: 1.8; }
 
 {% if site and site.membership_url %}
-/* ── MEMBERSHIP (abonnement de soutien, optionnel) ──
+/* ── MEMBERSHIP (Membre du circuit, optionnel) ──
    Tout ce bloc (CSS + markup) est conditionné par site.membership_url : tant
    que content/site.json ne fournit pas d'URL Stripe, rien n'en sort dans le
    HTML rendu · pas même le CSS. */
@@ -276,9 +316,53 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   text-decoration: none; transition: border-color .18s, color .18s;
 }
 .membership-cta:hover, .membership-cta:focus-visible { border-color: var(--issue-accent); color: var(--issue-accent); }
+.membership-alt { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--meta); text-decoration: underline; text-decoration-color: transparent; transition: color .18s, text-decoration-color .18s; margin-top: 14px; }
+.membership-alt:hover, .membership-alt:focus-visible { color: var(--issue-accent); text-decoration-color: var(--issue-accent); }
 .membership-note { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 14px; }
 {% endif %}
+{% if circuit %}
+/* ── CIRCUIT (verrou membre, contenu chiffré embarqué déverrouillé par code) ──
+   Conditionné par `circuit` : seules les issues avec contenu membre
+   embarquent ce CSS, rien n'en sort ailleurs. */
+.circuit-lock { background: var(--surface); padding: 44px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.circuit-lock .triple-rule { margin-bottom: 24px; }
+/* Titre = vrai moment de vente : même famille/poids que le hero et les h2
+   (Hanken 800, casse phrase), pas un kicker mono noyé sous le teaser. */
+.circuit-kicker { font-family: var(--text); font-size: clamp(24px, 5vw, 29px); font-weight: 800; letter-spacing: -.015em; line-height: 1.15; color: var(--cream); margin-bottom: 16px; }
+.circuit-teaser { font-size: 15px; color: var(--mid); line-height: 1.7; margin-bottom: 24px; max-width: 440px; }
+.circuit-form { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.circuit-input {
+  flex: 1; min-width: 160px;
+  font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--cream); background: transparent; border: 1px solid var(--border-strong);
+  padding: 13px 16px; min-height: 44px;
+}
+.circuit-input::placeholder { color: var(--faint); text-transform: none; letter-spacing: normal; }
+.circuit-input:focus-visible { outline: 2px solid var(--issue-accent); outline-offset: 2px; border-color: var(--issue-accent); }
+.circuit-submit {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--cream); background: transparent; border: 1px solid var(--cream);
+  padding: 13px 22px; min-height: 44px; cursor: pointer; transition: border-color .18s, color .18s;
+}
+.circuit-submit:hover, .circuit-submit:focus-visible { border-color: var(--issue-accent); color: var(--issue-accent); }
+.circuit-error { font-family: var(--mono); font-size: 11px; color: var(--red); margin-top: 12px; display: none; }
+.circuit-error.show { display: block; }
+.circuit-membership { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.circuit-membership-link { color: var(--dim); text-decoration: none; padding: 4px 0; transition: color .18s; }
+.circuit-membership-link--primary { color: var(--cream); }
+.circuit-membership-link:hover, .circuit-membership-link:focus-visible { color: var(--issue-accent); }
+.circuit-open-line { display: none; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--issue-accent); }
+#circuit-lock.is-open .circuit-locked { display: none; }
+#circuit-lock.is-open .circuit-open-line { display: block; }
+/* Panneau ouvert : une ligne de statut seule ne justifie plus le padding
+   plein d'un formulaire, on resserre pour éviter la boîte vide. */
+#circuit-lock.is-open { padding-top: 28px; padding-bottom: 28px; }
 
+/* Badge discret sur les fragments membres injectés (templates/circuit_fragment.html.j2) ·
+   même corps que .s-num pour que la ligne d'accent garde un seul registre. */
+.s-circuit { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--issue-accent); }
+@media (max-width: 600px) { .circuit-lock { padding: 24px; } }
+{% endif %}
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
 .subscribe-section { padding: 56px 48px; border-bottom: 1px solid var(--border); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
@@ -377,6 +461,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
+  .studio-body p { font-size: 17px; }
 }
 </style>
 </head>
@@ -386,10 +471,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" data-flow="0">
   <div class="issue-numeral" aria-hidden="true">{{ '%02d'|format(issue_num) }}</div>
   <div class="hero-content">
-    <div class="hero-meta">{{ date_iso }} &nbsp;·&nbsp; CIRCUIT FERMÉ N°{{ "%02d"|format(issue_num) }} &nbsp;·&nbsp; {{ month_label }}</div>
+    <div class="hero-meta">CIRCUIT FERMÉ N°{{ "%02d"|format(issue_num) }} &nbsp;·&nbsp; {{ date_display }}</div>
 
     <div class="logo-block">
       <div class="lockup">
@@ -429,26 +514,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   le rendu selon la présence de `tracks` ou `paragraphs`.
 #}
 {% for block in blocks %}
-  {% if block.type == "section" %}
-<div class="body-wrap">
-<div class="section reveal{% if block.invert or block.heading == 'Note de studio' %} section--invert{% endif %}" id="s{{ block.index }}">
+  {% if block.type == "section" and block.heading == 'Note de studio' %}
+<div class="body-wrap" data-flow="{{ loop.index }}">
+<div class="section studio-note reveal section--invert" id="s{{ block.index }}">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="studio-kicker">Note de studio · {{ month_label }}</div>
+  <div class="s-body studio-body">
+    {% for p in block.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
+  </div>
+  <div class="studio-sig">
+    <div class="signal-glyph" aria-hidden="true">
+      <span class="sg-bar sg-r"></span>
+      <span class="sg-bar sg-g"></span>
+      <span class="sg-bar sg-b"></span>
+    </div>
+  </div>
+</div>
+</div>
+  {% elif block.type == "section" %}
+<div class="body-wrap" data-flow="{{ loop.index }}">
+<div class="section reveal{% if block.invert %} section--invert{% endif %}" id="s{{ block.index }}">
   <div class="s-accent"><div class="s-bar s-bar-{{ block.accent }}"></div><div class="s-num">{{ block.index }} / {{ section_count }}</div></div>
   <h2>{{ block.heading }}</h2>
     {% if block.tracks %}
   <div class="tracks tracks-{{ block.accent }}">
     {% for t in block.tracks %}
-  <div class="track"{% if t.slug %} id="{{ t.slug }}"{% endif %}>
-    <div class="track-name">{{ t.name }}</div>
-    {% if t.label or t.catno or t.year %}<div class="track-meta">{{ t.label }}{% if t.catno %} {{ t.catno }}{% endif %}{% if t.format %} · {{ t.format }}{% endif %}{% if t.place %} · {{ t.place }}{% endif %}{% if t.year %} · {{ t.year }}{% endif %}</div>
-    {% elif t.meta %}<div class="track-meta">{{ t.meta }}</div>{% endif %}
-    <div class="track-body">{{ t.body | safe }}</div>
-    {% if t.dig %}<div class="track-dig"><span class="dig-arrow">↳</span> {{ t.dig }}</div>{% endif %}
-    {% if t.links %}
-    <div class="track-links">
-      {% for link in t.links %}<a class="track-link track-link-{{ block.accent }}" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
-    </div>
-    {% endif %}
-  </div>
+{{ trackm.track(t, block.accent) }}
     {% endfor %}
   </div>
     {% endif %}
@@ -460,13 +551,35 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 </div>
 </div>
   {% elif block.type == "stat" %}
-<div class="stat stat-{{ block.accent }} reveal">
+<div class="stat stat-{{ block.accent }} reveal" data-flow="{{ loop.index }}">
   <div class="stat-num">{{ block.number }}</div>
   <div class="stat-ctx">{{ block.context }}</div>
 </div>
   {% endif %}
 {% endfor %}
-
+{% if circuit %}
+<!-- BLOC VERROU (circuit fermé) -->
+<div id="circuit-lock" class="circuit-lock reveal">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="circuit-locked">
+    <div class="circuit-kicker">Le circuit est fermé</div>
+    <p class="circuit-teaser">{{ circuit.teaser or "La suite de ce numéro reste dans le circuit, réservée aux membres." }}</p>
+    <form id="circuit-form" class="circuit-form" autocomplete="off">
+      <input id="circuit-code" class="circuit-input" type="text" autocomplete="off" placeholder="code du circuit" aria-label="Code du circuit">
+      <button type="submit" class="circuit-submit">Entrer</button>
+    </form>
+    <p class="circuit-error" role="alert">Mauvais code.</p>
+    {% if site and site.membership_url %}
+    <div class="circuit-membership">
+      <a class="circuit-membership-link circuit-membership-link--primary" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € / mois' }}</a>
+      {% if site.membership_annual_url %}<a class="circuit-membership-link" href="{{ site.membership_annual_url }}" target="_blank" rel="noopener">ou l'année · {{ site.membership_annual_price or '50 € / an' }}</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="circuit-open-line">Circuit ouvert · code retenu sur cet appareil</div>
+</div>
+<script type="application/json" id="circuit-blob">{{ circuit | tojson }}</script>
+{% endif %}
 <!-- TRACKLIST RÉCAP (optionnel, flag racine show_tracklist) -->
 {% if show_tracklist %}
 <div class="body-wrap">
@@ -500,14 +613,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   <p>{{ forward_text | safe }}</p>
 </div>
 
-{% if site and site.membership_url %}
-<!-- MEMBERSHIP (abonnement de soutien · masqué tant que content/site.json n'a pas d'URL Stripe) -->
+{% if site and site.membership_url and not circuit %}
+<!-- MEMBERSHIP (Membre du circuit · masqué tant que content/site.json n'a pas d'URL Stripe,
+     ou si l'issue a un circuit fermé : la version compacte est déjà dans le bloc verrou) -->
 <div class="membership reveal">
   <div class="lbl lbl-accent">Soutenir</div>
-  <h3 class="membership-title">Abonnement de soutien</h3>
-  <p>Si CIRCUIT FERMÉ nourrit tes écoutes, finance la suite · sélection, serveur, archives. Le contenu reste ouvert : l'abonnement, c'est le geste.</p>
+  <h3 class="membership-title">Membre du circuit</h3>
+  <p>La lettre reste gratuite. Les membres financent la suite et débloquent la Séance d'écoute mensuelle, le crate du mois avec ses tracks bonus, et l'objet de fin d'année pour les annuels.</p>
   <a class="membership-cta" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € / mois' }}</a>
-  <p class="membership-note">Sans engagement · résiliable en un clic via Stripe.</p>
+  {% if site.membership_annual_url %}
+  <div><a class="membership-alt" href="{{ site.membership_annual_url }}" target="_blank" rel="noopener">ou l'année · {{ site.membership_annual_price or '50 € / an' }}</a></div>
+  {% endif %}
+  <p class="membership-note">Sans engagement · résiliable en un clic.</p>
 </div>
 {% endif %}
 
@@ -623,6 +740,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   } catch (e) {}
 })();
 </script>
+{% if circuit %}<script src="../../pwa/circuit.js" defer></script>
+{% endif -%}
 <script src="../../pwa/push-client.js"></script>
 </body>
 </html>

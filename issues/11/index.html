@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIRCUIT FERMÉ N°11 · Londres ne dormait pas, 1997 à 2004</title>
 <meta name="theme-color" content="#0E0F14">
+<!-- Open Graph / Twitter Card : og_card.py génère issues/NN/card.png au build
+     (tools/build_issue.py). og_image_available vient du contexte de rendu
+     (og_card.py réussi) : si absent, aucune balise image n'est émise (pas
+     de lien cassé), le reste (title/description/url) reste servi. -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="CIRCUIT FERMÉ">
+<meta property="og:url" content="https://arochab.github.io/kapman-news/issues/11/">
+<meta property="og:title" content="Londres ne dormait pas, 1997 à 2004">
+<meta property="og:description" content="7 tracks de la tech house anglaise, 1997 à 2004 : de House Of 909 à Switch vs. McGuyver, sans détour">
+<meta name="twitter:title" content="Londres ne dormait pas, 1997 à 2004">
+<meta name="twitter:description" content="7 tracks de la tech house anglaise, 1997 à 2004 : de House Of 909 à Switch vs. McGuyver, sans détour">
+<meta property="og:image" content="https://arochab.github.io/kapman-news/issues/11/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CIRCUIT FERMÉ N°11 · Londres ne dormait pas, 1997 à 2004">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arochab.github.io/kapman-news/issues/11/card.png">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,7 +158,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   border-bottom: 1px solid var(--border);
 }
 .sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--accent, var(--blue)); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--issue-accent); }
 .sum-link { color: inherit; text-decoration: none; display: block; }
 .sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
 
@@ -184,6 +202,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .section--invert .s-body p { color: var(--ink-soft); }
 .section--invert .s-num { color: var(--ink-meta); }
 .section--invert .s-body a { color: var(--blue); }
+
+/* ── NOTE DE STUDIO (panneau signature, hors flux numéroté) ──
+   Sort du comptage "n / N" : triple rule fine en tête, en-tête mono dédié,
+   corps en Hanken plus grand que les sections, glyphe signal en signature
+   finale (aligné à droite, sans nom). Toujours cream (section--invert). */
+.studio-note .triple-rule { height: 3px; margin-bottom: 24px; }
+.studio-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-meta); margin-bottom: 24px; }
+.studio-body p { font-family: var(--text); font-size: 19px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 18px; }
+.studio-body p:last-child { margin-bottom: 0; }
+.studio-body a { color: var(--blue); }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
 
 /* ── TRACK ── */
 .track {
@@ -358,6 +387,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   .logo-block .wordmark { font-size: 22px; }
   .stat-num { font-size: 52px; }
   .section--invert { margin: 0 -24px; padding: 44px 24px; }
+  .studio-body p { font-size: 17px; }
 }
 </style>
 </head>
@@ -367,10 +397,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" data-flow="0">
   <div class="issue-numeral" aria-hidden="true">11</div>
   <div class="hero-content">
-    <div class="hero-meta">2026-07-03 &nbsp;·&nbsp; CIRCUIT FERMÉ N°11 &nbsp;·&nbsp; Juillet 2026</div>
+    <div class="hero-meta">CIRCUIT FERMÉ N°11 &nbsp;·&nbsp; 03.07.26</div>
 
     <div class="logo-block">
       <div class="lockup">
@@ -409,7 +439,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="1">
 <div class="section reveal" id="s1">
   <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
   <h2>Ce qui tourne : la tech house anglaise, 1997 à 2004</h2>
@@ -459,7 +489,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Third Movement · Free (Original Mix)</div>
     <div class="track-meta">Forensic Records FOR-014 · 12&#34;, White Label · UK · 2000</div>
     
-    <div class="track-body">Third Movement sort Free en 2000 sur Forensic Records, en pressage promo blanc réservé aux DJ's avant la sortie commerciale. Le morceau avance sur une ligne de basse profonde et des percussions sèches, la tech house anglaise qui commence à regarder vers la house progressive sans jamais s'y noyer complètement.</div>
+    <div class="track-body">Free sort en 2000 sur Forensic Records, en pressage promo blanc réservé aux DJs avant la sortie commerciale. La basse creuse profond, les percussions restent sèches : l'Angleterre commence à lorgner vers la house progressive sans jamais s'y noyer.</div>
     
     
     <div class="track-links">
@@ -472,7 +502,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Mainframe · Mainframe</div>
     <div class="track-meta">Fuju Fuju 004 · 12&#34; · UK · 2001</div>
     
-    <div class="track-body">Sur Fuju, sous label de Junior London, le projet Mainframe sort un disque éponyme en 2001. La face B, un dub épuré aux percussions étouffées, tient debout sur la seule tension du groove. La ligne anglaise creuse son sillon loin des maisons déjà connues.</div>
+    <div class="track-body">Sur Fuju, sous-label de Junior London, le projet Mainframe sort un disque éponyme en 2001. La face B, un dub épuré aux percussions étouffées, tient debout sur la seule tension du groove. La maison mère arrive juste derrière.</div>
     
     
     <div class="track-links">
@@ -485,7 +515,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Foremost Poets · Open Season (Mental Mix)</div>
     <div class="track-meta">Junior London BRG049 · 12&#34; · UK · 2002</div>
     
-    <div class="track-body">Foremost Poets publie Open Season sur Junior London en 2002, deux mixes construits autour du même sample retourné à l'envers. Le Mental Mix pousse le grain plus loin que le Main Mix, plus sec, plus tendu. La tech house anglaise a fini par digérer le funk américain sans jamais le trahir.</div>
+    <div class="track-body">Foremost Poets publie Open Season sur Junior London en 2002, deux mixes construits autour du même sample retourné à l'envers. Le Mental Mix pousse le grain plus loin que le Main Mix, plus sec, plus tendu. Londres a fini par digérer le funk américain sans jamais le trahir.</div>
     <div class="track-dig"><span class="dig-arrow">↳</span> Les deux versions samplent Open Sesame de Kool &amp; The Gang, un clin d&#39;œil que seuls les habitués du label repéraient à l&#39;époque.</div>
     
     <div class="track-links">
@@ -515,14 +545,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-green reveal">
+<div class="stat stat-green reveal" data-flow="2">
   <div class="stat-num">7</div>
-  <div class="stat-ctx">Sept ans séparent The Main Event de Big Banana : toute la ligne tech house anglaise traversée dans cette sélection, sans un seul faux pas.</div>
+  <div class="stat-ctx">Sept ans séparent The Main Event de Big Banana : d&#39;un riff de piano tordu à un riff acide, la même langue apprise en 1997 puis durcie en chemin.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="3">
 <div class="section reveal" id="s2">
   <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
   <h2>Sorties récentes : la ligne continue ailleurs</h2>
@@ -533,7 +563,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">TSVI · Dance Tripping</div>
     <div class="track-meta">Nervous Horizon · Digital · Londres · 2026</div>
     
-    <div class="track-body">Sur Nervous Horizon, le label londonien qu'il a monté avec Wallwork et Federico Ciampolini, TSVI sort l'EP Dance Tripping en avril 2026. Le morceau titre tient sur des basses tordues et une pulsation qui ne cède jamais, la même mécanique tech house qu'en 1997, recalibrée pour aujourd'hui. La ligne ouverte plus haut n'a jamais vraiment quitté Londres.</div>
+    <div class="track-body">Sur Nervous Horizon, le label londonien qu'il a monté avec Wallwork et Federico Ciampolini, TSVI sort l'EP Dance Tripping en avril 2026. Le morceau titre tient sur des basses tordues et une pulsation qui ne cède jamais, la même mécanique qu'en 1997, recalibrée pour aujourd'hui. La ligne ouverte plus haut n'a jamais vraiment quitté Londres.</div>
     
     
     <div class="track-links">
@@ -546,7 +576,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="track-name">Cee ElAssaad · Set Me Free (Original Mix)</div>
     <div class="track-meta">Local Talk · Digital · Casablanca · 2026</div>
     
-    <div class="track-body">Sur Local Talk, label suédois de house chaude, Cee ElAssaad sort Set Me Free depuis Casablanca en mai 2026. L'orgue Hammond tourne en boucle sur un kick appuyé, loin de l'Angleterre mais sur la même intensité tech house que le reste de cette sélection. La ligne continue, ailleurs et autrement.</div>
+    <div class="track-body">Sur Local Talk, label suédois de house chaude, Cee ElAssaad sort Set Me Free depuis Casablanca en mai 2026. L'orgue Hammond tourne en boucle sur un kick appuyé, loin de l'Angleterre mais avec la même intensité que le reste de cette sélection. La ligne continue, ailleurs et autrement.</div>
     
     
     <div class="track-links">
@@ -563,14 +593,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-blue reveal">
+<div class="stat stat-blue reveal" data-flow="4">
   <div class="stat-num">183</div>
   <div class="stat-ctx">183 références Low Pressings recensées sur Discogs entre 1997 et 2020 : vingt-trois ans du même sceau sur chaque disque, sans jamais changer d&#39;adresse.</div>
 </div>
   
 
   
-<div class="body-wrap">
+<div class="body-wrap" data-flow="5">
 <div class="section reveal" id="s3">
   <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
   <h2>Le label · Low Pressings</h2>
@@ -585,16 +615,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="body-wrap">
-<div class="section reveal section--invert" id="s4">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">4 / 4</div></div>
-  <h2>Note de studio</h2>
-    
-    
-  <div class="s-body">
+<div class="body-wrap" data-flow="6">
+<div class="section studio-note reveal section--invert" id="s4">
+  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+  <div class="studio-kicker">Note de studio · Juillet 2026</div>
+  <div class="s-body studio-body">
     <p>Un mois que les hats du TR-6S traînent derrière la grille. Le réglage n'a pas bougé : quelques millisecondes, pas plus. Ce qui a bougé, c'est tout le reste.</p><p>Un groove qui respire prend de la place. Dès que le décalage fait son travail, les couches deviennent des obstacles : la nappe du MicroKorg 2 est passée de trois voix à une, et le morceau tient mieux debout. Je n'avais pas prévu que désaligner une piste m'obligerait à en couper trois autres.</p><p>L'autre constat : quand c'est juste, on ne l'entend plus. Je garde deux scènes dans Session View : la version alignée, la version décalée. À l'aveugle, personne ne pointe le décalage ; mais quand je repasse sur la grille, on entend tout de suite que quelque chose est mort. Une technique réussie est une technique inaudible.</p><p>Prochaine étape : ne rien ajouter. Moins d'éléments, mieux placés. Le TR-6S a fait sa part, maintenant c'est au mix d'apprendre à se taire.</p>
   </div>
-    
+  <div class="studio-sig">
+    <div class="signal-glyph" aria-hidden="true">
+      <span class="sg-bar sg-r"></span>
+      <span class="sg-bar sg-g"></span>
+      <span class="sg-bar sg-b"></span>
+    </div>
+  </div>
 </div>
 </div>
   

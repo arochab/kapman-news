@@ -1,4 +1,6 @@
 {
   "membership_url": "",
-  "membership_price": "5 € / mois"
+  "membership_price": "5 € / mois",
+  "membership_annual_url": "",
+  "membership_annual_price": "50 € / an"
 }
