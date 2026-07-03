@@ -213,7 +213,7 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         kid = date_iso[:7] if len(date_iso) >= 7 else ""
 
     if teaser is None:
-        teaser = f"{count} tracks de plus reservees aux membres du circuit."
+        teaser = f"{count} tracks de plus, réservées aux membres du circuit."
 
     plaintext_obj = {"fragments": fragments, "source": clear}
     plaintext = json.dumps(plaintext_obj, ensure_ascii=False).encode("utf-8")

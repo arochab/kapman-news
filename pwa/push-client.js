@@ -134,7 +134,7 @@
       if (sub) {
         currentSub = sub;
         setBtnSubscribed();
-        setStatus('Tu es bien abonné — tu recevras les prochaines issues.', 'ok');
+        setStatus('Tu es bien abonné · tu recevras les prochaines issues.', 'ok');
       }
     } catch (err) {
       console.warn('[KAPMAN] getSubscription au chargement a échoué:', err);
@@ -193,7 +193,7 @@
         unsubTimer = setTimeout(() => {
           clearUnsubArm();
           setBtnSubscribed();
-          setStatus('Tu es bien abonné — tu recevras les prochaines issues.', 'ok');
+          setStatus('Tu es bien abonné · tu recevras les prochaines issues.', 'ok');
         }, UNSUB_ARM_MS);
         return;
       }
@@ -237,7 +237,7 @@
       if (existing) {
         currentSub = existing;
         setBtnSubscribed();
-        setStatus('Tu es bien abonné — tu recevras les prochaines issues.', 'ok');
+        setStatus('Tu es bien abonné · tu recevras les prochaines issues.', 'ok');
         return;
       }
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CIRCUIT FERMÉ N°09 · Ce qu&#39;on entend quand personne regarde</title>
-<meta name="theme-color" content="#0E0F14">
+<meta name="theme-color" content="#0A0A0C">
 <!-- Open Graph / Twitter Card : og_card.py génère issues/NN/card.png au build
      (tools/build_issue.py). og_image_available vient du contexte de rendu
      (og_card.py réussi) : si absent, aucune balise image n'est émise (pas
@@ -23,311 +23,301 @@
 <meta property="og:image:alt" content="CIRCUIT FERMÉ N°09 · Ce qu&#39;on entend quand personne regarde">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://arochab.github.io/kapman-news/issues/09/card.png">
+<link rel="icon" href="../../pwa/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="../../pwa/icon-192.png">
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand book : SIGNAL = glyphe 3 barres R/V/B · TEXT = Hanken Grotesk · TECHNICAL = IBM Plex Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Charte v4 « société d'écoute » : DISPLAY/ÉDITORIAL = Fraunces (opsz auto,
+     variable 300..700, romain + italique) · CORPS/UI = Space Grotesk ·
+     TECHNIQUE = Space Mono. -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  /* Couleurs exactes du brand book (brand_assets/) */
-  --ink:    #0E0F14;
-  --cream:  #F0EEE6;
-  --red:    #E83A2E;
-  --green:  #1FC85E;
-  --blue:   #3A6CF0;
-  --mid:    #B8B3AB;
-  --dim:    #9A9DA8;          /* corrigé pour 7.1:1 de contraste sur --ink */
-  --meta:   #8A8D99;          /* corrigé pour 5.8:1 de contraste sur --ink */
-  --faint:  #8B8E99;          /* corrigé pour 5.9:1 de contraste sur --ink */
-  --border: #1B1C22;
-  --border-strong: #2A2C36;
-  --surface:#121319;
-  --deep:   #0B0C10;          /* fond le plus sombre (stat, forward) */
-  --blue-text: #5B85F5;       /* liens dans le texte (5.6:1) ; #3A6CF0 reste pour le graphique */
-  --ink-soft: #3A3B42;        /* registre cream (section--invert) */
-  --ink-meta: #6B6D78;        /* registre cream (section--invert) */
-  --text:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-  --mono:   'IBM Plex Mono', ui-monospace, monospace;
-  --issue-accent: var(--red);
+  /* Charte v4 · tokens exacts (docs charte). Zéro hex hors :root. */
+  --carbone:    #0A0A0C;   /* fond */
+  --graphite:   #131316;   /* surfaces, cartes */
+  --hairline:   #26262B;   /* filets 1px */
+  --os:         #ECE7DC;   /* texte principal / fond des panneaux inversés */
+  --brume:      #9C978A;   /* texte secondaire */
+  --creuse:     #6E6A60;   /* méta discrète, uniquement ≥12px ou uppercase tracké */
+  --laiton:     #C2A36B;   /* accent */
+  --laiton-vif: #D9BC85;   /* hover / focus */
+  --terracotta: #C96C5A;   /* erreurs uniquement */
+  --panel-ink:  #1A1A1C;   /* texte des panneaux --os (tokens inversés) */
+  --cuivre:     #C08D6E;
+  --acier:      #A9AEB8;
+  /* Cycle des éditions : même mécanique issue_num % 3, même variable
+     --issue-accent. acc-0 = laiton « OR » · acc-1 = cuivre « CUIVRE » ·
+     acc-2 = acier « ACIER ». */
+  --acc-red:    var(--laiton);
+  --acc-green:  var(--cuivre);
+  --acc-blue:   var(--acier);
+  /* Variante des accents lisible (≥4.5:1) sur fond --os : réservée aux liens
+     et emphases dans les panneaux inversés (note de studio, sections invert). */
+  --acc-red-ink:   #7A5A28;
+  --acc-green-ink: #7A5330;
+  --acc-blue-ink:  #52565F;
+  --issue-accent: var(--acc-red);
+  --issue-accent-ink: var(--acc-red-ink);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --mono:  'Space Mono', ui-monospace, monospace;
 }
 
-html { background: var(--ink); }
+html { background: var(--carbone); scrollbar-color: var(--hairline) var(--carbone); }
 body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--text);
-  font-size: 16px;
-  line-height: 1.65;
+  background: var(--carbone);
+  color: var(--os);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--issue-accent, var(--blue)); color: var(--ink); }
+::selection { background: var(--laiton); color: var(--carbone); }
 
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--blue)); outline-offset: 3px; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--laiton); outline-offset: 3px; }
 
-.wrap { max-width: 680px; margin: 0 auto; counter-reset: trk; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--carbone); }
+::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--laiton); }
 
-/* ── TRIPLE RULE ── */
-.triple-rule { display: flex; height: 3px; width: 100%; }
-.triple-rule .r { flex: 1; background: var(--red); }
-.triple-rule .g { flex: 1; background: var(--green); }
-.triple-rule .b { flex: 1; background: var(--blue); }
+.wrap { max-width: 720px; margin: 0 auto; counter-reset: trk; }
+
+/* ── LE SILLON (motif signature) ──
+   Arcs concentriques SVG inline : hairline pour la trame, 3 anneaux en
+   accent d'édition. Remplace la triple-rule R/V/B partout : tête de page
+   (sous le header), signature de la note de studio, pied de page. */
+.sillon-mark circle { fill: none; stroke: var(--hairline); stroke-width: 1; }
+.sillon-mark circle.acc { stroke: var(--issue-accent); }
+.sillon { display: flex; align-items: center; gap: 18px; padding: 0 var(--gutter, 40px) 28px; }
+.sillon-line { flex: 1; height: 1px; background: var(--hairline); }
+.sillon .sillon-mark { width: 26px; height: 26px; flex-shrink: 0; }
+
+/* ── SCEAU CF ── */
+.seal-cf circle { fill: none; stroke: currentColor; stroke-width: 1; }
+.seal-cf text { font-family: var(--mono); font-weight: 700; fill: currentColor; }
+
+/* ── HEADER (sceau + wordmark) ── */
+.site-header { display: flex; align-items: center; gap: 14px; padding: 36px var(--gutter, 40px) 26px; }
+.seal-cf.header-seal { width: 32px; height: 32px; color: var(--os); flex-shrink: 0; }
+.header-text { display: flex; flex-direction: column; gap: 5px; }
+.header-wordmark { font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: .34em; text-transform: uppercase; color: var(--os); line-height: 1; }
+.header-sub { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--creuse); line-height: 1; }
 
 /* ── HERO ── */
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 56px 48px 48px;
-  border-bottom: 1px solid var(--border);
-  background: var(--ink);
+  padding: 8px var(--gutter, 40px) 56px;
 }
-.hero-content { position: relative; z-index: 1; }
+.hero-content { position: relative; z-index: 1; max-width: 560px; }
 
-/* Numéral d'issue géant · un seul geste géant par hero, contour simple (pas de split RGB) */
+/* Numéral d'issue en filigrane : Fraunces, contour subtil, hors du flux de lecture. */
 .issue-numeral {
-  position: absolute; right: -8px; top: 28px; z-index: 0; pointer-events: none;
-  font-family: var(--text); font-weight: 800; font-size: clamp(96px, 24vw, 180px); line-height: .85;
-  color: transparent; -webkit-text-stroke: 1px var(--issue-accent); opacity: .35;
+  position: absolute; right: -6px; top: -6px; z-index: 0; pointer-events: none;
+  font-family: var(--serif); font-weight: 500; font-size: clamp(96px, 26vw, 190px); line-height: .85;
+  color: var(--graphite); -webkit-text-stroke: 1px var(--hairline);
 }
 
-.hero-meta {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--meta);
-  margin-bottom: 40px;
+.edition-tag {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--creuse); margin-bottom: 22px;
 }
-
-.logo-block { margin-bottom: 40px; }
-
-/* ── SIGNAL GLYPH + WORDMARK LOCKUP ──
-   Glyphe = 3 barres arrondies R/V/B qui respirent légèrement (scaleY, bas ancré).
-   Wordmark = CIRCUIT (Hanken 800) au-dessus de FERMÉ (Plex Mono, tracking large). */
-.lockup { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-
-.signal-glyph { display: flex; align-items: flex-end; gap: 5px; }
-.signal-glyph .sg-bar { width: 6px; border-radius: 3px; transform-origin: bottom; }
-.signal-glyph .sg-r { background: var(--red);   height: 12px; animation: sg-breathe 2.8s ease-in-out infinite alternate; }
-.signal-glyph .sg-g { background: var(--green); height: 22px; animation: sg-breathe 3.6s ease-in-out infinite alternate; }
-.signal-glyph .sg-b { background: var(--blue);  height: 17px; animation: sg-breathe 3.2s ease-in-out infinite alternate; }
-@keyframes sg-breathe { from { transform: scaleY(1); } to { transform: scaleY(.75); } }
-.signal-glyph.paused .sg-bar { animation-play-state: paused; }
-
-.lockup-text { display: flex; flex-direction: column; gap: 4px; }
-.wordmark { font-family: var(--text); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); line-height: 1; }
-.signal-label { font-family: var(--mono); font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: var(--meta); line-height: 1; }
-.logo-block .wordmark { font-size: 26px; }
-.logo-block .signal-label { font-size: 9px; }
-
-.logo-mini-rule { display: flex; height: 2px; width: 160px; margin-bottom: 8px; }
-.logo-mini-rule .r { flex: 1; background: var(--red); }
-.logo-mini-rule .g { flex: 1; background: var(--green); }
-.logo-mini-rule .b { flex: 1; background: var(--blue); }
-
-.logo-collective { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--meta); }
+.pastille { display: inline-block; width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.pastille-red   { background: var(--acc-red); }
+.pastille-green { background: var(--acc-green); }
+.pastille-blue  { background: var(--acc-blue); }
 
 .tagline {
-  font-family: var(--text);
-  font-size: clamp(34px, 7vw, 46px);
-  font-weight: 800;
-  letter-spacing: -.03em;
-  color: var(--cream);
-  line-height: 1.05;
-  margin-bottom: 14px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(36px, 8.5vw, 68px);
+  font-weight: 560;
+  letter-spacing: -.01em;
+  color: var(--os);
+  line-height: 1.08;
+  margin-bottom: 26px;
 }
-.reading-time { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--meta); }
+.hero-meta { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--creuse); }
+.hero-meta span { white-space: nowrap; }
 
 /* ── SUMMARY ── */
-.summary { background: var(--surface); padding: 28px 48px; border-bottom: 1px solid var(--border); }
-.lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
-.lbl-blue   { color: var(--blue); }
-.lbl-red    { color: var(--red); }
-.lbl-green  { color: var(--green); }
-.lbl-accent { color: var(--issue-accent); }
+.summary { padding: 0 var(--gutter, 40px) 40px; }
+.kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--laiton); margin-bottom: 18px; }
 
-.sum-list { list-style: none; }
+.sum-list { list-style: none; border-top: 1px solid var(--hairline); }
 .sum-list li {
-  padding: 10px 0 10px 20px;
+  padding: 14px 0 14px 20px;
   position: relative;
-  font-size: 14px;
-  color: var(--mid);
-  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--brume);
+  border-bottom: 1px solid var(--hairline);
 }
-.sum-list li:last-child { border-bottom: none; }
-.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--issue-accent); }
-.sum-link { color: inherit; text-decoration: none; display: block; }
-.sum-link:hover, .sum-link:focus-visible { color: var(--cream); }
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--laiton); font-weight: 700; }
+.sum-link { color: inherit; text-decoration: none; display: block; transition: color .18s; }
+.sum-link:hover, .sum-link:focus-visible { color: var(--os); }
 
 .listen-all {
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--issue-accent); border: 1px solid var(--issue-accent);
-  padding: 13px 20px; min-height: 44px; margin-top: 18px;
-  text-decoration: none; transition: background .18s, color .18s;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--carbone); background: var(--laiton); border: 1px solid var(--laiton); border-radius: 999px;
+  padding: 13px 26px; min-height: 44px; margin-top: 24px;
+  text-decoration: none; transition: background .18s, border-color .18s;
 }
-.listen-all:hover { background: var(--issue-accent); color: var(--ink); }
-.listen-all-end-wrap { padding: 0 48px 44px; }
+.listen-all:hover, .listen-all:focus-visible { background: var(--laiton-vif); border-color: var(--laiton-vif); }
+.listen-all-end-wrap { padding: 0 var(--gutter, 40px) 48px; }
 .listen-all--end { margin-top: 0; }
 
 /* ── BODY ── */
-.body-wrap { padding: 0 48px; }
+.body-wrap { padding: 0 var(--gutter, 40px); }
 
 /* ── SECTION ── */
-.section { padding: 44px 0; border-bottom: 1px solid var(--border); }
-.s-accent { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-.s-bar { height: 2px; width: 28px; flex-shrink: 0; }
-.s-bar-red   { background: var(--red); }
-.s-bar-green { background: var(--green); }
-.s-bar-blue  { background: var(--blue); }
-.s-num { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--meta); }
+.section { padding: 48px 0; border-bottom: 1px solid var(--hairline); }
+.s-accent { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.s-num { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--creuse); }
 
 .section h2 {
-  font-family: var(--text);
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -.015em;
-  text-transform: none;
-  color: var(--cream);
-  line-height: 1.3;
-  margin-bottom: 28px;
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: clamp(24px, 4vw, 29px);
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--os);
+  line-height: 1.28;
+  margin-bottom: 30px;
 }
 
-/* ── SECTION INVERSÉE (cream) · "Note de studio" & co ── */
-.section--invert { background: var(--cream); color: var(--ink); margin: 0 -48px; padding: 44px 48px; }
-.section--invert h2 { color: var(--ink); }
-.section--invert .s-body p { color: var(--ink-soft); }
-.section--invert .s-num { color: var(--ink-meta); }
-.section--invert .s-body a { color: var(--blue); }
+/* ── SECTION INVERSÉE (panneau --os) · « Note de studio » & co ── */
+.section--invert { background: var(--os); color: var(--panel-ink); margin: 0 calc(var(--gutter, 40px) * -1); padding: 48px var(--gutter, 40px); }
+.section--invert h2 { color: var(--panel-ink); }
+.section--invert .s-body p, .section--invert .s-body { color: var(--panel-ink); }
+.section--invert .s-body strong, .section--invert .studio-body strong { color: var(--panel-ink); font-weight: 700; }
+.section--invert .s-num { color: var(--creuse); }
+.section--invert .s-body a, .section--invert .studio-body a { color: var(--issue-accent-ink); text-decoration-color: currentColor; }
 
 /* ── NOTE DE STUDIO (panneau signature, hors flux numéroté) ──
-   Sort du comptage "n / N" : triple rule fine en tête, en-tête mono dédié,
-   corps en Hanken plus grand que les sections, glyphe signal en signature
-   finale (aligné à droite, sans nom). Toujours cream (section--invert). */
-.studio-note .triple-rule { height: 3px; margin-bottom: 24px; }
-.studio-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-meta); margin-bottom: 24px; }
-.studio-body p { font-family: var(--text); font-size: 19px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 18px; }
+   Panneau --os (tokens inversés) : en-tête mono, corps en Fraunces romain
+   19px/1.75 (seule prose serif du site, la voix), signature = le sillon
+   (arcs en accent) aligné à droite. */
+.studio-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--creuse); margin-bottom: 26px; }
+.studio-body p { font-family: var(--serif); font-style: normal; font-weight: 400; font-size: 19px; line-height: 1.75; color: var(--panel-ink); margin-bottom: 18px; }
 .studio-body p:last-child { margin-bottom: 0; }
-.studio-body a { color: var(--blue); }
-.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 32px; }
+.studio-sig .sillon-mark { width: 38px; height: 38px; }
 
 /* ── TRACK ── */
 .track {
-  margin-bottom: 28px; padding: 0 0 28px 40px; position: relative;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px; padding: 0 0 32px 42px; position: relative;
+  border-bottom: 1px solid var(--hairline);
 }
 .track:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.track:target { border-left: 2px solid var(--accent, var(--blue)); padding-left: 38px; }
+.track:target { border-left: 2px solid var(--laiton); padding-left: 40px; }
 .track::before {
   counter-increment: trk; content: counter(trk, decimal-leading-zero);
-  position: absolute; left: 0; top: 1px;
+  position: absolute; left: 0; top: 2px;
   font-family: var(--mono);
-  font-size: 10px; letter-spacing: .04em; color: var(--meta);
+  font-size: 11px; letter-spacing: .04em; color: var(--creuse);
   font-variant-numeric: tabular-nums; transition: color .2s;
 }
-.track:hover::before { color: var(--accent, #555); }
-.track-name { font-size: 15px; font-weight: 600; color: var(--cream); margin-bottom: 2px; line-height: 1.3; }
-.track-meta { font-family: var(--mono); font-size: 10px; color: var(--meta); letter-spacing: .04em; margin-bottom: 8px; text-transform: uppercase; }
-.track-body { font-size: 15px; color: var(--mid); line-height: 1.65; margin-bottom: 12px; }
-.track-dig { font-family: var(--mono); font-size: 10px; color: var(--meta); line-height: 1.5; margin-bottom: 12px; }
-.dig-arrow { color: var(--accent, var(--blue)); margin-right: 4px; }
-.tracks-red   { --accent: var(--red); }
-.tracks-green { --accent: var(--green); }
-.tracks-blue  { --accent: var(--blue); }
-.track-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.track:hover::before { color: var(--laiton); }
+.track-name { font-family: var(--sans); font-size: 18px; font-weight: 700; color: var(--os); margin-bottom: 4px; line-height: 1.35; }
+.track-meta { font-family: var(--mono); font-size: 11px; color: var(--laiton); letter-spacing: .06em; margin-bottom: 10px; text-transform: uppercase; }
+.track-body { font-size: 16.5px; color: var(--brume); line-height: 1.7; margin-bottom: 14px; }
+.track-body strong { color: var(--os); font-weight: 700; }
+.track-dig { font-family: var(--mono); font-size: 13px; color: var(--laiton); line-height: 1.5; margin-bottom: 14px; }
+.dig-arrow { margin-right: 6px; }
+.track-links { display: flex; flex-wrap: wrap; gap: 10px; }
 .track-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: .14em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--brume);
   min-height: 44px;
-  padding: 11px 16px;
-  border: 1px solid var(--border-strong);
-  border-radius: 2px;
-  transition: border-color .18s, color .18s, background .18s;
+  padding: 11px 18px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  transition: border-color .18s, color .18s;
 }
-.track-link:hover { border-color: currentColor; background: rgba(255,255,255,.02); }
-.track-link-red   { color: var(--red); }
-.track-link-green { color: var(--green); }
-.track-link-blue  { color: var(--blue); }
+.track-link:hover, .track-link:focus-visible { border-color: var(--laiton); color: var(--laiton); }
 
 /* ── STAT ── */
-.stat { padding: 32px 48px; border-bottom: 1px solid var(--border); background: var(--deep); }
-.stat-red   { border-left: 3px solid var(--red); }
-.stat-green { border-left: 3px solid var(--green); }
-.stat-blue  { border-left: 3px solid var(--blue); }
-.stat-num { font-family: var(--mono); font-size: 64px; font-weight: 500; line-height: 1; letter-spacing: -.02em; margin-bottom: 12px; }
-.stat-red   .stat-num { color: var(--red); }
-.stat-green .stat-num { color: var(--green); }
-.stat-blue  .stat-num { color: var(--blue); }
-.stat-ctx { font-size: 14px; color: var(--dim); line-height: 1.65; }
+.stat { padding: 40px var(--gutter, 40px); border-bottom: 1px solid var(--hairline); background: var(--graphite); }
+.stat .pastille { margin-bottom: 16px; }
+.stat-num { font-family: var(--mono); font-weight: 700; font-size: 60px; line-height: 1; letter-spacing: -.02em; color: var(--os); margin-bottom: 14px; }
+.stat-ctx { font-size: 14.5px; color: var(--brume); line-height: 1.65; }
 
 /* ── SECTION BODY ── */
-.s-body p { font-size: 15px; color: var(--mid); line-height: 1.75; margin-bottom: 16px; }
+.s-body p { font-size: 16.5px; color: var(--brume); line-height: 1.7; margin-bottom: 18px; }
 .s-body p:last-child { margin-bottom: 0; }
-.s-body a { color: var(--blue-text); text-decoration: none; }
-.s-body a:hover { text-decoration: underline; }
-.s-body strong { color: var(--cream); font-weight: 600; }
+.s-body a { color: var(--laiton); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+.s-body a:hover, .s-body a:focus-visible { border-color: var(--laiton); }
+.s-body strong { color: var(--os); font-weight: 700; }
 
 /* ── TRACKLIST RÉCAP (optionnel) ── */
-.tracklist-recap-list { list-style: none; font-family: var(--mono); font-size: 12px; }
-.tracklist-recap-list li { border-bottom: 1px solid var(--border); }
-.tracklist-recap-list li:last-child { border-bottom: none; }
-.tracklist-recap-list a { display: block; padding: 10px 0; min-height: 44px; display: flex; align-items: center; color: var(--mid); text-decoration: none; }
-.tracklist-recap-list a:hover, .tracklist-recap-list a:focus-visible { color: var(--cream); }
+.tracklist-recap-list { list-style: none; font-family: var(--mono); font-size: 12.5px; border-top: 1px solid var(--hairline); }
+.tracklist-recap-list li { border-bottom: 1px solid var(--hairline); }
+.tracklist-recap-list a { display: flex; align-items: center; padding: 12px 0; min-height: 44px; color: var(--brume); text-decoration: none; transition: color .18s; }
+.tracklist-recap-list a:hover, .tracklist-recap-list a:focus-visible { color: var(--laiton); }
 
 /* ── FORWARD ── */
-.forward { background: var(--deep); padding: 32px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.forward p { font-size: 15px; color: var(--mid); line-height: 1.8; }
+.forward { background: var(--graphite); padding: 40px var(--gutter, 40px); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.forward p { font-size: 15.5px; color: var(--brume); line-height: 1.8; }
 
 
 
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
-.subscribe-section { padding: 56px 48px; border-bottom: 1px solid var(--border); text-align: center; }
+.subscribe-section { padding: 60px var(--gutter, 40px); border-bottom: 1px solid var(--hairline); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
-.sub-text h3 { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); margin-bottom: 12px; }
-.sub-text p { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 22px; }
+.sub-text h3 { font-family: var(--serif); font-size: clamp(21px, 4vw, 25px); font-weight: 500; color: var(--os); margin-bottom: 14px; }
+.sub-text p { font-size: 14.5px; color: var(--brume); line-height: 1.7; margin-bottom: 26px; }
 #sub-btn, #share-btn {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: .2em;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: var(--os);
   background: transparent;
-  border: 1px solid var(--border-strong);
-  padding: 14px 24px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 14px 26px;
   min-height: 44px;
   cursor: pointer;
-  transition: all .2s;
+  transition: border-color .18s, color .18s;
 }
-#sub-btn:hover, #sub-btn.on, #share-btn:hover { border-color: var(--green); color: var(--green); }
-#share-btn { margin-top: 24px; }
-.sub-note { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-top: 14px; }
-#sub-status { font-family: var(--mono); font-size: 12px; color: var(--meta); margin-top: 12px; min-height: 16px; line-height: 1.5; }
-#sub-status[data-kind="ok"]  { color: var(--green); }
-#sub-status[data-kind="err"] { color: var(--red); }
-.qr-wrap { margin: 40px auto 0; padding-top: 36px; border-top: 1px solid var(--border); max-width: 260px; }
-.qr-share-lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 16px; }
-.qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 18px; image-rendering: pixelated; background: var(--cream); padding: 8px; border-radius: 4px; }
-.qr-steps { display: inline-flex; flex-direction: column; gap: 7px; text-align: left; }
-.qr-steps span { font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.4; }
-.qr-steps b { color: var(--green); font-weight: 500; margin-right: 6px; }
+#sub-btn:hover, #sub-btn.on, #share-btn:hover { border-color: var(--laiton); color: var(--laiton); }
+#share-btn { margin-top: 28px; }
+.sub-note { font-family: var(--mono); font-size: 10px; color: var(--creuse); line-height: 1.6; margin-top: 16px; letter-spacing: .02em; }
+#sub-status { font-family: var(--mono); font-size: 12px; color: var(--creuse); margin-top: 14px; min-height: 16px; line-height: 1.5; }
+#sub-status[data-kind="ok"]  { color: var(--laiton); }
+#sub-status[data-kind="err"] { color: var(--terracotta); }
+.qr-wrap { margin: 44px auto 0; padding-top: 40px; border-top: 1px solid var(--hairline); max-width: 260px; }
+.qr-share-lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--creuse); margin-bottom: 18px; }
+.qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 20px; image-rendering: pixelated; background: var(--os); padding: 8px; border-radius: 6px; }
+.qr-steps { display: inline-flex; flex-direction: column; gap: 8px; text-align: left; }
+.qr-steps span { font-family: var(--mono); font-size: 11px; color: var(--brume); line-height: 1.4; }
+.qr-steps b { color: var(--laiton); font-weight: 700; margin-right: 6px; }
 
 /* ── NAVIGATION D'ISSUE ── */
 .issue-nav {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 48px; border-top: 1px solid var(--border);
+  padding: 22px var(--gutter, 40px); border-top: 1px solid var(--hairline);
   font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
 }
-.issue-nav a { color: var(--faint); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color .15s; }
-.issue-nav a:hover { color: var(--cream); }
+.issue-nav a { color: var(--creuse); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color .15s; }
+.issue-nav a:hover, .issue-nav a:focus-visible { color: var(--laiton); }
 .issue-nav-prev, .issue-nav-next { flex: 1; }
 .issue-nav-next { text-align: right; justify-content: flex-end; }
 .issue-nav-next a { justify-content: flex-end; }
@@ -335,97 +325,69 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 .issue-nav-all a { justify-content: center; }
 
 /* ── FOOTER ── */
-.footer { padding: 48px 48px 60px; text-align: center; background: var(--ink); }
-.footer-logo { margin-bottom: 24px; }
-.footer-lockup { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
-.footer-lockup .signal-glyph { gap: 3px; }
-.footer-lockup .sg-bar { width: 4px; }
-.footer-lockup .lockup-text { gap: 2px; }
-.footer-lockup .wordmark { font-size: 18px; color: var(--dim); }
-.footer-lockup .signal-label { font-size: 9px; }
-.footer-mini-rule { display: flex; height: 1px; width: 80px; margin: 0 auto 6px; }
-.footer-mini-rule .r { flex:1; background: var(--red); }
-.footer-mini-rule .g { flex:1; background: var(--green); }
-.footer-mini-rule .b { flex:1; background: var(--blue); }
-.footer-collective { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 28px; }
-.footer-credit { font-family: var(--mono); font-size: 10px; color: var(--faint); line-height: 1.6; margin-bottom: 4px; }
-.footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-.footer-link { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .15s; }
-.footer-link:hover, .footer-link:focus-visible { color: var(--cream); }
-.footer-colophon { font-family: var(--mono); font-size: 10px; color: var(--meta); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
+.footer { padding: 0 var(--gutter, 40px) 56px; text-align: center; }
+.footer-seal { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px; }
+.footer-seal .seal-cf { width: 26px; height: 26px; color: var(--creuse); }
+.footer-seal .header-wordmark { font-size: 12px; color: var(--brume); }
+.footer-credit { font-family: var(--mono); font-size: 10px; color: var(--creuse); line-height: 1.6; margin-bottom: 6px; letter-spacing: .04em; }
+.footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.footer-link { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--creuse); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .15s; }
+.footer-link:hover, .footer-link:focus-visible { color: var(--laiton); }
+.footer-colophon { font-family: var(--mono); font-size: 10px; color: var(--creuse); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
 
-/* ── MOTION ── */
-/* La triple-rule se déploie depuis le centre au chargement */
-.triple-rule .r, .triple-rule .g, .triple-rule .b {
-  transform: scaleX(0); transform-origin: center;
-  animation: rule-grow .7s cubic-bezier(.2,.8,.2,1) forwards;
-}
-.triple-rule .g { animation-delay: .08s; }
-.triple-rule .b { animation-delay: .16s; }
-@keyframes rule-grow { to { transform: scaleX(1); } }
-
-/* Apparition au scroll · entrée franche (rise).
-   Le contenu n'est masqué QUE si JS tourne (classe .js sur <html>) : sans JS,
-   ou si l'observer échoue, tout reste visible. Jamais de contenu perdu. */
-.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .5s ease, transform .65s cubic-bezier(.16,1,.3,1); }
+/* ── MOTION ──
+   Reveal translateY(12px) + fondu, 600ms. Hover : filets hairline → laiton
+   (géré par composant ci-dessus). Coupé entièrement en reduced-motion. */
+.js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
 .js .reveal.in { opacity: 1; transform: none; }
-/* Les stats claquent : slide latéral à l'apparition */
-.js .stat.reveal { transform: translateX(-18px); transition: opacity .4s ease, transform .55s cubic-bezier(.16,1,.3,1); }
-.js .stat.reveal.in { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .triple-rule .r, .triple-rule .g, .triple-rule .b,
-  .signal-glyph .sg-bar { animation: none !important; transform: none !important; }
-  .js .reveal, .js .stat.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 @media (max-width: 600px) {
-  .hero, .summary, .body-wrap, .forward,
-  .subscribe-section, .footer, .stat,
-  .issue-nav, .listen-all-end-wrap { padding-left: 24px; padding-right: 24px; }
+  :root { --gutter: 24px; }
+  .site-header { padding-top: 28px; padding-bottom: 20px; }
+  .stat-num { font-size: 48px; }
+  .lock-title { max-width: none; }
   
-  .logo-block .wordmark { font-size: 22px; }
-  .stat-num { font-size: 52px; }
-  .section--invert { margin: 0 -24px; padding: 44px 24px; }
-  .studio-body p { font-size: 17px; }
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
+<!-- HEADER -->
+<header class="site-header">
+  <svg class="seal-cf header-seal" viewBox="0 0 40 40" aria-hidden="true">
+    <circle cx="20" cy="20" r="18"></circle>
+    <text x="20" y="25" text-anchor="middle" font-size="13">CF</text>
+  </svg>
+  <div class="header-text">
+    <div class="header-wordmark">Circuit Fermé</div>
+    <div class="header-sub">société d'écoute · paris</div>
+  </div>
+</header>
+<div class="sillon" aria-hidden="true">
+  <span class="sillon-line"></span>
+  <svg class="sillon-mark" viewBox="0 0 40 40"><circle cx="20" cy="20" r="4"></circle><circle class="acc" cx="20" cy="20" r="7"></circle><circle cx="20" cy="20" r="10"></circle><circle class="acc" cx="20" cy="20" r="13"></circle><circle cx="20" cy="20" r="16"></circle><circle class="acc" cx="20" cy="20" r="19"></circle></svg>
+  <span class="sillon-line"></span>
+</div>
 
 <!-- HERO -->
 <div class="hero" data-flow="0">
-  <div class="issue-numeral" aria-hidden="true">09</div>
+  <div class="issue-numeral" aria-hidden="true">Nº09</div>
   <div class="hero-content">
-    <div class="hero-meta">CIRCUIT FERMÉ N°09 &nbsp;·&nbsp; 13.06.26</div>
-
-    <div class="logo-block">
-      <div class="lockup">
-        <div class="signal-glyph" aria-hidden="true">
-          <span class="sg-bar sg-r"></span>
-          <span class="sg-bar sg-g"></span>
-          <span class="sg-bar sg-b"></span>
-        </div>
-        <div class="lockup-text">
-          <div class="wordmark">CIRCUIT</div>
-          <div class="signal-label">Fermé</div>
-        </div>
-      </div>
-      <div class="logo-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-      <div class="logo-collective">Underground Electronic · Paris</div>
-    </div>
-
+    <div class="edition-tag"><span class="pastille pastille-red" aria-hidden="true"></span><span>Édition Nº09 · OR</span></div>
     <h1 class="tagline">Ce qu'on entend quand<br>personne regarde</h1>
-    <div class="reading-time">4 min &nbsp;·&nbsp; Juin 2026</div>
+    <div class="hero-meta"><span>CIRCUIT FERMÉ N°09</span> <span>· 13.06.26</span> <span>· Lecture 4 min</span></div>
   </div>
 </div>
 
 <!-- SUMMARY -->
 <div class="summary">
-  <div class="lbl lbl-accent">Cette édition</div>
+  <div class="kicker">Cette édition</div>
   <ul class="sum-list">
     <li><a class="sum-link" href="#s1">10 tracks hors canon : de la deep house UK 1996 au minimal de Vancouver, du digging, pas des évidences</a></li>
     <li><a class="sum-link" href="#s2">2 sorties récentes 2026 qui méritent l&#39;attention</a></li>
@@ -441,7 +403,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 <div class="body-wrap" data-flow="1">
 <div class="section reveal" id="s1">
-  <div class="s-accent"><div class="s-bar s-bar-red"></div><div class="s-num">1 / 4</div></div>
+  <div class="s-accent"><span class="pastille pastille-red" aria-hidden="true"></span><span class="s-num">01 / 04</span></div>
   <h2>Ce qui tourne : les incontournables</h2>
     
   <div class="tracks tracks-red">
@@ -454,7 +416,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=BjhiCl9C85s" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=BjhiCl9C85s" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -467,7 +429,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=guphkg-9rUw" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=guphkg-9rUw" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -480,7 +442,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=QzZR65TFMvo" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=QzZR65TFMvo" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -493,7 +455,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=elYx3OhNTXY" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=elYx3OhNTXY" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -506,7 +468,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=mF5oGbtVSQI" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=mF5oGbtVSQI" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -519,7 +481,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=HEpUV9o7sOU" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=HEpUV9o7sOU" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -532,7 +494,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=AFm2NVoL8EE" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=AFm2NVoL8EE" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -545,7 +507,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=wE_F9MdtVHA" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=wE_F9MdtVHA" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -558,7 +520,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=P3n7PoyVPI8" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=P3n7PoyVPI8" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -571,7 +533,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-red" href="https://www.youtube.com/watch?v=yJ1h0Jnn1lI" target="_blank" rel="noopener">▶ Écouter</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=yJ1h0Jnn1lI" target="_blank" rel="noopener">▶ Écouter</a>
     </div>
     
   </div>
@@ -584,7 +546,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-green reveal" data-flow="2">
+<div class="stat reveal" data-flow="2">
+  <span class="pastille pastille-green" aria-hidden="true"></span>
   <div class="stat-num">1996</div>
   <div class="stat-ctx">Année des deux classiques de cette issue : Presence et Housey Doingz. Trente ans plus tard ils sonnent encore plus frais que beaucoup de sorties récentes.</div>
 </div>
@@ -593,7 +556,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 <div class="body-wrap" data-flow="3">
 <div class="section reveal" id="s2">
-  <div class="s-accent"><div class="s-bar s-bar-green"></div><div class="s-num">2 / 4</div></div>
+  <div class="s-accent"><span class="pastille pastille-green" aria-hidden="true"></span><span class="s-num">02 / 04</span></div>
   <h2>Sorties 2026 : ce qui mérite l&#39;attention</h2>
     
   <div class="tracks tracks-green">
@@ -606,7 +569,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=5MycIrUAyGM" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://found.ee/PDlqVV" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=5MycIrUAyGM" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link" href="https://found.ee/PDlqVV" target="_blank" rel="noopener">↗ Bandcamp</a>
     </div>
     
   </div>
@@ -619,7 +582,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     
     
     <div class="track-links">
-      <a class="track-link track-link-green" href="https://www.youtube.com/watch?v=4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link track-link-green" href="https://dankrecordsuk.bandcamp.com" target="_blank" rel="noopener">↗ Bandcamp</a>
+      <a class="track-link" href="https://www.youtube.com/watch?v=4bX8RVXvnyY" target="_blank" rel="noopener">▶ Écouter</a><a class="track-link" href="https://dankrecordsuk.bandcamp.com" target="_blank" rel="noopener">↗ Bandcamp</a>
     </div>
     
   </div>
@@ -632,7 +595,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 
   
-<div class="stat stat-blue reveal" data-flow="4">
+<div class="stat reveal" data-flow="4">
+  <span class="pastille pastille-blue" aria-hidden="true"></span>
   <div class="stat-num">300</div>
   <div class="stat-ctx">Copies pressées pour le Kerouac EP sur Dank Records UK. Première sortie du label. À surveiller de près.</div>
 </div>
@@ -641,7 +605,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 <div class="body-wrap" data-flow="5">
 <div class="section reveal" id="s3">
-  <div class="s-accent"><div class="s-bar s-bar-blue"></div><div class="s-num">3 / 4</div></div>
+  <div class="s-accent"><span class="pastille pastille-blue" aria-hidden="true"></span><span class="s-num">03 / 04</span></div>
   <h2>Le label · Wagon Repair</h2>
     
     
@@ -656,17 +620,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
 <div class="body-wrap" data-flow="6">
 <div class="section studio-note reveal section--invert" id="s4">
-  <div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
   <div class="studio-kicker">Note de studio · Juin 2026</div>
   <div class="s-body studio-body">
     <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test : la machine propose, je ne corrige plus.</p>
   </div>
   <div class="studio-sig">
-    <div class="signal-glyph" aria-hidden="true">
-      <span class="sg-bar sg-r"></span>
-      <span class="sg-bar sg-g"></span>
-      <span class="sg-bar sg-b"></span>
-    </div>
+    <svg class="sillon-mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="4"></circle><circle class="acc" cx="20" cy="20" r="7"></circle><circle cx="20" cy="20" r="10"></circle><circle class="acc" cx="20" cy="20" r="13"></circle><circle cx="20" cy="20" r="16"></circle><circle class="acc" cx="20" cy="20" r="19"></circle></svg>
   </div>
 </div>
 </div>
@@ -685,7 +644,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 
 <!-- FORWARD -->
 <div class="forward reveal">
-  <div class="lbl lbl-red" style="margin-bottom:14px">Ce qui suit</div>
+  <div class="kicker" style="margin-bottom:14px">Ce qui suit</div>
   <p>Le catalogue Wagon Repair complet sur Discogs, la sortie Secretsundaze/9FINITY d'Epsie sur Bandcamp, les premières sorties de Dank Records UK. Trois fils à tirer, chacun mène plus loin que cette page.</p>
 </div>
 
@@ -694,10 +653,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 <!-- SUBSCRIBE + QR (QR = partage à un ami, parcours honnête) -->
 <div class="subscribe-section reveal">
   <div class="sub-text">
-    <h3>Recevoir les prochaines issues</h3>
-    <p>Notification push Android directement sur ton téléphone. Pas d'appli, pas de compte · Chrome + un tap.</p>
+    <h3>Recevoir les prochaines éditions</h3>
+    <p>Une notification sur votre téléphone Android, deux fois par semaine. Pas d'application, pas de compte&nbsp;: Chrome suffit.</p>
     <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
-    <p class="sub-note">Tu peux couper quand tu veux · une fois abonné·e, le même bouton sert à te désabonner.</p>
+    <p class="sub-note">Vous pouvez couper quand vous voulez · le même bouton sert à vous désabonner.</p>
     <p id="sub-status" aria-live="polite"></p>
   </div>
   <button id="share-btn" hidden>↗ Partager à un ami</button>
@@ -705,9 +664,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
     <div class="qr-share-lbl">Partager à un ami</div>
     <img src="../../pwa/qr.png" alt="QR vers CIRCUIT FERMÉ" onerror="this.parentNode.style.display='none'">
     <div class="qr-steps">
-      <span><b>1.</b> Scanne avec l'appareil photo</span>
-      <span><b>2.</b> Ouvre le lien dans Chrome</span>
-      <span><b>3.</b> Appuie sur « S'abonner »</span>
+      <span><b>1.</b> Scannez avec l'appareil photo</span>
+      <span><b>2.</b> Ouvrez le lien dans Chrome</span>
+      <span><b>3.</b> Appuyez sur « S'abonner »</span>
     </div>
   </div>
 </div>
@@ -720,21 +679,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
 </div>
 
 <!-- FOOTER -->
+<div class="sillon" aria-hidden="true">
+  <span class="sillon-line"></span>
+  <svg class="sillon-mark" viewBox="0 0 40 40"><circle cx="20" cy="20" r="4"></circle><circle class="acc" cx="20" cy="20" r="7"></circle><circle cx="20" cy="20" r="10"></circle><circle class="acc" cx="20" cy="20" r="13"></circle><circle cx="20" cy="20" r="16"></circle><circle class="acc" cx="20" cy="20" r="19"></circle></svg>
+  <span class="sillon-line"></span>
+</div>
 <div class="footer">
-  <div class="footer-logo">
-    <div class="footer-lockup">
-      <div class="signal-glyph" aria-hidden="true">
-        <span class="sg-bar sg-r"></span>
-        <span class="sg-bar sg-g"></span>
-        <span class="sg-bar sg-b"></span>
-      </div>
-      <div class="lockup-text">
-        <div class="wordmark">CIRCUIT</div>
-        <div class="signal-label">Fermé</div>
-      </div>
-    </div>
-    <div class="footer-mini-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
-    <div class="footer-collective">Underground Electronic · Paris</div>
+  <div class="footer-seal">
+    <svg class="seal-cf" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18"></circle><text x="20" y="25" text-anchor="middle" font-size="13">CF</text></svg>
+    <div class="header-wordmark">Circuit Fermé</div>
   </div>
 
   <div class="footer-credit">Sélection · KAPMAN</div>
@@ -746,8 +699,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   
   <div class="footer-colophon">N°09 · JUIN 2026 · 12 TRACKS · PARIS · CIRCUIT FERMÉ</div>
 </div>
-
-<div class="triple-rule"><span class="r"></span><span class="g"></span><span class="b"></span></div>
 
 </div>
 <script>
@@ -787,20 +738,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent, var(--b
   } catch (e) {
     root.classList.remove('js'); showAll();
   }
-
-  // Le glyphe respire en continu, mais on le pause hors viewport (repos, pas de bruit gratuit).
-  try {
-    var hero = document.querySelector('.hero');
-    var glyph = document.querySelector('.hero .signal-glyph');
-    if (hero && glyph && 'IntersectionObserver' in window) {
-      var heroIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          glyph.classList.toggle('paused', !e.isIntersecting);
-        });
-      }, { threshold: 0 });
-      heroIO.observe(hero);
-    }
-  } catch (e) {}
 })();
 </script>
 <script src="../../pwa/push-client.js"></script>

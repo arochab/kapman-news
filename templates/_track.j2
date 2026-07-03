@@ -18,7 +18,7 @@
     {% if t.dig %}<div class="track-dig"><span class="dig-arrow">↳</span> {{ t.dig }}</div>{% endif %}
     {% if t.links %}
     <div class="track-links">
-      {% for link in t.links %}<a class="track-link track-link-{{ accent }}" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+      {% for link in t.links %}<a class="track-link" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
     </div>
     {% endif %}
   </div>{% endmacro %}

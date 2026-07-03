@@ -124,16 +124,37 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   `server/gunicorn.conf.py` monte le timeout worker à 120s (le défaut 30s tuait le worker
   en plein envoi). La start command Render doit rester `gunicorn app:app` (conf auto-chargée).
 
-## Design system
+## Design system (v4 « société d'écoute », juillet 2026)
 
-Ink `#0E0F14` · Cream `#F0EEE6` · Red `#E83A2E` · Green `#1FC85E` · Blue `#3A6CF0`.
-Fonts : **Hanken Grotesk** (texte + wordmark 800) · **IBM Plex Mono** (technique).
-Black Ops One est SUPPRIMÉE (juillet 2026, demande d'Adam). Logo v3 = glyphe
-« signal » (3 barres verticales arrondies R/V/B, hauteurs 12/22/17) + wordmark
-KAPMAN (Hanken 800) + SIGNAL (mono espacé) ; plus de cercles additifs, plus de
-glitch RGB. La triple-rule R/V/B reste la signature graphique. Gris uniquement
-via les tokens du `:root` (`--dim`/`--meta`/`--faint`, tous ≥4.5:1 sur l'ink) : zéro hex
-littéral hors `:root`. All design lives in
-`templates/issue.html.j2` — change it there, never per-issue.
-- La note de studio est désormais un panneau signature hors du flux numéroté
-  (en-tête mono, glyphe signal en signature).
+- **Palette** : carbone `#0A0A0C` (fond) · graphite `#131316` (surfaces, cartes)
+  · hairline `#26262B` (filets 1px) · os `#ECE7DC` (texte principal, fond des
+  panneaux inversés) · brume `#9C978A` (texte secondaire) · creuse `#6E6A60`
+  (méta discrète, uniquement ≥12px ou uppercase tracké) · laiton `#C2A36B`
+  (accent, hover `#D9BC85`) · terracotta `#C96C5A` (erreurs uniquement). Cycle
+  des éditions par `issue_num % 3`, même mécanique qu'avant : or (laiton),
+  cuivre `#C08D6E`, acier `#A9AEB8`, avec une variante lisible sur fond os
+  pour les panneaux inversés. Gris uniquement via les tokens du `:root` : zéro
+  hex littéral ailleurs (tolérance : `#0A0A0C` dans `theme-color` et le
+  manifest).
+- **Typo** : **Fraunces** (display, italique, note de studio) · **Space
+  Grotesk** (corps, UI) · **Space Mono** (technique, kickers, méta). Chargées
+  via Google Fonts avec repli système (`Georgia`, `system-ui`, `ui-monospace`)
+  ; les mêmes familles existent en TTF locales dans `tools/assets/fonts/` pour
+  le rendu des cartes de partage (`tools/og_card.py`).
+- **Motifs** : le sillon (arcs concentriques SVG en en-tête et en signature de
+  la note de studio), la pastille (accent rond devant chaque kicker), le sceau
+  CF (cercle + monogramme, remplace le logo). La triple-rule R/V/B et le
+  glyphe signal sont SUPPRIMÉS (juillet 2026, refonte v4).
+- **Le Disque** : sphère vinyle en three.js sur la home (`pwa/disque.js`,
+  dépend uniquement de `pwa/vendor/three.module.min.js`), montée dans
+  `#disque-mount`. Purement décoratif, jamais bloquant : coupée si
+  `prefers-reduced-motion`, si le module échoue à charger ou si WebGL est
+  indisponible, et alors seul le fallback CSS (`.disque-fallback`, dégradé +
+  arcs) reste visible.
+- **Verrou membre** = la carte de membre (`#circuit-lock` dans
+  `templates/issue.html.j2`), pas un simple paywall texte : même registre
+  graphite/laiton que le reste de la page, badge `.s-circuit` sur les
+  fragments injectés.
+
+All design lives in `templates/issue.html.j2` (+ `index.html` pour la home) :
+change it there, never per-issue.
