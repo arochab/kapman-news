@@ -76,7 +76,7 @@ jobs:
 
       - name: Install deps
         if: steps.queue.outputs.issue != ''
-        run: pip install requests python-dotenv jinja2
+        run: pip install requests python-dotenv jinja2 pillow
 
       - name: Rendre et publier le numéro (si pas encore rendu)
         if: steps.queue.outputs.needs_build == 'true'
