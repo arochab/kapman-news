@@ -4,18 +4,20 @@ Génère la carte de partage (Open Graph, 1200x630) d'une issue CIRCUIT FERMÉ.
   python tools/og_card.py --content content/11.json
 
 Rendu direct avec Pillow (pas de navigateur headless) à partir des mêmes
-polices que le site (Inter Tight, B612 Mono, committées localement dans
-tools/assets/fonts/ · aucun téléchargement au build CI) et des mêmes
-couleurs de marque que templates/issue.html.j2 (charte v5, « Index de
-sélection »).
+polices que le site (Newsreader, Instrument Sans, B612 Mono, committées
+localement dans tools/assets/fonts/ · aucun téléchargement au build CI) et
+des mêmes couleurs de marque que templates/issue.html.j2 (charte v5.1,
+« le registre humain »).
 
 Composition : la fiche d'un registre, pas une bannière web. Fond ivoire,
 cadre noir 2px doublé d'un filet fin extérieur, « ÉD. 011 » géant en B612
-Mono gris structure posé en fond de registre, wordmark + kicker en tête,
-tagline Inter Tight ExtraBold alignée à droite, deux ou trois barres de
-caviardage noires en bas à droite (l'intrigue dans WhatsApp), pied B612
-gris (date · pièces · lecture). Si le numéro est fermé (champ `circuit`),
-petit tampon « RÉSERVÉ » à bordure rouge double, posé droit.
+Mono gris structure adouci (mélangé sur ivoire, ~60% d'opacité perçue)
+posé en fond de registre, wordmark Newsreader 600 tracké + kicker B612 en
+tête, tagline Newsreader 600 chaleureuse (vraies bas de casse) alignée à
+droite, deux ou trois barres de caviardage noires en bas à droite
+(l'intrigue dans WhatsApp), pied B612 gris (date · pièces · lecture). Si
+le numéro est fermé (champ `circuit`), petit tampon « RÉSERVÉ » à bordure
+rouge double, posé droit.
 
 Sortie : issues/NN/card.png. Appelé depuis tools/build_issue.py à chaque
 rendu d'issue (import direct). Toute erreur (Pillow absent, police absente,
@@ -40,9 +42,13 @@ W, H = 1200, 630
 # ── Couleurs de marque (identiques au :root v5 de templates/issue.html.j2) ──
 IVOIRE = (252, 251, 247)     # #FCFBF7 · fond
 NOIR = (18, 18, 18)          # #121212 · encre
-STRUCTURE = (200, 197, 188)  # #C8C5BC · filets, numéral de fond
+STRUCTURE = (200, 197, 188)  # #C8C5BC · filets
 GRIS = (111, 108, 100)       # #6F6C64 · texte secondaire
 ROUGE = (215, 38, 30)        # #D7261E · strate membre uniquement (tampon)
+
+# ── Numéral de fond « ÉD. » adouci (v5.1 §4) : STRUCTURE mélangé sur IVOIRE
+# à ~60% d'opacité perçue, pas la couleur de filet pleine. ──
+STRUCTURE_SOFT = tuple(round(s * 0.6 + i * 0.4) for s, i in zip(STRUCTURE, IVOIRE))
 
 DASH_RE = re.compile(r"\s*[—–]\s*")
 
@@ -103,6 +109,26 @@ def _tracked(text: str, spacing: str = " ") -> str:
     return spacing.join(text)
 
 
+def _tracked_width(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont, tracking: float) -> float:
+    """Largeur totale d'un texte dessiné avec _draw_tracked (mêmes paramètres)."""
+    if not text:
+        return 0.0
+    width = sum(draw.textlength(ch, font=font) for ch in text)
+    return width + tracking * (len(text) - 1)
+
+
+def _draw_tracked(draw: ImageDraw.ImageDraw, xy: tuple[float, float], text: str, font: ImageFont.FreeTypeFont, fill, tracking: float = 0.0) -> float:
+    """Dessine `text` caractère par caractère avec un espacement additionnel
+    `tracking` (px) entre chaque lettre (letter-spacing léger du wordmark,
+    charte v5.1 §2 : Newsreader 600, tracking +0.04em). Retourne la largeur
+    totale dessinée."""
+    x, y = xy
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += draw.textlength(ch, font=font) + tracking
+    return x - xy[0] - (tracking if text else 0)
+
+
 def _piece_count(content: dict) -> int:
     """Nombre total de pièces du numéro : tracks publiques des blocs +
     pièces scellées (circuit.total prime, sinon circuit.pieces)."""
@@ -121,9 +147,9 @@ def _piece_count(content: dict) -> int:
 
 
 def _draw_cartouche_cf(draw: ImageDraw.ImageDraw, right: int, top: int) -> None:
-    """Micro-signe : « CF » Inter Tight ExtraBold ivoire dans un rectangle
-    noir plein, comme un cartouche de registre (jamais de cercle)."""
-    f_cf = _font("InterTight-ExtraBold.ttf", 24)
+    """Micro-signe : « CF » Newsreader 600 ivoire dans un rectangle noir
+    plein, comme un cartouche de registre (jamais de cercle)."""
+    f_cf = _font("Newsreader-SemiBold.ttf", 24)
     bbox = draw.textbbox((0, 0), "CF", font=f_cf)
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     pad_x, pad_y = 14, 9
@@ -177,21 +203,24 @@ def render_card(content: dict) -> Image.Image:
         size -= 8
     n_bottom = H - 66
     x = 56
-    draw.text((x - a_bbox[0], n_bottom - a_bbox[3]), seg_a, font=f_num, fill=STRUCTURE)
+    draw.text((x - a_bbox[0], n_bottom - a_bbox[3]), seg_a, font=f_num, fill=STRUCTURE_SOFT)
     x += (a_bbox[2] - a_bbox[0]) + gap
-    draw.text((x - b_bbox[0], n_bottom - b_bbox[3]), seg_b, font=f_num, fill=STRUCTURE)
+    draw.text((x - b_bbox[0], n_bottom - b_bbox[3]), seg_b, font=f_num, fill=STRUCTURE_SOFT)
 
     # ── Cadre : filet fin extérieur + cadre noir 2px (la fiche du registre) ──
     draw.rectangle([10, 10, W - 11, H - 11], outline=STRUCTURE, width=1)
     draw.rectangle([22, 22, W - 23, H - 23], outline=NOIR, width=2)
 
-    # ── Tête : wordmark Inter Tight ExtraBold + kicker B612 Mono gris ──
-    f_word = _font("InterTight-ExtraBold.ttf", 32)
-    w_bbox = draw.textbbox((0, 0), "CIRCUIT FERMÉ", font=f_word)
+    # ── Tête : wordmark Newsreader 600 tracké léger + kicker B612 Mono gris
+    # (charte v5.1 §2 : manchette de journal, pas un code d'erreur) ──
+    wordmark = "CIRCUIT FERMÉ"
+    f_word = _font("Newsreader-SemiBold.ttf", 34)
+    word_tracking = 34 * 0.04
+    w_bbox = draw.textbbox((0, 0), wordmark, font=f_word)
     top = 58
-    draw.text((margin - w_bbox[0], top - w_bbox[1]), "CIRCUIT FERMÉ", font=f_word, fill=NOIR)
+    _draw_tracked(draw, (margin - w_bbox[0], top - w_bbox[1]), wordmark, f_word, NOIR, tracking=word_tracking)
 
-    kicker = "REGISTRE DES SÉLECTIONS · PARIS"
+    kicker = "Sélection électronique · Paris"
     f_kicker = _font("B612Mono-Regular.ttf", 15)
     k_bbox = draw.textbbox((0, 0), kicker, font=f_kicker)
     k_y = top + (w_bbox[3] - w_bbox[1]) + 16
@@ -234,14 +263,15 @@ def render_card(content: dict) -> Image.Image:
         y -= bar_h + bar_gap
     bars_top = y + bar_gap
 
-    # ── Tagline Inter Tight ExtraBold noir, alignée à droite au dessus des
-    # barres, wrap max 3 lignes avec réduction auto. ──
+    # ── Tagline Newsreader 600 noir, chaleureuse (vraies bas de casse),
+    # alignée à droite au dessus des barres, wrap max 3 lignes avec
+    # réduction auto (charte v5.1 §2). ──
     tagline = no_dash(content.get("tagline_plain", ""))
     tagline_max_w = 660
     lines: list[str] = []
     f_tagline = None
     for size in (58, 50, 44, 38):
-        f_tagline = _font("InterTight-ExtraBold.ttf", size)
+        f_tagline = _font("Newsreader-SemiBold.ttf", size)
         lines = _wrap(draw, tagline, f_tagline, tagline_max_w, 3)
         consumed = " ".join(lines)
         if len(consumed) >= len(tagline.rstrip()) or size == 38:

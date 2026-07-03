@@ -10,11 +10,13 @@
 <link rel="manifest" href="pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Charte v5 « Index de sélection » : DISPLAY + CORPS = Inter Tight
-     (400/500/600/700/800) · TECHNIQUE (dates, index, états, toute donnée) =
-     B612 Mono (400/700). Marque publique unique : CIRCUIT FERMÉ (jamais
-     KAPMAN SIGNAL, jamais Escape Music Collective). -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Charte v5.1 « le registre humain » : DISPLAY + ÉDITORIAL = Newsreader
+     (opsz, 400/500/600 + italiques) · CORPS/UI = Instrument Sans
+     (400/500/600/700) · TECHNIQUE (index, dates : données courtes
+     uniquement, plus aucun long libellé en mono caps) = B612 Mono
+     (400/700). Marque publique unique : CIRCUIT FERMÉ (jamais KAPMAN
+     SIGNAL, jamais Escape Music Collective). -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Instrument+Sans:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -30,8 +32,8 @@
   --rouge:     #D7261E; /* strate MEMBRE uniquement : cartouche, encart */
   --papier:    #F4F2EC; /* surfaces légères */
 
-  --f-display: 'Inter Tight', Georgia, serif;
-  --f-body:    'Inter Tight', system-ui, -apple-system, sans-serif;
+  --f-display: 'Newsreader', Georgia, serif;
+  --f-body:    'Instrument Sans', system-ui, -apple-system, sans-serif;
   --f-mono:    'B612 Mono', ui-monospace, monospace;
 
   --gutter: 40px;
@@ -62,7 +64,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 /* ── CARTOUCHES / ÉTIQUETTES DE STRATE (mêmes classes que templates/issue.html.j2) ── */
 .tag {
   display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--f-mono); font-size: 10.5px; font-weight: 700;
+  font-family: var(--f-mono); font-size: 10px; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
   border: 1px solid var(--noir); padding: 3px 8px 2px;
   color: var(--noir); background: transparent; line-height: 1.5;
@@ -74,18 +76,18 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
   padding: 28px var(--gutter, 40px) 20px; border-bottom: 2px solid var(--noir);
 }
-.header-wordmark { font-family: var(--f-display); font-weight: 800; font-size: 18px; letter-spacing: -.005em; }
+.header-wordmark { font-family: var(--f-display); font-weight: 600; font-size: 21px; letter-spacing: .04em; }
 
 /* ── HERO ── */
 .hero { padding: 44px var(--gutter, 40px) 48px; }
 .hero-content { max-width: 620px; }
 .edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
-.kicker-inline { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); font-weight: 700; }
+.kicker-inline { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); font-weight: 600; }
 .hero-title {
-  font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 6.5vw, 48px);
-  letter-spacing: -.01em; color: var(--noir); line-height: 1.12; margin-bottom: 20px; max-width: 560px;
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 6.5vw, 48px);
+  letter-spacing: -.005em; color: var(--noir); line-height: 1.15; margin-bottom: 20px; max-width: 560px;
 }
-.hero-sub { font-size: 17px; color: var(--gris); line-height: 1.55; margin-bottom: 28px; max-width: 480px; }
+.hero-sub { font-size: 17px; color: var(--gris); line-height: 1.6; margin-bottom: 28px; max-width: 480px; }
 
 .cta-primary {
   display: inline-flex; align-items: center; justify-content: center;
@@ -113,8 +115,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .archive { padding: 8px var(--gutter, 40px) 4px; }
 .section-divider {
   display: flex; align-items: center; gap: 14px;
-  font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--gris); font-weight: 700; padding: 22px 0 14px; border-top: 1px solid var(--noir);
+  font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gris); font-weight: 600; padding: 22px 0 14px; border-top: 1px solid var(--noir);
 }
 .registry-row {
   display: flex; align-items: baseline; gap: 18px; padding: 18px 12px;
@@ -124,18 +126,18 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .registry-row:hover, .registry-row:focus-visible { background: var(--papier); }
 .registry-idx { font-family: var(--f-mono); font-size: 13px; font-weight: 700; color: var(--gris); flex-shrink: 0; width: 32px; }
 .registry-main { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; }
-.tagline { font-family: var(--f-body); font-weight: 700; font-size: 16px; color: var(--noir); line-height: 1.35; }
+.tagline { font-family: var(--f-body); font-weight: 500; font-size: 16px; color: var(--noir); line-height: 1.35; }
 .registry-main .meta { font-family: var(--f-mono); font-size: 11px; color: var(--gris); letter-spacing: .02em; }
 .registry-count { font-family: var(--f-mono); font-size: 11px; color: var(--gris); flex-shrink: 0; white-space: nowrap; }
 
 /* ── LE CIRCUIT (carte de membre, invitation) ── */
 .circuit-invite { padding: 52px var(--gutter, 40px) 0; }
 .circuit-card { border: 1px solid var(--rouge); padding: 40px; }
-.circuit-title { font-family: var(--f-display); font-weight: 800; font-size: clamp(23px, 4vw, 27px); color: var(--noir); margin: 16px 0 14px; }
+.circuit-title { font-family: var(--f-display); font-weight: 600; font-size: clamp(23px, 4vw, 27px); color: var(--noir); margin: 16px 0 14px; }
 .circuit-lede { font-size: 15.5px; color: var(--gris); line-height: 1.6; max-width: 460px; }
 .membership { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--structure); }
-.membership-kicker { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--noir); font-weight: 700; margin-bottom: 12px; }
-.membership-title { font-family: var(--f-display); font-weight: 700; font-size: 19px; color: var(--noir); margin-bottom: 10px; line-height: 1.3; }
+.membership-kicker { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--noir); font-weight: 600; margin-bottom: 12px; }
+.membership-title { font-family: var(--f-display); font-weight: 600; font-size: 19px; color: var(--noir); margin-bottom: 10px; line-height: 1.3; }
 .membership p { font-size: 14.5px; color: var(--gris); line-height: 1.6; max-width: 440px; margin: 0 0 20px; }
 .membership-cta {
   display: inline-flex; align-items: center; justify-content: center;
@@ -148,7 +150,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 /* ── FOOTER ── */
 .footer { padding: 48px var(--gutter, 40px) 56px; text-align: center; border-top: 2px solid var(--noir); margin-top: 52px; }
-.footer-mention { font-family: var(--f-mono); font-size: 10px; color: var(--gris); letter-spacing: .1em; text-transform: uppercase; line-height: 1.6; margin-bottom: 22px; }
+.footer-mention { font-family: var(--f-body); font-weight: 500; font-size: 10.5px; color: var(--gris); letter-spacing: .08em; text-transform: uppercase; line-height: 1.6; margin-bottom: 22px; }
 .footer-credit { font-family: var(--f-mono); font-size: 10px; color: var(--gris); line-height: 1.6; margin-bottom: 6px; letter-spacing: .04em; }
 .footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
 .footer-link { font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gris); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .08s; }
@@ -184,12 +186,12 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 <div class="hero">
   <div class="hero-content reveal">
     <div class="edition-tag"><span class="kicker-inline">Registre des sélections · Paris</span></div>
-    <h1 class="hero-title">Les sorties tech house &amp; minimale qui ne passent pas ailleurs.</h1>
-    <p class="hero-sub">Sept titres par édition, vérifiés un par un, jamais republiés avant dix numéros. Envoyés par notification, deux fois par semaine, à qui s'inscrit. Gratuit.</p>
-    <button id="sub-btn" class="cta-primary" onclick="subscribePush()">Recevoir les sélections →</button>
+    <h1 class="hero-title">Sept titres que vous n&#x27;entendrez nulle part ailleurs.</h1>
+    <p class="hero-sub">Une sélection électronique underground, écoutée et choisie à la main à Paris. Deux envois par semaine, par notification. Gratuit.</p>
+    <button id="sub-btn" class="cta-primary" onclick="subscribePush()">Recevoir les sélections</button>
     <p class="hero-note">Une notification par édition, rien d'autre. Désabonnement en un tap, à tout moment.</p>
     <p id="sub-status" aria-live="polite"></p>
-    <div><button id="share-btn" class="cta-outline" hidden>↗ Partager le registre</button></div>
+    <div><button id="share-btn" class="cta-outline" hidden>Partager</button></div>
   </div>
 </div>
 

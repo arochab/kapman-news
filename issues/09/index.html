@@ -28,11 +28,12 @@
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Charte v5 « Index de sélection » : DISPLAY + CORPS = Inter Tight
-     (400/500/600/700/800) · TECHNIQUE (dates, catno, index, états, toute
-     donnée) = B612 Mono (400/700). Fraunces/Space Grotesk/Space Mono
-     retirées partout. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Charte v5.1 « le registre humain » : DISPLAY + ÉDITORIAL = Newsreader
+     (opsz, 400/500/600 + italiques) · CORPS/UI = Instrument Sans
+     (400/500/600/700) · TECHNIQUE (index, dates, catno, format, compteurs :
+     données courtes uniquement, plus aucun long libellé en mono caps) =
+     B612 Mono (400/700). Inter Tight/Fraunces retirées partout. -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Instrument+Sans:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -47,11 +48,11 @@
   --rouge:     #D7261E; /* strate MEMBRE uniquement : tampon, étiquettes, caviardage au hover */
   --papier:    #F4F2EC; /* surfaces légères (note de studio) */
 
-  --f-display: 'Inter Tight', Georgia, serif;
-  --f-body:    'Inter Tight', system-ui, -apple-system, sans-serif;
+  --f-display: 'Newsreader', Georgia, serif;
+  --f-body:    'Instrument Sans', system-ui, -apple-system, sans-serif;
   --f-mono:    'B612 Mono', ui-monospace, monospace;
 
-  --fs-micro:   10.5px;
+  --fs-micro:   10px;
   --fs-kicker:  11.5px;
   --fs-meta:    13px;
   --fs-body:    17px;
@@ -70,7 +71,7 @@ body {
   color: var(--noir);
   font-family: var(--f-body);
   font-size: var(--fs-body);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -98,11 +99,12 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .tag--membres { border-color: var(--rouge); color: var(--rouge); }
 .tag--index { background: var(--noir); color: var(--ivoire); border-color: var(--noir); }
 
-/* Micro-signe [CF] : rectangle, jamais un cercle (cf v4). */
+/* Micro-signe [CF] : cartouche rectangulaire noir plein, jamais un cercle
+   (cf v4), texte en Newsreader 600 (charte v5.1). */
 .microsign {
-  font-family: var(--f-mono); font-weight: 700; font-size: 13px;
-  border: 1.5px solid var(--noir); padding: 5px 8px; display: inline-block;
-  letter-spacing: .02em; color: var(--noir); line-height: 1;
+  font-family: var(--f-display); font-weight: 600; font-size: 13px;
+  background: var(--noir); color: var(--ivoire); padding: 5px 9px; display: inline-block;
+  letter-spacing: .02em; line-height: 1;
 }
 
 /* ── HEADER ── */
@@ -110,24 +112,25 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
   padding: 28px var(--gutter, 40px) 20px; border-bottom: 2px solid var(--noir);
 }
-.header-wordmark { font-family: var(--f-display); font-weight: 800; font-size: 18px; letter-spacing: -.005em; }
+.header-wordmark { font-family: var(--f-display); font-weight: 600; font-size: 21px; letter-spacing: .04em; }
 .header-meta { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); letter-spacing: .02em; }
 
 /* ── HERO ── */
 .hero { padding: 40px var(--gutter, 40px) 44px; }
 .hero-content { max-width: 620px; }
-.edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.ed-num { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
 .tagline {
-  font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 7.5vw, 54px);
-  letter-spacing: -.01em; color: var(--noir); line-height: 1.1; margin-bottom: 18px;
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 7.5vw, 54px);
+  letter-spacing: -.005em; color: var(--noir); line-height: 1.15; margin-bottom: 18px;
 }
 .hero-sub { font-size: var(--fs-body-lg); color: var(--gris); line-height: 1.5; margin-bottom: 20px; max-width: 520px; }
-.hero-meta { font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .04em; color: var(--gris); }
+.hero-meta { display: flex; flex-wrap: nowrap; gap: 8px; font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .04em; color: var(--gris); }
 .hero-meta span { white-space: nowrap; }
 
 /* ── SUMMARY ── */
 .summary { padding: 0 var(--gutter, 40px) 40px; }
-.kicker { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--noir); margin-bottom: 18px; font-weight: 700; }
+.kicker { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--noir); margin-bottom: 18px; font-weight: 600; }
 
 .sum-list { list-style: none; border-top: 1px solid var(--noir); }
 .sum-list li {
@@ -158,16 +161,25 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .s-num { font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .1em; text-transform: uppercase; color: var(--gris); }
 
 .section h2 {
-  font-family: var(--f-display); font-weight: 700; font-size: clamp(24px, 4vw, var(--fs-h2));
-  letter-spacing: -.01em; color: var(--noir); line-height: 1.28; margin-bottom: 30px;
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 4vw, var(--fs-h2));
+  letter-spacing: 0; color: var(--noir); line-height: 1.22; margin-bottom: 30px;
 }
 
-/* ── NOTE DE STUDIO (encart papier) ── */
-.studio { background: var(--papier); border: 1px solid var(--structure); padding: 40px var(--gutter, 40px); margin: 0 var(--gutter, 40px) 0; }
-.studio-label { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--noir); font-weight: 700; margin-bottom: 24px; }
-.studio-body p { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-h4); line-height: 1.6; color: var(--noir); margin-bottom: 18px; }
+/* ── NOTE DE STUDIO (charte v5.1 : colonne de magazine pleine largeur,
+   plus un encart admin ; bleed hors du body-wrap parent via marge
+   négative, filet fin SEULEMENT en haut). ── */
+.studio {
+  background: var(--papier); border-top: 1px solid var(--noir);
+  margin: 0 calc(-1 * var(--gutter, 40px)); padding: 40px var(--gutter, 40px);
+}
+.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.studio-label { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 20px; color: var(--noir); }
+.studio-date { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: var(--gris); }
+.studio-body { max-width: 62ch; }
+.studio-body p { font-family: var(--f-display); font-weight: 400; font-size: 18.5px; line-height: 1.68; color: var(--noir); margin-bottom: 18px; }
 .studio-body p:last-child { margin-bottom: 0; }
-.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--structure); max-width: 62ch; }
+.studio-sig-cf { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 14px; color: var(--gris); }
 
 /* ── PIÈCE (registre public, "PIÈCE 01/07") ── */
 .pieces { display: flex; flex-direction: column; gap: 32px; }
@@ -190,7 +202,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 /* ── STAT (ligne de registre) ── */
 .stat-row { padding: 40px var(--gutter, 40px); border-bottom: 1px solid var(--structure); background: var(--papier); }
-.stat-num { font-family: var(--f-display); font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -.02em; color: var(--noir); margin-bottom: 12px; }
+.stat-num { font-family: var(--f-display); font-weight: 600; font-size: 48px; line-height: 1; letter-spacing: -.01em; color: var(--noir); margin-bottom: 12px; }
 .stat-ctx { font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); line-height: 1.55; }
 
 /* ── SECTION BODY ── */
@@ -218,7 +230,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
 .subscribe-section { padding: 60px var(--gutter, 40px); border-bottom: 1px solid var(--structure); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
-.sub-text h3 { font-family: var(--f-display); font-size: clamp(21px, 4vw, 25px); font-weight: 700; color: var(--noir); margin-bottom: 14px; }
+.sub-text h3 { font-family: var(--f-display); font-size: clamp(21px, 4vw, 25px); font-weight: 600; color: var(--noir); margin-bottom: 14px; }
 .sub-text p { font-size: 14.5px; color: var(--gris); line-height: 1.6; margin-bottom: 26px; }
 #sub-btn, #share-btn {
   font-family: var(--f-body); font-weight: 700; font-size: 15px; letter-spacing: .005em;
@@ -232,7 +244,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 #sub-status[data-kind="ok"]  { color: var(--noir); font-weight: 700; }
 #sub-status[data-kind="err"] { color: var(--rouge); }
 .qr-wrap { margin: 44px auto 0; padding-top: 40px; border-top: 1px solid var(--structure); max-width: 260px; }
-.qr-share-lbl { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--gris); margin-bottom: 18px; font-weight: 700; }
+.qr-share-lbl { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); margin-bottom: 18px; font-weight: 600; }
 .qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 20px; image-rendering: pixelated; background: var(--ivoire); padding: 8px; border: 1px solid var(--structure); }
 .qr-steps { display: inline-flex; flex-direction: column; gap: 8px; text-align: left; }
 .qr-steps span { font-family: var(--f-mono); font-size: 11px; color: var(--gris); line-height: 1.4; }
@@ -262,7 +274,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
 .footer-link { font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gris); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .08s; }
 .footer-link:hover, .footer-link:focus-visible { color: var(--noir); }
-.footer-colophon { font-family: var(--f-mono); font-size: 10px; color: var(--gris); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
+.footer-colophon { font-family: var(--f-body); font-weight: 500; font-size: 10.5px; color: var(--gris); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
 
 /* ── MOTION ── reveal : opacity seule, 240ms, pas de translation. Le seul
    autre mouvement du site est la cascade de caviardage ci-dessus. */
@@ -278,7 +290,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   :root { --gutter: 24px; }
   .site-header { padding-top: 24px; padding-bottom: 18px; }
   .stat-num { font-size: 40px; }
-  .studio { margin: 0 24px 0; padding: 28px 24px; }
+  .studio { margin: 0 -24px; padding: 28px 24px; }
   
 }
 </style>
@@ -295,7 +307,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 <!-- HERO -->
 <div class="hero" data-flow="0">
   <div class="hero-content">
-    <div class="edition-tag"><span class="tag tag--index tnum">ÉD. 009</span> <span class="tag">Public</span></div>
+    <div class="edition-tag"><span class="ed-num tnum">ÉD. 009</span></div>
     <h1 class="tagline">Ce qu'on entend quand<br>personne regarde</h1>
     <div class="hero-meta tnum"><span>13.06.26</span> <span>· Lecture 4 min</span></div>
   </div>
@@ -325,7 +337,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="metrosoul-metrosoul-2-day">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 01/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Metrosoul · Metrosoul 2 Day</div>
     <div class="piece-meta tnum">Metromusic memu001 · 12&#34; · Allemagne · 2004</div>
@@ -340,7 +351,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="jesse-rose-a-sided">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 02/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Jesse Rose · A-Sided</div>
     <div class="piece-meta tnum">Dubsided DSD004 · 12&#34; · Londres · 2005</div>
@@ -355,7 +365,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="morgan-geist-super-ep">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 03/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Morgan Geist · Super EP</div>
     <div class="piece-meta tnum">Environ ENV 012 · 12&#34; · New York · 2001</div>
@@ -370,7 +379,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="lowtec-looser">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 04/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Lowtec · Looser</div>
     <div class="piece-meta tnum">Nonplus Records NONPLUS011 · 12&#34; · Londres · 2011</div>
@@ -385,7 +393,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="the-missing-link-cracker-smoke">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 05/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">The Missing Link · Cracker Smoke</div>
     <div class="piece-meta tnum">Wagon Repair WAG001 · 12&#34; EP · Vancouver · 2004</div>
@@ -400,7 +407,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="presence-gettin-lifted">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 06/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Presence · Gettin&#39; Lifted</div>
     <div class="piece-meta tnum">Remote REM004 · 12&#34; · UK · 1996</div>
@@ -415,7 +421,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="housey-doingz-gobstopper">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 07/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Housey Doingz · Gobstopper</div>
     <div class="piece-meta tnum">Wiggle WIG001 · 12&#34; EP · Londres · 1996</div>
@@ -430,7 +435,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="shonky-the-way-it-goes">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 08/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Shonky · The Way It Goes</div>
     <div class="piece-meta tnum">Wicked Bass WB029 · 12&#34; EP · Kyiv · 2024</div>
@@ -445,7 +449,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="dyed-soundorom-remote-cocktail">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 09/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Dyed Soundorom · Remote Cocktail</div>
     <div class="piece-meta tnum">Freak n&#39; Chic FNC30 · 12&#34; · Paris · 2008</div>
@@ -460,7 +463,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="switch-get-ya-dub-on">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 10/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Switch · Get Ya Dub On</div>
     <div class="piece-meta tnum">Freerange FR029 · 12&#34; · Londres · 2003</div>
@@ -497,7 +499,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="epsie-chase-the-worm">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 11/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Epsie · Chase The Worm</div>
     <div class="piece-meta tnum">9FINITY 9FINITY007 · 12&#34; EP · Londres · 2026</div>
@@ -512,7 +513,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
       <div class="piece" id="kerouac-marky">
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE 12/12</span>
-      <span class="tag">Public</span>
     </div>
     <div class="piece-title">Kerouac · Marky</div>
     <div class="piece-meta tnum">Dank Records UK DANK001 · 12&#34; · Londres · 2026</div>
@@ -557,11 +557,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   
 <div class="body-wrap" data-flow="6">
 <div class="section studio reveal" id="s4">
-  <div class="studio-label">Note de studio · Juin 2026</div>
+  <div class="studio-head">
+    <span class="studio-label">Note de studio</span>
+    <span class="studio-date tnum">13.06.26</span>
+  </div>
   <div class="studio-body">
     <p>J'ai arrêté d'essayer de faire sonner le TR-6S comme quelque chose que j'ai déjà entendu.</p><p>Le problème avec le TR-6S c'est qu'on a tous une image de ce qu'une boîte à rythmes doit faire, et cette image vient d'autres tracks, d'autres producteurs. Résultat : on passe du temps à retrouver un son qu'on admire au lieu de trouver le sien.</p><p>Ce mois-ci j'ai essayé l'inverse. Partir des défauts de la machine (les fréquences qui sonnent bizarrement, les temps de decay qui ne font pas ce qu'on attend) et construire autour de ça au lieu de les corriger. Le MicroKorg 2 en nappe froide par-dessus, pas pour combler les silences mais pour les souligner.</p><p>Live 12 en Session View comme espace de test : la machine propose, je ne corrige plus.</p>
   </div>
-  <div class="studio-sig"><span class="microsign">CF</span></div>
+  <div class="studio-sig"><span class="studio-sig-cf">CF</span></div>
 </div>
 </div>
   

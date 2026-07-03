@@ -20,7 +20,11 @@
               le Nème) ; le gabarit ne fait que lire `t.idx`.
     - total : nombre total de pièces du numéro (circuit.total si le numéro
               est fermé, sinon le nombre de pièces publiques).
-    - strate: "public" ou "membres", pilote le cartouche de strate.
+    - strate: "public" ou "membres". Charte v5.1 : les cartouches de strate
+      sont réservées à UN affichage par écran (en-tête de page / en-tête de
+      section), jamais répétées pièce par pièce : ce paramètre est donc
+      conservé dans la signature (contrat inchangé pour les appelants) mais
+      ne rend plus de cartouche ici.
 
   Pas de whitespace control ("-") sur les tags macro/endmacro : le tag et le
   premier/dernier caractère du markup restent sur la même ligne source pour
@@ -31,7 +35,6 @@
 {% macro track(t, idx, total, strate) %}  <div class="piece"{% if t.slug %} id="{{ t.slug }}"{% endif %}>
     <div class="piece-head">
       <span class="tag tag--index tnum">PIÈCE {{ '%02d'|format(idx) }}/{{ '%02d'|format(total) }}</span>
-      <span class="tag{% if strate == 'membres' %} tag--membres{% endif %}">{{ 'Membres' if strate == 'membres' else 'Public' }}</span>
     </div>
     <div class="piece-title">{{ t.name }}</div>
     {% if t.label or t.catno or t.year or t.meta %}<div class="piece-meta tnum">{{ meta(t) }}</div>{% endif %}

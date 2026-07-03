@@ -5,7 +5,7 @@
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
 // Bump à chaque changement de DA/template — force le remplacement du cache.
-const CACHE = 'cf-v7';
+const CACHE = 'cf-v8';
 
 // URL du serveur Render — même valeur que pwa/push-client.js (RENDER).
 const RENDER = 'https://kapman-news.onrender.com';
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (e) => {
         caches.match(e.request).then(
           (cached) =>
             cached ||
-            new Response('Hors-ligne — reviens quand tu as du réseau.', {
+            new Response('Hors ligne. Revenez quand vous aurez du réseau.', {
               status: 503,
               headers: { 'Content-Type': 'text/plain; charset=utf-8' },
             })

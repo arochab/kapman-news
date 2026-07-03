@@ -321,10 +321,11 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         kid = date_iso[:7] if len(date_iso) >= 7 else ""
 
     if teaser is None:
+        piece_word = "pièce" if count == 1 else "pièces"
         teaser = (
-            f"{count} pièces, la sélection par où commencer et le "
-            "récapitulatif complet sont scellés. La note de studio et 1 "
-            "statistique restent publiques."
+            "La suite de cette édition est réservée aux membres. "
+            f"{count} {piece_word}, par où commencer et le crate du mois. "
+            "Le code arrive à l'inscription."
         )
 
     plaintext_obj = {"fragments": fragments, "source": clear}

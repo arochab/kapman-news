@@ -1,7 +1,8 @@
 """
-Génère les icônes PWA CIRCUIT FERMÉ depuis la DA v5 (« Index de sélection ») :
-cartouche RECTANGULAIRE noir plein portant « CF » en Inter Tight ExtraBold
-ivoire, posé sur fond ivoire · le micro-signe du registre, jamais de cercle.
+Génère les icônes PWA CIRCUIT FERMÉ depuis la DA v5.1 (« le registre
+humain ») : cartouche RECTANGULAIRE noir plein portant « CF » en
+Newsreader 600 ivoire, posé sur fond ivoire · le micro-signe du registre,
+jamais de cercle.
 Output : pwa/icon-192.png, pwa/icon-512.png, pwa/badge-72.png
 100% local, aucune dépendance réseau.
 """
@@ -23,7 +24,7 @@ def _cartouche_geometry(S, safe_dim):
     box_h = safe_dim * 0.56
     cx = cy = S / 2
     rect = [cx - box_w / 2, cy - box_h / 2, cx + box_w / 2, cy + box_h / 2]
-    font = ImageFont.truetype(str(FONTS / "InterTight-ExtraBold.ttf"), round(box_h * 0.60))
+    font = ImageFont.truetype(str(FONTS / "Newsreader-SemiBold.ttf"), round(box_h * 0.66))
     return rect, font, cx, cy
 
 

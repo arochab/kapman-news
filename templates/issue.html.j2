@@ -82,11 +82,12 @@
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Charte v5 « Index de sélection » : DISPLAY + CORPS = Inter Tight
-     (400/500/600/700/800) · TECHNIQUE (dates, catno, index, états, toute
-     donnée) = B612 Mono (400/700). Fraunces/Space Grotesk/Space Mono
-     retirées partout. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Charte v5.1 « le registre humain » : DISPLAY + ÉDITORIAL = Newsreader
+     (opsz, 400/500/600 + italiques) · CORPS/UI = Instrument Sans
+     (400/500/600/700) · TECHNIQUE (index, dates, catno, format, compteurs :
+     données courtes uniquement, plus aucun long libellé en mono caps) =
+     B612 Mono (400/700). Inter Tight/Fraunces retirées partout. -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Instrument+Sans:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -101,11 +102,11 @@
   --rouge:     #D7261E; /* strate MEMBRE uniquement : tampon, étiquettes, caviardage au hover */
   --papier:    #F4F2EC; /* surfaces légères (note de studio) */
 
-  --f-display: 'Inter Tight', Georgia, serif;
-  --f-body:    'Inter Tight', system-ui, -apple-system, sans-serif;
+  --f-display: 'Newsreader', Georgia, serif;
+  --f-body:    'Instrument Sans', system-ui, -apple-system, sans-serif;
   --f-mono:    'B612 Mono', ui-monospace, monospace;
 
-  --fs-micro:   10.5px;
+  --fs-micro:   10px;
   --fs-kicker:  11.5px;
   --fs-meta:    13px;
   --fs-body:    17px;
@@ -124,7 +125,7 @@ body {
   color: var(--noir);
   font-family: var(--f-body);
   font-size: var(--fs-body);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -152,11 +153,12 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .tag--membres { border-color: var(--rouge); color: var(--rouge); }
 .tag--index { background: var(--noir); color: var(--ivoire); border-color: var(--noir); }
 
-/* Micro-signe [CF] : rectangle, jamais un cercle (cf v4). */
+/* Micro-signe [CF] : cartouche rectangulaire noir plein, jamais un cercle
+   (cf v4), texte en Newsreader 600 (charte v5.1). */
 .microsign {
-  font-family: var(--f-mono); font-weight: 700; font-size: 13px;
-  border: 1.5px solid var(--noir); padding: 5px 8px; display: inline-block;
-  letter-spacing: .02em; color: var(--noir); line-height: 1;
+  font-family: var(--f-display); font-weight: 600; font-size: 13px;
+  background: var(--noir); color: var(--ivoire); padding: 5px 9px; display: inline-block;
+  letter-spacing: .02em; line-height: 1;
 }
 
 /* ── HEADER ── */
@@ -164,24 +166,25 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
   padding: 28px var(--gutter, 40px) 20px; border-bottom: 2px solid var(--noir);
 }
-.header-wordmark { font-family: var(--f-display); font-weight: 800; font-size: 18px; letter-spacing: -.005em; }
+.header-wordmark { font-family: var(--f-display); font-weight: 600; font-size: 21px; letter-spacing: .04em; }
 .header-meta { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); letter-spacing: .02em; }
 
 /* ── HERO ── */
 .hero { padding: 40px var(--gutter, 40px) 44px; }
 .hero-content { max-width: 620px; }
-.edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.ed-num { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
 .tagline {
-  font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 7.5vw, 54px);
-  letter-spacing: -.01em; color: var(--noir); line-height: 1.1; margin-bottom: 18px;
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 7.5vw, 54px);
+  letter-spacing: -.005em; color: var(--noir); line-height: 1.15; margin-bottom: 18px;
 }
 .hero-sub { font-size: var(--fs-body-lg); color: var(--gris); line-height: 1.5; margin-bottom: 20px; max-width: 520px; }
-.hero-meta { font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .04em; color: var(--gris); }
+.hero-meta { display: flex; flex-wrap: nowrap; gap: 8px; font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .04em; color: var(--gris); }
 .hero-meta span { white-space: nowrap; }
 
 /* ── SUMMARY ── */
 .summary { padding: 0 var(--gutter, 40px) 40px; }
-.kicker { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--noir); margin-bottom: 18px; font-weight: 700; }
+.kicker { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--noir); margin-bottom: 18px; font-weight: 600; }
 
 .sum-list { list-style: none; border-top: 1px solid var(--noir); }
 .sum-list li {
@@ -212,16 +215,25 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .s-num { font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .1em; text-transform: uppercase; color: var(--gris); }
 
 .section h2 {
-  font-family: var(--f-display); font-weight: 700; font-size: clamp(24px, 4vw, var(--fs-h2));
-  letter-spacing: -.01em; color: var(--noir); line-height: 1.28; margin-bottom: 30px;
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 4vw, var(--fs-h2));
+  letter-spacing: 0; color: var(--noir); line-height: 1.22; margin-bottom: 30px;
 }
 
-/* ── NOTE DE STUDIO (encart papier) ── */
-.studio { background: var(--papier); border: 1px solid var(--structure); padding: 40px var(--gutter, 40px); margin: 0 var(--gutter, 40px) 0; }
-.studio-label { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--noir); font-weight: 700; margin-bottom: 24px; }
-.studio-body p { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-h4); line-height: 1.6; color: var(--noir); margin-bottom: 18px; }
+/* ── NOTE DE STUDIO (charte v5.1 : colonne de magazine pleine largeur,
+   plus un encart admin ; bleed hors du body-wrap parent via marge
+   négative, filet fin SEULEMENT en haut). ── */
+.studio {
+  background: var(--papier); border-top: 1px solid var(--noir);
+  margin: 0 calc(-1 * var(--gutter, 40px)); padding: 40px var(--gutter, 40px);
+}
+.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.studio-label { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 20px; color: var(--noir); }
+.studio-date { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: var(--gris); }
+.studio-body { max-width: 62ch; }
+.studio-body p { font-family: var(--f-display); font-weight: 400; font-size: 18.5px; line-height: 1.68; color: var(--noir); margin-bottom: 18px; }
 .studio-body p:last-child { margin-bottom: 0; }
-.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--structure); max-width: 62ch; }
+.studio-sig-cf { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 14px; color: var(--gris); }
 
 /* ── PIÈCE (registre public, "PIÈCE 01/07") ── */
 .pieces { display: flex; flex-direction: column; gap: 32px; }
@@ -244,7 +256,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 /* ── STAT (ligne de registre) ── */
 .stat-row { padding: 40px var(--gutter, 40px); border-bottom: 1px solid var(--structure); background: var(--papier); }
-.stat-num { font-family: var(--f-display); font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -.02em; color: var(--noir); margin-bottom: 12px; }
+.stat-num { font-family: var(--f-display); font-weight: 600; font-size: 48px; line-height: 1; letter-spacing: -.01em; color: var(--noir); margin-bottom: 12px; }
 .stat-ctx { font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); line-height: 1.55; }
 
 /* ── SECTION BODY ── */
@@ -359,7 +371,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 /* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
 .subscribe-section { padding: 60px var(--gutter, 40px); border-bottom: 1px solid var(--structure); text-align: center; }
 .sub-text { max-width: 420px; margin: 0 auto; }
-.sub-text h3 { font-family: var(--f-display); font-size: clamp(21px, 4vw, 25px); font-weight: 700; color: var(--noir); margin-bottom: 14px; }
+.sub-text h3 { font-family: var(--f-display); font-size: clamp(21px, 4vw, 25px); font-weight: 600; color: var(--noir); margin-bottom: 14px; }
 .sub-text p { font-size: 14.5px; color: var(--gris); line-height: 1.6; margin-bottom: 26px; }
 #sub-btn, #share-btn {
   font-family: var(--f-body); font-weight: 700; font-size: 15px; letter-spacing: .005em;
@@ -373,7 +385,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 #sub-status[data-kind="ok"]  { color: var(--noir); font-weight: 700; }
 #sub-status[data-kind="err"] { color: var(--rouge); }
 .qr-wrap { margin: 44px auto 0; padding-top: 40px; border-top: 1px solid var(--structure); max-width: 260px; }
-.qr-share-lbl { font-family: var(--f-mono); font-size: var(--fs-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--gris); margin-bottom: 18px; font-weight: 700; }
+.qr-share-lbl { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); margin-bottom: 18px; font-weight: 600; }
 .qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 20px; image-rendering: pixelated; background: var(--ivoire); padding: 8px; border: 1px solid var(--structure); }
 .qr-steps { display: inline-flex; flex-direction: column; gap: 8px; text-align: left; }
 .qr-steps span { font-family: var(--f-mono); font-size: 11px; color: var(--gris); line-height: 1.4; }
@@ -385,7 +397,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
    site.membership_url, comme avant. */
 .membership { margin: 52px var(--gutter, 40px); border: 1px solid var(--rouge); padding: 44px; text-align: center; }
 .membership-tag { display: flex; justify-content: center; margin-bottom: 20px; }
-.membership-title { font-family: var(--f-display); font-size: clamp(23px, 4vw, 27px); font-weight: 700; color: var(--noir); margin-bottom: 14px; line-height: 1.3; }
+.membership-title { font-family: var(--f-display); font-size: clamp(23px, 4vw, 27px); font-weight: 600; color: var(--noir); margin-bottom: 14px; line-height: 1.3; }
 .membership p { font-size: 15.5px; color: var(--gris); line-height: 1.6; max-width: 420px; margin: 0 auto 26px; }
 .membership-cta {
   display: inline-flex; align-items: center; justify-content: center;
@@ -421,7 +433,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
 .footer-link { font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gris); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .08s; }
 .footer-link:hover, .footer-link:focus-visible { color: var(--noir); }
-.footer-colophon { font-family: var(--f-mono); font-size: 10px; color: var(--gris); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
+.footer-colophon { font-family: var(--f-body); font-weight: 500; font-size: 10.5px; color: var(--gris); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
 
 /* ── MOTION ── reveal : opacity seule, 240ms, pas de translation. Le seul
    autre mouvement du site est la cascade de caviardage ci-dessus. */
@@ -437,7 +449,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   :root { --gutter: 24px; }
   .site-header { padding-top: 24px; padding-bottom: 18px; }
   .stat-num { font-size: 40px; }
-  .studio { margin: 0 24px 0; padding: 28px 24px; }
+  .studio { margin: 0 -24px; padding: 28px 24px; }
   {% if site and site.membership_url %}.membership { padding: 32px 24px; }{% endif %}
 }
 </style>
@@ -454,7 +466,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 <!-- HERO -->
 <div class="hero" data-flow="0">
   <div class="hero-content">
-    <div class="edition-tag"><span class="tag tag--index tnum">ÉD. {{ '%03d'|format(issue_num) }}</span> <span class="tag">Public</span></div>
+    <div class="edition-tag"><span class="ed-num tnum">ÉD. {{ '%03d'|format(issue_num) }}</span></div>
     <h1 class="tagline">{{ tagline_html | safe }}</h1>
     <div class="hero-meta tnum"><span>{{ date_display }}</span> {% if listening_time %}<span>· Lecture {{ reading_time }}</span> <span>· Écoute {{ listening_time }}</span>{% else %}<span>· Lecture {{ reading_time }}</span>{% endif %}</div>
   </div>
@@ -481,11 +493,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   {% if block.type == "section" and block.heading == 'Note de studio' %}
 <div class="body-wrap" data-flow="{{ loop.index }}">
 <div class="section studio reveal" id="s{{ block.index }}">
-  <div class="studio-label">Note de studio · {{ month_label }}</div>
+  <div class="studio-head">
+    <span class="studio-label">Note de studio</span>
+    <span class="studio-date tnum">{{ date_display }}</span>
+  </div>
   <div class="studio-body">
     {% for p in block.paragraphs %}<p>{{ p | safe }}</p>{% endfor %}
   </div>
-  <div class="studio-sig"><span class="microsign">CF</span></div>
+  <div class="studio-sig"><span class="studio-sig-cf">CF</span></div>
 </div>
 </div>
   {% elif block.type == "section" %}
@@ -573,7 +588,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
   <div class="circuit-locked">
     <div class="stamp-row"><span class="stamp">Réservé</span></div>
-    <p class="registre-note">{{ circuit.teaser or "La suite de ce numéro reste dans le circuit, réservée aux membres." }}</p>
+    <p class="registre-note">{{ circuit.teaser or "La suite de cette édition est réservée aux membres. Quatre pièces, par où commencer et le crate du mois. Le code arrive à l'inscription." }}</p>
     <form id="circuit-form" class="circuit-form" autocomplete="off">
       <div class="code-entry"><input id="circuit-code" type="text" autocomplete="off" placeholder="Code du mois" aria-label="Code du circuit"></div>
       <button type="submit" class="btn-primary">Entrer le code</button>
@@ -582,13 +597,13 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
     {% if site and site.membership_url %}
     <div class="circuit-membership">
       <span class="tag tag--membres">Membres</span>
-      <a class="circuit-membership-link circuit-membership-link--primary" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € par mois' }}</a>
+      <a class="circuit-membership-link circuit-membership-link--primary" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € / mois' }}</a>
       {% if site.membership_annual_url %}<a class="circuit-membership-link" href="{{ site.membership_annual_url }}" target="_blank" rel="noopener">ou {{ site.membership_annual_price or "50 € l'année" }}, l'objet de décembre compris</a>{% endif %}
     </div>
     {% endif %}
   </div>
   <div class="circuit-open-line">
-    <span class="tag tag--stamp-open tnum">Registre complet · membre</span>
+    <span class="tag tag--stamp-open tnum">Édition complète · membre</span>
   </div>
 </div>
 </div>
@@ -634,7 +649,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   <div class="membership-tag"><span class="tag tag--membres">Membres</span></div>
   <h3 class="membership-title">Le Circuit</h3>
   <p>La lettre publique reste gratuite. Les membres débloquent le reste de chaque numéro fermé, le crate du mois avec ses tracks bonus, et l'objet de fin d'année pour les annuels.</p>
-  <a class="membership-cta" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € par mois' }}</a>
+  <a class="membership-cta" href="{{ site.membership_url }}" target="_blank" rel="noopener">Devenir membre · {{ site.membership_price or '5 € / mois' }}</a>
   {% if site.membership_annual_url %}
   <div><a class="membership-alt" href="{{ site.membership_annual_url }}" target="_blank" rel="noopener">ou {{ site.membership_annual_price or "50 € l'année" }}, l'objet de décembre compris</a></div>
   {% endif %}
