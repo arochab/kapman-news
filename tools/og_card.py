@@ -1,19 +1,21 @@
 """
 Génère la carte de partage (Open Graph, 1200x630) d'une issue CIRCUIT FERMÉ.
 
-  python tools/og_card.py --content content/10.json
+  python tools/og_card.py --content content/11.json
 
 Rendu direct avec Pillow (pas de navigateur headless) à partir des mêmes
-polices que le site (Fraunces, Space Grotesk, Space Mono, committées
-localement dans tools/assets/fonts/ · aucun téléchargement au build CI) et
-des mêmes couleurs de marque que templates/issue.html.j2 (charte v4, « la
-société d'écoute »).
+polices que le site (Inter Tight, B612 Mono, committées localement dans
+tools/assets/fonts/ · aucun téléchargement au build CI) et des mêmes
+couleurs de marque que templates/issue.html.j2 (charte v5, « Index de
+sélection »).
 
-Composition : pochette / carte de membre, pas une bannière web. Fond
-carbone, sillon (arcs concentriques hairline, 3 dans le métal de l'édition)
-centré derrière le numéral filigrane, pastille métal + label d'édition,
-tagline en Fraunces italique, sceau CF en haut à gauche, ligne mono en pied,
-le tout cerné d'un bord hairline façon carte gaufrée.
+Composition : la fiche d'un registre, pas une bannière web. Fond ivoire,
+cadre noir 2px doublé d'un filet fin extérieur, « ÉD. 011 » géant en B612
+Mono gris structure posé en fond de registre, wordmark + kicker en tête,
+tagline Inter Tight ExtraBold alignée à droite, deux ou trois barres de
+caviardage noires en bas à droite (l'intrigue dans WhatsApp), pied B612
+gris (date · pièces · lecture). Si le numéro est fermé (champ `circuit`),
+petit tampon « RÉSERVÉ » à bordure rouge double, posé droit.
 
 Sortie : issues/NN/card.png. Appelé depuis tools/build_issue.py à chaque
 rendu d'issue (import direct). Toute erreur (Pillow absent, police absente,
@@ -35,30 +37,19 @@ ISSUES = ROOT / "issues"
 # ── Dimensions Open Graph standard ──
 W, H = 1200, 630
 
-# ── Couleurs de marque (identiques à templates/issue.html.j2 :root, charte v4) ──
-CARBONE = (10, 10, 12)      # #0A0A0C — fond
-GRAPHITE = (19, 19, 22)     # #131316 — surfaces / filigrane du numéral
-HAIRLINE = (38, 38, 43)     # #26262B — filets 1px
-OS = (236, 231, 220)        # #ECE7DC — texte principal
-BRUME = (156, 151, 138)     # #9C978A — texte secondaire
-CREUSE = (110, 106, 96)     # #6E6A60 — méta discrète (≥12px / uppercase)
-LAITON = (194, 163, 107)    # #C2A36B — accent
-TERRACOTTA = (201, 108, 90)  # #C96C5A — erreurs uniquement (non utilisé ici)
-
-# Cycle des éditions par issue_num % 3 — MÊME mécanique que templates/issue.html.j2
-# (--issue-accent) et build_issue.py (build_row_html : accent_idx = issue_num % 3).
-# 0 = laiton « OR », 1 = cuivre, 2 = acier.
-METALS = [
-    ("OR", (194, 163, 107)),      # laiton #C2A36B
-    ("CUIVRE", (192, 141, 110)),  # cuivre #C08D6E
-    ("ACIER", (169, 174, 184)),   # acier #A9AEB8
-]
+# ── Couleurs de marque (identiques au :root v5 de templates/issue.html.j2) ──
+IVOIRE = (252, 251, 247)     # #FCFBF7 · fond
+NOIR = (18, 18, 18)          # #121212 · encre
+STRUCTURE = (200, 197, 188)  # #C8C5BC · filets, numéral de fond
+GRIS = (111, 108, 100)       # #6F6C64 · texte secondaire
+ROUGE = (215, 38, 30)        # #D7261E · strate membre uniquement (tampon)
 
 DASH_RE = re.compile(r"\s*[—–]\s*")
 
 
 def no_dash(text: str) -> str:
-    """Aucun tiret (— / –) dans un texte rendu : remplacé par ' · ' (règle éditoriale)."""
+    """Aucun tiret cadratin ou demi cadratin dans un texte rendu : remplacé
+    par ' · ' (règle éditoriale)."""
     if not text:
         return text
     return DASH_RE.sub(" · ", text).strip()
@@ -112,163 +103,158 @@ def _tracked(text: str, spacing: str = " ") -> str:
     return spacing.join(text)
 
 
-def _radial_mask(w: int, h: int, cx: int, cy: int, inner_r: int, outer_r: int) -> Image.Image:
-    """Masque L (0..255) : opaque dans inner_r, dégradé jusqu'à 0 à outer_r.
-    Calculé à basse résolution puis remis à l'échelle (pas de numpy) pour
-    un fondu propre du sillon, sans bord de découpe visible."""
-    lw, lh = 160, 84
-    small = Image.new("L", (lw, lh), 0)
-    px = small.load()
-    scale_x, scale_y = w / lw, h / lh
-    scx, scy = cx / scale_x, cy / scale_y
-    sinner, souter = inner_r / scale_x, outer_r / scale_x
-    for j in range(lh):
-        for i in range(lw):
-            d = ((i - scx) ** 2 + (j - scy) ** 2) ** 0.5
-            if d <= sinner:
-                v = 255
-            elif d >= souter:
-                v = 0
-            else:
-                v = round(255 * (1 - (d - sinner) / (souter - sinner)))
-            px[i, j] = v
-    return small.resize((w, h), Image.BICUBIC)
+def _piece_count(content: dict) -> int:
+    """Nombre total de pièces du numéro : tracks publiques des blocs +
+    pièces scellées (circuit.total prime, sinon circuit.pieces)."""
+    count = 0
+    for block in content.get("blocks", []) or []:
+        count += len(block.get("tracks", []) or [])
+    circuit = content.get("circuit")
+    if isinstance(circuit, dict):
+        total = circuit.get("total")
+        if isinstance(total, int) and total > 0:
+            return total
+        pieces = circuit.get("pieces")
+        if isinstance(pieces, list):
+            count += len(pieces)
+    return count
 
 
-def _draw_sillon(img: Image.Image, cx: int, cy: int, accent: tuple):
-    """Le sillon : arcs concentriques hairline centrés sur (cx, cy), 3 anneaux
-    dans le métal de l'édition mêlés aux autres en hairline. Dessiné sur un
-    calque à part puis fondu dans le fond avec un masque radial, pour que le
-    motif se dissolve avant d'atteindre la tagline (cadré comme le hero
-    d'issue : le numéral en spindle, le sillon en label de disque, pas un
-    filigrane qui traverse tout le texte)."""
-    layer = Image.new("RGB", img.size, CARBONE)
-    ldraw = ImageDraw.Draw(layer)
-    radii = range(90, 950, 80)
-    accent_at = {150, 390, 630}  # 3 anneaux dans le métal, répartis sur la portée visible
-    for r in radii:
-        bbox = [cx - r, cy - r, cx + r, cy + r]
-        closest = min(abs(a - r) for a in accent_at)
-        if closest < 40:
-            ldraw.ellipse(bbox, outline=accent, width=2)
-        else:
-            ldraw.ellipse(bbox, outline=HAIRLINE, width=1)
-    mask = _radial_mask(img.width, img.height, cx, cy, inner_r=230, outer_r=470)
-    img.paste(layer, (0, 0), mask)
+def _draw_cartouche_cf(draw: ImageDraw.ImageDraw, right: int, top: int) -> None:
+    """Micro-signe : « CF » Inter Tight ExtraBold ivoire dans un rectangle
+    noir plein, comme un cartouche de registre (jamais de cercle)."""
+    f_cf = _font("InterTight-ExtraBold.ttf", 24)
+    bbox = draw.textbbox((0, 0), "CF", font=f_cf)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    pad_x, pad_y = 14, 9
+    bw, bh = tw + 2 * pad_x, th + 2 * pad_y
+    x0 = right - bw
+    draw.rectangle([x0, top, right, top + bh], fill=NOIR)
+    draw.text((x0 + pad_x - bbox[0], top + pad_y - bbox[1]), "CF", font=f_cf, fill=IVOIRE)
 
 
-def _draw_seal(draw: ImageDraw.ImageDraw, cx: int, cy: int, radius: int, f_cf: ImageFont.FreeTypeFont):
-    """Sceau CF : cercle hairline + monogramme Space Mono Bold centré."""
-    draw.ellipse([cx - radius, cy - radius, cx + radius, cy + radius], outline=HAIRLINE, width=2)
-    cf_bbox = draw.textbbox((0, 0), "CF", font=f_cf)
-    cf_w = cf_bbox[2] - cf_bbox[0]
-    cf_h = cf_bbox[3] - cf_bbox[1]
-    draw.text((cx - cf_w / 2 - cf_bbox[0], cy - cf_h / 2 - cf_bbox[1]), "CF", font=f_cf, fill=OS)
+def _draw_stamp(img: Image.Image, right: int, top: int) -> None:
+    """Tampon « RÉSERVÉ » : bordure rouge double 1px, B612 Mono 700, posé
+    droit, léger décalage d'encrage toléré (opacité 0.9), jamais incliné."""
+    f_stamp = _font("B612Mono-Bold.ttf", 17)
+    text = _tracked("RÉSERVÉ", " ")
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    bbox = draw.textbbox((0, 0), text, font=f_stamp)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    pad_x, pad_y = 16, 10
+    bw, bh = tw + 2 * pad_x, th + 2 * pad_y
+    x0 = right - bw
+    ink = ROUGE + (230,)
+    draw.rectangle([x0, top, x0 + bw, top + bh], outline=ink, width=1)
+    draw.rectangle([x0 + 4, top + 4, x0 + bw - 4, top + bh - 4], outline=ink, width=1)
+    draw.text((x0 + pad_x - bbox[0], top + pad_y - bbox[1]), text, font=f_stamp, fill=ink)
+    img.paste(overlay, (0, 0), overlay)
 
 
 def render_card(content: dict) -> Image.Image:
     issue_num = content["issue_num"]
-    metal_name, metal_color = METALS[issue_num % 3]
 
-    img = Image.new("RGB", (W, H), CARBONE)
+    img = Image.new("RGB", (W, H), IVOIRE)
+    draw = ImageDraw.Draw(img)
 
     margin = 64
 
-    # ── Le sillon, centré au delà du coin haut droit (coeur hors cadre) :
-    # le numéral devient le spindle du disque, les anneaux le label ; le
-    # fondu radial l'éteint bien avant la tagline. Dessiné avant tout le
-    # reste (paste sur l'image nue), puis draw est lié une seule fois. ──
-    _draw_sillon(img, cx=W + 60, cy=110, accent=metal_color)
-    draw = ImageDraw.Draw(img)
+    # ── Fond de registre : « ÉD. 011 » géant en B612 Mono Bold gris
+    # structure, ancré en bas à gauche. C'est une donnée d'index posée en
+    # fond, pas un filigrane fantaisie : dessiné avant tout le reste. ──
+    seg_a, seg_b = "ÉD.", f"{issue_num:03d}"
+    target_w = 720
+    size = 200
+    while size > 40:
+        f_num = _font("B612Mono-Bold.ttf", size)
+        a_bbox = draw.textbbox((0, 0), seg_a, font=f_num)
+        b_bbox = draw.textbbox((0, 0), seg_b, font=f_num)
+        gap = int(size * 0.24)
+        total = (a_bbox[2] - a_bbox[0]) + gap + (b_bbox[2] - b_bbox[0])
+        if total <= target_w:
+            break
+        size -= 8
+    n_bottom = H - 66
+    x = 56
+    draw.text((x - a_bbox[0], n_bottom - a_bbox[3]), seg_a, font=f_num, fill=STRUCTURE)
+    x += (a_bbox[2] - a_bbox[0]) + gap
+    draw.text((x - b_bbox[0], n_bottom - b_bbox[3]), seg_b, font=f_num, fill=STRUCTURE)
 
-    # ── Bord hairline façon carte gaufrée / pochette (pas une bannière web :
-    # un cadre, des coins arrondis, comme la carte de membre #circuit-lock) ──
-    frame_inset = 22
-    draw.rounded_rectangle(
-        [frame_inset, frame_inset, W - frame_inset, H - frame_inset],
-        radius=16, outline=HAIRLINE, width=2,
-    )
+    # ── Cadre : filet fin extérieur + cadre noir 2px (la fiche du registre) ──
+    draw.rectangle([10, 10, W - 11, H - 11], outline=STRUCTURE, width=1)
+    draw.rectangle([22, 22, W - 23, H - 23], outline=NOIR, width=2)
 
-    # ── Numéral géant en filigrane graphite (Fraunces Medium), posé sur le
-    # sillon, coin haut droit — même logique que le hero d'issue (numéral
-    # graphite avec contour subtil). ──
-    numeral = f"Nº{issue_num:02d}"
-    f_numeral = _font("Fraunces-Medium.ttf", 230)
-    n_bbox = draw.textbbox((0, 0), numeral, font=f_numeral)
-    n_w = n_bbox[2] - n_bbox[0]
-    n_x = W - margin - n_w - n_bbox[0]
-    n_y = -18 - n_bbox[1]
-    draw.text((n_x, n_y), numeral, font=f_numeral, fill=GRAPHITE)
+    # ── Tête : wordmark Inter Tight ExtraBold + kicker B612 Mono gris ──
+    f_word = _font("InterTight-ExtraBold.ttf", 32)
+    w_bbox = draw.textbbox((0, 0), "CIRCUIT FERMÉ", font=f_word)
+    top = 58
+    draw.text((margin - w_bbox[0], top - w_bbox[1]), "CIRCUIT FERMÉ", font=f_word, fill=NOIR)
 
-    # ── Sceau CF, haut gauche : cercle hairline + « CF » Space Mono Bold,
-    # avec le lockup mono « CIRCUIT FERMÉ · SOCIÉTÉ D'ÉCOUTE ». ──
-    seal_r = 27
-    seal_cx = margin + seal_r
-    seal_cy = margin + seal_r
-    f_cf = _font("SpaceMono-Bold.ttf", 20)
-    _draw_seal(draw, seal_cx, seal_cy, seal_r, f_cf)
+    kicker = "REGISTRE DES SÉLECTIONS · PARIS"
+    f_kicker = _font("B612Mono-Regular.ttf", 15)
+    k_bbox = draw.textbbox((0, 0), kicker, font=f_kicker)
+    k_y = top + (w_bbox[3] - w_bbox[1]) + 16
+    draw.text((margin - k_bbox[0], k_y - k_bbox[1]), kicker, font=f_kicker, fill=GRIS)
 
-    text_x = margin + seal_r * 2 + 20
-    f_wordmark = _font("SpaceMono-Bold.ttf", 17)
-    f_subtitle = _font("SpaceMono-Regular.ttf", 12)
-    wm_text = _tracked("CIRCUIT FERMÉ", " ")
-    st_text = _tracked("SOCIÉTÉ D'ÉCOUTE", " ")
+    # ── Micro-signe CF en haut à droite ; tampon RÉSERVÉ à sa gauche si le
+    # numéro est fermé (seul rouge autorisé sur la carte). ──
+    _draw_cartouche_cf(draw, right=W - margin, top=top)
+    if content.get("circuit"):
+        _draw_stamp(img, right=W - margin - 90, top=top)
+        draw = ImageDraw.Draw(img)
 
-    wm_bbox = draw.textbbox((0, 0), wm_text, font=f_wordmark)
-    cy = seal_cy - seal_r
-    draw.text((text_x, cy - wm_bbox[1]), wm_text, font=f_wordmark, fill=OS)
-    cy += (wm_bbox[3] - wm_bbox[1]) + 8
+    # ── Pied B612 gris, aligné à droite : date · N pièces · lecture ──
+    date_str = _row_date(content.get("date_iso", ""))
+    n_pieces = _piece_count(content)
+    reading = no_dash(content.get("reading_time", "") or "")
+    parts = [date_str]
+    if n_pieces:
+        parts.append(f"{n_pieces} PIÈCES" if n_pieces > 1 else "1 PIÈCE")
+    if reading:
+        parts.append(f"LECTURE {reading}".upper())
+    footer = " · ".join(p for p in parts if p)
+    f_footer = _font("B612Mono-Regular.ttf", 15)
+    fb = draw.textbbox((0, 0), footer, font=f_footer)
+    foot_h = fb[3] - fb[1]
+    foot_top = H - 60 - foot_h
+    draw.text((W - margin - (fb[2] - fb[0]) - fb[0], foot_top - fb[1]), footer, font=f_footer, fill=GRIS)
 
-    st_bbox = draw.textbbox((0, 0), st_text, font=f_subtitle)
-    draw.text((text_x, cy - st_bbox[1]), st_text, font=f_subtitle, fill=CREUSE)
+    # ── Barres de caviardage : 3 barres noires pleines, largeurs variées
+    # (stables par numéro), empilées au dessus du pied, alignées à droite.
+    # Discrètes : c'est un motif du registre, pas un slogan. ──
+    bar_h = 10
+    bar_gap = 13
+    base = (340, 205, 275)
+    bar_widths = [b + ((issue_num * 37 + i * 61) % 70) - 35 for i, b in enumerate(base)]
+    bars_bottom = foot_top - 30
+    y = bars_bottom
+    for bw in bar_widths:
+        draw.rectangle([W - margin - bw, y - bar_h, W - margin, y], fill=NOIR)
+        y -= bar_h + bar_gap
+    bars_top = y + bar_gap
 
-    # ── Pastille métal + label d'édition, sous le lockup : disque plein du
-    # métal de l'édition, comme un pressage coloré, + « ÉDITION Nº12 · OR ». ──
-    label_y = margin + seal_r * 2 + 34
-    dot_r = 6
-    dot_cy = label_y + 7
-    draw.ellipse([margin, dot_cy - dot_r, margin + 2 * dot_r, dot_cy + dot_r], fill=metal_color)
-    edition_text = _tracked(f"ÉDITION Nº{issue_num:02d} · {metal_name}", " ")
-    f_edition = _font("SpaceMono-Regular.ttf", 13)
-    ed_bbox = draw.textbbox((0, 0), edition_text, font=f_edition)
-    draw.text((margin + 2 * dot_r + 14, dot_cy - (ed_bbox[3] - ed_bbox[1]) / 2 - ed_bbox[1]), edition_text, font=f_edition, fill=BRUME)
-
-    # ── Tagline, Fraunces italique, os, wrap max 3 lignes, réduction auto,
-    # centrée verticalement dans la zone libre entre le label et le pied. ──
+    # ── Tagline Inter Tight ExtraBold noir, alignée à droite au dessus des
+    # barres, wrap max 3 lignes avec réduction auto. ──
     tagline = no_dash(content.get("tagline_plain", ""))
-    tagline_max_w = W - 2 * margin
-    tagline_sizes = [64, 56, 48, 42]
+    tagline_max_w = 660
     lines: list[str] = []
     f_tagline = None
-    for size in tagline_sizes:
-        f_tagline = _font("Fraunces-Italic.ttf", size)
+    for size in (58, 50, 44, 38):
+        f_tagline = _font("InterTight-ExtraBold.ttf", size)
         lines = _wrap(draw, tagline, f_tagline, tagline_max_w, 3)
         consumed = " ".join(lines)
-        if len(consumed) >= len(tagline.rstrip()) or size == tagline_sizes[-1]:
+        if len(consumed) >= len(tagline.rstrip()) or size == 38:
             break
 
-    line_bbox = draw.textbbox((0, 0), "Ag", font=f_tagline)
-    line_h = int((line_bbox[3] - line_bbox[1]) * 1.22)
-
-    zone_top = label_y + 46
-    zone_bottom = H - margin - 54
-    block_h = line_h * len(lines)
-    block_top = zone_top + max(0, (zone_bottom - zone_top - block_h) // 2)
-    y = block_top
+    line_bbox = draw.textbbox((0, 0), "Agé", font=f_tagline)
+    line_h = int((line_bbox[3] - line_bbox[1]) * 1.16)
+    block_bottom = bars_top - 34
+    y = block_bottom - line_h * len(lines)
     for line in lines:
-        draw.text((margin, y - line_bbox[1]), line, font=f_tagline, fill=OS)
+        lw = draw.textlength(line, font=f_tagline)
+        draw.text((W - margin - lw, y - line_bbox[1]), line, font=f_tagline, fill=NOIR)
         y += line_h
-
-    # ── Ligne mono discrète en pied : date + lecture (+ écoute), en brume,
-    # même registre que .hero-meta / .reading-time côté site. ──
-    date_str = _row_date(content.get("date_iso", ""))
-    reading = no_dash(content.get("reading_time", ""))
-    listening = no_dash(content.get("listening_time", ""))
-    parts = [p for p in [date_str, f"LECTURE {reading}".upper() if reading else "", f"ÉCOUTE {listening}".upper() if listening else ""] if p]
-    footer = "   ·   ".join(parts)
-    f_footer = _font("SpaceMono-Regular.ttf", 15)
-    fb = draw.textbbox((0, 0), footer, font=f_footer)
-    draw.text((margin, H - margin - (fb[3] - fb[1]) - fb[1]), footer, font=f_footer, fill=BRUME)
 
     return img
 

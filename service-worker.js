@@ -5,7 +5,7 @@
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
 // Bump à chaque changement de DA/template — force le remplacement du cache.
-const CACHE = 'cf-v6';
+const CACHE = 'cf-v7';
 
 // URL du serveur Render — même valeur que pwa/push-client.js (RENDER).
 const RENDER = 'https://kapman-news.onrender.com';
@@ -71,7 +71,7 @@ self.addEventListener('push', (e) => {
     data = {};
   }
 
-  const title = data.title || 'KAPMAN SIGNAL';
+  const title = data.title || 'CIRCUIT FERMÉ';
   const targetUrl = data.url
     ? fromScope(String(data.url).replace(/^\//, ''))
     : fromScope('./');

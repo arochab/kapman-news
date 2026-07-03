@@ -1,24 +1,45 @@
 {#
-  Macro track(t, accent) : markup d'une track individuelle, identique au
-  markup inline historique de templates/issue.html.j2 (track-name,
-  track-meta avec la logique label/catno/format/place/year ou fallback meta,
-  track-body, track-dig, track-links). Réutilisée par issue.html.j2 (blocs
-  publics) et templates/circuit_fragment.html.j2 (fragments membres).
+  v5 « Index de sélection » : macros pour une pièce du registre.
 
-  Pas de "-" (whitespace control) sur les tags macro/endmacro : le tag et le
-  premier/dernier caractère du markup sont volontairement sur la même ligne
-  source pour préserver l'indentation exacte "  <div..." sans qu'un trim
-  Jinja n'avale aussi les espaces (et pas seulement le saut de ligne).
+  meta(t) : rend la chaîne de méta discographique seule (label/catno/format/
+  place/year, fallback t.meta), sans wrapper. Partagée entre track() ici et
+  la liste compacte du registre caviardé (templates/issue.html.j2), pour ne
+  jamais dupliquer la logique label/catno/format/place/year.
+
+  track(t, idx, total, strate) : markup complet d'une pièce (« PIÈCE
+  01/07 »), identique pour les blocs publics (issue.html.j2) et les
+  fragments membres injectés (circuit_fragment.html.j2).
+    - idx   : index GLOBAL de la pièce dans le flux entrelacé de la page
+              (1..total), jamais un compteur séquentiel par strate. Côté
+              public, issue.html.j2 l'incrémente en parcourant les blocs
+              dans l'ordre d'affichage. Côté membres, l'index n'est pas
+              calculé ici : chaque track porte déjà un champ entier `t.idx`
+              stampé par tools/circuit.py (compute_pieces), qui interclasse
+              les blocs membres à leur "position" parmi les blocs publics
+              (position 0 = avant le premier bloc public, position N = après
+              le Nème) ; le gabarit ne fait que lire `t.idx`.
+    - total : nombre total de pièces du numéro (circuit.total si le numéro
+              est fermé, sinon le nombre de pièces publiques).
+    - strate: "public" ou "membres", pilote le cartouche de strate.
+
+  Pas de whitespace control ("-") sur les tags macro/endmacro : le tag et le
+  premier/dernier caractère du markup restent sur la même ligne source pour
+  préserver l'indentation exacte sans qu'un trim Jinja n'avale aussi les
+  espaces (et pas seulement le saut de ligne).
 #}
-{% macro track(t, accent) %}  <div class="track"{% if t.slug %} id="{{ t.slug }}"{% endif %}>
-    <div class="track-name">{{ t.name }}</div>
-    {% if t.label or t.catno or t.year %}<div class="track-meta">{{ t.label }}{% if t.catno %} {{ t.catno }}{% endif %}{% if t.format %} · {{ t.format }}{% endif %}{% if t.place %} · {{ t.place }}{% endif %}{% if t.year %} · {{ t.year }}{% endif %}</div>
-    {% elif t.meta %}<div class="track-meta">{{ t.meta }}</div>{% endif %}
-    <div class="track-body">{{ t.body | safe }}</div>
-    {% if t.dig %}<div class="track-dig"><span class="dig-arrow">↳</span> {{ t.dig }}</div>{% endif %}
+{% macro meta(t) %}{% if t.label or t.catno or t.year %}{{ t.label }}{% if t.catno %} {{ t.catno }}{% endif %}{% if t.format %} · {{ t.format }}{% endif %}{% if t.place %} · {{ t.place }}{% endif %}{% if t.year %} · {{ t.year }}{% endif %}{% elif t.meta %}{{ t.meta }}{% endif %}{% endmacro %}
+{% macro track(t, idx, total, strate) %}  <div class="piece"{% if t.slug %} id="{{ t.slug }}"{% endif %}>
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE {{ '%02d'|format(idx) }}/{{ '%02d'|format(total) }}</span>
+      <span class="tag{% if strate == 'membres' %} tag--membres{% endif %}">{{ 'Membres' if strate == 'membres' else 'Public' }}</span>
+    </div>
+    <div class="piece-title">{{ t.name }}</div>
+    {% if t.label or t.catno or t.year or t.meta %}<div class="piece-meta tnum">{{ meta(t) }}</div>{% endif %}
+    <div class="piece-body">{{ t.body | safe }}</div>
+    {% if t.dig %}<div class="piece-dig"><span class="dig-arrow">↳</span> {{ t.dig }}</div>{% endif %}
     {% if t.links %}
-    <div class="track-links">
-      {% for link in t.links %}<a class="track-link" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
+    <div class="piece-links">
+      {% for link in t.links %}<a class="piece-link" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
     </div>
     {% endif %}
   </div>{% endmacro %}

@@ -158,8 +158,13 @@ avant le premier bloc public).
   "salt": "<base64>",
   "iv": "<base64>",
   "ct": "<base64>",
-  "teaser": "3 tracks de plus réservées aux membres du circuit.",
-  "count": 3
+  "teaser": "3 pièces, la sélection par où commencer et le récapitulatif complet sont scellés. La note de studio et 1 statistique restent publiques.",
+  "count": 3,
+  "pieces": [
+    { "idx": 4, "year": "2000", "format": "12\"" },
+    { "idx": 6, "format": "12\"" }
+  ],
+  "total": 7
 }
 ```
 
@@ -172,10 +177,42 @@ avant le premier bloc public).
 | `ct` | Ciphertext AES-256-GCM, tag concaténé en fin (comportement par défaut de `cryptography` et de WebCrypto), base64 standard. |
 | `teaser` | Texte public affiché à la place du contenu membre (chaîne libre publique, jamais chiffrée). Écrit par `--seal --teaser "..."`, sinon construit automatiquement depuis `count`. |
 | `count` | Nombre total de tracks des blocs membres. Calculé par `--seal`, jamais saisi à la main. |
+| `pieces` | **Public, jamais chiffré.** Registre caviardé : liste ordonnée des pièces membres, `{"idx": <index global 1..total>, "year"?: "...", "format"?: "..."}`. `year`/`format` omis si absents du track source. **JAMAIS** `name`/`label`/`catno`/`place` ni aucun texte — seule une méta qui ne désanonymise pas la track. Calculé par `--seal` (`compute_pieces`), jamais saisi à la main. |
+| `total` | Nombre total de pièces du numéro (tracks publiques + tracks membres), calculé par `--seal`. |
 
 Absent (issue sans circuit fermé) : `circuit` est falsy en Jinja, rendu
 identique à aujourd'hui, aucune adaptation nécessaire pour les anciennes
-issues.
+issues. De même, `pieces`/`total` absents (blob scellé avant leur
+introduction) : le template affiche le seuil sans lignes caviardées, teaser
+seul — un `--seal` de plus les régénère.
+
+### L'index global des pièces (`idx` / `start_idx`)
+
+`--seal` calcule (fonction `compute_pieces` de `tools/circuit.py`) l'index
+global 1-based de chaque **pièce** (= une track, publique ou membre) dans
+l'ordre exact où la page finale les affiche :
+
+1. Le flux public est la liste `blocks` de `content/NN.json`, dans l'ordre ;
+   chaque bloc y occupe la position de flux `data-flow="{{ loop.index }}"`
+   (1-based, voir `templates/issue.html.j2`), la position `0` étant juste
+   avant le premier bloc public (immédiatement après le hero).
+2. Chaque bloc membre porte son champ `position` (même index de flux) : il
+   s'insère juste **après** le bloc public de ce numéro (`position: 0` =
+   avant le premier bloc public).
+3. À position égale, plusieurs blocs membres conservent l'ordre dans lequel
+   ils apparaissent dans `content/circuit/NN.json` (stable).
+4. Seuls les blocs `section` munis de `tracks` produisent des pièces (une
+   par track) ; les `stat` et les sections à paragraphes (label du mois,
+   note de studio) n'en produisent aucune.
+5. On numérote `1..total` en parcourant ce flux dans l'ordre d'affichage :
+   blocs membres `position: 0`, puis bloc public 1, blocs membres
+   `position: 1`, bloc public 2, blocs membres `position: 2`, etc.
+
+Chaque fragment du plaintext déchiffré (`fragments[]`, cf ci-dessous) reçoit
+en plus un champ `start_idx` : l'index global de la première track de son
+bloc (absent/`null` si le bloc n'a pas de tracks). `templates/circuit_fragment`
+numérote ainsi « PIÈCE `start_idx + i` / `total` » pour la i-ème track du
+fragment (0-based), sans recalculer l'algorithme côté client.
 
 ### Crypto (compatibilité WebCrypto obligatoire)
 
@@ -185,11 +222,13 @@ issues.
   ciphertext.
 - Encodage : base64 standard avec padding pour `salt`/`iv`/`ct`.
 - Le plaintext (avant chiffrement) est un JSON UTF-8 :
-  `{"fragments": [{"position": <int>, "html": "<fragment HTML rendu>"}], "source": {...}}`
+  `{"fragments": [{"position": <int>, "html": "<fragment HTML rendu>", "start_idx": <int|null>}], "source": {...}}`
   où `fragments[].html` vient du rendu individuel de chaque bloc via
-  `templates/circuit_fragment.html.j2`, et `source` est le contenu intégral
-  de `content/circuit/NN.json` (permet à `--open` de reconstruire le clair
-  sans perte).
+  `templates/circuit_fragment.html.j2`, `fragments[].start_idx` est l'index
+  global (1-based) de la première track du bloc (`null` si le bloc n'a pas
+  de tracks, cf section précédente sur `compute_pieces`), et `source` est le
+  contenu intégral de `content/circuit/NN.json` (permet à `--open` de
+  reconstruire le clair sans perte).
 
 ### Procédure
 

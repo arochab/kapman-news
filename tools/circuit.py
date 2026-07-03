@@ -14,6 +14,12 @@ itérations, compatible WebCrypto côté navigateur) et écrit le résultat dans
 le champ "circuit" de content/NN.json. --open fait l'inverse : déchiffre et
 recrée content/circuit/NN.json à partir du clair.
 
+--seal écrit aussi en clair, dans "circuit" (public, jamais chiffré) : le
+registre "pieces" (index global + méta sûre de chaque pièce membre, cf
+compute_pieces) et "total" (nb de pièces du numéro), plus un "start_idx" par
+fragment chiffré (index global de sa 1ère track) pour la numérotation
+PIÈCE 0X/0N côté template. Un re-seal régénère ces champs proprement.
+
 Contrat détaillé (structure du clair, du champ "circuit", procédure) :
 content/SCHEMA.md, section "Numéro à circuit fermé".
 """
@@ -127,7 +133,75 @@ def _jinja_env():
     )
 
 
-def render_block(env, block: dict) -> str:
+def compute_pieces(public_blocks: list, member_blocks: list):
+    """Calcule l'index global (1-based) de chaque piece du numero, dans
+    l'ordre exact ou la page finale les affiche.
+
+    Algorithme (miroir de templates/issue.html.j2 + pwa/circuit.js) :
+    - Le flux public est la liste "blocks" du JSON public, dans l'ordre ;
+      chaque bloc y occupe la position de flux data-flow="{{ loop.index }}"
+      (1-based, cf issue.html.j2), la position 0 etant juste avant le
+      premier bloc public (immediatement apres le hero).
+    - Chaque bloc membre (content/circuit/NN.json) porte un champ entier
+      obligatoire "position" qui vaut ce meme index de flux : il s'insere
+      juste APRES le bloc public de ce numero (position 0 = avant le
+      premier bloc public, cf content/SCHEMA.md).
+    - A position egale, plusieurs blocs membres conservent l'ordre dans
+      lequel ils apparaissent dans content/circuit/NN.json (stable).
+    - Une "piece" = une track, a l'interieur d'un bloc "section" muni de
+      "tracks". Les blocs "stat" et les sections a paragraphes (label du
+      mois, note de studio) ne comptent aucune piece (rien a caviarder).
+    - On numerote 1..N en parcourant ce flux dans l'ordre d'affichage :
+      blocs membres position 0, puis bloc public 1, blocs membres
+      position 1, bloc public 2, blocs membres position 2, etc.
+
+    Retourne (start_idx_by_id, member_pieces, total) :
+    - start_idx_by_id : {id(bloc membre): index global de sa 1ere track},
+      absent du dict (donc None via .get) si le bloc n'a pas de tracks
+      (stat, paragraphes) : templates/circuit_fragment n'a alors rien a
+      numeroter pour ce fragment.
+    - member_pieces : liste ordonnee (registre public) des pieces membres,
+      chacune {"idx": <int>, "year"?: <str>, "format"?: <str>} — "year" et
+      "format" omis si absents du track source. JAMAIS name/label/catno/
+      place ni aucun texte : seule une meta sure (deja public par nature :
+      un format ou une annee ne desanonymise pas une track).
+    - total : nombre total de pieces du numero (tracks publiques + tracks
+      membres).
+    """
+    by_position = {}
+    for b in member_blocks:
+        by_position.setdefault(b.get("position"), []).append(b)
+
+    idx = 0
+    start_idx_by_id = {}
+    member_pieces = []
+
+    def consume(bs):
+        nonlocal idx
+        for b in bs:
+            tracks = b.get("tracks") or []
+            if not tracks:
+                continue
+            start_idx_by_id[id(b)] = idx + 1
+            for t in tracks:
+                idx += 1
+                piece = {"idx": idx}
+                if t.get("year"):
+                    piece["year"] = t["year"]
+                if t.get("format"):
+                    piece["format"] = t["format"]
+                member_pieces.append(piece)
+
+    consume(by_position.get(0, []))
+    for k, block in enumerate(public_blocks, start=1):
+        if block.get("type") == "section":
+            idx += len(block.get("tracks") or [])
+        consume(by_position.get(k, []))
+
+    return start_idx_by_id, member_pieces, idx
+
+
+def render_block(env, block: dict, start_idx: int = None, total: int = 0) -> str:
     """Rend un bloc membre en fragment HTML autonome via
     templates/circuit_fragment.html.j2.
 
@@ -137,18 +211,29 @@ def render_block(env, block: dict) -> str:
     recoivent un slug avec la meme convention que build_issue.render_issue,
     pour permettre des ancres dans le fragment.
 
-    Variables passees au template : "block" (le bloc lui meme) et
-    "accent_class" (raccourci = block["accent"], ex. "red" ; le template
-    choisit comment le prefixer, ex. tracks-{{ accent_class }}, comme le
-    fait deja templates/issue.html.j2 pour les blocs publics).
+    start_idx / total : le contrat de numerotation "PIECE 0X/0N" tel que lu
+    aujourd'hui par templates/_track.j2 (macro track(t, idx, total, strate))
+    attend un champ entier "idx" pre-calcule sur CHAQUE track et une
+    variable "total" au contexte de rendu. compute_pieces() calcule cet
+    index dans l'ordre exact d'affichage (position des blocs membres
+    interclassee avec les blocs publics, cf sa docstring) ; start_idx est
+    l'index de la 1ere track du bloc, les suivantes s'incrementent de 1. Si
+    start_idx est None (bloc sans tracks, ex. "stat"), rien n'est ecrit
+    (aucune track a numeroter).
+
+    Variables passees au template : "block" (le bloc lui meme, tracks
+    annotees de "idx"), "accent_class" (raccourci = block["accent"], garde
+    pour compat gabarit) et "total".
     """
     import build_issue as _build_issue
 
-    for t in block.get("tracks", []) or []:
+    for i, t in enumerate(block.get("tracks", []) or []):
         t["slug"] = _build_issue.slugify(t["name"])
+        if start_idx is not None:
+            t["idx"] = start_idx + i
     accent_class = block.get("accent")
     tmpl = env.get_template("circuit_fragment.html.j2")
-    return tmpl.render(block=block, accent_class=accent_class)
+    return tmpl.render(block=block, accent_class=accent_class, total=total)
 
 
 def _content_path(num: int) -> Path:
@@ -163,7 +248,15 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
     """Lit content/circuit/NN.json (clair), rend chaque bloc en HTML,
     construit le plaintext {"fragments": [...], "source": {...}}, chiffre,
     et ecrit le champ "circuit" dans content/NN.json (reste du JSON
-    preserve, indent 2, ensure_ascii False)."""
+    preserve, indent 2, ensure_ascii False).
+
+    Calcule aussi (compute_pieces) et ecrit en clair dans "circuit" le
+    registre public "pieces" (index global + meta sure de chaque piece
+    membre) et "total" (nb de pieces du numero), ainsi que "start_idx" par
+    fragment (index global de sa 1ere track) pour que
+    templates/circuit_fragment puisse numeroter PIECE 0X/0N cote membre.
+    Idempotent : un re-seal (numero deja scelle) regenere pieces/total/
+    start_idx depuis le contenu courant, rien n'est jamais accumule."""
     content_path = _content_path(num)
     clear_path = _circuit_clear_path(num)
 
@@ -189,6 +282,10 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         )
         sys.exit(1)
 
+    start_idx_by_id, member_pieces, total = compute_pieces(
+        content.get("blocks") or [], blocks
+    )
+
     env = _jinja_env()
     fragments = []
     count = 0
@@ -204,8 +301,19 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         # render_block ajoute un slug par track (comme build_issue.render_issue) :
         # on rend une copie profonde pour ne jamais muter "clear", qui est
         # sauvegarde tel quel dans le plaintext (champ "source", cf --open).
-        html_fragment = render_block(env, copy.deepcopy(block))
-        fragments.append({"position": position, "html": html_fragment})
+        # start_idx alimente aussi le rendu HTML (t.idx + total, contrat lu
+        # par templates/_track.j2 aujourd'hui) : le fragment chiffre porte
+        # deja la bonne numerotation "PIECE 0X/0N", sans dependre d'un
+        # recalcul cote client.
+        block_start_idx = start_idx_by_id.get(id(block))
+        html_fragment = render_block(
+            env, copy.deepcopy(block), start_idx=block_start_idx, total=total
+        )
+        fragments.append({
+            "position": position,
+            "html": html_fragment,
+            "start_idx": block_start_idx,
+        })
         count += len(block.get("tracks", []) or [])
 
     if kid is None:
@@ -213,7 +321,11 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         kid = date_iso[:7] if len(date_iso) >= 7 else ""
 
     if teaser is None:
-        teaser = f"{count} tracks de plus, réservées aux membres du circuit."
+        teaser = (
+            f"{count} pièces, la sélection par où commencer et le "
+            "récapitulatif complet sont scellés. La note de studio et 1 "
+            "statistique restent publiques."
+        )
 
     plaintext_obj = {"fragments": fragments, "source": clear}
     plaintext = json.dumps(plaintext_obj, ensure_ascii=False).encode("utf-8")
@@ -228,6 +340,8 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
         "ct": base64.b64encode(ct).decode("ascii"),
         "teaser": teaser,
         "count": count,
+        "pieces": member_pieces,
+        "total": total,
     }
 
     content_path.write_text(
@@ -235,7 +349,8 @@ def cmd_seal(num: int, code: str, kid: str = None, teaser: str = None):
     )
     print(
         f"[OK] content/{num:02d}.json : champ 'circuit' ecrit "
-        f"({count} track(s), kid={kid!r}, {len(fragments)} fragment(s))."
+        f"({count} track(s), kid={kid!r}, {len(fragments)} fragment(s), "
+        f"{len(member_pieces)} piece(s) au registre, total={total})."
     )
 
 

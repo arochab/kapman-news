@@ -124,36 +124,47 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   `server/gunicorn.conf.py` monte le timeout worker à 120s (le défaut 30s tuait le worker
   en plein envoi). La start command Render doit rester `gunicorn app:app` (conf auto-chargée).
 
-## Design system (v4 « société d'écoute », juillet 2026)
+## Design system (v5 « index de sélection », juillet 2026)
 
-- **Palette** : carbone `#0A0A0C` (fond) · graphite `#131316` (surfaces, cartes)
-  · hairline `#26262B` (filets 1px) · os `#ECE7DC` (texte principal, fond des
-  panneaux inversés) · brume `#9C978A` (texte secondaire) · creuse `#6E6A60`
-  (méta discrète, uniquement ≥12px ou uppercase tracké) · laiton `#C2A36B`
-  (accent, hover `#D9BC85`) · terracotta `#C96C5A` (erreurs uniquement). Cycle
-  des éditions par `issue_num % 3`, même mécanique qu'avant : or (laiton),
-  cuivre `#C08D6E`, acier `#A9AEB8`, avec une variante lisible sur fond os
-  pour les panneaux inversés. Gris uniquement via les tokens du `:root` : zéro
-  hex littéral ailleurs (tolérance : `#0A0A0C` dans `theme-color` et le
-  manifest).
-- **Typo** : **Fraunces** (display, italique, note de studio) · **Space
-  Grotesk** (corps, UI) · **Space Mono** (technique, kickers, méta). Chargées
-  via Google Fonts avec repli système (`Georgia`, `system-ui`, `ui-monospace`)
-  ; les mêmes familles existent en TTF locales dans `tools/assets/fonts/` pour
-  le rendu des cartes de partage (`tools/og_card.py`).
-- **Motifs** : le sillon (arcs concentriques SVG en en-tête et en signature de
-  la note de studio), la pastille (accent rond devant chaque kicker), le sceau
-  CF (cercle + monogramme, remplace le logo). La triple-rule R/V/B et le
-  glyphe signal sont SUPPRIMÉS (juillet 2026, refonte v4).
-- **Le Disque** : sphère vinyle en three.js sur la home (`pwa/disque.js`,
-  dépend uniquement de `pwa/vendor/three.module.min.js`), montée dans
-  `#disque-mount`. Purement décoratif, jamais bloquant : coupée si
-  `prefers-reduced-motion`, si le module échoue à charger ou si WebGL est
-  indisponible, et alors seul le fallback CSS (`.disque-fallback`, dégradé +
-  arcs) reste visible.
+Esprit : un registre officiel de sélection, pas une vitrine. Prestige par
+l'ordre (numérotation, filets, chiffres tabulaires, tampon), pas par
+l'ornement. Presque rien ne bouge.
+
+- **Palette** : ivoire `#FCFBF7` (fond) · noir `#121212` (encre) · structure
+  `#C8C5BC` (filets, bordures) · gris `#6F6C64` (texte secondaire, ≥4.5:1 sur
+  ivoire) · papier `#F4F2EC` (surfaces légères). Rouge `#D7261E` réservé à la
+  **strate membre uniquement** (tampon RÉSERVÉ, étiquettes membres, barres de
+  caviardage au hover) : jamais en décor côté public. Le cycle or/cuivre/acier
+  par édition disparaît : identité monochrome + rouge de strate, `issue_num %
+  3` ne pilote plus rien. Zéro hex hors `:root` (tolérance : `#FCFBF7` dans
+  `theme-color` et le manifest).
+- **Typo** : **Inter Tight** (400 à 800, display et corps, 17px/1.55 en
+  lecture) · **B612 Mono** (400/700, 11 à 13px) pour toute donnée : dates,
+  catno, formats, index, compteurs, étiquettes de strate. Chargées via
+  Google Fonts avec repli système ; les mêmes familles existent en TTF
+  locales dans `tools/assets/fonts/` pour les cartes de partage
+  (`tools/og_card.py`). Fraunces, Space Grotesk et Space Mono sont RETIRÉES.
+- **Signalétique** : wordmark « CIRCUIT FERMÉ » Inter Tight 800 capitales ;
+  micro signe « CF » dans un rectangle noir (pas de cercle). Cartouches de
+  strate systématiques en B612 Mono : bordé « PUBLIC », plein rouge
+  « MEMBRES » / « RÉSERVÉ ». Numérotation « ÉD. 011 » et « PIÈCE 01/07 » en
+  B612 Mono, chiffres tabulaires, zéros de tête.
+- **Le registre et le caviardage** : chaque numéro fermé liste ses pièces en
+  continu et numérotées. Pièces publiques : nom, méta complète, texte, liens.
+  Pièces membres : ligne présente (index + méta sûre format/année) mais nom
+  remplacé par une barre noire pleine, texte absent, sous un tampon RÉSERVÉ.
+  Déverrouillage : les barres se retirent ligne à ligne (seule animation du
+  site avec le reveal), les fragments membres s'injectent, le tampon devient
+  cartouche « REGISTRE COMPLET · MEMBRE ». Pipeline technique et index global
+  des pièces : `content/SCHEMA.md` (`circuit.pieces`/`circuit.total`).
+- **Motion minimale** : reveal au scroll en opacité seule (240ms, pas de
+  translation), hover en changement de fond/soulignement instantané (80ms),
+  cascade de décaviardage au déverrouillage (le seul moment de théâtre du
+  site). `prefers-reduced-motion` coupe tout. **three.js et Le Disque sont
+  SUPPRIMÉS** (`pwa/disque.js`, `pwa/vendor/` retirés, plus aucune référence).
 - **Verrou membre** = la carte de membre (`#circuit-lock` dans
   `templates/issue.html.j2`), pas un simple paywall texte : même registre
-  graphite/laiton que le reste de la page, badge `.s-circuit` sur les
+  noir/ivoire/rouge que le reste de la page, badge `.s-circuit` sur les
   fragments injectés.
 
 All design lives in `templates/issue.html.j2` (+ `index.html` pour la home) :
