@@ -17,6 +17,7 @@ import json
 import re
 import unicodedata
 from pathlib import Path
+from urllib.parse import quote
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 ROOT = Path(__file__).parent.parent
@@ -93,6 +94,14 @@ def extract_listen_all(content: dict):
     listen_all_url = None
     if listen_count >= 2:
         listen_all_url = "https://www.youtube.com/watch_videos?video_ids=" + ",".join(ids)
+        # Nomme la playlist anonyme dans YouTube même (paramètre title) :
+        # « CIRCUIT FERMÉ · N°11 · <tagline> ». Une vraie playlist nommée
+        # (champ playlist_url du JSON) prime toujours sur ce lien généré.
+        num = content.get("issue_num")
+        tagline = (content.get("tagline_plain") or "").strip()
+        if num is not None:
+            title = f"CIRCUIT FERMÉ · N°{num:02d}" + (f" · {tagline}" if tagline else "")
+            listen_all_url += "&title=" + quote(title, safe="")
     return listen_all_url, listen_count
 
 
