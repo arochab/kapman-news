@@ -126,3 +126,43 @@ Seal obligatoire via `tools/circuit.py --seal` avant commit, jamais de clair mem
 9. **La contre-note hebdomadaire et les horodatages fictifs.** « Il n'existe pas 4 récits intimes par semaine ; une anecdote fausse repérée par un proche tue la moat entière » (juge chambre 2), et la contre-note « converge vers 3 tropes au bout de 6 numéros ». La voix intime vit dans les pièces à la première personne, un seul registre, honnête, chaque semaine ; on n'assèche pas deux puits à la fois.
 
 Le principe qui a tout arbitré : rien dans l'offre membre ne périme, rien ne dépend d'une participation que 14 personnes ne fourniront pas, rien ne promet un rythme que 30 minutes par session ne tiennent pas. Quatre pièces vécues par semaine, un dossier et un crate par mois, un objet par an. C'est court, c'est tenable, et chaque ligne est introuvable ailleurs.
+
+---
+
+## 6. Doctrine de clarté et conventions premium
+
+*Verdict d'Adam sur le premier spécimen membre (juillet 2026) : « pas clair du
+tout, tout doit être crystal clear ». Ces conventions sont obligatoires sur
+tout numéro fermé. La clarté s'ajoute AUTOUR de la prose, elle ne la dilue
+pas : le niveau d'écriture des pièces reste celui des piliers.*
+
+1. **Chaque dispositif s'auto-explique à la première rencontre, en une
+   ligne.** Un lecteur qui débarque ne connaît ni « M. 004 », ni « requête »,
+   ni « dossier », ni « crate ». Conventions fixées :
+   - **La requête** : sa section porte le chapeau « La requête du mois : un
+     membre demande, la sélection répond », et la pièce ouvre sur « M. 004
+     (chaque membre porte un numéro) a demandé : ... Voici la réponse. »
+   - **Le dossier** : chapeau « Le dossier, chaque mois : un label passé au
+     crible, ce qu'il faut écouter, dans quel ordre, et ce qu'il faut
+     éviter. »
+   - **Le crate** : chapeau « Le crate du mois : votre sélection du mois,
+     ordonnée pour être jouée telle quelle, du premier au dernier disque. »
+   - **La fiche d'achat** : étiquetée dans `dig`, jamais un ↳ nu :
+     « FICHE D'ACHAT · Acheter : ... Éviter : ... »
+2. **Chaque texte commence par sa thèse**, note de studio comprise : la
+   première phrase annonce de quoi le texte parle, puis il déroule. Jamais
+   d'ouverture en énigme. Un lecteur pressé doit comprendre chaque paragraphe
+   isolément.
+3. **Phrases courtes, un fait par phrase, aucune référence interne non
+   expliquée** : pas de « direction B » sans dire qu'un vote a eu lieu, pas
+   de numéro de membre sans dire que chaque membre en porte un.
+4. **Le chapeau membre** ouvre la zone membre : « Registre complet · vous
+   lisez la version membre », plus une ligne qui liste ce que CE numéro
+   contient pour le membre (pièces racontées, dossier, crate, requête).
+5. **Le reçu de fin de mois** ferme la zone membre : « Votre mois de X en
+   tant que membre : N pièces racontées et sourcées · 1 label passé au
+   crible · 1 crate prêt à jouer · 1 requête servie. » La preuve de valeur,
+   factuelle, sans emphase.
+6. **Chaque section membre porte une raison d'être d'une ligne** (pourquoi ce
+   contenu vaut l'abonnement), intégrée naturellement au chapeau ou au titre
+   de section, jamais en argumentaire lourd.
