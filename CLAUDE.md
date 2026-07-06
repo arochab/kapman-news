@@ -140,21 +140,14 @@ l'ornement. Presque rien ne bouge.
   par édition disparaît : identité monochrome + rouge de strate, `issue_num %
   3` ne pilote plus rien. Zéro hex hors `:root` (tolérance : `#FCFBF7` dans
   `theme-color` et le manifest).
-- **Typo** : **Newsreader** (opsz, 400/500/600 + italiques 400/500) pour le
-  display et l'éditorial : taglines et H1 en Newsreader 500-600, vraies bas
-  de casse, interligne 1.12-1.18 ; l'italique pour les nuances. **Instrument
-  Sans** (400/500/600/700) pour le corps et l'UI, 17px/1.6 en lecture.
-  **B612 Mono** (400/700, 11 à 13px) cantonnée aux données courtes : dates,
-  catno, formats, index, compteurs, étiquettes de strate, plus aucun long
-  libellé en mono caps. Chargées via Google Fonts avec repli système ; les
-  mêmes familles existent en TTF locales dans `tools/assets/fonts/` pour les
-  cartes de partage (`tools/og_card.py`). Fraunces, Inter Tight, Space
-  Grotesk et Space Mono sont RETIRÉES.
+- **Typo** : **Geist** (display + corps, 400/500/600/700) et **Geist Mono**
+  (données courtes, 400/700), Google Fonts + TTF locales pour les cartes ;
+  Newsreader/Instrument Sans/Geist Mono retirées.
 - **Signalétique** : wordmark « CIRCUIT FERMÉ » Inter Tight 800 capitales ;
   micro signe « CF » dans un rectangle noir (pas de cercle). Cartouches de
-  strate systématiques en B612 Mono : bordé « PUBLIC », plein rouge
+  strate systématiques en Geist Mono : bordé « PUBLIC », plein rouge
   « MEMBRES » / « RÉSERVÉ ». Numérotation « ÉD. 011 » et « PIÈCE 01/07 » en
-  B612 Mono, chiffres tabulaires, zéros de tête.
+  Geist Mono, chiffres tabulaires, zéros de tête.
 - **Le registre et le caviardage** : chaque numéro fermé liste ses pièces en
   continu et numérotées. Pièces publiques : nom, méta complète, texte, liens.
   Pièces membres : ligne présente (index + méta sûre format/année) mais nom

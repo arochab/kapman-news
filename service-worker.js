@@ -5,7 +5,7 @@
 // pointerait vers la racine du domaine (hors site sur GitHub Pages).
 
 // Bump à chaque changement de DA/template — force le remplacement du cache.
-const CACHE = 'cf-v8';
+const CACHE = 'cf-v9';
 
 // URL du serveur Render — même valeur que pwa/push-client.js (RENDER).
 const RENDER = 'https://kapman-news.onrender.com';
