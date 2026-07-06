@@ -16,7 +16,7 @@ Chaque issue est décrite par un JSON. `build_issue.py` le transforme en
 | `summary_bullets` | list[str] | Puces "Cette édition". Les N premières (N = nombre de sections) sont des liens `#s1`, `#s2`, … vers les sections correspondantes. |
 | `blocks` | list | Corps : alternance de `section` et `stat` dans l'ordre |
 | `forward_text` | str | Paragraphe "Ce qui suit" (HTML autorisé) |
-| `playlist_url` | str | *Optionnel.* Lien "Écouter la sélection" — prime sur `listen_all_url` (calculé par le build à partir des liens YouTube des tracks). |
+| `playlist_url` | str | *Optionnel.* Lien "Écouter la sélection" · prime sur `listen_all_url` (calculé par le build à partir des liens YouTube des tracks, nommé automatiquement « CIRCUIT FERMÉ · N°NN · tagline » via le paramètre `title`). Pour une vraie playlist YouTube pérenne, la créer sur le compte anonyme et la nommer selon la même convention avant de coller son URL ici. |
 | `listening_time` | str | *Optionnel.* Ex. `"22 min"`. Si présent, le hero affiche `{{ reading_time }} lecture · {{ listening_time }} écoute` au lieu du format par défaut. |
 | `show_tracklist` | bool | *Optionnel.* Si vrai, ajoute un récap mono "Tracklist" (toutes les tracks, toutes sections confondues) juste avant "Ce qui suit", chaque ligne pointant vers l'ancre `#{{ t.slug }}` de la track. |
 
