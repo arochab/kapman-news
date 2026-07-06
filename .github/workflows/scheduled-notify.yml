@@ -32,12 +32,17 @@ jobs:
       - name: Garde horaire (10h à Paris)
         id: gate
         run: |
+          # Tolérant aux retards de cron GitHub (souvent 1 à 3h aux heures
+          # chargées : le créneau du 3 juillet est parti à 12h34 Paris et la
+          # garde stricte "H == 10" l'a avalé). On accepte 10h à 14h ; le
+          # doublon été/hiver reste inoffensif : le fichier d'état rend le
+          # second passage silencieux.
           H=$(TZ=Europe/Paris date +%H)
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$H" = "10" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || { [ "$H" -ge 10 ] && [ "$H" -le 14 ]; }; then
             echo "go=true" >> $GITHUB_OUTPUT
           else
             echo "go=false" >> $GITHUB_OUTPUT
-            echo "Il est ${H}h à Paris, doublon été/hiver : on sort."
+            echo "Il est ${H}h à Paris, hors fenêtre de livraison : on sort."
           fi
 
       - uses: actions/checkout@v4
