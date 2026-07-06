@@ -28,12 +28,11 @@
 <link rel="manifest" href="../../pwa/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Charte v5.1 « le registre humain » : DISPLAY + ÉDITORIAL = Newsreader
-     (opsz, 400/500/600 + italiques) · CORPS/UI = Instrument Sans
-     (400/500/600/700) · TECHNIQUE (index, dates, catno, format, compteurs :
-     données courtes uniquement, plus aucun long libellé en mono caps) =
-     B612 Mono (400/700). Inter Tight/Fraunces retirées partout. -->
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Instrument+Sans:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Charte v5.2 « sleek tech » : DISPLAY + CORPS = Geist (400/500/600/700) ·
+     TECHNIQUE (index, dates, catno, format, compteurs : données courtes
+     uniquement, plus aucun long libellé en mono caps) = Geist Mono
+     (400/700). Newsreader/Instrument Sans/B612 Mono retirées partout. -->
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -48,9 +47,9 @@
   --rouge:     #D7261E; /* strate MEMBRE uniquement : tampon, étiquettes, caviardage au hover */
   --papier:    #F4F2EC; /* surfaces légères (note de studio) */
 
-  --f-display: 'Newsreader', Georgia, serif;
-  --f-body:    'Instrument Sans', system-ui, -apple-system, sans-serif;
-  --f-mono:    'B612 Mono', ui-monospace, monospace;
+  --f-display: 'Geist', system-ui, sans-serif;
+  --f-body:    'Geist', system-ui, sans-serif;
+  --f-mono:    'Geist Mono', ui-monospace, monospace;
 
   --fs-micro:   10px;
   --fs-kicker:  11.5px;
@@ -100,7 +99,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .tag--index { background: var(--noir); color: var(--ivoire); border-color: var(--noir); }
 
 /* Micro-signe [CF] : cartouche rectangulaire noir plein, jamais un cercle
-   (cf v4), texte en Newsreader 600 (charte v5.1). */
+   (cf v4), texte en Geist 600 (charte v5.2). */
 .microsign {
   font-family: var(--f-display); font-weight: 600; font-size: 13px;
   background: var(--noir); color: var(--ivoire); padding: 5px 9px; display: inline-block;

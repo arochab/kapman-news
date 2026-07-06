@@ -4,18 +4,18 @@ Génère la carte de partage (Open Graph, 1200x630) d'une issue CIRCUIT FERMÉ.
   python tools/og_card.py --content content/11.json
 
 Rendu direct avec Pillow (pas de navigateur headless) à partir des mêmes
-polices que le site (Newsreader, Instrument Sans, B612 Mono, committées
-localement dans tools/assets/fonts/ · aucun téléchargement au build CI) et
-des mêmes couleurs de marque que templates/issue.html.j2 (charte v5.1,
-« le registre humain »).
+polices que le site (Geist, Geist Mono, committées localement dans
+tools/assets/fonts/ · aucun téléchargement au build CI) et des mêmes
+couleurs de marque que templates/issue.html.j2 (charte v5.2, « sleek
+tech »).
 
 Composition : la fiche d'un registre, pas une bannière web. Fond ivoire,
-cadre noir 2px doublé d'un filet fin extérieur, « ÉD. 011 » géant en B612
+cadre noir 2px doublé d'un filet fin extérieur, « ÉD. 011 » géant en Geist
 Mono gris structure adouci (mélangé sur ivoire, ~60% d'opacité perçue)
-posé en fond de registre, wordmark Newsreader 600 tracké + kicker B612 en
-tête, tagline Newsreader 600 chaleureuse (vraies bas de casse) alignée à
-droite, deux ou trois barres de caviardage noires en bas à droite
-(l'intrigue dans WhatsApp), pied B612 gris (date · pièces · lecture). Si
+posé en fond de registre, wordmark Geist SemiBold tracké + kicker Geist
+Mono en tête, tagline Geist SemiBold chaleureuse (vraies bas de casse)
+alignée à droite, deux ou trois barres de caviardage noires en bas à droite
+(l'intrigue dans WhatsApp), pied Geist Mono gris (date · pièces · lecture). Si
 le numéro est fermé (champ `circuit`), petit tampon « RÉSERVÉ » à bordure
 rouge double, posé droit.
 
@@ -120,7 +120,7 @@ def _tracked_width(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTyp
 def _draw_tracked(draw: ImageDraw.ImageDraw, xy: tuple[float, float], text: str, font: ImageFont.FreeTypeFont, fill, tracking: float = 0.0) -> float:
     """Dessine `text` caractère par caractère avec un espacement additionnel
     `tracking` (px) entre chaque lettre (letter-spacing léger du wordmark,
-    charte v5.1 §2 : Newsreader 600, tracking +0.04em). Retourne la largeur
+    charte v5.2 §2 : Geist SemiBold, tracking +0.04em). Retourne la largeur
     totale dessinée."""
     x, y = xy
     for ch in text:
@@ -147,9 +147,9 @@ def _piece_count(content: dict) -> int:
 
 
 def _draw_cartouche_cf(draw: ImageDraw.ImageDraw, right: int, top: int) -> None:
-    """Micro-signe : « CF » Newsreader 600 ivoire dans un rectangle noir
+    """Micro-signe : « CF » Geist SemiBold ivoire dans un rectangle noir
     plein, comme un cartouche de registre (jamais de cercle)."""
-    f_cf = _font("Newsreader-SemiBold.ttf", 24)
+    f_cf = _font("Geist-SemiBold.ttf", 24)
     bbox = draw.textbbox((0, 0), "CF", font=f_cf)
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     pad_x, pad_y = 14, 9
@@ -160,9 +160,9 @@ def _draw_cartouche_cf(draw: ImageDraw.ImageDraw, right: int, top: int) -> None:
 
 
 def _draw_stamp(img: Image.Image, right: int, top: int) -> None:
-    """Tampon « RÉSERVÉ » : bordure rouge double 1px, B612 Mono 700, posé
+    """Tampon « RÉSERVÉ » : bordure rouge double 1px, Geist Mono 700, posé
     droit, léger décalage d'encrage toléré (opacité 0.9), jamais incliné."""
-    f_stamp = _font("B612Mono-Bold.ttf", 17)
+    f_stamp = _font("GeistMono-Bold.ttf", 17)
     text = _tracked("RÉSERVÉ", " ")
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
@@ -186,14 +186,14 @@ def render_card(content: dict) -> Image.Image:
 
     margin = 64
 
-    # ── Fond de registre : « ÉD. 011 » géant en B612 Mono Bold gris
+    # ── Fond de registre : « ÉD. 011 » géant en Geist Mono Bold gris
     # structure, ancré en bas à gauche. C'est une donnée d'index posée en
     # fond, pas un filigrane fantaisie : dessiné avant tout le reste. ──
     seg_a, seg_b = "ÉD.", f"{issue_num:03d}"
     target_w = 720
     size = 200
     while size > 40:
-        f_num = _font("B612Mono-Bold.ttf", size)
+        f_num = _font("GeistMono-Bold.ttf", size)
         a_bbox = draw.textbbox((0, 0), seg_a, font=f_num)
         b_bbox = draw.textbbox((0, 0), seg_b, font=f_num)
         gap = int(size * 0.24)
@@ -211,17 +211,17 @@ def render_card(content: dict) -> Image.Image:
     draw.rectangle([10, 10, W - 11, H - 11], outline=STRUCTURE, width=1)
     draw.rectangle([22, 22, W - 23, H - 23], outline=NOIR, width=2)
 
-    # ── Tête : wordmark Newsreader 600 tracké léger + kicker B612 Mono gris
-    # (charte v5.1 §2 : manchette de journal, pas un code d'erreur) ──
+    # ── Tête : wordmark Geist SemiBold tracké léger + kicker Geist Mono gris
+    # (charte v5.2 §2 : manchette de journal, pas un code d'erreur) ──
     wordmark = "CIRCUIT FERMÉ"
-    f_word = _font("Newsreader-SemiBold.ttf", 34)
+    f_word = _font("Geist-SemiBold.ttf", 34)
     word_tracking = 34 * 0.04
     w_bbox = draw.textbbox((0, 0), wordmark, font=f_word)
     top = 58
     _draw_tracked(draw, (margin - w_bbox[0], top - w_bbox[1]), wordmark, f_word, NOIR, tracking=word_tracking)
 
     kicker = "Sélection électronique · Paris"
-    f_kicker = _font("B612Mono-Regular.ttf", 15)
+    f_kicker = _font("GeistMono-Regular.ttf", 15)
     k_bbox = draw.textbbox((0, 0), kicker, font=f_kicker)
     k_y = top + (w_bbox[3] - w_bbox[1]) + 16
     draw.text((margin - k_bbox[0], k_y - k_bbox[1]), kicker, font=f_kicker, fill=GRIS)
@@ -233,7 +233,7 @@ def render_card(content: dict) -> Image.Image:
         _draw_stamp(img, right=W - margin - 90, top=top)
         draw = ImageDraw.Draw(img)
 
-    # ── Pied B612 gris, aligné à droite : date · N pièces · lecture ──
+    # ── Pied Geist Mono gris, aligné à droite : date · N pièces · lecture ──
     date_str = _row_date(content.get("date_iso", ""))
     n_pieces = _piece_count(content)
     reading = no_dash(content.get("reading_time", "") or "")
@@ -243,7 +243,7 @@ def render_card(content: dict) -> Image.Image:
     if reading:
         parts.append(f"LECTURE {reading}".upper())
     footer = " · ".join(p for p in parts if p)
-    f_footer = _font("B612Mono-Regular.ttf", 15)
+    f_footer = _font("GeistMono-Regular.ttf", 15)
     fb = draw.textbbox((0, 0), footer, font=f_footer)
     foot_h = fb[3] - fb[1]
     foot_top = H - 60 - foot_h
@@ -263,15 +263,15 @@ def render_card(content: dict) -> Image.Image:
         y -= bar_h + bar_gap
     bars_top = y + bar_gap
 
-    # ── Tagline Newsreader 600 noir, chaleureuse (vraies bas de casse),
+    # ── Tagline Geist SemiBold noir, chaleureuse (vraies bas de casse),
     # alignée à droite au dessus des barres, wrap max 3 lignes avec
-    # réduction auto (charte v5.1 §2). ──
+    # réduction auto (charte v5.2 §2). ──
     tagline = no_dash(content.get("tagline_plain", ""))
     tagline_max_w = 660
     lines: list[str] = []
     f_tagline = None
     for size in (58, 50, 44, 38):
-        f_tagline = _font("Newsreader-SemiBold.ttf", size)
+        f_tagline = _font("Geist-SemiBold.ttf", size)
         lines = _wrap(draw, tagline, f_tagline, tagline_max_w, 3)
         consumed = " ".join(lines)
         if len(consumed) >= len(tagline.rstrip()) or size == 38:
