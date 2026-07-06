@@ -103,6 +103,8 @@ GitHub Pages (static site)  +  Render (Flask push server)  +  Gist (subscriber s
   fermé ; le code mensuel n'est jamais commité ; jamais de clair membre
   (`content/circuit/NN.json`) dans git. Détail complet : `docs/MONETISATION.md`
   et `docs/PIPELINE-EDITORIAL.md`.
+- **Tout dispositif membre s'auto-explique en une ligne à la première rencontre** ;
+  chaque texte commence par sa thèse (doctrine : `docs/PRODUIT-MEMBRE.md`).
 - La Séance d'écoute collective est hors offre (idée reportée, pas au programme) ;
   la cabine WhatsApp reste gratuite et ouverte à tous les abonnés.
 - Les créneaux mar/ven sont des **fenêtres de livraison, pas des quotas** : ne publier
