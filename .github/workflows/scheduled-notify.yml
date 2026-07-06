@@ -102,10 +102,13 @@ jobs:
           PUSH_SECRET: ${{ secrets.PUSH_SECRET }}
         run: |
           NN="${{ steps.queue.outputs.issue }}"
+          # Le corps de la notification porte la tagline du numéro : c'est le
+          # premier point de contact, il doit vendre la thèse, pas du générique.
+          BODY=$(python3 -c "import json;print(json.load(open('content/$NN.json'))['tagline_plain'])")
           python tools/send_push.py \
             --issue "$NN" \
-            --title "CIRCUIT FERMÉ N°$NN" \
-            --body "Nouvelle issue disponible : écoute ce qu'on a sélectionné."
+            --title "CIRCUIT FERMÉ · N°$NN" \
+            --body "$BODY"
 
       # Marqué APRÈS envoi réussi : un envoi raté sera retenté au créneau suivant.
       - name: Avancer le marqueur

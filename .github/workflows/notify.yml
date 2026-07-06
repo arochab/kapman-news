@@ -70,7 +70,9 @@ jobs:
           PUSH_SECRET: ${{ secrets.PUSH_SECRET }}
         run: |
           ISSUE="${{ steps.detect.outputs.issue }}"
+          # Même règle que le créneau programmé : le corps porte la tagline.
+          BODY=$(python3 -c "import json;print(json.load(open('content/$ISSUE.json'))['tagline_plain'])")
           python tools/send_push.py \
             --issue "$ISSUE" \
-            --title "CIRCUIT FERMÉ N°$ISSUE" \
-            --body "Nouvelle issue disponible : écoute ce qu'on a sélectionné ce mois-ci."
+            --title "CIRCUIT FERMÉ · N°$ISSUE" \
+            --body "$BODY"
