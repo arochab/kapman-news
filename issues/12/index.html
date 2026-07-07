@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRCUIT FERMÉ N°12 · Couper d&#39;abord, garder ce qui résiste</title>
+<meta name="theme-color" content="#FCFBF7">
+<!-- Open Graph / Twitter Card : og_card.py génère issues/NN/card.png au build
+     (tools/build_issue.py). og_image_available vient du contexte de rendu
+     (og_card.py réussi) : si absent, aucune balise image n'est émise (pas
+     de lien cassé), le reste (title/description/url) reste servi. -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="CIRCUIT FERMÉ">
+<meta property="og:url" content="https://arochab.github.io/kapman-news/issues/12/">
+<meta property="og:title" content="Couper d&#39;abord, garder ce qui résiste">
+<meta property="og:description" content="Sept tracks du dub comme méthode, 1993 à 2018 : des Idjut Boys à Konduku, retirer plutôt qu&#39;ajouter">
+<meta name="twitter:title" content="Couper d&#39;abord, garder ce qui résiste">
+<meta name="twitter:description" content="Sept tracks du dub comme méthode, 1993 à 2018 : des Idjut Boys à Konduku, retirer plutôt qu&#39;ajouter">
+<meta property="og:image" content="https://arochab.github.io/kapman-news/issues/12/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CIRCUIT FERMÉ N°12 · Couper d&#39;abord, garder ce qui résiste">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arochab.github.io/kapman-news/issues/12/card.png">
+<link rel="icon" href="../../pwa/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="../../pwa/icon-192.png">
+<link rel="manifest" href="../../pwa/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Charte v5.2 « sleek tech » : DISPLAY + CORPS = Geist (400/500/600/700) ·
+     TECHNIQUE (index, dates, catno, format, compteurs : données courtes
+     uniquement, plus aucun long libellé en mono caps) = Geist Mono
+     (400/700). Newsreader/Instrument Sans/B612 Mono retirées partout. -->
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Charte v5 · tokens exacts (docs charte) : 4 rôles + papier, rien
+     d'autre. Zéro hex hors :root. Le cycle or/cuivre/acier v4 disparaît :
+     identité monochrome + rouge de strate uniquement. */
+  --ivoire:    #FCFBF7; /* fond, la totalité des surfaces */
+  --noir:      #121212; /* encre : texte, filets structurants, tampons, caviardage */
+  --structure: #C8C5BC; /* structure secondaire : hairlines, séparateurs */
+  --gris:      #6F6C64; /* texte secondaire, ≥4.5:1 sur ivoire */
+  --rouge:     #D7261E; /* strate MEMBRE uniquement : tampon, étiquettes, caviardage au hover */
+  --papier:    #F4F2EC; /* surfaces légères (note de studio) */
+
+  --f-display: 'Geist', system-ui, sans-serif;
+  --f-body:    'Geist', system-ui, sans-serif;
+  --f-mono:    'Geist Mono', ui-monospace, monospace;
+
+  --fs-micro:   10px;
+  --fs-kicker:  11.5px;
+  --fs-meta:    13px;
+  --fs-body:    17px;
+  --fs-body-lg: 19px;
+  --fs-h4:      19px;
+  --fs-h3:      23px;
+  --fs-h2:      33px;
+  --fs-h1:      46px;
+
+  --gutter: 40px;
+}
+
+html { background: var(--ivoire); scrollbar-color: var(--structure) var(--ivoire); }
+body {
+  background: var(--ivoire);
+  color: var(--noir);
+  font-family: var(--f-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--noir); color: var(--ivoire); }
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--noir); outline-offset: 3px; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ivoire); }
+::-webkit-scrollbar-thumb { background: var(--structure); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--noir); }
+
+.wrap { max-width: 720px; margin: 0 auto; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ── CARTOUCHES / ÉTIQUETTES DE STRATE ── */
+.tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--f-mono); font-size: var(--fs-micro); font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid var(--noir); padding: 3px 8px 2px;
+  color: var(--noir); background: transparent; line-height: 1.5;
+}
+.tag--membres { border-color: var(--rouge); color: var(--rouge); }
+.tag--index { background: var(--noir); color: var(--ivoire); border-color: var(--noir); }
+
+/* Micro-signe [CF] : cartouche rectangulaire noir plein, jamais un cercle
+   (cf v4), texte en Geist 600 (charte v5.2). */
+.microsign {
+  font-family: var(--f-display); font-weight: 600; font-size: 13px;
+  background: var(--noir); color: var(--ivoire); padding: 5px 9px; display: inline-block;
+  letter-spacing: .02em; line-height: 1;
+}
+
+/* ── HEADER ── */
+.site-header {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  padding: 28px var(--gutter, 40px) 20px; border-bottom: 2px solid var(--noir);
+}
+.header-wordmark { font-family: var(--f-display); font-weight: 600; font-size: 21px; letter-spacing: .04em; }
+.header-meta { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); letter-spacing: .02em; }
+
+/* ── HERO ── */
+.hero { padding: 40px var(--gutter, 40px) 44px; }
+.hero-content { max-width: 620px; }
+.edition-tag { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.ed-num { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
+.tagline {
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 7.5vw, 54px);
+  letter-spacing: -.005em; color: var(--noir); line-height: 1.15; margin-bottom: 18px;
+}
+.hero-sub { font-size: var(--fs-body-lg); color: var(--gris); line-height: 1.5; margin-bottom: 20px; max-width: 520px; }
+.hero-meta { display: flex; flex-wrap: nowrap; gap: 8px; font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .04em; color: var(--gris); }
+.hero-meta span { white-space: nowrap; }
+
+/* ── SUMMARY ── */
+.summary { padding: 0 var(--gutter, 40px) 40px; }
+.kicker { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--noir); margin-bottom: 18px; font-weight: 600; }
+
+.sum-list { list-style: none; border-top: 1px solid var(--noir); }
+.sum-list li {
+  padding: 14px 0 14px 20px; position: relative;
+  font-size: 15px; color: var(--gris); border-bottom: 1px solid var(--structure);
+}
+.sum-list li::before { content: "·"; position: absolute; left: 0; color: var(--noir); font-weight: 700; }
+.sum-link { color: inherit; text-decoration: none; display: block; transition: color .08s; }
+.sum-link:hover, .sum-link:focus-visible { color: var(--noir); text-decoration: underline; }
+
+.listen-all {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--f-body); font-weight: 700; font-size: 15px; letter-spacing: .005em;
+  color: var(--ivoire); background: var(--noir); border: 1px solid var(--noir);
+  padding: 13px 24px; min-height: 44px; margin-top: 24px;
+  text-decoration: none; transition: background .08s, color .08s;
+}
+.listen-all:hover, .listen-all:focus-visible { background: var(--ivoire); color: var(--noir); }
+.listen-all-end-wrap { padding: 0 var(--gutter, 40px) 48px; }
+.listen-all--end { margin-top: 0; }
+
+/* ── BODY ── */
+.body-wrap { padding: 0 var(--gutter, 40px); }
+
+/* ── SECTION ── */
+.section { padding: 48px 0; border-bottom: 1px solid var(--structure); }
+.s-accent { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.s-num { font-family: var(--f-mono); font-size: var(--fs-meta); letter-spacing: .1em; text-transform: uppercase; color: var(--gris); }
+
+.section h2 {
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 4vw, var(--fs-h2));
+  letter-spacing: 0; color: var(--noir); line-height: 1.22; margin-bottom: 30px;
+}
+
+/* ── NOTE DE STUDIO (charte v5.1 : colonne de magazine pleine largeur,
+   plus un encart admin ; bleed hors du body-wrap parent via marge
+   négative, filet fin SEULEMENT en haut). ── */
+.studio {
+  background: var(--papier); border-top: 1px solid var(--noir);
+  margin: 0 calc(-1 * var(--gutter, 40px)); padding: 40px var(--gutter, 40px);
+}
+.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+.studio-label { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 20px; color: var(--noir); }
+.studio-date { font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; color: var(--gris); }
+.studio-body { max-width: 62ch; }
+.studio-body p { font-family: var(--f-display); font-weight: 400; font-size: 18.5px; line-height: 1.68; color: var(--noir); margin-bottom: 18px; }
+.studio-body p:last-child { margin-bottom: 0; }
+.studio-sig { display: flex; justify-content: flex-end; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--structure); max-width: 62ch; }
+.studio-sig-cf { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 14px; color: var(--gris); }
+
+/* ── PIÈCE (registre public, "PIÈCE 01/07") ── */
+.pieces { display: flex; flex-direction: column; gap: 32px; }
+.piece { border: 1px solid var(--noir); padding: 20px 22px 24px; }
+.piece:target { border-width: 2px; }
+.piece-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.piece-title { font-family: var(--f-body); font-weight: 700; font-size: 18px; line-height: 1.3; color: var(--noir); margin-bottom: 8px; }
+.piece-meta { font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); letter-spacing: .02em; margin-bottom: 14px; line-height: 1.6; }
+.piece-body { font-size: var(--fs-body); color: var(--noir); line-height: 1.6; margin-bottom: 12px; }
+.piece-body strong { font-weight: 700; }
+.piece-dig { font-size: 14.5px; line-height: 1.5; color: var(--gris); border-left: 2px solid var(--structure); padding-left: 12px; margin-bottom: 14px; }
+.piece-dig .dig-arrow { font-family: var(--f-mono); color: var(--noir); margin-right: 4px; }
+.piece-links { display: flex; flex-wrap: wrap; gap: 16px; }
+.piece-link {
+  font-family: var(--f-mono); font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+  color: var(--noir); text-decoration: none; border-bottom: 1px solid transparent;
+  min-height: 44px; display: inline-flex; align-items: center; transition: border-color .08s, color .08s;
+}
+.piece-link:hover, .piece-link:focus-visible { border-color: var(--noir); }
+
+/* ── STAT (ligne de registre) ── */
+.stat-row { padding: 40px var(--gutter, 40px); border-bottom: 1px solid var(--structure); background: var(--papier); }
+.stat-num { font-family: var(--f-display); font-weight: 600; font-size: 48px; line-height: 1; letter-spacing: -.01em; color: var(--noir); margin-bottom: 12px; }
+.stat-ctx { font-family: var(--f-mono); font-size: var(--fs-meta); color: var(--gris); line-height: 1.55; }
+
+/* ── SECTION BODY ── */
+.s-body p { font-size: var(--fs-body); color: var(--noir); line-height: 1.6; margin-bottom: 18px; }
+.s-body p:last-child { margin-bottom: 0; }
+.s-body a { color: var(--noir); text-decoration: none; border-bottom: 1px solid var(--noir); }
+.s-body a:hover, .s-body a:focus-visible { color: var(--gris); }
+.s-body strong { font-weight: 700; }
+
+/* ── TRACKLIST RÉCAP (optionnel) ── */
+.tracklist-recap-list { list-style: none; font-family: var(--f-mono); font-size: 12.5px; border-top: 1px solid var(--structure); }
+.tracklist-recap-list li { border-bottom: 1px solid var(--structure); }
+.tracklist-recap-list a { display: flex; align-items: center; padding: 12px 0; min-height: 44px; color: var(--gris); text-decoration: none; transition: color .08s; }
+.tracklist-recap-list a:hover, .tracklist-recap-list a:focus-visible { color: var(--noir); }
+
+/* ── FORWARD ── */
+.forward { background: var(--papier); padding: 40px var(--gutter, 40px); border-top: 1px solid var(--structure); border-bottom: 1px solid var(--structure); }
+.forward p { font-size: 15.5px; color: var(--gris); line-height: 1.6; }
+
+/* ── LE REGISTRE ET LE CAVIARDAGE (cœur du système) ──
+   Conditionné par `circuit` : seules les issues avec contenu membre
+   embarquent ce CSS, rien n'en sort ailleurs (rétrocompat totale). */
+
+
+/* ── SUBSCRIBE (texte centré, QR centré en bas) ── */
+.subscribe-section { padding: 60px var(--gutter, 40px); border-bottom: 1px solid var(--structure); text-align: center; }
+.sub-text { max-width: 420px; margin: 0 auto; }
+.sub-text h3 { font-family: var(--f-display); font-size: clamp(21px, 4vw, 25px); font-weight: 600; color: var(--noir); margin-bottom: 14px; }
+.sub-text p { font-size: 14.5px; color: var(--gris); line-height: 1.6; margin-bottom: 26px; }
+#sub-btn, #share-btn {
+  font-family: var(--f-body); font-weight: 700; font-size: 15px; letter-spacing: .005em;
+  color: var(--noir); background: transparent; border: 1px solid var(--noir);
+  padding: 14px 26px; min-height: 44px; cursor: pointer; transition: background .08s, color .08s;
+}
+#sub-btn:hover, #sub-btn.on, #share-btn:hover { background: var(--noir); color: var(--ivoire); }
+#share-btn { margin-top: 28px; }
+.sub-note { font-family: var(--f-mono); font-size: 10px; color: var(--gris); line-height: 1.6; margin-top: 16px; letter-spacing: .02em; }
+#sub-status { font-family: var(--f-mono); font-size: 12px; color: var(--gris); margin-top: 14px; min-height: 16px; line-height: 1.5; }
+#sub-status[data-kind="ok"]  { color: var(--noir); font-weight: 700; }
+#sub-status[data-kind="err"] { color: var(--rouge); }
+.qr-wrap { margin: 44px auto 0; padding-top: 40px; border-top: 1px solid var(--structure); max-width: 260px; }
+.qr-share-lbl { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); margin-bottom: 18px; font-weight: 600; }
+.qr-wrap img { width: 128px; height: 128px; display: block; margin: 0 auto 20px; image-rendering: pixelated; background: var(--ivoire); padding: 8px; border: 1px solid var(--structure); }
+.qr-steps { display: inline-flex; flex-direction: column; gap: 8px; text-align: left; }
+.qr-steps span { font-family: var(--f-mono); font-size: 11px; color: var(--gris); line-height: 1.4; }
+.qr-steps b { color: var(--noir); font-weight: 700; margin-right: 6px; }
+
+
+
+/* ── NAVIGATION D'ISSUE ── */
+.issue-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px var(--gutter, 40px); border-top: 1px solid var(--structure);
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+}
+.issue-nav a { color: var(--gris); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color .08s; }
+.issue-nav a:hover, .issue-nav a:focus-visible { color: var(--noir); }
+.issue-nav-prev, .issue-nav-next { flex: 1; }
+.issue-nav-next { text-align: right; justify-content: flex-end; }
+.issue-nav-next a { justify-content: flex-end; }
+.issue-nav-all { flex: 1; text-align: center; }
+.issue-nav-all a { justify-content: center; }
+
+/* ── FOOTER ── */
+.footer { padding: 48px var(--gutter, 40px) 56px; text-align: center; border-top: 2px solid var(--noir); }
+.footer-seal { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 24px; }
+.footer-seal .header-wordmark { font-size: 13px; }
+.footer-credit { font-family: var(--f-mono); font-size: 10px; color: var(--gris); line-height: 1.6; margin-bottom: 6px; letter-spacing: .04em; }
+.footer-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.footer-link { font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gris); text-decoration: none; padding: 17px 12px; display: inline-flex; align-items: center; transition: color .08s; }
+.footer-link:hover, .footer-link:focus-visible { color: var(--noir); }
+.footer-colophon { font-family: var(--f-body); font-weight: 500; font-size: 10.5px; color: var(--gris); letter-spacing: .06em; text-transform: uppercase; line-height: 1.6; }
+
+/* ── MOTION ── reveal : opacity seule, 240ms, pas de translation. Le seul
+   autre mouvement du site est la cascade de caviardage ci-dessus. */
+.js .reveal { opacity: 0; transition: opacity .24s ease; }
+.js .reveal.in { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1 !important; }
+}
+
+@media (max-width: 600px) {
+  :root { --gutter: 24px; }
+  .site-header { padding-top: 24px; padding-bottom: 18px; }
+  .stat-num { font-size: 40px; }
+  .studio { margin: 0 -24px; padding: 28px 24px; }
+  
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-wordmark">CIRCUIT FERMÉ</div>
+  <div class="header-meta tnum"><span class="tag">Public</span> 07.07.26</div>
+</header>
+
+<!-- HERO -->
+<div class="hero" data-flow="0">
+  <div class="hero-content">
+    <div class="edition-tag"><span class="ed-num tnum">ÉD. 012</span></div>
+    <h1 class="tagline">Couper d'abord,<br>garder ce qui résiste</h1>
+    <div class="hero-meta tnum"><span>07.07.26</span> <span>· Lecture 6 min</span></div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="kicker">Cette édition</div>
+  <ul class="sum-list">
+    <li><a class="sum-link" href="#s1">Sept tracks du dub comme méthode, 1993 à 2018 : des Idjut Boys à Konduku, retirer plutôt qu&#39;ajouter</a></li>
+    <li><a class="sum-link" href="#s2">Deux sorties à suivre : cv313 et Federsen sur Alt/Dub, R.Hz sur spclnch</a></li>
+    <li><a class="sum-link" href="#s3">Le label : Wackie&#39;s, cinquante ans de dub dans le même quartier du Bronx</a></li>
+    <li><a class="sum-link" href="#s4">Note de studio : faire la version dub de son propre morceau</a></li>
+    
+  </ul>
+  <a class="listen-all" href="https://www.youtube.com/watch_videos?video_ids=H4WpbmgE3kE,Ug6ynHK0r78,RE7Lkdz2mCA,7DGR8-JmdzY,hqXNAiQogag,kKcpiQXO0QE,EARftaTpUXo,Ma7uJ6rWnBY&amp;title=CIRCUIT%20FERM%C3%89%20%C2%B7%20N%C2%B012%20%C2%B7%20Couper%20d%27abord%2C%20garder%20ce%20qui%20r%C3%A9siste" target="_blank" rel="noopener">▶ Écouter la sélection</a>
+</div>
+
+
+  
+<div class="body-wrap" data-flow="1">
+<div class="section reveal" id="s1">
+  <div class="s-accent"><span class="s-num tnum">01 / 04</span></div>
+  <h2>Ce qui tourne : le dub comme méthode, 1993 à 2018</h2>
+    
+  <div class="pieces">
+      <div class="piece" id="idjut-boys-jesta-dub">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 01/09</span>
+    </div>
+    <div class="piece-title">Idjut Boys · Jesta (Dub)</div>
+    <div class="piece-meta tnum">U-Star Records US 001 · 12&#34;, EP · UK · 1993</div>
+    <div class="piece-body">En 1993, le duo londonien Idjut Boys sort son tout premier disque sur son propre label, U-Star Records, monté pour l'occasion. La face B referme Jesta sur une version simplement titrée Dub : la mélodie disparaît, il ne reste qu'une carcasse rythmique et un écho qui traîne derrière chaque coup de caisse claire. Le mot dub désigne ici un geste précis, couper d'abord et garder ensuite ce qui tient debout tout seul. C'est le point de départ chronologique de tout ce numéro.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=H4WpbmgE3kE" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/182008-Idjut-Boys-Idjut-Boy-EP" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="vainqueur-elevation-version-1">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 02/09</span>
+    </div>
+    <div class="piece-title">Vainqueur · Elevation (Version 1)</div>
+    <div class="piece-meta tnum">Chain Reaction CR-07 · 12&#34; · Allemagne · 1996</div>
+    <div class="piece-body">Trois ans plus tard à Berlin, Vainqueur pose la seule référence vraiment canon de cette sélection. Chain Reaction, label monté par Moritz von Oswald et Mark Ernestus dans la foulée de Basic Channel, y invente une manière d'étirer un accord sur plusieurs minutes sans jamais le répéter à l'identique. Elevation tient sur une nappe qui respire et un kick à peine posé, presque tout le morceau est fait de silence retravaillé. Le reste du numéro part de là pour aller chercher des versions plus obscures du même geste.</div>
+    <div class="piece-dig"><span class="dig-arrow">↳</span> La Version 1 dépasse quinze minutes sur le disque original, sans qu&#39;aucune section ne se répète à l&#39;identique.</div>
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=Ug6ynHK0r78" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/7501-Vainqueur-Elevation" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="lowfour-ian-ep">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 03/09</span>
+    </div>
+    <div class="piece-title">Lowfour · Ian EP</div>
+    <div class="piece-meta tnum">Echocord echocord 03 · 12&#34;, White Label, EP · Danemark · 2002</div>
+    <div class="piece-body">En 2002 à Copenhague, Kenneth Christiansen monte Echocord pour prolonger ailleurs ce que Chain Reaction avait posé à Berlin. Sa troisième sortie revient au Suédois Andreas Tilliander, déjà actif sous plusieurs alias, ici sous le nom Lowfour. Les quatre Riddim de l'EP reposent sur une boucle sourde et un espace qui se creuse à chaque mesure, le titre annonce directement la source jamaïcaine du geste. Le dub technique quitte l'Allemagne et devient une méthode qu'on peut exporter.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=RE7Lkdz2mCA" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/2817454-Lowfour-Ian-EP" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="shed-tk001">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 04/09</span>
+    </div>
+    <div class="piece-title">Shed · TK001</div>
+    <div class="piece-meta tnum">Styrax Leaves strx leaves 01 · 12&#34;, Limited Edition, Single Sided · Allemagne · 2005</div>
+    <div class="piece-body">Styrax Leaves ouvre son catalogue en 2005 avec un split entre Shed, encore débutant, et Don Williams, alias du Berlinois Thomas Wendel qui dirige déjà Mojuba et A.R.T.less. La face de Shed, TK001, use une seule boucle étouffée qu'elle évide peu à peu, sans rien ajouter en cours de route. Cette économie de moyens, presque entièrement rythmique, préfigure ce que Shed développera ensuite sous ses autres alias. Une manière de traiter le manque comme matériau principal du morceau.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=7DGR8-JmdzY" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/1162328-Shed-Don-Williams-1st-Bouquet" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="echologist-dreadscapes">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 05/09</span>
+    </div>
+    <div class="piece-title">Echologist · Dreadscapes</div>
+    <div class="piece-meta tnum">Mule Musiq mule musiq 004 · 12&#34; · Japon · 2005</div>
+    <div class="piece-body">La même année à Tokyo, le label Mule Musiq publie Dreadscapes, du Sud-Africain Brendon Moeller sous son alias Echologist. Le titre annonce le programme, une techno saturée de réverbe, presque entièrement construite sur les creux entre les coups. Moeller a quitté Johannesburg en 1993, la même année que la sortie des Idjut Boys qui ouvre ce numéro. Le geste berlinois de 1996 a maintenant traversé deux océans.</div>
+    <div class="piece-dig"><span class="dig-arrow">↳</span> Dreadscapes inclut aussi un remix signé Dub Archanoid Trim, sorti la même année sur le même label.</div>
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=hqXNAiQogag" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/581563-Echologist-Dreadscapes" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="jacek-sienkiewicz-living-in-oblivion">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 06/09</span>
+    </div>
+    <div class="piece-title">Jacek Sienkiewicz · Living In Oblivion</div>
+    <div class="piece-meta tnum">Smallville Records SMALLVILLE 05 · 12&#34; · Allemagne · 2007</div>
+    <div class="piece-body">Deux ans plus tard, le disquaire hambourgeois devenu label Smallville publie sa cinquième référence, confiée au Polonais Jacek Sienkiewicz. Living In Oblivion s'étale sur douze minutes sans jamais poser de kick fixe, la matière dub sert ici à faire de la house sans rendre la structure évidente. Le morceau flotte plutôt qu'il n'avance, un choix qui distingue tout de suite le son Smallville du dub techno plus rigide de Berlin ou de Copenhague. C'est la version hambourgeoise du même geste, retirer la charpente et voir ce qui continue de tenir.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=kKcpiQXO0QE" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/1144343-Jacek-Sienkiewicz-Living-In-Oblivion" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="konduku-pembe-alan">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 07/09</span>
+    </div>
+    <div class="piece-title">Konduku · Pembe Alan</div>
+    <div class="piece-meta tnum">Nous&#39;klaer Audio NOUSLP002 · 2x12&#34;, Album · Pays-Bas · 2018</div>
+    <div class="piece-body">Onze ans plus tard, le Néerlandais Ruben Üvez, seul derrière le nom Konduku, referme le versant catalogue de ce numéro sur Nous'klaer Audio, label rotterdamois fondé par DJ Oberman en 2013. Pembe Alan, extrait de l'album Kıran, mélange bass anglaise, house et dub techno dans une seule piste sans jamais choisir un camp. Le morceau garde la texture cassée de la bass music, mais l'espace laissé entre les percussions reste entièrement dub. Vingt-cinq ans après Jesta (Dub), la méthode n'a pas changé, couper d'abord et garder ce qui résiste.</div>
+    <div class="piece-dig"><span class="dig-arrow">↳</span> Kıran, qui donne son titre à l&#39;album, est une colline de Cappadoce liée à la famille paternelle turque de Ruben Üvez.</div>
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=EARftaTpUXo" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://www.discogs.com/release/12022065-Konduku-Kıran" target="_blank" rel="noopener">◈ Discogs</a>
+    </div>
+    
+  </div>
+    
+  </div>
+    
+    
+</div>
+</div>
+  
+
+  
+<div class="stat-row reveal" data-flow="2">
+  <div class="stat-num tnum">25</div>
+  <div class="stat-ctx">Vingt-cinq ans séparent Jesta (Dub) des Idjut Boys de Pembe Alan de Konduku. Entre les deux, le même geste voyage de Londres à Rotterdam, par Berlin, Copenhague, Tokyo et Hambourg.</div>
+</div>
+  
+
+  
+<div class="body-wrap" data-flow="3">
+<div class="section reveal" id="s2">
+  <div class="s-accent"><span class="s-num tnum">02 / 04</span></div>
+  <h2>Sorties récentes : la méthode aujourd&#39;hui</h2>
+    
+  <div class="pieces">
+      <div class="piece" id="cv313-federsen-third-dimension">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 08/09</span>
+    </div>
+    <div class="piece-title">cv313 &amp; Federsen · Third Dimension</div>
+    <div class="piece-meta tnum">Alt/Dub AD007 · 12&#34; · 2026</div>
+    <div class="piece-body">Deuxième volet de la série Altering Dimensions entre l'Américain Stephen Hitchell, connu sous le nom cv313 et pour son travail avec Rod Modell dans Echospace, et Federsen, qui dirige Alt/Dub depuis les Cornouailles anglaises. Third Dimension déroule huit minutes de textures qui mutent lentement, percussions modulées et basse épaisse en dessous. Le nom cv313 vient de l'indicatif téléphonique de Detroit, ville dont Hitchell tire l'essentiel de son vocabulaire dub depuis les années 90. Un dub techno d'aujourd'hui qui ne renie rien du geste de Chain Reaction, juste plus patient encore.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://www.youtube.com/watch?v=Ma7uJ6rWnBY" target="_blank" rel="noopener">▶ Écouter</a><a class="piece-link" href="https://altdub.bandcamp.com/track/third-dimension" target="_blank" rel="noopener">↗ Bandcamp</a>
+    </div>
+    
+  </div>
+      <div class="piece" id="r-hz-reversed-dub">
+    <div class="piece-head">
+      <span class="tag tag--index tnum">PIÈCE 09/09</span>
+    </div>
+    <div class="piece-title">R.Hz · Reversed Dub</div>
+    <div class="piece-meta tnum">spclnch SPCLNCH-BLACK-03 · 12&#34; · Pays-Bas · 2026</div>
+    <div class="piece-body">Sur spclnch, label fondé à Minsk en 2019 par Thomas Carmody avant de s'installer aux Pays-Bas, le Moscovite R.Hz publie un nouvel album après Dub Ratio, Mindscript et Echo Frequencies les années précédentes. Reversed Dub, septième piste de Hybrid Dub, retourne littéralement le principe du dub techno, au lieu de retirer des éléments dans le temps, la piste semble reculer sur elle-même, samples et percussions rejoués à l'envers. Une manière très 2026 de prendre la méthode au pied de la lettre plutôt que de la citer en référence.</div>
+    
+    
+    <div class="piece-links">
+      <a class="piece-link" href="https://spclnch.bandcamp.com/track/reversed-dub" target="_blank" rel="noopener">↗ Bandcamp</a>
+    </div>
+    
+  </div>
+    
+  </div>
+    
+    
+</div>
+</div>
+  
+
+  
+<div class="stat-row reveal" data-flow="4">
+  <div class="stat-num tnum">50</div>
+  <div class="stat-ctx">Cinquante ans depuis l&#39;ouverture du studio de Lloyd Bullwackie Barnes dans le Bronx en 1976. Son label, Wackie&#39;s, compte aujourd&#39;hui 631 références répertoriées sur Discogs, sans les sous-labels Wackies Music, Wackies Studio et Wackie&#39;s House of Music.</div>
+</div>
+  
+
+  
+<div class="body-wrap" data-flow="5">
+<div class="section reveal" id="s3">
+  <div class="s-accent"><span class="s-num tnum">03 / 04</span></div>
+  <h2>Le label · Wackie&#39;s</h2>
+    
+    
+  <div class="s-body">
+    <p>New York, 1976. Lloyd Barnes, surnommé Bullwackie, a grandi à Trench Town avant de rejoindre la ville en 1967. Il a appris le métier auprès de Duke Reid au studio Treasure Isle, croisé Prince Buster et les débuts de Studio One, avant de monter son propre studio au 4731 White Plains Road dans le Bronx, juste à côté de son magasin de disques Wackie's House of Music.</p><p>Le label ne cherche pas à copier la Jamaïque, il la reconstruit avec les moyens du Bronx : mêmes techniques de suppression et de délai héritées de Duke Reid, appliquées avec un groupe maison, les Wackies Rhythm Force, et des voix comme Horace Andy, Sugar Minott ou Wayne Jarrett. C'est le dub reggae originel, celui dont techno et house ont hérité la méthode sans toujours le savoir : retirer une piste à la fois jusqu'à ce que le silence devienne un instrument.</p><p>Par où commencer : Horace Andy · Dance Hall Style, 1982, catalogue W-1383, puis remonter le catalogue sur <a href="https://www.discogs.com/release/5319468-Horace-Andy-Dance-Hall-Style" target="_blank">◈ Discogs →</a></p>
+  </div>
+    
+</div>
+</div>
+  
+
+  
+<div class="body-wrap" data-flow="6">
+<div class="section studio reveal" id="s4">
+  <div class="studio-head">
+    <span class="studio-label">Note de studio</span>
+    <span class="studio-date tnum">07.07.26</span>
+  </div>
+  <div class="studio-body">
+    <p>J'ai fait un truc que je n'avais jamais osé avec un de mes morceaux : sa version dub. Pas un remix pour DJ, pas une intro allongée. J'ai dupliqué la session dans Live 12, gardé la même grille, et j'ai commencé à couper.</p><p>La nappe du MicroKorg 2 est partie en premier, elle occupait toute la place au milieu sans rien porter. Puis la moitié des hats du TR-6S, gardés seulement sur les temps forts, passés dans un delay qui répète trois fois avant de mourir. Il restait une caisse claire, une basse, et beaucoup de vide entre les deux.</p><p>Ce qui m'a surpris, c'est que le vide tenait tout seul. Le morceau original avait besoin de ses seize pistes pour paraître fini ; la version dub tient debout avec quatre, et elle groove davantage. Ce que j'ai enlevé n'était pas de la musique, c'était de la décoration posée par habitude.</p><p>Je vais reprendre le master avec ce filtre en tête : chaque piste doit justifier sa place, sinon elle part dans la version dub. Le mix avait déjà appris à se taire sur le morceau précédent ; cette fois c'est le morceau entier qui apprend à tenir debout sur moins.</p>
+  </div>
+  <div class="studio-sig"><span class="studio-sig-cf">CF</span></div>
+</div>
+</div>
+  
+
+
+<!-- TRACKLIST RÉCAP (optionnel, flag racine show_tracklist) -->
+
+<div class="body-wrap">
+<div class="section reveal">
+  <div class="kicker">Tracklist</div>
+  <ol class="tracklist-recap-list">
+    
+    
+      
+        
+          
+  <li><a href="#idjut-boys-jesta-dub">01 Idjut Boys · Jesta (Dub)</a></li>
+        
+          
+  <li><a href="#vainqueur-elevation-version-1">02 Vainqueur · Elevation (Version 1)</a></li>
+        
+          
+  <li><a href="#lowfour-ian-ep">03 Lowfour · Ian EP</a></li>
+        
+          
+  <li><a href="#shed-tk001">04 Shed · TK001</a></li>
+        
+          
+  <li><a href="#echologist-dreadscapes">05 Echologist · Dreadscapes</a></li>
+        
+          
+  <li><a href="#jacek-sienkiewicz-living-in-oblivion">06 Jacek Sienkiewicz · Living In Oblivion</a></li>
+        
+          
+  <li><a href="#konduku-pembe-alan">07 Konduku · Pembe Alan</a></li>
+        
+      
+    
+      
+    
+      
+        
+          
+  <li><a href="#cv313-federsen-third-dimension">08 cv313 &amp; Federsen · Third Dimension</a></li>
+        
+          
+  <li><a href="#r-hz-reversed-dub">09 R.Hz · Reversed Dub</a></li>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+  </ol>
+</div>
+</div>
+
+
+<!-- ÉCOUTER LA SÉLECTION (répété avant le forward) -->
+
+<div class="listen-all-end-wrap">
+  <a class="listen-all listen-all--end" href="https://www.youtube.com/watch_videos?video_ids=H4WpbmgE3kE,Ug6ynHK0r78,RE7Lkdz2mCA,7DGR8-JmdzY,hqXNAiQogag,kKcpiQXO0QE,EARftaTpUXo,Ma7uJ6rWnBY&amp;title=CIRCUIT%20FERM%C3%89%20%C2%B7%20N%C2%B012%20%C2%B7%20Couper%20d%27abord%2C%20garder%20ce%20qui%20r%C3%A9siste" target="_blank" rel="noopener">▶ Écouter la sélection</a>
+</div>
+
+
+<!-- FORWARD -->
+<div class="forward reveal">
+  <div class="kicker" style="margin-bottom:14px">Ce qui suit</div>
+  <p>Le catalogue de Wackie's se remonte entier sur Discogs, Third Dimension de cv313 et Federsen tourne en douze pouces chez Alt/Dub, et Reversed Dub de R.Hz s'écoute en entier sur le Bandcamp de spclnch. Trois directions, une seule consigne : couper d'abord.</p>
+</div>
+
+
+
+<!-- SUBSCRIBE + QR (QR = partage à un ami, parcours honnête) -->
+<div class="subscribe-section reveal">
+  <div class="sub-text">
+    <h3>Recevoir les prochaines éditions</h3>
+    <p>Une notification sur votre téléphone Android, deux fois par semaine. Pas d'application, pas de compte&nbsp;: Chrome suffit.</p>
+    <button id="sub-btn" onclick="subscribePush()">↓ S'abonner aux notifications</button>
+    <p class="sub-note">Vous pouvez couper quand vous voulez · le même bouton sert à vous désabonner.</p>
+    <p id="sub-status" aria-live="polite"></p>
+  </div>
+  <button id="share-btn" hidden>↗ Partager à un ami</button>
+  <div class="qr-wrap">
+    <div class="qr-share-lbl">Partager à un ami</div>
+    <img src="../../pwa/qr.png" alt="QR vers CIRCUIT FERMÉ" onerror="this.parentNode.style.display='none'">
+    <div class="qr-steps">
+      <span><b>1.</b> Scannez avec l'appareil photo</span>
+      <span><b>2.</b> Ouvrez le lien dans Chrome</span>
+      <span><b>3.</b> Appuyez sur « S'abonner »</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION D'ISSUE -->
+<div class="issue-nav">
+  <span class="issue-nav-prev"><a href="../11/">← N°11</a></span>
+  <span class="issue-nav-all"><a href="../../">Tous les numéros</a></span>
+  <span class="issue-nav-next"></span>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-seal">
+    <span class="microsign">CF</span>
+    <div class="header-wordmark">CIRCUIT FERMÉ</div>
+  </div>
+
+  <div class="footer-credit">Sélection · KAPMAN</div>
+  <div class="footer-links">
+    <a class="footer-link" href="https://shotgun.live/artists/kapman_music" target="_blank" rel="noopener">Shotgun</a>
+    <a class="footer-link" href="https://soundcloud.com/kapman_music" target="_blank" rel="noopener">SoundCloud</a>
+    <a class="footer-link" href="https://www.instagram.com/kapman___/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <div class="footer-colophon">N°12 · JUILLET 2026 · 9 PIÈCES · PARIS · CIRCUIT FERMÉ · REGISTRE DES SÉLECTIONS</div>
+</div>
+
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { els.forEach(function (el) { el.classList.add('in'); }); }
+
+  // On n'arme le masquage que si tout est OK ; sinon le contenu reste visible.
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    root.classList.add('js'); showAll(); return;
+  }
+
+  try {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+
+    root.classList.add('js');           // masque (via CSS) puis révèle au scroll
+    els.forEach(function (el) { io.observe(el); });
+
+    // Révèle immédiatement ce qui est déjà dans le viewport au chargement.
+    requestAnimationFrame(function () {
+      els.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+      });
+    });
+
+    // Filet de sécurité : quoi qu'il arrive, tout est visible après 1,2 s.
+    setTimeout(showAll, 1200);
+  } catch (e) {
+    root.classList.remove('js'); showAll();
+  }
+})();
+</script>
+<script src="../../pwa/push-client.js"></script>
+</body>
+</html>
