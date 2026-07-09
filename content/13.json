@@ -1,0 +1,59 @@
+{
+  "issue_num": 13,
+  "date_iso": "YYYY-MM-DD",
+  "month_label": "Mois AAAA",
+  "reading_time": "4 min",
+  "playlist_url": "",
+  "listening_time": "",
+  "tagline_plain": "",
+  "tagline_html": "",
+  "summary_bullets": [
+    "",
+    "",
+    "",
+    ""
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "accent": "red",
+      "heading": "",
+      "tracks": []
+    },
+    {
+      "type": "stat",
+      "accent": "green",
+      "number": "",
+      "context": ""
+    },
+    {
+      "type": "section",
+      "accent": "green",
+      "heading": "",
+      "tracks": []
+    },
+    {
+      "type": "stat",
+      "accent": "blue",
+      "number": "",
+      "context": ""
+    },
+    {
+      "type": "section",
+      "accent": "blue",
+      "heading": "",
+      "paragraphs": [
+        ""
+      ]
+    },
+    {
+      "type": "section",
+      "accent": "red",
+      "heading": "Note de studio",
+      "paragraphs": [
+        ""
+      ]
+    }
+  ],
+  "forward_text": ""
+}
